@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct EventDate : Comparable, Hashable, Codable {
+public struct EventDate : Comparable, Jsonable {
     private static var sameHourComponents:DateComponents = {
         var components:DateComponents = DateComponents()
         components.hour = 0
@@ -137,6 +137,9 @@ public struct EventDate : Comparable, Hashable, Codable {
         return EventDate(date: newDate)
     }
     public func getDateString() -> String {
+        return toString()
+    }
+    public func toString() -> String {
         return EventDate.getDateString(components: components)
     }
     

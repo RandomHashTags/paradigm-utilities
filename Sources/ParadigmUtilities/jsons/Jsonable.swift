@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol Jsonable : Hashable, Codable {
+public protocol Jsonable : Hashable, Codable, Sendable {
     func getTranslatedKeys() -> [CodingKey]?
     func getClientRemovedKeys() -> [CodingKey]?
     //func getFolderPath() -> FolderPath?

@@ -16,6 +16,11 @@ public struct ClientHyperlinks : Sequence, IteratorProtocol, Jsonable {
     
     private var hyperlinks:[Hyperlink], hyperlinkCount:Int = -1
     
+    public init(imageURLPrefix: String, hyperlinks: [Hyperlink] = [Hyperlink]()) {
+        self.imageURLPrefix = imageURLPrefix
+        self.hyperlinks = hyperlinks
+    }
+    
     public var count : Int {
         return hyperlinks.count
     }
@@ -40,5 +45,11 @@ public struct ClientHyperlinks : Sequence, IteratorProtocol, Jsonable {
         guard nextNumber < hyperlinks.count else { return nil }
         hyperlinkCount = nextNumber
         return hyperlinks[hyperlinkCount]
+    }
+    public mutating func append(_ hyperlink: Hyperlink) {
+        hyperlinks.append(hyperlink)
+    }
+    public mutating func append(contentsOf newElements: [Hyperlink]) {
+        hyperlinks.append(contentsOf: newElements)
     }
 }
