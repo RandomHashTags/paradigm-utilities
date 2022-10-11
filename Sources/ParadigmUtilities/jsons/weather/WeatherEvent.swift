@@ -9,4 +9,9 @@ import Foundation
 
 public struct WeatherEvent : Jsonable {
     public let event:String, defcon:Int
+    
+    public init(event: String, defcon: Int) {
+        self.event = event
+        self.defcon = defcon
+    }
 }

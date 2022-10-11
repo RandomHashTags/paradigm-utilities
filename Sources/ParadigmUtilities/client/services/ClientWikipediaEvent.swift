@@ -10,4 +10,14 @@ import SwiftSovereignStates
 
 public struct ClientWikipediaEvent {
     public let images:[String]?, description:String, hyperlinks:ClientHyperlinks?, countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?, tags:[String]?, sources:EventSources?
+    
+    public init(images: [String]?, description: String, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [SovereignStateSubdivisionWrapper]?, tags: [String]?, sources: EventSources?) {
+        self.images = images
+        self.description = description
+        self.hyperlinks = hyperlinks
+        self.countries = countries
+        self.subdivisions = subdivisions
+        self.tags = tags
+        self.sources = sources
+    }
 }

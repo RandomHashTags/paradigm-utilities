@@ -10,4 +10,11 @@ import GEOSwift
 
 public struct WeatherZone : Jsonable {
     public let name:String, nameSuffix:String?, subdivision:String, geometry:Geometry
+    
+    public init(name: String, nameSuffix: String?, subdivision: String, geometry: Geometry) {
+        self.name = name
+        self.nameSuffix = nameSuffix
+        self.subdivision = subdivision
+        self.geometry = geometry
+    }
 }
