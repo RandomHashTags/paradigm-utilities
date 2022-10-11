@@ -9,10 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct GovernmentPoliticianTerm : Jsonable {
-    let position:GovernmentPoliticianPosition, start:EventDate, end:EventDate?, party:PoliticalParty, how:String?
-    let subdivision:SovereignStateSubdivisionWrapper?
-    let district:Int?
-    let contactInformation:ContactInformation?
+    public let position:GovernmentPoliticianPosition, start:EventDate, end:EventDate?, party:PoliticalParty, how:String?, subdivision:SovereignStateSubdivisionWrapper?, district:Int?, contactInformation:ContactInformation?
     
     init(position: GovernmentPoliticianPosition, start: EventDate, end: EventDate?, party: PoliticalParty, how: String?, subdivision: (any SovereignStateSubdivision)?, district: Int?, contactInformation: ContactInformation?) {
         self.position = position
