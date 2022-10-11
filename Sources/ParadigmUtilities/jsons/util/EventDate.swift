@@ -92,7 +92,7 @@ public struct EventDate : Comparable, Hashable, Codable {
         return nil
     }
     
-    var components:DateComponents
+    public var components:DateComponents
     
     public init(year: Int, month: Month, day: Int) {
         self.init(year: year, month: month.rawValue, day: day)
