@@ -12,4 +12,7 @@ public enum ParadigmUtilities {
         }
         return date
     }
+    
+    private static func test() {
+    }
 }
