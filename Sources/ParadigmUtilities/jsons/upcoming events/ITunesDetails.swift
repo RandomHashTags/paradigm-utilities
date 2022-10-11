@@ -8,5 +8,5 @@
 import Foundation
 
 public struct ITunesDetails : Jsonable {
-    let artistViewUrl:String, collectionViewUrl:String, amgArtistId:Int, imageURL:String
+    public let artistViewUrl:String, collectionViewUrl:String, amgArtistId:Int, imageURL:String
 }

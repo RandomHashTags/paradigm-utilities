@@ -8,5 +8,5 @@
 import Foundation
 
 public struct WeatherPreAlert : Jsonable {
-    let id:String, areas:[String], time:WeatherAlertTime
+    public let id:String, areas:[String], time:WeatherAlertTime
 }

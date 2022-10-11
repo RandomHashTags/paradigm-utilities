@@ -7,6 +7,6 @@
 
 import Foundation
 
-struct PreEnactedBill {
-    let id:String, title:String
+public struct PreEnactedBill {
+    public let id:String, title:String
 }

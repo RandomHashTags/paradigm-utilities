@@ -8,5 +8,5 @@
 import Foundation
 
 public struct PreEarthquake : Jsonable {
-    let id:String, place:String
+    public let id:String, place:String
 }

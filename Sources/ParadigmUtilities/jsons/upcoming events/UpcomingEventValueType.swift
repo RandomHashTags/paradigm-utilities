@@ -32,11 +32,11 @@ public enum UpcomingEventValueType : String, CaseIterable {
     case video_url
     case wikipedia_events
     
-    static func defaultType() -> UpcomingEventValueType {
+    public static func defaultType() -> UpcomingEventValueType {
         return UpcomingEventValueType.string
     }
     
-    static func valueOf(_ string: String?) -> UpcomingEventValueType? {
+    public static func valueOf(_ string: String?) -> UpcomingEventValueType? {
         guard let string:String = string else { return nil }
         return UpcomingEventValueType.allCases.first(where: { string.compare($0.rawValue) == .orderedSame })
     }

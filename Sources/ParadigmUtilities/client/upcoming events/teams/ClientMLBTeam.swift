@@ -8,5 +8,5 @@
 import Foundation
 
 public struct ClientMLBTeam : Jsonable {
-    let name:String, scheduleURL:String, logoURL:String, wikipediaURL:String
+    public let name:String, scheduleURL:String, logoURL:String, wikipediaURL:String
 }

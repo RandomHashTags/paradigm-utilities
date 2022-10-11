@@ -27,48 +27,48 @@ public struct EventDate : Comparable, Hashable, Codable {
         return leftYear < rightYear || leftYear == rightYear && (leftMonth < rightMonth || leftMonth == rightMonth && leftDay < rightDay)
     }
     
-    static func getTodayDateString() -> String {
+    public static func getTodayDateString() -> String {
         return EventDate.getDateString(date: ParadigmUtilities.getNow())
     }
     
-    static func getDateString(date: Date) -> String {
+    public static func getDateString(date: Date) -> String {
         let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.month, .year, .day], from: date)
         return getDateString(components: components)
     }
-    static func getDateString(components: DateComponents) -> String {
+    public static func getDateString(components: DateComponents) -> String {
         return getDateString(year: components.year!, month: components.month!, day: components.day!)
     }
-    static func getDateString(year: Int, month: Int, day: Int) -> String {
+    public static func getDateString(year: Int, month: Int, day: Int) -> String {
         return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
     }
-    static func getISO8601(date: Date) -> String {
+    public static func getISO8601(date: Date) -> String {
         let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.year, .month, .day], from: date)
         let year:Int = components.year!, month:Int = components.month!, day:Int = components.day!
         return year.description + "-" + (month < 10 ? "0" : "") + month.description + "-" + (day < 10 ? "0" : "") + day.description + "T00:00:00Z"
     }
     
-    static func from(dateString: String) -> EventDate {
+    public static func from(dateString: String) -> EventDate {
         let values:[String] = dateString.components(separatedBy: "-")
         let month:Int = Int(values[0])!, year:Int = Int(values[1])!, day:Int = Int(values[2])!
         return EventDate(year: year, month: month, day: day)
     }
     
-    static func getFirst(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
+    public static func getFirst(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
         return get(amount: 1, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
     }
-    static func getSecond(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
+    public static func getSecond(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
         return get(amount: 2, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
     }
-    static func getThird(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
+    public static func getThird(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
         return get(amount: 3, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
     }
-    static func getFourth(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
+    public static func getFourth(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
         return get(amount: 4, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
     }
-    static func getLast(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
+    public static func getLast(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
         return get(amount: 5, dayOfWeek: dayOfWeek, year: year, month: month, day: 1) ?? getFourth(dayOfWeek: dayOfWeek, month: month, year: year)
     }
-    static func getFirstAfter(dayOfWeek: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
+    public static func getFirstAfter(dayOfWeek: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
         return get(amount: 1, dayOfWeek: dayOfWeek, year: year, month: month, day: day)
     }
     
@@ -94,10 +94,10 @@ public struct EventDate : Comparable, Hashable, Codable {
     
     var components:DateComponents
     
-    init(year: Int, month: Month, day: Int) {
+    public init(year: Int, month: Month, day: Int) {
         self.init(year: year, month: month.rawValue, day: day)
     }
-    init(year: Int, month: Int, day: Int) {
+    public init(year: Int, month: Int, day: Int) {
         var components:DateComponents = DateComponents()
         components.year = year
         components.month = month
@@ -105,10 +105,10 @@ public struct EventDate : Comparable, Hashable, Codable {
         self.components = components
     }
     
-    init(date: Date) {
+    public init(date: Date) {
         components = ParadigmUtilities.calendar().dateComponents([.month, .year, .day], from: date)
     }
-    init(components: DateComponents) {
+    public init(components: DateComponents) {
         self.components = components
     }
     
@@ -122,25 +122,25 @@ public struct EventDate : Comparable, Hashable, Codable {
         try container.encode(getDateString())
     }
     
-    func toDate() -> Date {
+    public func toDate() -> Date {
         return ParadigmUtilities.calendar().date(from: components)!
     }
-    mutating func adding(_ timeInterval: TimeInterval) {
+    public mutating func adding(_ timeInterval: TimeInterval) {
         let calendar:Calendar = ParadigmUtilities.calendar()
         let seconds:Int = Int(timeInterval)
         let newDate:Date = calendar.date(byAdding: .second, value: seconds, to: toDate())!
         components = calendar.dateComponents([.month, .year, .day], from: newDate)
     }
-    func plus(_ timeInterval: TimeInterval) -> EventDate {
+    public func plus(_ timeInterval: TimeInterval) -> EventDate {
         let seconds:Int = Int(timeInterval)
         let newDate:Date = ParadigmUtilities.calendar().date(byAdding: .second, value: seconds, to: toDate())!
         return EventDate(date: newDate)
     }
-    func getDateString() -> String {
+    public func getDateString() -> String {
         return EventDate.getDateString(components: components)
     }
     
-    func getFirstWeekdayAfter() -> EventDate {
+    public func getFirstWeekdayAfter() -> EventDate {
         let date:Date = toDate()
         switch date.dayOfWeek {
         case .friday:
@@ -152,10 +152,10 @@ public struct EventDate : Comparable, Hashable, Codable {
         }
     }
     
-    func previousDay() -> EventDate {
+    public func previousDay() -> EventDate {
         return nextDate(direction: .backward)
     }
-    func nextDay() -> EventDate {
+    public func nextDay() -> EventDate {
         return nextDate(direction: .forward)
     }
     private func nextDate(direction: Calendar.SearchDirection) -> EventDate {

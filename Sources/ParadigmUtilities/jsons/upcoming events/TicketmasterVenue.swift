@@ -8,5 +8,5 @@
 import Foundation
 
 public struct TicketmasterVenue : Jsonable {
-    let name:String, imageURL:String?, countryCode:String, subdivisionName:String?, cityName:String, location:Location?, generalRule:String?, childRule:String?, parkingDetail:String?, accessibleSeatingInfo:String?, url:String
+    public let name:String, imageURL:String?, countryCode:String, subdivisionName:String?, cityName:String, location:Location?, generalRule:String?, childRule:String?, parkingDetail:String?, accessibleSeatingInfo:String?, url:String
 }

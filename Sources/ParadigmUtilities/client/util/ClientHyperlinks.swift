@@ -12,14 +12,14 @@ private enum CodingKeys: CodingKey {
     case hyperlinks
 }
 public struct ClientHyperlinks : Sequence, IteratorProtocol, Jsonable {
-    let imageURLPrefix:String
+    public let imageURLPrefix:String
     
     private var hyperlinks:[Hyperlink], hyperlinkCount:Int = -1
     
-    var count : Int {
+    public var count : Int {
         return hyperlinks.count
     }
-    var isEmpty : Bool {
+    public var isEmpty : Bool {
         return hyperlinks.isEmpty
     }
     
@@ -35,7 +35,7 @@ public struct ClientHyperlinks : Sequence, IteratorProtocol, Jsonable {
         self.hyperlinks = try container.decode([Hyperlink].self, forKey: .hyperlinks)
     }
     
-    mutating public func next() -> Hyperlink? {
+    public mutating func next() -> Hyperlink? {
         let nextNumber:Int = hyperlinkCount + 1
         guard nextNumber < hyperlinks.count else { return nil }
         hyperlinkCount = nextNumber

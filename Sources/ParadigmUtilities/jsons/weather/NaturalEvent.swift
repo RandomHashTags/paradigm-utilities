@@ -9,9 +9,9 @@ import Foundation
 import SwiftSovereignStates
 
 public struct NaturalEvent : Jsonable {
-    let id:String, place:String, country:Country?, subdivision:SovereignStateSubdivisionWrapper?, location:Location?, description:String?, sources:EventSources
+    public let id:String, place:String, country:Country?, subdivision:SovereignStateSubdivisionWrapper?, location:Location?, description:String?, sources:EventSources
     
-    init(id: String, place: String, country: Country?, subdivision: (any SovereignStateSubdivision)?, location: Location?, description: String?, sources: EventSources) {
+    public init(id: String, place: String, country: Country?, subdivision: (any SovereignStateSubdivision)?, location: Location?, description: String?, sources: EventSources) {
         self.id = id
         self.place = place
         self.country = country

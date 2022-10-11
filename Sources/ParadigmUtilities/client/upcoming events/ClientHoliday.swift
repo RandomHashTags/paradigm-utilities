@@ -8,5 +8,5 @@
 import Foundation
 
 public struct ClientHoliday : Jsonable {
-    let response_version:Int, id:String, name:String, description:String, aliases:[String]?, imageURL:String?, type:String, sources:EventSources?
+    public let response_version:Int, id:String, name:String, description:String, aliases:[String]?, imageURL:String?, type:String, sources:EventSources?
 }

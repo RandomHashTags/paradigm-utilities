@@ -8,5 +8,5 @@
 import Foundation
 
 public struct MovieProductionCompany : Jsonable {
-    let id:String, name:String, aliases:[String]?, description:String, imageURL:String?, sources:EventSources
+    public let id:String, name:String, aliases:[String]?, description:String, imageURL:String?, sources:EventSources
 }

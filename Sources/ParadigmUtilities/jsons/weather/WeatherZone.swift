@@ -9,5 +9,5 @@ import Foundation
 import GEOSwift
 
 public struct WeatherZone : Jsonable {
-    let name:String, nameSuffix:String?, subdivision:String, geometry:Geometry
+    public let name:String, nameSuffix:String?, subdivision:String, geometry:Geometry
 }

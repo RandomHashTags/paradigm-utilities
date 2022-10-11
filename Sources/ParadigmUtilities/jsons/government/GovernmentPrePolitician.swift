@@ -8,5 +8,5 @@
 import Foundation
 
 public struct GovernmentPrePolitician : Jsonable {
-    let id:String, name:HumanName, party:PoliticalParty, imageURL:String?
+    public let id:String, name:HumanName, party:PoliticalParty, imageURL:String?
 }

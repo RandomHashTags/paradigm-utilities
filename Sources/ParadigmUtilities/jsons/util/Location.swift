@@ -8,7 +8,12 @@
 import Foundation
 
 public struct Location : Jsonable {
-    let longitude:Double, latitude:Double
+    public let longitude:Double, latitude:Double
+    
+    public init(longitude: Double, latitude: Double) {
+        self.longitude = longitude
+        self.latitude = latitude
+    }
     
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()

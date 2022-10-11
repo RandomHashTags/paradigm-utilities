@@ -20,7 +20,7 @@ public enum PoliticalParty : String, CaseIterable, Jsonable {
     case no_party
     case unknown
     
-    static func valueOf(_ string: String) -> PoliticalParty {
+    public static func valueOf(_ string: String) -> PoliticalParty {
         return PoliticalParty.allCases.first(where: {
             guard string.compare("\($0)") == .orderedSame || string.compare($0.getAbbreviation()) == .orderedSame || string.compare($0.getName()) == .orderedSame else {
                 let stringLowercase:String = string.lowercased()
@@ -30,7 +30,7 @@ public enum PoliticalParty : String, CaseIterable, Jsonable {
         }) ?? PoliticalParty.unknown
     }
     
-    func getName() -> String {
+    public func getName() -> String {
         switch self {
         case .democrat: return "Democrat"
         case .independent: return "Independent"
@@ -45,14 +45,14 @@ public enum PoliticalParty : String, CaseIterable, Jsonable {
         case .unknown: return "Unknown"
         }
     }
-    func getAliases() -> [String] {
+    public func getAliases() -> [String] {
         switch self {
         case .democrat: return ["Democratic"]
         case .republican: return ["GOP"]
         default: return []
         }
     }
-    func getAbbreviation() -> String {
+    public func getAbbreviation() -> String {
         switch self {
         case .democrat: return "D"
         case .independent: return "I"

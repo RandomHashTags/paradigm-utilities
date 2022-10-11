@@ -8,6 +8,6 @@
 import Foundation
 
 public struct Hyperlink : Jsonable {
-    let text:String
-    var url:String
+    public let text:String
+    public var url:String
 }

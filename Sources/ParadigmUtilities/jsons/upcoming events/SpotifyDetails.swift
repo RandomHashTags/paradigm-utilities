@@ -8,5 +8,5 @@
 import Foundation
 
 public struct SpotifyDetails : Jsonable {
-    let total_tracks:Int, imageURL:String, available_markets:[String], url:String
+    public let total_tracks:Int, imageURL:String, available_markets:[String], url:String
 }

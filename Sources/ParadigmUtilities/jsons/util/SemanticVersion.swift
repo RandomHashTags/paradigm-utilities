@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SemanticVersion : Codable, Hashable, Comparable {
+public struct SemanticVersion : Jsonable, Comparable {
     public static func < (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
         let leftMajor:Int = lhs.major, rightMajor:Int = rhs.major
         let leftMinor:Int = lhs.minor, rightMinor:Int = rhs.minor
@@ -15,21 +15,31 @@ public struct SemanticVersion : Codable, Hashable, Comparable {
         return leftMajor < rightMajor || leftMajor == rightMajor && (leftMinor < rightMinor || leftMinor == rightMinor && leftPatch < rightPatch)
     }
     
-    let major:Int, minor:Int, patch:Int
+    public let major:Int, minor:Int, patch:Int
     
-    init(major: Int, minor: Int, patch: Int) {
+    public init(major: Int, minor: Int, patch: Int) {
         self.major = major
         self.minor = minor
         self.patch = patch
     }
-    init(string: String) {
+    public init(string: String) {
         let values:[String] = string.components(separatedBy: ".")
         major = Int(values[0])!
         minor = Int(values[1])!
         patch = Int(values[2])!
     }
     
-    func toString() -> String {
+    public func encode(to encoder: Encoder) throws {
+        var container:SingleValueEncodingContainer = encoder.singleValueContainer()
+        try container.encode(toString())
+    }
+    public init(from decoder: Decoder) throws {
+        let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
+        let string:String = try container.decode(String.self)
+        self = SemanticVersion(string: string)
+    }
+    
+    public func toString() -> String {
         return major.description + "." + minor.description + "." + patch.description
     }
 }

@@ -5,14 +5,11 @@ public enum ParadigmUtilities {
         return Calendar.current
     }
     
-    static func getNow() -> Date {
+    public static func getNow() -> Date {
         var date:Date = Date()
         while date.year < 2022 {
             date = Date()
         }
         return date
-    }
-    
-    private static func test() {
     }
 }

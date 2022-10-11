@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct GovernmentAdministrationBill : Jsonable {
-    let sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
+public struct GovernmentAdministrationBill : Jsonable {
+    public let sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
-    init(sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
+    public init(sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
         self.sponsor = sponsor
         self.summary = summary
         self.policyArea = policyArea?.rawValue

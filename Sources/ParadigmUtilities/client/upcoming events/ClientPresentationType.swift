@@ -8,5 +8,5 @@
 import Foundation
 
 public struct ClientPresentationType : Jsonable {
-    let id:String, name:String, type:String, aliases:[String]?, defaultImageURL:String?
+    public let id:String, name:String, type:String, aliases:[String]?, defaultImageURL:String?
 }

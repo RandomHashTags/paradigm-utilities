@@ -8,5 +8,5 @@
 import Foundation
 
 public struct WeatherEvent : Jsonable {
-    let event:String, defcon:Int
+    public let event:String, defcon:Int
 }

@@ -14,7 +14,7 @@ public struct EventSources : Jsonable {
     
     private var sources:[EventSource]
     
-    init(sources: [EventSource] = [EventSource]()) {
+    public init(sources: [EventSource] = [EventSource]()) {
         self.sources = sources
     }
     
@@ -27,18 +27,18 @@ public struct EventSources : Jsonable {
         try container.encode(self.sources)
     }
     
-    var isEmpty : Bool {
+    public var isEmpty : Bool {
         return sources.isEmpty
     }
     
-    mutating func append(_ source: EventSource) {
+    public mutating func append(_ source: EventSource) {
         sources.append(source)
     }
-    mutating func append(_ sources: EventSources?) {
+    public mutating func append(_ sources: EventSources?) {
         guard let sources:[EventSource] = sources?.sources else { return }
         self.sources.append(contentsOf: sources)
     }
-    mutating func append(contentsOf: [EventSource]) {
+    public mutating func append(contentsOf: [EventSource]) {
         sources.append(contentsOf: contentsOf)
     }
 }

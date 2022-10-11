@@ -14,7 +14,7 @@ public enum UpdateType : String, CaseIterable, Codable {
     case performance_improvement
     case change
     
-    static func valueOf(_ string: String?) -> UpdateType? {
+    public static func valueOf(_ string: String?) -> UpdateType? {
         guard let string:String = string else { return nil }
         return UpdateType.allCases.first(where: { string.elementsEqual("\($0)") })
     }

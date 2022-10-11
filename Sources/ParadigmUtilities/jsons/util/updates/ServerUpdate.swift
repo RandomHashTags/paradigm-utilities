@@ -8,9 +8,9 @@
 import Foundation
 
 public struct ServerUpdate : Jsonable {
-    let type:UpdateType, summary:String, related:UpdateRelatedContent?, requiresPremium:Bool?
+    public let type:UpdateType, summary:String, related:UpdateRelatedContent?, requiresPremium:Bool?
     
-    init(type: UpdateType, summary: String, related: UpdateRelatedContent? = nil, requiresPremium: Bool = false) {
+    public init(type: UpdateType, summary: String, related: UpdateRelatedContent? = nil, requiresPremium: Bool = false) {
         self.type = type
         self.summary = summary
         self.related = related
