@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PreEnactedBill {
+public struct PreEnactedBill : Jsonable {
     public let id:String, title:String
     
     public init(id: String, title: String) {

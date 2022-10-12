@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol GovernmentBillStatusHistoryStatus : CaseIterable, RawRepresentable where RawValue == String  {
+public protocol GovernmentBillStatusHistoryStatus : CaseIterable, Jsonable, RawRepresentable where RawValue == String  {
     func getName() -> String
 }
 public extension GovernmentBillStatusHistoryStatus {
