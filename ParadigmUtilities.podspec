@@ -12,5 +12,4 @@ Pod::Spec.new do |s|
   s.swift_versions = ['5.6', '5.7']
   s.cocoapods_version = '>= 1.5.0'
   s.source_files = 'Sources/**/*'
-  //s.dependency 'SwiftSovereignStates', '~> 1.1.1'
 end
