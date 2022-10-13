@@ -7,10 +7,12 @@
 
 import Foundation
 
-public struct SovereignStateSingleValue : SovereignStateInformationValueProtocol {
-    public let notes:String?, value:String, valueDescription:String?, yearOfData:Int
+public struct SovereignStateSingleValue : SovereignStateInformationValue {
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, notes:String?, value:String, valueDescription:String?, yearOfData:Int
     
-    public init(notes: String?, value: String, valueDescription: String?, yearOfData: Int) {
+    public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int) {
+        type = .single_values
+        self.info = info
         self.notes = notes
         self.value = value
         self.valueDescription = valueDescription

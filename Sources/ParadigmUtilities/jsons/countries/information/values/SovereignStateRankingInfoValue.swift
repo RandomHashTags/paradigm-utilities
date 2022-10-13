@@ -7,13 +7,15 @@
 
 import Foundation
 
-public struct SovereignStateRankingInfoValue : SovereignStateInformationValueProtocol {
-    public let defcon:Int
+public struct SovereignStateRankingInfoValue : SovereignStateInformationValue {
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, defcon:Int
     public var worldRank:Int
     public let yearOfData:Int, value:Double, isEstimate:Bool
     public let values:[SovereignStateRankingInfoValueOther]?
     
-    public init(defcon: Int, worldRank: Int, yearOfData: Int, value: Double, isEstimate: Bool, values: [SovereignStateRankingInfoValueOther]?) {
+    public init(info: SovereignStateInfo, defcon: Int, worldRank: Int, yearOfData: Int, value: Double, isEstimate: Bool, values: [SovereignStateRankingInfoValueOther]?) {
+        type = .rankings
+        self.info = info
         self.defcon = defcon
         self.worldRank = worldRank
         self.yearOfData = yearOfData

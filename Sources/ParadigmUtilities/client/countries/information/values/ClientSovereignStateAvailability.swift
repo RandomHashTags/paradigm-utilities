@@ -7,10 +7,12 @@
 
 import Foundation
 
-public struct ClientSovereignStateAvailability : SovereignStateInformationValueProtocol {
-    public let title:String, primaryCategory:String, imageURL:String?, value:Bool
+public struct ClientSovereignStateAvailability : SovereignStateInformationValue {
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, title:String, primaryCategory:String, imageURL:String?, value:Bool
     
-    public init(title: String, primaryCategory: String, imageURL: String?, value: Bool) {
+    public init(info: SovereignStateInfo, title: String, primaryCategory: String, imageURL: String?, value: Bool) {
+        type = .availabilities
+        self.info = info
         self.title = title
         self.primaryCategory = primaryCategory
         self.imageURL = imageURL

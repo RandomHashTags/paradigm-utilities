@@ -8,10 +8,12 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct PreVolcano : Jsonable {
-    public let id:String, name:String, imageURL:String?, country:Country
+public struct PreVolcano : SovereignStateInformationValue {
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, id:String, name:String, imageURL:String?, country:Country
     
     public init(id: String, name: String, imageURL: String?, country: Country) {
+        type = .national
+        info = .geography_volcanoes
         self.id = id
         self.name = name
         self.imageURL = imageURL
