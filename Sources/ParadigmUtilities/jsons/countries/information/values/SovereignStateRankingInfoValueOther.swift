@@ -8,9 +8,9 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValueOther : Jsonable {
-    public let value:Double?, valueType:String, description:String, suffix:String?
+    public let value:Double?, valueType:NumberType, description:String, suffix:String?
     
-    public init(value: Double?, valueType: String, description: String, suffix: String?) {
+    public init(value: Double?, valueType: NumberType, description: String, suffix: String?) {
         self.value = value
         self.valueType = valueType
         self.description = description

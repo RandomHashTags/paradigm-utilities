@@ -18,6 +18,10 @@ public struct EventSources : Jsonable {
         self.sources = sources
     }
     
+    subscript(index: Int) -> EventSource? {
+        return sources.count > index ? sources[index] : nil
+    }
+    
     public init(from decoder: Decoder) throws {
         let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
         self.sources = try container.decode([EventSource].self)

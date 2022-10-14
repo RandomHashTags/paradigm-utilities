@@ -28,16 +28,4 @@ public struct WeatherAlert : Jsonable {
         self.time = time
         self.source = source
     }
-    public init(preAlert: ServerWeatherPreAlert, zones: [WeatherZone], source: EventSource) {
-        event = preAlert.event
-        defcon = preAlert.defcon
-        subdivisions = preAlert.subdivisions
-        certainty = preAlert.certainty
-        headline = preAlert.headline
-        instruction = preAlert.instruction
-        description = preAlert.description
-        time = preAlert.time
-        self.zones = zones
-        self.source = source
-    }
 }

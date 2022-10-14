@@ -10,12 +10,12 @@ import SwiftSovereignStates
 import GEOSwift
 
 public struct WeatherZone : Jsonable {
-    public let name:String, nameSuffix:String?, subdivision:SovereignStateSubdivisionWrapper, geometry:Geometry
+    public let name:String, nameSuffix:String?, subdivision:SovereignStateSubdivisionWrapper?, geometry:Geometry
     
-    public init(name: String, nameSuffix: String?, subdivision: any SovereignStateSubdivision, geometry: Geometry) {
+    public init(name: String, nameSuffix: String?, subdivision: (any SovereignStateSubdivision)?, geometry: Geometry) {
         self.name = name
         self.nameSuffix = nameSuffix
-        self.subdivision = SovereignStateSubdivisionWrapper(subdivision)
+        self.subdivision = subdivision?.wrapped()
         self.geometry = geometry
     }
 }
