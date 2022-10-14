@@ -14,4 +14,5 @@ Pod::Spec.new do |s|
   s.source_files = 'Sources/**/*'
   s.dependency 'SwiftSovereignStates', '~> 1.1.3'
   s.dependency 'ZippyJSON', '~> 1.2.5'
+  s.dependency 'GEOSwift', '~> 9.0.0'
 end
