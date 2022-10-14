@@ -13,7 +13,7 @@ private enum CodingKeys : CodingKey {
     case values
 }
 
-public struct SovereignStateInformation : Jsonable {
+public final class SovereignStateInformation : Jsonable {
     public static func == (lhs: SovereignStateInformation, rhs: SovereignStateInformation) -> Bool {
         return lhs.hashValue == rhs.hashValue
     }
@@ -40,11 +40,21 @@ public struct SovereignStateInformation : Jsonable {
             let value:NationalTrees? = SovereignStateInformation.parse(decoder, data: data)
             return value
             
+        case .neighbors:
+            let value:SovereignStateNeighbors? = SovereignStateInformation.parse(decoder, data: data)
+            return value
+            
         case .service_cia_values:
             let value:CIAValue? = SovereignStateInformation.parse(decoder, data: data)
             return value
+        case .service_sovereign_state_history:
+            let value:SovereignStateHistory? = SovereignStateInformation.parse(decoder, data: data)
+            return value
         case .service_travel_advisories:
             let value:TravelAdvisory? = SovereignStateInformation.parse(decoder, data: data)
+            return value
+        case .service_wikipedia:
+            let value:SovereignStateWikipedia? = SovereignStateInformation.parse(decoder, data: data)
             return value
             
         default:
@@ -138,6 +148,10 @@ public struct SovereignStateInformation : Jsonable {
         return all.isEmpty ? nil : all
     }
     
+    public func getAvailabilities() -> [ClientSovereignStateAvailability]? {
+        return getAll(where: { $0.type == .availabilities })
+    }
+    
     public func getNationalAnimals() -> NationalAnimals? {
         return get()
     }
@@ -156,6 +170,10 @@ public struct SovereignStateInformation : Jsonable {
     }
     public func getVolcanoes() -> [PreVolcano]? {
         return getAll()
+    }
+    
+    public func getNeighbors() -> SovereignStateNeighbors? {
+        return get()
     }
     
     public func getAgriculture() -> [SovereignStateAgricultureValue]? {
@@ -177,7 +195,13 @@ public struct SovereignStateInformation : Jsonable {
     public func getCIAValues() -> [CIAValue]? {
         return getAll()
     }
+    public func getHistory() -> SovereignStateHistory? {
+        return get()
+    }
     public func getTravelAdvisories() -> [TravelAdvisory]? {
         return getAll()
+    }
+    public func getWikipedia() -> SovereignStateWikipedia? {
+        return get()
     }
 }

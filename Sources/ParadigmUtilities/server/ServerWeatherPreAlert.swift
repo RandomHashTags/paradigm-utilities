@@ -6,15 +6,17 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public struct ServerWeatherPreAlert : Jsonable {
-    public let defcon:Int, event:String, id:String, subdivisions:[String], certainty:String?, headline:String?, instruction:String?, description:String?, zones:[WeatherZone], time:WeatherAlertTime
+    public let defcon:Int, event:String, id:String, country:Country, subdivisions:[SovereignStateSubdivisionWrapper], certainty:String?, headline:String?, instruction:String?, description:String?, zones:[WeatherZone], time:WeatherAlertTime
     
-    public init(defcon: Int, event: String, id: String, subdivisions: [String], certainty: String?, headline: String?, instruction: String?, description: String?, zones: [WeatherZone], time: WeatherAlertTime) {
+    public init(defcon: Int, event: String, id: String, country: Country, subdivisions: [any SovereignStateSubdivision], certainty: String?, headline: String?, instruction: String?, description: String?, zones: [WeatherZone], time: WeatherAlertTime) {
         self.defcon = defcon
         self.event = event
         self.id = id
-        self.subdivisions = subdivisions
+        self.country = country
+        self.subdivisions = subdivisions.map({ SovereignStateSubdivisionWrapper($0) })
         self.certainty = certainty
         self.headline = headline
         self.instruction = instruction
@@ -23,13 +25,13 @@ public struct ServerWeatherPreAlert : Jsonable {
         self.time = time
     }
     
-    public func onlyWithSubdivision(_ subdivision: String) -> ServerWeatherPreAlert {
+    public func onlyWithSubdivision(_ subdivision: any SovereignStateSubdivision) -> ServerWeatherPreAlert {
         var subdivisionZones:[WeatherZone] = [WeatherZone](zones)
-        subdivisionZones.removeAll(where: { $0.subdivision.compare(subdivision) != .orderedSame })
-        return ServerWeatherPreAlert(defcon: defcon, event: event, id: id, subdivisions: [subdivision], certainty: nil, headline: nil, instruction: nil, description: nil, zones: subdivisionZones, time: time)
+        subdivisionZones.removeAll(where: { !subdivision.isEqual($0.subdivision) })
+        return ServerWeatherPreAlert(defcon: defcon, event: event, id: id, country: country, subdivisions: [subdivision], certainty: nil, headline: nil, instruction: nil, description: nil, zones: subdivisionZones, time: time)
     }
     
     public func toClientJsonable() -> WeatherPreAlert {
-        return WeatherPreAlert(id: id, areas: zones.map({ $0.name }), time: time)
+        return WeatherPreAlert(id: id, areas: zones.map({ $0.name }), time: time, country: country)
     }
 }

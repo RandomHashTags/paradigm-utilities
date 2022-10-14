@@ -132,6 +132,8 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case national_parks
     case national_trees
     
+    case neighbors
+    
     case ranking_adult_hiv_prevalence
     case ranking_cannabis_use
     case ranking_civilian_firearms
@@ -169,7 +171,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     
     case service_apple_ios_maps_flyover
     case service_cia_values
-    case service_country_history
+    case service_sovereign_state_history
     case service_country_events
     case service_travel_advisories
     case service_wikipedia
@@ -349,7 +351,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         
         case .service_apple_ios_maps_flyover: return "Flyover"
         case .service_cia_values: return "CIA Values"
-        case .service_country_history: return "Country History"
+        case .service_sovereign_state_history: return "Sovereign State History"
         case .service_country_events: return "Country Events"
         case .service_travel_advisories: return "Travel Advisories"
         case .service_wikipedia: return "Wikipedia"
@@ -361,6 +363,8 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .value_system_of_government: return "System of Government"
         case .value_traffic_side: return "Side of traffic"
         case .value_voting_age: return "Voting Age"
+            
+        case .neighbors: return "Neighbors"
         }
     }
 }

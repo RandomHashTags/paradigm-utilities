@@ -43,11 +43,11 @@ public struct EventSources : Jsonable {
         sources.append(contentsOf: contentsOf)
     }
     
-    mutating func sorted(by: (EventSource, EventSource) -> Bool) {
+    public mutating func sorted(by: (EventSource, EventSource) -> Bool) {
         sources = sources.sorted(by: by)
     }
     
-    func getWikipediaSource() -> EventSource? {
+    public func getWikipediaSource() -> EventSource? {
         return sources.first(where: { $0.siteName.lowercased().starts(with: "wikipedia: ") })
     }
 }
