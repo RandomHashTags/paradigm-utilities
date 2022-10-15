@@ -7,18 +7,17 @@
 
 import Foundation
 
-public struct ServerEarthquakes : Jsonable {
+public struct EarthquakesResponse : Jsonable {
     let country:String
-    let magnitudes:[ServerEarthquakesMagnitudes]
+    let magnitudes:[EarthquakesResponseMagnitudes]
     
-    public init(country: String, magnitudes: [ServerEarthquakesMagnitudes]) {
+    public init(country: String, magnitudes: [EarthquakesResponseMagnitudes]) {
         self.country = country
         self.magnitudes = magnitudes
     }
 }
-public struct ServerEarthquakesMagnitudes : Jsonable {
-    let mag:String
-    let quakes:[PreEarthquake]
+public struct EarthquakesResponseMagnitudes : Jsonable {
+    public let mag:String, quakes:[PreEarthquake]
     
     public init(mag: String, quakes: [PreEarthquake]) {
         self.mag = mag

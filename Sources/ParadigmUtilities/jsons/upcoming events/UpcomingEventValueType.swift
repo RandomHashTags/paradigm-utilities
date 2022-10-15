@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueType : String, CaseIterable {
+public enum UpcomingEventValueType : String, CaseIterable, Jsonable {
     case array_string
     case boolean
     case int

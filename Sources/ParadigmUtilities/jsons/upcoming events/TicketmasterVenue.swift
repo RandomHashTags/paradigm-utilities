@@ -6,16 +6,17 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public struct TicketmasterVenue : Jsonable {
-    public let name:String, imageURL:String?, countryCode:String, subdivisionName:String?, cityName:String, location:Location?, generalRule:String?, childRule:String?, parkingDetail:String?, accessibleSeatingInfo:String?, url:String
+    public let name:String, imageURL:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?, generalRule:String?, childRule:String?, parkingDetail:String?, accessibleSeatingInfo:String?, url:String
     
-    public init(name: String, imageURL: String?, countryCode: String, subdivisionName: String?, cityName: String, location: Location?, generalRule: String?, childRule: String?, parkingDetail: String?, accessibleSeatingInfo: String?, url: String) {
+    public init(name: String, imageURL: String?, country: Country, subdivision: (any SovereignStateSubdivision)?, city: (any SovereignStateCity)?, location: Location?, generalRule: String?, childRule: String?, parkingDetail: String?, accessibleSeatingInfo: String?, url: String) {
         self.name = name
         self.imageURL = imageURL
-        self.countryCode = countryCode
-        self.subdivisionName = subdivisionName
-        self.cityName = cityName
+        self.country = country
+        self.subdivision = subdivision?.wrapped()
+        self.city = city?.wrapped()
         self.location = location
         self.generalRule = generalRule
         self.childRule = childRule

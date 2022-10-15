@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct PreHoliday {
+public struct PreHoliday : Jsonable {
     public let date:EventDate, id:String, name:String, type:String, emoji:String?, celebrators:String?
     public var countries:[Country]?
     
