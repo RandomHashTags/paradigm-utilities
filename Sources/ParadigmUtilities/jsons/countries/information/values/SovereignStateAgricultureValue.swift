@@ -7,14 +7,17 @@
 
 import Foundation
 
-public struct SovereignStateAgricultureValue : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info: SovereignStateInfo, worldRank:Int, yearOfData:Int, value:Double
+public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, worldRank:Int, maxWorldRank:Int, yearOfData:Int, value:Double, suffix:String, isEstimate:Bool
     
-    public init(info: SovereignStateInfo, worldRank: Int, yearOfData: Int, value: Double) {
+    public init(info: SovereignStateInfo, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Double, suffix:String, isEstimate: Bool) {
         type = .agriculture
         self.info = info
         self.worldRank = worldRank
+        self.maxWorldRank = maxWorldRank
         self.yearOfData = yearOfData
         self.value = value
+        self.suffix = suffix
+        self.isEstimate = isEstimate
     }
 }
