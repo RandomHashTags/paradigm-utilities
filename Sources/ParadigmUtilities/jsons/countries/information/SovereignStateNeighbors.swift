@@ -9,12 +9,13 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SovereignStateNeighbors : SovereignStateInformationValue {
-    public let type: SovereignStateInformationType, info: SovereignStateInfo, neighbors:[String]
+    public let type: SovereignStateInformationType, info: SovereignStateInfo, neighbors:[String], sources:EventSources?
     
     public init(neighbors: [any SovereignRegion]) {
         type = .neighbors
         info = .national_anthem
         self.neighbors = neighbors.map({ $0.getCacheID() })
+        sources = nil
     }
     
     public func getCountries() -> [Country]? {

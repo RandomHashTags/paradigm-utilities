@@ -8,9 +8,9 @@
 import Foundation
 
 public struct SovereignStateSingleValue : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, notes:String?, value:String, valueDescription:String?, yearOfData:Int, sources:EventSources
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, notes:String?, value:String, valueDescription:String?, yearOfData:Int, sources:EventSources?
     
-    public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int, sources: EventSources) {
+    public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int, sources: EventSources?) {
         type = .single_values
         self.info = info
         self.notes = notes

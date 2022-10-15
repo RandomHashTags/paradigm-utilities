@@ -9,11 +9,12 @@ import Foundation
 
 public struct SovereignStateHistory : SovereignStateInformationValue {
     public let type:SovereignStateInformationType, info:SovereignStateInfo
-    public let summaryEvents:[HistoricalEvent]
+    public let summaryEvents:[HistoricalEvent], sources:EventSources?
     
-    public init(summaryEvents: [HistoricalEvent]) {
+    public init(summaryEvents: [HistoricalEvent], sources: EventSources?) {
         type = .history
         info = .service_sovereign_state_history
         self.summaryEvents = summaryEvents
+        self.sources = sources
     }
 }

@@ -8,9 +8,9 @@
 import Foundation
 
 public struct NationalCapital : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, place:String, sources:EventSources
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, place:String, sources:EventSources?
     
-    public init(place: String, sources: EventSources) {
+    public init(place: String, sources: EventSources?) {
         type = .national
         info = .national_capital
         self.place = place

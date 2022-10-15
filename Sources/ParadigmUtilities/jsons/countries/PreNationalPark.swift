@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreNationalPark : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, id:String, name:String, imageURL:String?, country:Country
+    public let type:SovereignStateInformationType, info:SovereignStateInfo, id:String, name:String, imageURL:String?, country:Country, sources:EventSources?
     
     public init(id: String, name: String, imageURL: String?, country: Country) {
         type = .national
@@ -18,5 +18,6 @@ public struct PreNationalPark : SovereignStateInformationValue {
         self.name = name
         self.imageURL = imageURL
         self.country = country
+        sources = nil
     }
 }
