@@ -16,13 +16,13 @@ final class ParadigmUtilitiesTests: XCTestCase {
             capital
         ]
         let information:SovereignStateInformation = SovereignStateInformation(response_version: response_version, values: values)
-        XCTAssert(information.getNationalCapital() != nil)
+        XCTAssert(information.nationalCapital != nil)
         
         let data:Data = information.toString().data(using: .utf8)!
         let bro:SovereignStateInformation = try ZippyJSONDecoder().decode(SovereignStateInformation.self, from: data)
         XCTAssert(bro.response_version == response_version)
         XCTAssert(bro.values.count == information.values.count)
-        XCTAssert(bro.getNationalAnthem() == anthem)
-        XCTAssert(bro.getNationalCapital() == capital)
+        XCTAssert(bro.nationalAnthem == anthem)
+        XCTAssert(bro.nationalCapital == capital)
     }
 }

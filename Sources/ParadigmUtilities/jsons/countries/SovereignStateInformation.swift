@@ -88,7 +88,8 @@ public final class SovereignStateInformation : Jsonable {
         }
     }
     
-    public let response_version:Int, values:[any SovereignStateInformationValue]
+    public let response_version:Int
+    public var values:[any SovereignStateInformationValue]
     
     public init(response_version: Int, values: [any SovereignStateInformationValue]) {
         self.response_version = response_version
@@ -148,60 +149,26 @@ public final class SovereignStateInformation : Jsonable {
         return all.isEmpty ? nil : all
     }
     
-    public func getAvailabilities() -> [ClientSovereignStateAvailability]? {
-        return getAll(where: { $0.type == .availabilities })
-    }
+    public lazy var availabilities:[ClientSovereignStateAvailability]? = getAll(where: { $0.type == .availabilities })
     
-    public func getNationalAnimals() -> NationalAnimals? {
-        return get()
-    }
-    public func getNationalAnthem() -> NationalAnthem? {
-        return get()
-    }
-    public func getNationalCapital() -> NationalCapital? {
-        return get()
-    }
-    public func getNationalTrees() -> NationalTrees? {
-        return get()
-    }
+    public lazy var nationalAnimals:NationalAnimals? = get()
+    public lazy var nationalAnthem:NationalAnthem? = get()
+    public lazy var nationalCapital:NationalCapital? = get()
+    public lazy var nationalTrees:NationalTrees? = get()
     
-    public func getNationalParks() -> [PreNationalPark]? {
-        return getAll()
-    }
-    public func getVolcanoes() -> [PreVolcano]? {
-        return getAll()
-    }
+    public lazy var nationalParks:[PreNationalPark]? = getAll()
+    public lazy var volcanoes:[PreVolcano]? = getAll()
     
-    public func getNeighbors() -> SovereignStateNeighbors? {
-        return get()
-    }
+    public lazy var neighbors:SovereignStateNeighbors? = get()
     
-    public func getAgriculture() -> [SovereignStateAgricultureValue]? {
-        return getAll(where: { $0.type == .agriculture })
-    }
-    public func getInfo() -> [SovereignStateInfoKey]? {
-        return getAll(where: { $0.type == .information })
-    }
-    public func getLegalities() -> [SovereignStateInfoKey]? {
-        return getAll(where: { $0.type == .legalities })
-    }
-    public func getRankings() -> [SovereignStateRankingInfoValue]? {
-        return getAll()
-    }
-    public func getSingleValues() -> [SovereignStateSingleValue]? {
-        return getAll()
-    }
+    public lazy var agriculture:[SovereignStateAgricultureValue]? = getAll(where: { $0.type == .agriculture })
+    public lazy var info:[SovereignStateInfoKey]? = getAll(where: { $0.type == .information })
+    public lazy var legalities:[SovereignStateInfoKey]? = getAll(where: { $0.type == .legalities })
+    public lazy var rankings:[SovereignStateRankingInfoValue]? = getAll()
+    public lazy var singleValues:[SovereignStateSingleValue]? = getAll()
     
-    public func getCIAValues() -> [CIAValue]? {
-        return getAll()
-    }
-    public func getHistory() -> SovereignStateHistory? {
-        return get()
-    }
-    public func getTravelAdvisories() -> [TravelAdvisory]? {
-        return getAll()
-    }
-    public func getWikipedia() -> SovereignStateWikipedia? {
-        return get()
-    }
+    public lazy var ciaValues:[CIAValue]? = getAll()
+    public lazy var history:SovereignStateHistory? = get()
+    public lazy var travelAdvisories:[TravelAdvisory]? = getAll()
+    public lazy var wikipedia:SovereignStateWikipedia? = get()
 }
