@@ -15,7 +15,7 @@ public struct NaturalEvent : Jsonable {
         self.id = id
         self.place = place
         self.country = country
-        self.subdivision = subdivision != nil ? SovereignStateSubdivisionWrapper(subdivision!) : nil
+        self.subdivision = subdivision?.wrapped()
         self.location = location
         self.description = description
         self.sources = sources

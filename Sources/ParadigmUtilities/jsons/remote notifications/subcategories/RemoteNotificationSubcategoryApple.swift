@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RemoteNotificationSubcategoryApple : String, RemoteNotificationSubcategory {
+public enum RemoteNotificationSubcategoryApple : String, CaseIterable, RemoteNotificationSubcategory {
     case ios_update
     case ipados_update
     case macos_update

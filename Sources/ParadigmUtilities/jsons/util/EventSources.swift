@@ -34,6 +34,9 @@ public struct EventSources : Jsonable {
     public var isEmpty : Bool {
         return sources.isEmpty
     }
+    public var first : EventSource? {
+        return sources.first
+    }
     
     
     public mutating func append(_ source: EventSource) {

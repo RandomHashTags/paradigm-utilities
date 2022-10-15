@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public protocol RemoteNotificationSubcategory : CaseIterable, Jsonable, RawRepresentable where RawValue == String {
+public protocol RemoteNotificationSubcategory : Jsonable {
     func getCategory() -> RemoteNotificationCategory
     func getName() -> String
     func isConditional() -> Bool
@@ -16,6 +16,18 @@ public protocol RemoteNotificationSubcategory : CaseIterable, Jsonable, RawRepre
 }
 
 public extension RemoteNotificationSubcategory {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.getCategory() == rhs.getCategory() && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(getCategory())
+        hasher.combine(getIdentifier())
+    }
+    
+    func getIdentifier() -> String {
+        return String(describing: self)
+    }
     func getAllValues() async throws -> [String]? {
         return nil
     }
@@ -40,3 +52,25 @@ public extension RemoteNotificationSubcategory {
         return json
     }*/
 }
+
+/*
+public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcategory {
+    public let subcategory:any RemoteNotificationSubcategory
+    
+    public init(subcategory: any RemoteNotificationSubcategory) {
+        self.subcategory = subcategory
+    }
+    
+    public func getCategory() -> RemoteNotificationCategory {
+        return subcategory.getCategory()
+    }
+    
+    public func getName() -> String {
+        return subcategory.getName()
+    }
+    
+    public func isConditional() -> Bool {
+        return subcategory.isConditional()
+    }
+}
+*/

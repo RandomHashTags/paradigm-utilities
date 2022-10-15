@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RemoteNotificationSubcategoryWeather : String, RemoteNotificationSubcategory {
+public enum RemoteNotificationSubcategoryWeather : String, CaseIterable, RemoteNotificationSubcategory {
     case local_alert
     
     public func getCategory() -> RemoteNotificationCategory {

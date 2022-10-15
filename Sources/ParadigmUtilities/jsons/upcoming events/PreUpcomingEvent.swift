@@ -9,10 +9,10 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreUpcomingEvent : Jsonable {
-    public let type:UpcomingEventType, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64?, title:String, tag:String?, imageURL:String?, countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    public let productionCompanies:[String]?, popularity:Int?
+    public let type:UpcomingEventType, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64?, title:String, tag:String, imageURL:String?, countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public let productionCompanies:[String]?, popularity:Int?, awayTeam:ClientMLBTeam?, homeTeam:ClientMLBTeam?
     
-    public init(type: UpcomingEventType, eventDate: EventDate!, exactStartMilliseconds: Int64!, exactEndMilliseconds: Int64? = nil, title: String, tag: String?, imageURL: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, productionCompanies: [String]? = nil, popularity: Int? = nil) {
+    public init(type: UpcomingEventType, eventDate: EventDate!, exactStartMilliseconds: Int64!, exactEndMilliseconds: Int64? = nil, title: String, tag: String, imageURL: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, productionCompanies: [String]? = nil, popularity: Int? = nil, awayTeam: ClientMLBTeam? = nil, homeTeam: ClientMLBTeam? = nil) {
         self.type = type
         self.eventDate = eventDate
         self.exactStartMilliseconds = exactStartMilliseconds
@@ -24,5 +24,17 @@ public struct PreUpcomingEvent : Jsonable {
         self.subdivisions = subdivisions
         self.productionCompanies = productionCompanies
         self.popularity = popularity
+        self.awayTeam = awayTeam
+        self.homeTeam = homeTeam
+    }
+    
+    public func getIdentifier() -> String {
+        if let eventDate:EventDate = eventDate {
+            return eventDate.getDateString() + "." + title
+        } else if let exactStartMilliseconds:Int64 = exactStartMilliseconds {
+            return exactStartMilliseconds.description + "." + title
+        } else {
+            return "NIL_" + title
+        }
     }
 }
