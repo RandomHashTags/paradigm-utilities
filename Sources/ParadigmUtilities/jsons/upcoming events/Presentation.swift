@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Presentation : CaseIterable, Jsonable {
+public enum Presentation : String, CaseIterable, Jsonable {
     case apple_event
     case apple_event_wwdc
     case arm_devsummit

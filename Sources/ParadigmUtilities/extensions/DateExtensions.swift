@@ -8,11 +8,11 @@
 import Foundation
 
 public extension Date {
-    var milliseconds:TimeInterval {
-        return timeIntervalSince1970 * 1_000
+    var milliseconds:Int64 {
+        return Int64(timeIntervalSince1970 * 1_000)
     }
     
-    init(milliseconds: TimeInterval) {
+    init(milliseconds: Int64) {
         self = Date(timeIntervalSince1970: TimeInterval(milliseconds / 1_000))
     }
     

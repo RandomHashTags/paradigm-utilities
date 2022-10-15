@@ -9,8 +9,8 @@ import Foundation
 
 public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     case apple
-    case playstation
-    case video_game
+    //case playstation
+    //case video_game
     case weather
     
     public static func valueOf(_ string: String) -> RemoteNotificationCategory? {
@@ -18,11 +18,9 @@ public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     }
     public static func valueOf(subcategory: String) -> (any RemoteNotificationSubcategory)? {
         for category in RemoteNotificationCategory.allCases {
-            if let subcategories:[any RemoteNotificationSubcategory] = category.getSubcategories() {
-                for sub in subcategories {
-                    if subcategory.elementsEqual("\(sub)") {
-                        return sub
-                    }
+            for sub in category.getSubcategories() {
+                if subcategory.elementsEqual("\(sub)") {
+                    return sub
                 }
             }
         }
@@ -37,21 +35,20 @@ public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     public func getName() -> String {
         switch self {
         case .apple: return "Apple"
-        case .playstation: return "PlayStation"
-        case .video_game: return "Video Game"
+        //case .playstation: return "PlayStation"
+        //case .video_game: return "Video Game"
         case .weather: return "Weather"
         }
     }
     
     public func valueOfSubcategory(_ string: String) -> (any RemoteNotificationSubcategory)? {
-        guard let subcategories:[any RemoteNotificationSubcategory] = getSubcategories() else { return nil }
-        return subcategories.first(where: { string.elementsEqual("\($0)") })
+        return getSubcategories().first(where: { string.elementsEqual($0.getIdentifier()) })
     }
-    public func getSubcategories() -> [any RemoteNotificationSubcategory]? {
+    public func getSubcategories() -> [any RemoteNotificationSubcategory] {
         switch self {
         case .apple: return RemoteNotificationSubcategoryApple.allCases
-        case .playstation: return nil
-        case .video_game: return nil
+        //case .playstation: return nil
+        //case .video_game: return nil
         case .weather: return RemoteNotificationSubcategoryWeather.allCases
         }
     }

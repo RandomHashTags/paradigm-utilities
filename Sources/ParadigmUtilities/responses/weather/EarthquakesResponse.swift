@@ -6,12 +6,13 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public struct EarthquakesResponse : Jsonable {
-    let country:String
-    let magnitudes:[EarthquakesResponseMagnitudes]
+    public let country:Country
+    public let magnitudes:[EarthquakesResponseMagnitudes]
     
-    public init(country: String, magnitudes: [EarthquakesResponseMagnitudes]) {
+    public init(country: Country, magnitudes: [EarthquakesResponseMagnitudes]) {
         self.country = country
         self.magnitudes = magnitudes
     }

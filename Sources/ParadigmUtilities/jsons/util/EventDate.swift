@@ -30,10 +30,9 @@ public struct EventDate : Comparable, Jsonable {
     public static func getTodayDateString() -> String {
         return EventDate.getDateString(date: ParadigmUtilities.getNow())
     }
-    /*
     public static func getToday() -> EventDate {
-        return EventDate
-    }*/
+        return EventDate.from(date: ParadigmUtilities.getNow())
+    }
     
     public static func getDateString(date: Date) -> String {
         let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.month, .year, .day], from: date)
@@ -51,12 +50,12 @@ public struct EventDate : Comparable, Jsonable {
         return year.description + "-" + (month < 10 ? "0" : "") + month.description + "-" + (day < 10 ? "0" : "") + day.description + "T00:00:00Z"
     }
     
-    /*public static func from(date: Date) -> EventDate {
+    public static func from(date: Date) -> EventDate {
         let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.month, .day, .year], from: date)
         let monthInt:Int = components.month!, year:Int = components.year!, day:Int = components.day!
-        let month:String = monthInt.monthName!
+        let month:Month = Month.valueOf(monthInt) ?? Month.december
         return EventDate(year: year, month: month, day: day)
-    }*/
+    }
     public static func from(dateString: String) -> EventDate {
         let values:[String] = dateString.components(separatedBy: "-")
         let month:Int = Int(values[0])!, year:Int = Int(values[1])!, day:Int = Int(values[2])!
