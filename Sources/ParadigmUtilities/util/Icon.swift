@@ -6,9 +6,6 @@
 //
 
 import Foundation
-#if canImport(UIKit)
-import UIKit
-#endif
 
 public enum Icon : String, CaseIterable {
     
@@ -369,90 +366,5 @@ public enum Icon : String, CaseIterable {
     }
     public static func valueOfEmoji(_ enumerationKey: String?) -> Icon? {
         return valueOf(enumerationKey != nil ? "emoji_" + enumerationKey! : nil)
-    }
-    
-    #if canImport(UIKit)
-    public static func convertToUIImage(unicode: String?) -> UIImage? {
-        guard let nsString:String = unicode else { return nil }
-        let font:UIFont = UIFont.systemFont(ofSize: 14)
-        let stringAttributes:[NSAttributedString.Key:Any] = [NSAttributedString.Key.font: font]
-        let imageSize:CGSize = nsString.size(withAttributes: stringAttributes)
-
-        UIGraphicsBeginImageContextWithOptions(imageSize, false, 0)
-        UIColor.clear.set()
-        UIRectFill(CGRect(origin: CGPoint(), size: imageSize))
-        nsString.draw(at: CGPoint.zero, withAttributes: stringAttributes)
-        let image:UIImage? = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return image?.withRenderingMode(.alwaysOriginal)
-    }
-    public func getUIImage() -> UIImage? {
-        if isEmoji() {
-            return Icon.convertToUIImage(unicode: rawValue)
-        } else if isSFSymbol() {
-            return getMultiColorImage() ?? getHierarchicalImage() ?? getDefaultImage(withTintColor: true)
-        } else {
-            return getDefaultImage(withTintColor: true)
-        }
-    }
-    public func getBoldUIImage() -> UIImage? {
-        return getUIImage()?.applyingSymbolConfiguration(.init(weight: .bold))?.withTintColor(.darkGray)
-    }
-    
-    private func getTintColor() -> UIColor {
-        switch self {
-        case .system_multicolor_cross_circle_fill:
-            return UIColor.red
-        case .system_multicolor_info_circle_fill,
-                .system_checkmark,
-                .system_checkmark_circle,
-                .system_multicolor_checkmark_circle_fill:
-            return UIColor.link
-        case .system_multicolor_star,
-                .system_multicolor_star_fill:
-            return .yellow
-        default:
-            return UIColor.label
-        }
-    }
-    private func getDefaultImage(withTintColor: Bool) -> UIImage? {
-        var uiimage:UIImage? = (UIImage(named: rawValue) ?? UIImage(systemName: rawValue))?.withRenderingMode(.alwaysOriginal)
-        if withTintColor {
-            uiimage = uiimage?.withTintColor(getTintColor())
-        }
-        return uiimage
-    }
-    private func getMultiColorImage() -> UIImage? {
-        guard isMultiColor() else { return nil }
-        let uiimage:UIImage?
-        if #available(iOS 15.0, *) {
-            uiimage = UIImage(systemName: rawValue)
-        } else {
-            uiimage = UIImage(named: rawValue) ?? UIImage(systemName: rawValue)?.withTintColor(getTintColor())
-        }
-        return uiimage?.withRenderingMode(.alwaysOriginal)
-    }
-    private func getHierarchicalImage() -> UIImage? {
-        guard isHierarchical() else { return nil }
-        if #available(iOS 15.0, *) {
-            let configuration:UIImage.SymbolConfiguration = UIImage.SymbolConfiguration(hierarchicalColor: UIColor.label)
-            return UIImage(systemName: rawValue)?.withConfiguration(configuration)
-        } else {
-            return getDefaultImage(withTintColor: false)
-        }
-    }
-    #endif
-    
-    public func isEmoji() -> Bool {
-        return "\(self)".starts(with: "emoji_")
-    }
-    public func isSFSymbol() -> Bool {
-        return "\(self)".starts(with: "system_")
-    }
-    public func isMultiColor() -> Bool {
-        return "\(self)".starts(with: "system_multicolor_")
-    }
-    public func isHierarchical() -> Bool {
-        return "\(self)".starts(with: "system_hierarchical_")
     }
 }

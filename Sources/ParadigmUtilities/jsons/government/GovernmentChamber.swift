@@ -6,6 +6,24 @@
 //
 
 import Foundation
+import SwiftSovereignStates
+
+public enum GovernmentChambers {
+    public static func get(_ country: Country) -> [any GovernmentChamber]? {
+        switch country {
+        case .united_states: return GovernmentChamberUnitedStates.allCases
+        default: return nil
+        }
+    }
+}
+public extension Country {
+    func valueOfGovernmentChamber(_ identifier: String) -> (any GovernmentChamber)? {
+        return getGovernmentChambers()?.first(where: { $0.getIdentifier().elementsEqual(identifier) })
+    }
+    func getGovernmentChambers() -> [any GovernmentChamber]? {
+        return GovernmentChambers.get(self)
+    }
+}
 
 public protocol GovernmentChamber : Jsonable {
     func getName() -> String
