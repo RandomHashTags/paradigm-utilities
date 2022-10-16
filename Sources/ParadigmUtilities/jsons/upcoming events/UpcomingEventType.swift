@@ -283,6 +283,9 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         }
     }
     
+    public func isMovieEvent() -> Bool {
+        return self == .movie
+    }
     public func isPresentation() -> Bool {
         return self == .presentations
     }

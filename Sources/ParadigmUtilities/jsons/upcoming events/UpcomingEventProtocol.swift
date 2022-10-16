@@ -25,10 +25,21 @@ public protocol UpcomingEventProtocol : Jsonable {
     var countries:[Country]? { get }
     var subdivisions:[SovereignStateSubdivisionWrapper]? { get }
     
+    func getIdentifier() -> String
     func getType() -> UpcomingEventType
 }
 public extension UpcomingEventProtocol {
     func getDateString() -> String {
         return eventDate.getDateString()
+    }
+    
+    func getIdentifier() -> String {
+        if let eventDate:EventDate = eventDate {
+            return ParadigmUtilities.getEventDateIdentifier(dateString: eventDate.getDateString(), title: title)
+        } else if let exactStartMilliseconds:Int64 = exactStartMilliseconds {
+            return ParadigmUtilities.getEventDateIdentifier(exactTimeMilliseconds: exactStartMilliseconds, title: title)
+        } else {
+            return ParadigmUtilities.getEventDateIdentifier(dateString: "NIL", title: title)
+        }
     }
 }
