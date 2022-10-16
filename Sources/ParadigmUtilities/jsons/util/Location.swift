@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 public struct Location : Jsonable {
     public let longitude:Double, latitude:Double
@@ -24,5 +25,9 @@ public struct Location : Jsonable {
         let values:[Double] = try container.decode([Double].self)
         longitude = values[0]
         latitude = values[1]
+    }
+    
+    public func coreLocation() -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }

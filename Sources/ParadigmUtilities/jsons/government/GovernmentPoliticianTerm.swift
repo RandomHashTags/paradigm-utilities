@@ -17,7 +17,7 @@ public struct GovernmentPoliticianTerm : Jsonable {
         self.end = end
         self.party = party
         self.how = how
-        self.subdivision = subdivision != nil ? SovereignStateSubdivisionWrapper(subdivision!) : nil
+        self.subdivision = subdivision?.wrapped()
         self.district = district
         self.contactInformation = contactInformation
     }

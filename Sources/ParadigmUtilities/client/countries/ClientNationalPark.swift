@@ -18,7 +18,7 @@ public struct ClientNationalPark : Jsonable {
         self.imageURL = imageURL
         self.country = country
         self.countries = countries
-        self.subdivisions = subdivisions.map({ SovereignStateSubdivisionWrapper($0) })
+        self.subdivisions = subdivisions.map({ $0.wrapped() })
         self.sources = sources
     }
 }

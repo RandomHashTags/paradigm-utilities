@@ -8,14 +8,14 @@
 import Foundation
 
 public struct WikipediaStatistics : Jsonable {
-    public let area:WikipediaStatisticsArea?, elevation:WikipediaStatisticsElevation?, dimensions:WikipediaStatisticsDimensions?, population:WikipediaStatisticsPopulation?, govermentURL:String?
+    public let area:WikipediaStatisticsArea?, elevation:WikipediaStatisticsElevation?, dimensions:WikipediaStatisticsDimensions?, population:WikipediaStatisticsPopulation?, governmentURL:String?
     
     public init(area: WikipediaStatisticsArea?, elevation: WikipediaStatisticsElevation?, dimensions: WikipediaStatisticsDimensions?, population: WikipediaStatisticsPopulation?, governmentURL: String?) {
         self.area = area
         self.elevation = elevation
         self.dimensions = dimensions
         self.population = population
-        self.govermentURL = governmentURL
+        self.governmentURL = governmentURL
     }
 }
 

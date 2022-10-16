@@ -13,7 +13,7 @@ public struct UpdateRelatedContent : Jsonable {
     
     public init(countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil, sources: EventSources? = nil) {
         self.countries = countries
-        self.subdivisions = subdivisions?.map({ SovereignStateSubdivisionWrapper($0) })
+        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.sources = sources
     }
 }

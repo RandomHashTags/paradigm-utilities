@@ -31,6 +31,9 @@ public struct EventSources : Jsonable {
         try container.encode(self.sources)
     }
     
+    public var count : Int {
+        return sources.count
+    }
     public var isEmpty : Bool {
         return sources.isEmpty
     }

@@ -56,6 +56,9 @@ public final class SovereignStateInformation : Jsonable {
         case .service_wikipedia:
             let value:SovereignStateWikipedia? = SovereignStateInformation.parse(decoder, data: data)
             return value
+        case .service_wikipedia_featured_pictures:
+            let value:WikipediaFeaturedPictures? = SovereignStateInformation.parse(decoder, data: data)
+            return value
             
         default:
             let id:String = info.rawValue.components(separatedBy: "_")[0]
@@ -171,4 +174,5 @@ public final class SovereignStateInformation : Jsonable {
     public lazy var history:SovereignStateHistory? = get()
     public lazy var travelAdvisories:[TravelAdvisory]? = getAll()
     public lazy var wikipedia:SovereignStateWikipedia? = get()
+    public lazy var wikipediaFeaturedPictures:WikipediaFeaturedPictures? = get()
 }
