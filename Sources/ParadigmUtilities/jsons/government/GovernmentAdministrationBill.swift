@@ -8,9 +8,10 @@
 import Foundation
 
 public struct GovernmentAdministrationBill : Jsonable {
-    public let sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
+    public let title:String, sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
-    public init(sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
+    public init(title: String, sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
+        self.title = title
         self.sponsor = sponsor
         self.summary = summary
         self.policyArea = policyArea?.rawValue

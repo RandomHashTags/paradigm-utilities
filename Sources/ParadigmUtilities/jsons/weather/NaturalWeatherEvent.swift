@@ -1,5 +1,5 @@
 //
-//  NaturalEvent.swift
+//  NaturalWeatherEvent.swift
 //  
 //
 //  Created by Evan Anderson on 10/10/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct NaturalEvent : Jsonable {
+public struct NaturalWeatherEvent : Jsonable {
     public let id:String, place:String, country:Country?, subdivision:SovereignStateSubdivisionWrapper?, location:Location?, description:String?, sources:EventSources
     
     public init(id: String, place: String, country: Country?, subdivision: (any SovereignStateSubdivision)?, location: Location?, description: String?, sources: EventSources) {

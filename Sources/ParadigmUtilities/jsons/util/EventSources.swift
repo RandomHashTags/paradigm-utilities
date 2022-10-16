@@ -18,7 +18,7 @@ public struct EventSources : Jsonable {
         self.sources = sources
     }
     
-    subscript(index: Int) -> EventSource? {
+    public subscript(index: Int) -> EventSource? {
         return sources.count > index ? sources[index] : nil
     }
     
