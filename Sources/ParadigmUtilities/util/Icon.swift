@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Icon : String, CaseIterable {
+public enum Icon : String, CaseIterable, Jsonable {
     
     case emoji_drink_coffee = "☕"
     
@@ -366,5 +366,18 @@ public enum Icon : String, CaseIterable {
     }
     public static func valueOfEmoji(_ enumerationKey: String?) -> Icon? {
         return valueOf(enumerationKey != nil ? "emoji_" + enumerationKey! : nil)
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container:SingleValueEncodingContainer = encoder.singleValueContainer()
+        try container.encode("\(self)")
+    }
+    public init(from decoder: Decoder) throws {
+        let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
+        let string:String = try container.decode(String.self)
+        guard let icon:Icon = Icon.valueOf(string) else {
+            throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid Icon identifier \"" + string + "\"")
+        }
+        self = icon
     }
 }

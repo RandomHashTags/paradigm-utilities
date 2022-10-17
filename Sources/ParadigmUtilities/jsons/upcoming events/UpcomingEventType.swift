@@ -282,29 +282,4 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
             return nil
         }
     }
-    
-    public func isMovieEvent() -> Bool {
-        return self == .movie
-    }
-    public func isPresentation() -> Bool {
-        return self == .presentations
-    }
-    public func isSpaceEvent() -> Bool {
-        return self == .space_event
-    }
-    public func isSpaceLunarEclipse() -> Bool {
-        return self == .space_lunar_eclipse
-    }
-    public func isSpaceNearEarthObject() -> Bool {
-        return self == .space_near_earth_object
-    }
-    public func isSpaceRocketLaunch() -> Bool {
-        return self == .space_rocket_launch
-    }
-    public func isSportChampionships() -> Bool {
-        return self == .sport_championships
-    }
-    public func isSportMLB() -> Bool {
-        return self == .sport_mlb
-    }
 }
