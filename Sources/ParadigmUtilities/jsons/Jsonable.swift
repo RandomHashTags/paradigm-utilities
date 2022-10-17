@@ -23,12 +23,15 @@ public extension Jsonable {
     //    return nil
     //}
     
-    func toString() -> String {
+    func toData() -> Data? {
         do {
-            let data:Data = try JSONEncoder().encode(self)
-            return String(data: data, encoding: .utf8) ?? "{}"
+            return try JSONEncoder().encode(self)
         } catch {
-            return "{}"
+            return nil
         }
+    }
+    func toString() -> String? {
+        guard let data:Data = toData() else { return nil }
+        return String(data: data, encoding: .utf8)
     }
 }

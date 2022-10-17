@@ -18,7 +18,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let information:SovereignStateInformation = SovereignStateInformation(response_version: response_version, values: values)
         XCTAssert(information.nationalCapital != nil)
         
-        let data:Data = information.toString().data(using: .utf8)!
+        let data:Data = information.toString()!.data(using: .utf8)!
         let bro:SovereignStateInformation = try ZippyJSONDecoder().decode(SovereignStateInformation.self, from: data)
         XCTAssert(bro.response_version == response_version)
         XCTAssert(bro.values.count == information.values.count)
