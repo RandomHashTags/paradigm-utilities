@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct GenericUpcomingEvent : UpcomingEventProtocol {
+public struct GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public let type:UpcomingEventType, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
     public let customTypeSingularName:String?
     

@@ -9,7 +9,8 @@ import Foundation
 
 public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
     public let type:SovereignStateInformationType, info:SovereignStateInfo, defcon:Int
-    public let worldRank:Int, maxWorldRank:Int, yearOfData:Int, value:Double, suffix:String, isEstimate:Bool
+    public var worldRank:Int
+    public let maxWorldRank:Int, yearOfData:Int, value:Double, suffix:String, isEstimate:Bool
     public let values:[SovereignStateRankingInfoValueOther]?, sources:EventSources?
     
     public init(info: SovereignStateInfo, defcon: Int, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Double, suffix: String, isEstimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {

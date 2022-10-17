@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SpotifyNewMusicFridayEvent : UpcomingEventProtocol {
+public struct SpotifyNewMusicFridayEvent : GenericUpcomingEventProtocol {
     public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
     public let customTypeSingularName:String?
     

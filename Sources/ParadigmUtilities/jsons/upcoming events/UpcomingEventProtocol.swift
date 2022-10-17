@@ -16,12 +16,7 @@ public protocol UpcomingEventProtocol : Jsonable {
     var customTypeSingularName:String? { get }
     
     var title:String { get }
-    var description:String? { get }
-    var location:String? { get }
     var imageURL:String? { get }
-    var youtubeVideoIDs:[String]? { get }
-    var sources:EventSources { get }
-    var hyperlinks:ClientHyperlinks? { get }
     var countries:[Country]? { get }
     var subdivisions:[SovereignStateSubdivisionWrapper]? { get }
     
@@ -42,4 +37,12 @@ public extension UpcomingEventProtocol {
             return ParadigmUtilities.getEventDateIdentifier(dateString: "NIL", title: title)
         }
     }
+}
+
+public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
+    var description:String? { get }
+    var location:String? { get }
+    var youtubeVideoIDs:[String]? { get }
+    var sources:EventSources { get }
+    var hyperlinks:ClientHyperlinks? { get }
 }
