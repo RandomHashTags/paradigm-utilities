@@ -245,41 +245,4 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
             }
         }
     }
-    
-    public func parse(decoder: ZippyJSONDecoder, data: Data) -> (any UpcomingEventProtocol)? {
-        do {
-            switch self {
-            case .astronomy_picture_of_the_day: return try decoder.decode(APODEvent.self, from: data)
-            case .joke_of_the_day: return try decoder.decode(JOTDEvent.self, from: data)
-            case .movie: return try decoder.decode(MovieEvent.self, from: data)
-            case .music_album: return try decoder.decode(MusicAlbumEvent.self, from: data)
-                                
-            case .science_year_review: return nil // TODO: update
-            case .space_event: return try decoder.decode(SpaceEvent.self, from: data)
-            case .space_lunar_eclipse: return try decoder.decode(SpaceLunarEclipseEvent.self, from: data)
-            case .space_near_earth_object: return try decoder.decode(SpaceNearEarthObjectEvent.self, from: data)
-            case .space_rocket_launch: return try decoder.decode(SpaceRocketLaunchEvent.self, from: data)
-                
-            case .sport_mlb: return try decoder.decode(MLBEvent.self, from: data)
-            case .sport_professional_wrestling: return try decoder.decode(ProfessionalWrestlingEvent.self, from: data)
-            case .spotify_new_music_friday: return try decoder.decode(SpotifyNewMusicFridayEvent.self, from: data)
-                
-            case .ticketmaster_music_event: return try decoder.decode(TicketmasterMusicEvent.self, from: data)
-            case .video_game: return try decoder.decode(VideoGameEvent.self, from: data)
-            case .word_of_the_day: return try decoder.decode(WOTDEvent.self, from: data)
-                
-            case .earth_observatory_image_of_the_day,
-                    .presentations,
-                    .sport_championships,
-                    .sport_nfl,
-                    .sport_ufc,
-                    .tv_show,
-                    .video_game_events,
-                    .wikipedia_todays_featured_picture:
-                return try decoder.decode(GenericUpcomingEvent.self, from: data)
-            }
-        } catch {
-            return nil
-        }
-    }
 }

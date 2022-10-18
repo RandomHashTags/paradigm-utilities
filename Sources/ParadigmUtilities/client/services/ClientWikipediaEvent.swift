@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct ClientWikipediaEvent {
+public struct ClientWikipediaEvent : Jsonable {
     public let images:[String]?, description:String, hyperlinks:ClientHyperlinks?, countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?, tags:[String]?, sources:EventSources?
     
     public init(images: [String]?, description: String, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [SovereignStateSubdivisionWrapper]?, tags: [String]?, sources: EventSources?) {
