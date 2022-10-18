@@ -28,9 +28,16 @@ public final class SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.spotify_new_music_friday, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpotifyNewMusicFridayEventCodingKeys.self)
         tracks = try container.decode([SpotifyTrack].self, forKey: .tracks)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:SpotifyNewMusicFridayEventCodingKeys = key as? SpotifyNewMusicFridayEventCodingKeys else { return nil }
+        switch key {
+        case .tracks: return tracks
+        }
     }
 }

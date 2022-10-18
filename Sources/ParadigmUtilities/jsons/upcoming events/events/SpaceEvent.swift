@@ -26,10 +26,18 @@ public final class SpaceEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.space_event, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceEventCodingKeys.self)
         newsURL = try container.decodeIfPresent(String.self, forKey: .newsURL)
         videoURL = try container.decodeIfPresent(String.self, forKey: .videoURL)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:SpaceEventCodingKeys = key as? SpaceEventCodingKeys else { return nil }
+        switch key {
+        case .newsURL: return newsURL
+        case .videoURL: return videoURL
+        }
     }
 }

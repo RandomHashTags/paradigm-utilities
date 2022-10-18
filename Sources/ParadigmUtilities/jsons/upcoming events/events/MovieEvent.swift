@@ -46,7 +46,22 @@ public final class MovieEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.movie, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
-        fatalError("init(from:) has not been implemented")
+    public required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: MovieEventCodingKeys.self)
+        releaseInfo = try container.decodeIfPresent(String.self, forKey: .releaseInfo)
+        ratings = try container.decodeIfPresent(String.self, forKey: .ratings)
+        imdbInfo = try container.decodeIfPresent(IMDbMovieDetails.self, forKey: .imdbInfo)
+        productionCompanies = try container.decodeIfPresent([PreMovieProductionCompany].self, forKey: .productionCompanies)
+        try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:MovieEventCodingKeys = key as? MovieEventCodingKeys else { return nil }
+        switch key {
+        case .releaseInfo: return releaseInfo
+        case .ratings: return ratings
+        case .imdbInfo: return imdbInfo
+        case .productionCompanies: return productionCompanies
+        }
     }
 }

@@ -91,7 +91,7 @@ public final class TicketmasterMusicEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.ticketmaster_music_event, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: TicketmasterMusicEventCodingKeys.self)
         accessibility = try container.decodeIfPresent(String.self, forKey: .accessibility)
         ageRestriction = try container.decodeIfPresent(String.self, forKey: .ageRestriction)
@@ -106,5 +106,23 @@ public final class TicketmasterMusicEvent : GenericUpcomingEvent {
         priceRangeString = try container.decodeIfPresent(String.self, forKey: .priceRangeString)
         venues = try container.decodeIfPresent([TicketmasterVenue].self, forKey: .venues)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:TicketmasterMusicEventCodingKeys = key as? TicketmasterMusicEventCodingKeys else { return nil }
+        switch key {
+        case .accessibility: return accessibility
+        case .ageRestriction: return ageRestriction
+        case .healthCheckSummary: return healthCheckSummary
+        case .healthCheckDescription: return healthCheckDescription
+        case .pleaseNote: return pleaseNote
+        case .seatMapURL: return seatMapURL
+        case .ticketLimit: return ticketLimit
+        case .priceRangeCurrency: return priceRangeCurrency
+        case .priceRangeMax: return priceRangeMax
+        case .priceRangeMin: return priceRangeMin
+        case .priceRangeString: return priceRangeString
+        case .venues: return venues
+        }
     }
 }

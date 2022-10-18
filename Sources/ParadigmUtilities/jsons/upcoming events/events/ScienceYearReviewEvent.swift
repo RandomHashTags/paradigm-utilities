@@ -23,9 +23,16 @@ public final class ScienceYearReviewEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.science_year_review, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: ScienceYearReviewEventCodingKeys.self)
         years = try container.decode([Int:[ClientWikipediaEvent]].self, forKey: .years)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:ScienceYearReviewEventCodingKeys = key as? ScienceYearReviewEventCodingKeys else { return nil }
+        switch key {
+        case .years: return years
+        }
     }
 }

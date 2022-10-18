@@ -59,7 +59,7 @@ public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.space_near_earth_object, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceNearEarthObjectEventCodingKeys.self)
         closeApproachEpoch = try container.decode(Int64.self, forKey: .closeApproachEpoch)
         potentiallyHazardous = try container.decodeIfPresent(Bool.self, forKey: .potentiallyHazardous)
@@ -67,5 +67,16 @@ public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         estimatedDiameterMin = try container.decode(Float.self, forKey: .estimatedDiameterMin)
         relativeVelocity = try container.decode(String.self, forKey: .relativeVelocity)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:SpaceNearEarthObjectEventCodingKeys = key as? SpaceNearEarthObjectEventCodingKeys else { return nil }
+        switch key {
+        case .closeApproachEpoch: return closeApproachEpoch
+        case .potentiallyHazardous: return potentiallyHazardous
+        case .estimatedDiameterMax: return estimatedDiameterMax
+        case .estimatedDiameterMin: return estimatedDiameterMin
+        case .relativeVelocity: return relativeVelocity
+        }
     }
 }

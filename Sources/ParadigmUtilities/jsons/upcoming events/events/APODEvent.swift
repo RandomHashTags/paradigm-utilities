@@ -44,10 +44,18 @@ public final class APODEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.astronomy_picture_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: APODEventCodingKeys.self)
         copyright = try container.decodeIfPresent(String.self, forKey: .copyright)
         videoURL = try container.decodeIfPresent(String.self, forKey: .videoURL)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:APODEventCodingKeys = key as? APODEventCodingKeys else { return nil }
+        switch key {
+        case .copyright: return copyright
+        case .videoURL: return videoURL
+        }
     }
 }

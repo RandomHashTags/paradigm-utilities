@@ -52,12 +52,22 @@ public final class WOTDEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.word_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: WOTDEventCodingKeys.self)
         examples = try container.decode([String].self, forKey: .examples)
         pronunciationURL = try container.decodeIfPresent(String.self, forKey: .pronunciationURL)
         syllables = try container.decode(String.self, forKey: .syllables)
         grammarType = try container.decode(String.self, forKey: .grammarType)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:WOTDEventCodingKeys = key as? WOTDEventCodingKeys else { return nil }
+        switch key {
+        case .examples: return examples
+        case .pronunciationURL: return pronunciationURL
+        case .syllables: return syllables
+        case .grammarType: return grammarType
+        }
     }
 }

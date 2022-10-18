@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueCategoryPosition : String, CaseIterable {
+public enum UpcomingEventValueCategoryPosition : String, CaseIterable, Jsonable {
     case pre_content
     case above_description
     case below_description

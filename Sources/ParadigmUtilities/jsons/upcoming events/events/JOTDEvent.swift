@@ -28,11 +28,20 @@ public final class JOTDEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.joke_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: JOTDEventCodingKeys.self)
         copyright = try container.decode(String.self, forKey: .copyright)
         question = try container.decode(String.self, forKey: .question)
         answer = try container.decode(String.self, forKey: .answer)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:JOTDEventCodingKeys = key as? JOTDEventCodingKeys else { return nil }
+        switch key {
+        case .copyright: return copyright
+        case .question: return question
+        case .answer: return answer
+        }
     }
 }

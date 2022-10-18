@@ -91,4 +91,8 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
             return nil
         }
     }
+    
+    public func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        return nil
+    }
 }

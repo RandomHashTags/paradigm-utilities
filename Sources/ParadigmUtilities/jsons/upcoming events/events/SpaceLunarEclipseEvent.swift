@@ -49,7 +49,7 @@ public final class SpaceLunarEclipseEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.space_lunar_eclipse, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceLunarEclipseEventCodingKeys.self)
         timeGreatestMilliseconds = try container.decode(Int64.self, forKey: .timeGreatestMilliseconds)
         orbitalNode = try container.decode(String.self, forKey: .orbitalNode)
@@ -60,5 +60,19 @@ public final class SpaceLunarEclipseEvent : GenericUpcomingEvent {
         durationPartial = try container.decode(Int.self, forKey: .durationPartial)
         durationTotal = try container.decode(Int.self, forKey: .durationTotal)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:SpaceLunarEclipseEventCodingKeys = key as? SpaceLunarEclipseEventCodingKeys else { return nil }
+        switch key {
+        case .timeGreatestMilliseconds: return timeGreatestMilliseconds
+        case .orbitalNode: return orbitalNode
+        case .saros: return saros
+        case .gamma: return gamma
+        case .magnitudePenumbra: return magnitudePenumbra
+        case .magnitudeUmbra: return magnitudeUmbra
+        case .durationPartial: return durationPartial
+        case .durationTotal: return durationTotal
+        }
     }
 }

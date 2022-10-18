@@ -75,7 +75,7 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.space_rocket_launch, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceRocketLaunchEventCodingKeys.self)
         missionName = try container.decode(String.self, forKey: .missionName)
         missionDescription = try container.decode(String.self, forKey: .missionDescription)
@@ -88,5 +88,21 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         probability = try container.decode(String.self, forKey: .probability)
         videoURL = try container.decodeIfPresent(String.self, forKey: .videoURL)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:SpaceRocketLaunchEventCodingKeys = key as? SpaceRocketLaunchEventCodingKeys else { return nil }
+        switch key {
+        case .missionName: return missionName
+        case .missionDescription: return missionDescription
+        case .missionType: return missionType
+        case .windowStart: return windowStart
+        case .windowEnd: return windowEnd
+        case .exactDay: return exactDay
+        case .exactTime: return exactTime
+        case .status: return status
+        case .probability: return probability
+        case .videoURL: return videoURL
+        }
     }
 }

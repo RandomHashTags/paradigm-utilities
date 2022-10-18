@@ -39,11 +39,20 @@ public final class MusicAlbumEvent : GenericUpcomingEvent {
         super.init(type: UpcomingEventType.music_album, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    required init(from decoder: Decoder) throws {
+    public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: MusicAlbumEventCodingKeys.self)
         artist = try container.decode(String.self, forKey: .artist)
         spotifyDetails = try container.decodeIfPresent(SpotifyDetails.self, forKey: .spotifyDetails)
         itunesDetails = try container.decodeIfPresent(ITunesDetails.self, forKey: .itunesDetails)
         try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+        guard let key:MusicAlbumEventCodingKeys = key as? MusicAlbumEventCodingKeys else { return nil }
+        switch key {
+        case .artist: return artist
+        case .spotifyDetails: return spotifyDetails
+        case .itunesDetails: return itunesDetails
+        }
     }
 }
