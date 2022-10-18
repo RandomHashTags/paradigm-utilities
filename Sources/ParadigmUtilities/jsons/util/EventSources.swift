@@ -41,7 +41,6 @@ public struct EventSources : Jsonable {
         return sources.first
     }
     
-    
     public mutating func append(_ source: EventSource) {
         sources.append(source)
     }

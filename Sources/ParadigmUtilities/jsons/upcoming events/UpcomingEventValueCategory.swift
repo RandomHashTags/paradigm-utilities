@@ -32,7 +32,7 @@ public enum UpcomingEventValueCategory : String {
     case word_of_the_day_post_details
     case wrestling_details
     
-    func value() -> UpcomingEventValueCategoryValue {
+    public func value() -> UpcomingEventValueCategoryValue {
         switch self {
         case .astronomy_picture_of_the_day:            return getValue()
         case .joke_of_the_day:                         return getValue()
@@ -64,8 +64,8 @@ public enum UpcomingEventValueCategory : String {
     }
 }
 
-struct UpcomingEventValueCategoryValue : Hashable {
-    let id:String, position:UpcomingEventValueCategoryPosition, header:String?
+public struct UpcomingEventValueCategoryValue : Hashable {
+    public let id:String, position:UpcomingEventValueCategoryPosition, header:String?
     
     fileprivate init(_ id: String, position: UpcomingEventValueCategoryPosition = .post_videos, header: String? = nil) {
         self.id = id

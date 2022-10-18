@@ -38,6 +38,11 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         self.subdivisions = subdivisions?.map({ $0.wrapped() })
     }
     
+    public lazy var nonGenericEvent:GenericUpcomingEvent? = {
+        guard let data:Data = toData() else { return nil }
+        return GenericUpcomingEvent.parse(decoder: ZippyJSONDecoder(), data: data)
+    }()
+    
     public func hash(into hasher: inout Hasher) {
         hasher.combine(type)
         hasher.combine(getIdentifier())
