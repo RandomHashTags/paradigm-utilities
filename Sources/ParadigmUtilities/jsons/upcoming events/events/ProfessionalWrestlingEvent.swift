@@ -20,7 +20,7 @@ public enum ProfessionalWrestlingEventCodingKeys : String, UpcomingEventCodingKe
 public final class ProfessionalWrestlingEvent : GenericUpcomingEvent {
     public let mainEvent:String, notes:String?
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mainEvent: String, notes: String?) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mainEvent: String, notes: String?) {
         self.mainEvent = mainEvent
         self.notes = notes
         super.init(type: UpcomingEventType.sport_professional_wrestling, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)

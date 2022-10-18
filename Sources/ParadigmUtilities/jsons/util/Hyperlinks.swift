@@ -11,7 +11,7 @@ private enum CodingKeys: CodingKey {
     case imageURLPrefix
     case hyperlinks
 }
-public struct ClientHyperlinks : Sequence, IteratorProtocol, Jsonable {
+public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     public let imageURLPrefix:String
     
     private var hyperlinks:[Hyperlink], hyperlinkCount:Int = -1

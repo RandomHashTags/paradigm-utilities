@@ -23,7 +23,7 @@ public enum MLBEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class MLBEvent : GenericUpcomingEvent {
     public let teamAway:ClientMLBTeam, teamHome:ClientMLBTeam
     
-    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, teamAway: ClientMLBTeam, teamHome: ClientMLBTeam) {
+    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, teamAway: ClientMLBTeam, teamHome: ClientMLBTeam) {
         self.teamAway = teamAway
         self.teamHome = teamHome
         super.init(type: UpcomingEventType.sport_mlb, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)

@@ -50,7 +50,7 @@ public enum SpaceNearEarthObjectEventCodingKeys : String, UpcomingEventCodingKey
 public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
     public let closeApproachEpoch:Int64, potentiallyHazardous:Bool?, estimatedDiameterMax:Float, estimatedDiameterMin:Float, relativeVelocity:String
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, closeApproachEpoch: Int64, potentiallyHazardous: Bool?, estimatedDiameterMax: Float, estimatedDiameterMin: Float, relativeVelocity: String) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, closeApproachEpoch: Int64, potentiallyHazardous: Bool?, estimatedDiameterMax: Float, estimatedDiameterMin: Float, relativeVelocity: String) {
         self.closeApproachEpoch = closeApproachEpoch
         self.potentiallyHazardous = potentiallyHazardous
         self.estimatedDiameterMax = estimatedDiameterMax

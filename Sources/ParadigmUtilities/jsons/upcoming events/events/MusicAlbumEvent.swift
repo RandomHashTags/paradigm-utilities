@@ -32,7 +32,7 @@ public enum MusicAlbumEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class MusicAlbumEvent : GenericUpcomingEvent {
     public let artist:String, spotifyDetails:SpotifyDetails?, itunesDetails:ITunesDetails?
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, artist: String, spotifyDetails: SpotifyDetails?, itunesDetails: ITunesDetails?) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, artist: String, spotifyDetails: SpotifyDetails?, itunesDetails: ITunesDetails?) {
         self.artist = artist
         self.spotifyDetails = spotifyDetails
         self.itunesDetails = itunesDetails

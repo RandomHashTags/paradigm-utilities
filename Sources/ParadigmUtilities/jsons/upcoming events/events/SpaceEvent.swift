@@ -20,7 +20,7 @@ public enum SpaceEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class SpaceEvent : GenericUpcomingEvent {
     public let newsURL:String?, videoURL:String?
     
-    public init(exactStartMilliseconds:Int64, exactEndMilliseconds:Int64, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, newsURL: String?, videoURL: String?) {
+    public init(exactStartMilliseconds:Int64, exactEndMilliseconds:Int64, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, newsURL: String?, videoURL: String?) {
         self.newsURL = newsURL
         self.videoURL = videoURL
         super.init(type: UpcomingEventType.space_event, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)

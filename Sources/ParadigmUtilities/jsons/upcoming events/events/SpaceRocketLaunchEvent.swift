@@ -67,7 +67,7 @@ public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
     public let missionName:String, missionDescription:String, missionType:String, windowStart:Int64, windowEnd:Int64, exactDay:Bool?, exactTime:Bool?, status:String, probability:String, videoURL:String?
     
-    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mission: SpaceRocketLaunchMission) {
+    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mission: SpaceRocketLaunchMission) {
         missionName = mission.name
         missionDescription = mission.description
         missionType = mission.type

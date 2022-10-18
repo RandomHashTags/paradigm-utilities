@@ -17,7 +17,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
             anthem,
             capital
         ]
-        let information:SovereignStateInformation = SovereignStateInformation(response_version: response_version, values: values)
+        let information:SovereignStateInformation = SovereignStateInformation(response_version: response_version, administration: ClientGovernmentAdministration(current_version: 1, all_versions: [1,2,3]), values: values)
         XCTAssert(information.nationalCapital != nil)
         
         let data:Data = information.toString()!.data(using: .utf8)!

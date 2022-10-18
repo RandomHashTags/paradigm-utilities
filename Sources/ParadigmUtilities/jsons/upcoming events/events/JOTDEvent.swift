@@ -21,7 +21,7 @@ public enum JOTDEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class JOTDEvent : GenericUpcomingEvent {
     public let copyright:String, question:String, answer:String
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String, question: String, answer: String) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String, question: String, answer: String) {
         self.copyright = copyright
         self.question = question
         self.answer = answer

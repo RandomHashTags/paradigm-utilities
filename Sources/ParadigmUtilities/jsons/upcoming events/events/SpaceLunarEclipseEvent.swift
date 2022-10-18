@@ -37,7 +37,7 @@ public enum SpaceLunarEclipseEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class SpaceLunarEclipseEvent : GenericUpcomingEvent {
     public let timeGreatestMilliseconds:Int64, orbitalNode:String, saros:String, gamma:String, magnitudePenumbra:String, magnitudeUmbra:String, durationPartial:Int, durationTotal:Int
     
-    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, timeGreatestMilliseconds: Int64, orbitalNode: String, saros: String, gamma: String, magnitudePenumbra: String, magnitudeUmbra: String, durationPartial: Int, durationTotal: Int) {
+    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, timeGreatestMilliseconds: Int64, orbitalNode: String, saros: String, gamma: String, magnitudePenumbra: String, magnitudeUmbra: String, durationPartial: Int, durationTotal: Int) {
         self.timeGreatestMilliseconds = timeGreatestMilliseconds
         self.orbitalNode = orbitalNode
         self.saros = saros

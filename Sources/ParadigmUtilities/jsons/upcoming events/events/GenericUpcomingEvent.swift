@@ -18,10 +18,10 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public let customTypeSingularName:String?
     
     public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
+    public let hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     
-    public init(type: UpcomingEventType, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?) {
+    public init(type: UpcomingEventType, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?) {
         self.type = type
         self.eventDate = eventDate
         self.exactStartMilliseconds = exactStartMilliseconds

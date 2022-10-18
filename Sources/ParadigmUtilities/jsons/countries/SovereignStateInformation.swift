@@ -10,12 +10,13 @@ import ZippyJSON
 
 private enum CodingKeys : CodingKey {
     case response_version
+    case administration
     case values
 }
 
 public final class SovereignStateInformation : Jsonable {
     public static func == (lhs: SovereignStateInformation, rhs: SovereignStateInformation) -> Bool {
-        return lhs.hashValue == rhs.hashValue
+        return lhs.response_version == rhs.response_version && lhs.administration == rhs.administration && lhs.values.count == rhs.values.count
     }
     private static func parse(decoder: ZippyJSONDecoder, info: SovereignStateInfo, data: Data) -> (any SovereignStateInformationValue)? {
         switch info {
@@ -92,52 +93,43 @@ public final class SovereignStateInformation : Jsonable {
     }
     
     public let response_version:Int
+    public let administration:ClientGovernmentAdministration
     public var values:[any SovereignStateInformationValue]
     
-    public init(response_version: Int, values: [any SovereignStateInformationValue]) {
+    public init(response_version: Int, administration: ClientGovernmentAdministration, values: [any SovereignStateInformationValue]) {
         self.response_version = response_version
+        self.administration = administration
         self.values = values
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(response_version)
+        hasher.combine(administration)
         for value in values {
             hasher.combine(value.type)
             hasher.combine(value.info)
         }
     }
     public func encode(to encoder: Encoder) throws {
-        var valuesString:String = ""
-        for value in values {
-            let data:Data = try JSONEncoder().encode(value)
-            let string:String = (valuesString.isEmpty ? "" : ",") + String(data: data, encoding: .utf8)!
-            valuesString.append(string)
-        }
-        let string:String = "{\"response_version\":" + response_version.description + ",\"values\":[" + valuesString + "]}"
-        var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        try container.encode(string)
+        var container:KeyedEncodingContainer = encoder.container(keyedBy: CodingKeys.self)
+        try container.encode(response_version, forKey: .response_version)
+        try container.encode(administration, forKey: .administration)
+        
+        let encoder:JSONEncoder = JSONEncoder()
+        let valuesData:[Data] = try values.map({ try encoder.encode($0) })
+        try container.encode(valuesData, forKey: .values)
     }
     public init(from decoder: Decoder) throws {
-        let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
-        let string:String = try container.decode(String.self)
-        response_version = Int(string.components(separatedBy: "\"response_version\":")[1].components(separatedBy: ",")[0])!
-        var values:[any SovereignStateInformationValue] = [any SovereignStateInformationValue]()
-        var valuesString:String = string.components(separatedBy: ",\"values\":[")[1]
-        valuesString = valuesString.prefix(valuesString.count-2).description
-        let valuesArray:[String] = valuesString.components(separatedBy: "},{")
-        var index:Int = 0
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: CodingKeys.self)
+        response_version = try container.decode(Int.self, forKey: .response_version)
+        administration = try container.decode(ClientGovernmentAdministration.self, forKey: .administration)
+        
+        let valuesData:[Data] = try container.decode([Data].self, forKey: .values)
         let decoder:ZippyJSONDecoder = ZippyJSONDecoder()
-        for var valueString in valuesArray {
-            valueString = (index != 0 ? "{" : "") + valueString + (index == 0 ? "}" : "")
-            if let data:Data = valueString.data(using: .utf8) {
-                let item:SovereignStateInformationValueProtocolWrapper = try decoder.decode(SovereignStateInformationValueProtocolWrapper.self, from: data)
-                if let value:any SovereignStateInformationValue = SovereignStateInformation.parse(decoder: decoder, info: item.info, data: data) {
-                    values.append(value)
-                }
-            }
-            index += 1
-        }
-        self.values = values
+        values = try valuesData.compactMap({
+            let item:SovereignStateInformationValueProtocolWrapper = try decoder.decode(SovereignStateInformationValueProtocolWrapper.self, from: $0)
+            return SovereignStateInformation.parse(decoder: decoder, info: item.info, data: $0)
+        })
     }
     
     private func get<T: SovereignStateInformationValue>() -> T? {

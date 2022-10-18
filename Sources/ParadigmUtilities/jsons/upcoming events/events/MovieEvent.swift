@@ -46,7 +46,7 @@ public enum MovieEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class MovieEvent : GenericUpcomingEvent {
     public let releaseInfo:String?, ratings:String?, imdbInfo:IMDbMovieDetails?, productionCompanies:[PreMovieProductionCompany]?
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, releaseInfo: String?, ratings: String?, imdbInfo: IMDbMovieDetails?, productionCompanies: [PreMovieProductionCompany]?) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, releaseInfo: String?, ratings: String?, imdbInfo: IMDbMovieDetails?, productionCompanies: [PreMovieProductionCompany]?) {
         self.releaseInfo = releaseInfo
         self.ratings = ratings
         self.imdbInfo = imdbInfo

@@ -44,7 +44,7 @@ public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
     var location:String? { get }
     var youtubeVideoIDs:[String]? { get }
     var sources:EventSources { get }
-    var hyperlinks:ClientHyperlinks? { get }
+    var hyperlinks:Hyperlinks? { get }
 }
 
 public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresentable where RawValue == String {

@@ -25,7 +25,7 @@ public enum VideoGameEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class VideoGameEvent : GenericUpcomingEvent {
     public let platforms:[String], genres:[String]
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, platforms: [String], genres: [String]) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, platforms: [String], genres: [String]) {
         self.platforms = platforms
         self.genres = genres
         super.init(type: UpcomingEventType.video_game, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
