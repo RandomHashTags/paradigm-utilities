@@ -245,4 +245,24 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
             }
         }
     }
+    
+    public func getCodingKeys() -> [any UpcomingEventCodingKeys]? {
+        switch self {
+        case .astronomy_picture_of_the_day: return APODEventCodingKeys.allCases
+        case .joke_of_the_day: return JOTDEventCodingKeys.allCases
+        case .movie: return MovieEventCodingKeys.allCases
+        case .music_album: return MusicAlbumEventCodingKeys.allCases
+        case .science_year_review: return ScienceYearReviewEventCodingKeys.allCases
+        case .space_event: return SpaceEventCodingKeys.allCases
+        case .space_lunar_eclipse: return SpaceLunarEclipseEventCodingKeys.allCases
+        case .space_near_earth_object: return SpaceNearEarthObjectEventCodingKeys.allCases
+        case .space_rocket_launch: return SpaceRocketLaunchEventCodingKeys.allCases
+        case .sport_professional_wrestling: return ProfessionalWrestlingEventCodingKeys.allCases
+        case .spotify_new_music_friday: return SpotifyNewMusicFridayEventCodingKeys.allCases
+        case .ticketmaster_music_event: return TicketmasterMusicEventCodingKeys.allCases
+        case .video_game: return VideoGameEventCodingKeys.allCases
+        case .word_of_the_day: return WOTDEventCodingKeys.allCases
+        default: return nil
+        }
+    }
 }
