@@ -9,11 +9,10 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreHoliday : Jsonable {
-    public let date:EventDate, id:String, name:String, type:String, emoji:String?, celebrators:String?
+    public let id:String, name:String, type:String, emoji:String?, celebrators:String?
     public var countries:[Country]?
     
-    public init(date: EventDate, id: String, name: String, type: String, emoji: String?, celebrators: String?, countries: [Country]? = nil) {
-        self.date = date
+    public init(id: String, name: String, type: String, emoji: String?, celebrators: String?, countries: [Country]? = nil) {
         self.id = id
         self.name = name
         self.type = type

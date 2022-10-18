@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public struct PreEarthquake : Jsonable {
-    public let id:String, place:String
+    public let id:String, place:String, city:SovereignStateCityWrapper?
     
-    public init(id: String, place: String) {
+    public init(id: String, place: String, city: (any SovereignStateCity)?) {
         self.id = id
         self.place = place
+        self.city = city?.wrapped()
     }
 }

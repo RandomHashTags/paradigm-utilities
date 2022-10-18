@@ -8,9 +8,10 @@
 import Foundation
 import SwiftSovereignStates
 
+/*
 public struct EarthquakesResponse : Jsonable {
     public let country:Country
-    public let magnitudes:[EarthquakesResponseMagnitudes]
+    public let magnitudes:[Country:[String:[PreEarthquake]]]
     
     public init(country: Country, magnitudes: [EarthquakesResponseMagnitudes]) {
         self.country = country
@@ -25,3 +26,4 @@ public struct EarthquakesResponseMagnitudes : Jsonable {
         self.quakes = quakes
     }
 }
+*/

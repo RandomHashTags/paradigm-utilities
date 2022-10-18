@@ -15,10 +15,17 @@ public extension Sequence where Element : Hashable {
         }
         return counts.maximum
     }
+    
+    func uniqueSet() -> Set<Element> {
+        return Set<Element>(self)
+    }
+    func unique() -> [Element] {
+        let set:Set<Element> = uniqueSet()
+        return set.map({ $0 })
+    }
 }
 
 private struct SequenceCounter<T: Hashable> {
-    
     private var array:Set<T>
     private var counts:[T:Int]
     

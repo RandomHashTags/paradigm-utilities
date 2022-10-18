@@ -24,7 +24,7 @@ public protocol RemoteNotificationSubcategory : Jsonable {
     func getIdentifier() -> String
     func getName() -> String
     func isConditional() -> Bool
-    func getAllValues() async throws -> [String]?
+    func getAllValues() -> [Country:[String]]?
 }
 
 public extension RemoteNotificationSubcategory {
@@ -40,7 +40,7 @@ public extension RemoteNotificationSubcategory {
     func getIdentifier() -> String {
         return String(describing: self)
     }
-    func getAllValues() async throws -> [String]? {
+    func getAllValues() -> [Country:[String]]? {
         return nil
     }
     
@@ -64,7 +64,6 @@ public extension RemoteNotificationSubcategory {
         return json
     }*/
 }
-
 
 public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcategory {
     public let subcategory:any RemoteNotificationSubcategory
@@ -97,5 +96,8 @@ public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcatego
     }
     public func isConditional() -> Bool {
         return subcategory.isConditional()
+    }
+    public func getAllValues() -> [Country:[String]]? {
+        return subcategory.getAllValues()
     }
 }
