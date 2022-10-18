@@ -36,7 +36,14 @@ public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventCodingKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
-    
+    public func getValueCellType() -> UpcomingEventValueCellType {
+        switch self {
+        case .missionName:
+            return UpcomingEventValueCellType.label_header
+        default:
+            return UpcomingEventValueCellType.label
+        }
+    }
     public func getValuePrefix() -> String? {
         switch self {
         case .missionType: return "Type: "
@@ -47,7 +54,6 @@ public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventCodingKeys {
         default: return nil
         }
     }
-    
     public func getValueString() -> String? {
         switch self {
         case .status:

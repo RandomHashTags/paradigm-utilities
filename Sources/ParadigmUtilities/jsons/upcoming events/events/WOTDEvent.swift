@@ -23,12 +23,12 @@ public enum WOTDEventCodingKeys : String, UpcomingEventCodingKeys {
         }
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public func getValueCellType() -> UpcomingEventValueCellType {
         switch self {
         case .pronunciationURL:
-            return UpcomingEventValueType.audio
+            return UpcomingEventValueCellType.audio
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueCellType.label
         }
     }
     public func getValuePrefix() -> String? {

@@ -50,6 +50,7 @@ public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
 public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresentable where RawValue == String {
     func getCategory() -> UpcomingEventValueCategory
     func getValueType() -> UpcomingEventValueType
+    func getValueCellType() -> UpcomingEventValueCellType
     func getValueTypeUnit() -> UpcomingEventValueTypeUnit?
     func getValuePrefix() -> String?
     func getValueString() -> String?
@@ -57,6 +58,9 @@ public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresenta
 public extension UpcomingEventCodingKeys {
     func getValueType() -> UpcomingEventValueType {
         return UpcomingEventValueType.defaultType()
+    }
+    func getValueCellType() -> UpcomingEventValueCellType {
+        return UpcomingEventValueCellType.label
     }
     func getValueTypeUnit() -> UpcomingEventValueTypeUnit? {
         return nil

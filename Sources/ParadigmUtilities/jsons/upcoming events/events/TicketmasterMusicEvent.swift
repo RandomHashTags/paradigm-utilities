@@ -53,7 +53,14 @@ public enum TicketmasterMusicEventCodingKeys : String, UpcomingEventCodingKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
-    
+    public func getValueCellType() -> UpcomingEventValueCellType {
+        switch self {
+        case .venues:
+            return UpcomingEventValueCellType.ticketmaster_venue
+        default:
+            return UpcomingEventValueCellType.label
+        }
+    }
     public func getValuePrefix() -> String? {
         switch self {
         case .priceRangeString:

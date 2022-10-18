@@ -18,6 +18,12 @@ public enum SpotifyNewMusicFridayEventCodingKeys : String, UpcomingEventCodingKe
     public func getValueType() -> UpcomingEventValueType {
         return UpcomingEventValueType.spotify_tracks
     }
+    public func getValueCellType() -> UpcomingEventValueCellType {
+        switch self {
+        case .tracks:
+            return UpcomingEventValueCellType.spotify_tracks
+        }
+    }
 }
 
 public final class SpotifyNewMusicFridayEvent : GenericUpcomingEvent {

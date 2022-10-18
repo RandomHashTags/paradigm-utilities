@@ -17,7 +17,6 @@ public enum UpcomingEventValueType : String, CaseIterable, Jsonable {
     case string
     case placeholder
     
-    case audio
     case currency
     case currency_id
     case details_spotify

@@ -33,6 +33,14 @@ public enum MovieEventCodingKeys : String, UpcomingEventCodingKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
+    public func getValueCellType() -> UpcomingEventValueCellType {
+        switch self {
+        case .productionCompanies:
+            return UpcomingEventValueCellType.production_companies
+        default:
+            return UpcomingEventValueCellType.label
+        }
+    }
 }
 
 public final class MovieEvent : GenericUpcomingEvent {
