@@ -8,37 +8,45 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct MovieEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum MovieEventCodingKeys : String, UpcomingEventCodingKeys {
+    case releaseInfo
+    case ratings
+    case imdbInfo
+    case productionCompanies
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public func getCategory() -> UpcomingEventValueCategory {
+        switch self {
+        case .productionCompanies:
+            return UpcomingEventValueCategory.movie_production_companies
+        default:
+            return UpcomingEventValueCategory.movie
+        }
+    }
     
+    public func getValueType() -> UpcomingEventValueType {
+        switch self {
+        case .imdbInfo:
+            return UpcomingEventValueType.imdb_info
+        case .productionCompanies:
+            return UpcomingEventValueType.production_companies
+        default:
+            return UpcomingEventValueType.defaultType()
+        }
+    }
+}
+
+public final class MovieEvent : GenericUpcomingEvent {
     public let releaseInfo:String?, ratings:String?, imdbInfo:IMDbMovieDetails?, productionCompanies:[PreMovieProductionCompany]?
     
     public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, releaseInfo: String?, ratings: String?, imdbInfo: IMDbMovieDetails?, productionCompanies: [PreMovieProductionCompany]?) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.releaseInfo = releaseInfo
         self.ratings = ratings
         self.imdbInfo = imdbInfo
         self.productionCompanies = productionCompanies
+        super.init(type: UpcomingEventType.movie, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.movie
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
     }
 }

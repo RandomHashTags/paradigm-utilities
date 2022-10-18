@@ -8,35 +8,31 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct MLBEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum MLBEventCodingKeys : String, UpcomingEventCodingKeys {
+    case teamAway
+    case teamHome
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.mlb
+    }
+    public func getValueType() -> UpcomingEventValueType {
+        return UpcomingEventValueType.mlb_team
+    }
+}
+
+public final class MLBEvent : GenericUpcomingEvent {
     public let teamAway:ClientMLBTeam, teamHome:ClientMLBTeam
     
     public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, teamAway: ClientMLBTeam, teamHome: ClientMLBTeam) {
-        eventDate = nil
-        self.exactStartMilliseconds = exactStartMilliseconds
-        self.exactEndMilliseconds = exactEndMilliseconds
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        youtubeVideoIDs = nil
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.teamAway = teamAway
         self.teamHome = teamHome
+        super.init(type: UpcomingEventType.sport_mlb, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.sport_mlb
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: MLBEventCodingKeys.self)
+        teamAway = try container.decode(ClientMLBTeam.self, forKey: .teamAway)
+        teamHome = try container.decode(ClientMLBTeam.self, forKey: .teamHome)
+        try super.init(from: decoder)
     }
 }

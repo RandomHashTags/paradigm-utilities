@@ -8,36 +8,42 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct MusicAlbumEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum MusicAlbumEventCodingKeys : String, UpcomingEventCodingKeys {
+    case artist
+    case spotifyDetails
+    case itunesDetails
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.music_album
+    }
     
+    public func getValueType() -> UpcomingEventValueType {
+        switch self {
+        case .spotifyDetails:
+            return UpcomingEventValueType.details_spotify
+        case .itunesDetails:
+            return UpcomingEventValueType.details_itunes
+        default:
+            return UpcomingEventValueType.defaultType()
+        }
+    }
+}
+
+public final class MusicAlbumEvent : GenericUpcomingEvent {
     public let artist:String, spotifyDetails:SpotifyDetails?, itunesDetails:ITunesDetails?
     
     public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, artist: String, spotifyDetails: SpotifyDetails?, itunesDetails: ITunesDetails?) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        youtubeVideoIDs = nil
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.artist = artist
         self.spotifyDetails = spotifyDetails
         self.itunesDetails = itunesDetails
+        super.init(type: UpcomingEventType.music_album, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.music_album
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: MusicAlbumEventCodingKeys.self)
+        artist = try container.decode(String.self, forKey: .artist)
+        spotifyDetails = try container.decodeIfPresent(SpotifyDetails.self, forKey: .spotifyDetails)
+        itunesDetails = try container.decodeIfPresent(ITunesDetails.self, forKey: .itunesDetails)
+        try super.init(from: decoder)
     }
 }

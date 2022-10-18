@@ -8,30 +8,74 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct TicketmasterMusicEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum TicketmasterMusicEventCodingKeys : String, UpcomingEventCodingKeys {
+    case accessibility
+    case ageRestriction
+    case healthCheckSummary
+    case healthCheckDescription
+    case pleaseNote
+    case seatMapURL
+    case ticketLimit
+    case priceRangeCurrency
+    case priceRangeMax
+    case priceRangeMin
+    case priceRangeString
+    case venues
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public func getCategory() -> UpcomingEventValueCategory {
+        switch self {
+        case .accessibility:
+            return UpcomingEventValueCategory.ticketmaster_music_event_accessibility
+        case .ageRestriction:
+            return UpcomingEventValueCategory.ticketmaster_music_event_ageRestriction
+        case .healthCheckSummary, .healthCheckDescription:
+            return UpcomingEventValueCategory.ticketmaster_music_event_healthCheck
+        case .pleaseNote:
+            return UpcomingEventValueCategory.ticketmaster_music_event_pleaseNote
+        case .venues:
+            return UpcomingEventValueCategory.ticketmaster_venues
+        default:
+            return UpcomingEventValueCategory.ticketmaster_music_event
+        }
+    }
     
+    public func getValueType() -> UpcomingEventValueType {
+        switch self {
+        case .seatMapURL:
+            return UpcomingEventValueType.image
+        case .priceRangeCurrency:
+            return UpcomingEventValueType.currency_id
+        case .priceRangeMax, .priceRangeMin:
+            return UpcomingEventValueType.currency
+        case .venues:
+            return UpcomingEventValueType.ticketmaster_venues
+        default:
+            return UpcomingEventValueType.defaultType()
+        }
+    }
+    
+    public func getValuePrefix() -> String? {
+        switch self {
+        case .priceRangeString:
+            return "Price Range: "
+        default:
+            return nil
+        }
+    }
+    public func getValueString() -> String? {
+        switch self {
+        case .priceRangeString:
+            return "$%priceRangeMin% - $%priceRangeMax% (%priceRangeCurrency%)"
+        default:
+            return nil
+        }
+    }
+}
+
+public final class TicketmasterMusicEvent : GenericUpcomingEvent {
     public let accessibility:String?, ageRestriction:String?, healthCheckSummary:String?, healthCheckDescription:String?, pleaseNote:String?, seatMapURL:String?, ticketLimit:String?, priceRangeCurrency:String?, priceRangeMax:Float?, priceRangeMin:Float?, priceRangeString:String?, venues:[TicketmasterVenue]?
     
     public init(exactStartMilliseconds:Int64, exactEndMilliseconds:Int64, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, accessibility: String?, ageRestriction: String?, healthCheckSummary: String?, healthCheckDescription: String?, pleaseNote: String?, seatMapURL: String?, ticketLimit: String?, priceRangeCurrency: String?, priceRangeMax: Float?, priceRangeMin: Float?, priceRangeString: String?, venues: [TicketmasterVenue]?) {
-        eventDate = nil
-        self.exactStartMilliseconds = exactStartMilliseconds
-        self.exactEndMilliseconds = exactEndMilliseconds
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.accessibility = accessibility
         self.ageRestriction = ageRestriction
         self.healthCheckSummary = healthCheckSummary
@@ -44,9 +88,23 @@ public struct TicketmasterMusicEvent : GenericUpcomingEventProtocol {
         self.priceRangeMin = priceRangeMin
         self.priceRangeString = priceRangeString
         self.venues = venues
+        super.init(type: UpcomingEventType.ticketmaster_music_event, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.ticketmaster_music_event
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: TicketmasterMusicEventCodingKeys.self)
+        accessibility = try container.decodeIfPresent(String.self, forKey: .accessibility)
+        ageRestriction = try container.decodeIfPresent(String.self, forKey: .ageRestriction)
+        healthCheckSummary = try container.decodeIfPresent(String.self, forKey: .healthCheckSummary)
+        healthCheckDescription = try container.decodeIfPresent(String.self, forKey: .healthCheckDescription)
+        pleaseNote = try container.decodeIfPresent(String.self, forKey: .pleaseNote)
+        seatMapURL = try container.decodeIfPresent(String.self, forKey: .seatMapURL)
+        ticketLimit = try container.decodeIfPresent(String.self, forKey: .ticketLimit)
+        priceRangeCurrency = try container.decodeIfPresent(String.self, forKey: .priceRangeCurrency)
+        priceRangeMax = try container.decodeIfPresent(Float.self, forKey: .priceRangeMax)
+        priceRangeMin = try container.decodeIfPresent(Float.self, forKey: .priceRangeMin)
+        priceRangeString = try container.decodeIfPresent(String.self, forKey: .priceRangeString)
+        venues = try container.decodeIfPresent([TicketmasterVenue].self, forKey: .venues)
+        try super.init(from: decoder)
     }
 }

@@ -30,8 +30,4 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         self.awayTeam = awayTeam
         self.homeTeam = homeTeam
     }
-    
-    public func getType() -> UpcomingEventType {
-        return type
-    }
 }

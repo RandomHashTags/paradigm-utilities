@@ -8,35 +8,33 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct VideoGameEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum VideoGameEventCodingKeys : String, UpcomingEventCodingKeys {
+    case platforms
+    case genres
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    
+    public func getCategory() -> UpcomingEventValueCategory {
+        switch self {
+        case .platforms:
+            return UpcomingEventValueCategory.video_game_details
+        case .genres:
+            return UpcomingEventValueCategory.video_game_genres
+        }
+    }
+}
+
+public final class VideoGameEvent : GenericUpcomingEvent {
     public let platforms:[String], genres:[String]
     
     public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, platforms: [String], genres: [String]) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.platforms = platforms
         self.genres = genres
+        super.init(type: UpcomingEventType.video_game, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.video_game
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: VideoGameEventCodingKeys.self)
+        platforms = try container.decode([String].self, forKey: .platforms)
+        genres = try container.decode([String].self, forKey: .genres)
+        try super.init(from: decoder)
     }
 }

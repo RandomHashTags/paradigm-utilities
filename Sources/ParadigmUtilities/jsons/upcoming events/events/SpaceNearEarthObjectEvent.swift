@@ -8,38 +8,64 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SpaceNearEarthObjectEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum SpaceNearEarthObjectEventCodingKeys : String, UpcomingEventCodingKeys {
+    case closeApproachEpoch
+    case potentiallyHazardous
+    case estimatedDiameterMax
+    case estimatedDiameterMin
+    case relativeVelocity
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-        
-    public let closeApproachEpoch:Int64, potentiallyHazardous:Bool, estimatedDiameterMax:Float, estimatedDiameterMin:Float, relativeVelocity:String
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.near_earth_object
+    }
+    public func getValueType() -> UpcomingEventValueType {
+        switch self {
+        case .closeApproachEpoch:
+            return UpcomingEventValueType.int64
+        case .potentiallyHazardous:
+            return UpcomingEventValueType.boolean
+        case .estimatedDiameterMax, .estimatedDiameterMin:
+            return UpcomingEventValueType.float
+        default:
+            return UpcomingEventValueType.defaultType()
+        }
+    }
+    public func getValueTypeUnit() -> UpcomingEventValueTypeUnit? {
+        switch self {
+        case .estimatedDiameterMax, .estimatedDiameterMin:
+            return UpcomingEventValueTypeUnit.meters
+        default:
+            return nil
+        }
+    }
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, closeApproachEpoch: Int64, potentiallyHazardous: Bool, estimatedDiameterMax: Float, estimatedDiameterMin: Float, relativeVelocity: String) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
+    public func getValuePrefix() -> String? {
+        switch self {
+        case .relativeVelocity: return "Relative Velocity: "
+        default: return nil
+        }
+    }
+}
+
+public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
+    public let closeApproachEpoch:Int64, potentiallyHazardous:Bool?, estimatedDiameterMax:Float, estimatedDiameterMin:Float, relativeVelocity:String
+    
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, closeApproachEpoch: Int64, potentiallyHazardous: Bool?, estimatedDiameterMax: Float, estimatedDiameterMin: Float, relativeVelocity: String) {
         self.closeApproachEpoch = closeApproachEpoch
         self.potentiallyHazardous = potentiallyHazardous
         self.estimatedDiameterMax = estimatedDiameterMax
         self.estimatedDiameterMin = estimatedDiameterMin
         self.relativeVelocity = relativeVelocity
+        super.init(type: UpcomingEventType.space_near_earth_object, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.space_near_earth_object
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceNearEarthObjectEventCodingKeys.self)
+        closeApproachEpoch = try container.decode(Int64.self, forKey: .closeApproachEpoch)
+        potentiallyHazardous = try container.decodeIfPresent(Bool.self, forKey: .potentiallyHazardous)
+        estimatedDiameterMax = try container.decode(Float.self, forKey: .estimatedDiameterMax)
+        estimatedDiameterMin = try container.decode(Float.self, forKey: .estimatedDiameterMin)
+        relativeVelocity = try container.decode(String.self, forKey: .relativeVelocity)
+        try super.init(from: decoder)
     }
 }

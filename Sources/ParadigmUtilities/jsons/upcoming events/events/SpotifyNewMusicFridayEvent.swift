@@ -8,34 +8,29 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SpotifyNewMusicFridayEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum SpotifyNewMusicFridayEventCodingKeys : String, UpcomingEventCodingKeys {
+    case tracks
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.spotify_new_music_friday_tracks
+    }
     
+    public func getValueType() -> UpcomingEventValueType {
+        return UpcomingEventValueType.spotify_tracks
+    }
+}
+
+public final class SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
     public let tracks:[SpotifyTrack]
     
     public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, tracks: [SpotifyTrack]) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.tracks = tracks
+        super.init(type: UpcomingEventType.spotify_new_music_friday, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.spotify_new_music_friday
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpotifyNewMusicFridayEventCodingKeys.self)
+        tracks = try container.decode([SpotifyTrack].self, forKey: .tracks)
+        try super.init(from: decoder)
     }
 }

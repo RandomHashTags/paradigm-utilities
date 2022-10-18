@@ -8,35 +8,28 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SpaceEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum SpaceEventCodingKeys : String, UpcomingEventCodingKeys {
+    case newsURL
+    case videoURL
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-        
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.space_event
+    }
+}
+
+public final class SpaceEvent : GenericUpcomingEvent {
     public let newsURL:String?, videoURL:String?
     
     public init(exactStartMilliseconds:Int64, exactEndMilliseconds:Int64, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, newsURL: String?, videoURL: String?) {
-        eventDate = nil
-        self.exactStartMilliseconds = exactStartMilliseconds
-        self.exactEndMilliseconds = exactEndMilliseconds
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.newsURL = newsURL
         self.videoURL = videoURL
+        super.init(type: UpcomingEventType.space_event, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.space_event
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: SpaceEventCodingKeys.self)
+        newsURL = try container.decodeIfPresent(String.self, forKey: .newsURL)
+        videoURL = try container.decodeIfPresent(String.self, forKey: .videoURL)
+        try super.init(from: decoder)
     }
 }

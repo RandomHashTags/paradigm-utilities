@@ -8,36 +8,31 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct JOTDEvent : GenericUpcomingEventProtocol {
-    public let eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+public enum JOTDEventCodingKeys : String, UpcomingEventCodingKeys {
+    case copyright
+    case question
+    case answer
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
-    public let hyperlinks:ClientHyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.joke_of_the_day
+    }
+}
+
+public final class JOTDEvent : GenericUpcomingEvent {
     public let copyright:String, question:String, answer:String
     
     public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: ClientHyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String, question: String, answer: String) {
-        self.eventDate = eventDate
-        exactStartMilliseconds = nil
-        exactEndMilliseconds = nil
-        customTypeSingularName = nil
-        self.title = title
-        self.description = description
-        self.location = location
-        self.imageURL = imageURL
-        youtubeVideoIDs = nil
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
         self.copyright = copyright
         self.question = question
         self.answer = answer
+        super.init(type: UpcomingEventType.joke_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
-    public func getType() -> UpcomingEventType {
-        return UpcomingEventType.joke_of_the_day
+    required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: JOTDEventCodingKeys.self)
+        copyright = try container.decode(String.self, forKey: .copyright)
+        question = try container.decode(String.self, forKey: .question)
+        answer = try container.decode(String.self, forKey: .answer)
+        try super.init(from: decoder)
     }
 }

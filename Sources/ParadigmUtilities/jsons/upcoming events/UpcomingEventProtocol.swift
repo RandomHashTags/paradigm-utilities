@@ -9,6 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public protocol UpcomingEventProtocol : Jsonable {
+    var type:UpcomingEventType { get }
     var eventDate:EventDate! { get }
     var exactStartMilliseconds:Int64! { get }
     var exactEndMilliseconds:Int64! { get }
@@ -21,7 +22,6 @@ public protocol UpcomingEventProtocol : Jsonable {
     var subdivisions:[SovereignStateSubdivisionWrapper]? { get }
     
     func getIdentifier() -> String
-    func getType() -> UpcomingEventType
 }
 public extension UpcomingEventProtocol {
     func getDateString() -> String {
@@ -45,4 +45,26 @@ public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
     var youtubeVideoIDs:[String]? { get }
     var sources:EventSources { get }
     var hyperlinks:ClientHyperlinks? { get }
+}
+
+public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresentable where RawValue == String {
+    func getCategory() -> UpcomingEventValueCategory
+    func getValueType() -> UpcomingEventValueType
+    func getValueTypeUnit() -> UpcomingEventValueTypeUnit?
+    func getValuePrefix() -> String?
+    func getValueString() -> String?
+}
+public extension UpcomingEventCodingKeys {
+    func getValueType() -> UpcomingEventValueType {
+        return UpcomingEventValueType.defaultType()
+    }
+    func getValueTypeUnit() -> UpcomingEventValueTypeUnit? {
+        return nil
+    }
+    func getValuePrefix() -> String? {
+        return nil
+    }
+    func getValueString() -> String? {
+        return nil
+    }
 }
