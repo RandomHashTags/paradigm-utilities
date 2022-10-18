@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct GovernmentPrePolitician : Jsonable {
+public struct GovernmentPrePolitician : Person {
     public let id:String, name:HumanName, party:PoliticalParty, imageURL:String?
     
     public init(id: String, name: HumanName, party: PoliticalParty, imageURL: String?) {

@@ -2,17 +2,16 @@
 //  CountryFiltersResponse.swift
 //  
 //
-//  Created by Evan Anderson on 10/14/22.
+//  Created by Evan Anderson on 10/18/22.
 //
 
 import Foundation
-import SwiftSovereignStates
 
 public struct CountryFiltersResponse : Jsonable {
-    public let id:String, rankings:[Country:Int]
+    public let response_version:Int, filters:[CountryFilter]
     
-    public init(id: String, rankings: [Country:Int]) {
-        self.id = id
-        self.rankings = rankings
+    public init(response_version: Int, filters: [CountryFilter]) {
+        self.response_version = response_version
+        self.filters = filters
     }
 }
