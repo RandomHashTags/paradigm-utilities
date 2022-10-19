@@ -13,7 +13,7 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
     public let agriculture:[SovereignStateAgricultureValue]?
     public let info:[SovereignStateInfoKey]?
     public let legalities:[SovereignStateInfoKey]?
-    public let rankings:[SovereignStateRankingInfoValue]?
+    public var rankings:[SovereignStateRankingInfoValue]?
     public let single_values:[SovereignStateSingleValue]?
     
     public let national_animals:NationalAnimals?
