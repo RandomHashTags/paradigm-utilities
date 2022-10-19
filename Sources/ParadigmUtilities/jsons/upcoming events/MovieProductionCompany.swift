@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MovieProductionCompany : Jsonable {
+public struct MovieProductionCompany : MovieProductionCompanyProtocol {
     public let id:String, name:String, aliases:[String]?, description:String, imageURL:String?, sources:EventSources
     
     public init(id: String, name: String, aliases: [String]?, description: String, imageURL: String?, sources: EventSources) {
