@@ -10,14 +10,3 @@ import Foundation
 public protocol SovereignStateInformationValue : Jsonable {
     var sources:EventSources? { get }
 }
-
-/*
-public struct SovereignStateInformationValueProtocolWrapper : SovereignStateInformationValue {
-    public let sources:EventSources?
-    
-    public init(info: SovereignStateInfo, sources: EventSources?) {
-        self.info = info
-        self.sources = sources
-    }
-}
-*/

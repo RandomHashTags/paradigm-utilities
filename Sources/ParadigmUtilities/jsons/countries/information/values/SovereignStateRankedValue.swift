@@ -7,11 +7,9 @@
 
 import Foundation
 
-public protocol SovereignStateRankedValue : SovereignStateInformationValue {
-    var info:SovereignStateInfo { get }
+public protocol SovereignStateRankedValue : SovereignStateIdentifiableValue {
     var worldRank:Int { get }
     var maxWorldRank:Int { get }
-    var yearOfData:Int { get }
     var value:Double { get }
     var suffix:String { get }
     var isEstimate:Bool { get }

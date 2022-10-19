@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SovereignStateSingleValue : SovereignStateInformationValue {
+public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
     public let info:SovereignStateInfo, notes:String?, value:String, valueDescription:String?, yearOfData:Int, sources:EventSources?
     
     public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int, sources: EventSources?) {

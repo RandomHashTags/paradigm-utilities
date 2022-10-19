@@ -16,8 +16,8 @@ public final class SovereignStateInformation : Jsonable {
     public let response_version:Int
     public let administration:ClientGovernmentAdministration?
     
-    public let _static:SovereignStateStaticInformation?
-    public let nonstatic:SovereignStateNonStaticInformation?
+    public var _static:SovereignStateStaticInformation?
+    public var nonstatic:SovereignStateNonStaticInformation?
     
     public init(response_version: Int, administration: ClientGovernmentAdministration?, _static: SovereignStateStaticInformation?, nonstatic: SovereignStateNonStaticInformation?) {
         self.response_version = response_version
