@@ -8,10 +8,9 @@
 import Foundation
 
 public struct HomeResponseCountries : Jsonable {
-    public let availability_categories:AvailabilityCategoriesResponse?, filters:CountryFiltersResponse?
+    public let filters:CountryFiltersResponse?
     
-    public init(availability_categories: AvailabilityCategoriesResponse?, filters: CountryFiltersResponse?) {
-        self.availability_categories = availability_categories
+    public init(filters: CountryFiltersResponse?) {
         self.filters = filters
     }
 }

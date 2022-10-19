@@ -7,11 +7,10 @@
 
 import Foundation
 
-public struct ClientSovereignStateAvailability : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, primaryCategory:SovereignStateAvailabilityCategory, imageURL:String?, value:Bool, sources:EventSources?
+public struct ClientSovereignStateAvailability : Jsonable {
+    public let info:SovereignStateInfo, primaryCategory:SovereignStateAvailabilityCategory, imageURL:String?, value:Bool, sources:EventSources?
     
     public init(info: SovereignStateInfo, primaryCategory: SovereignStateAvailabilityCategory, imageURL: String?, value: Bool, sources: EventSources?) {
-        type = .availabilities
         self.info = info
         self.primaryCategory = primaryCategory
         self.imageURL = imageURL

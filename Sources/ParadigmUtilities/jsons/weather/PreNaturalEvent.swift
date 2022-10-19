@@ -9,12 +9,12 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreNaturalEvent : Jsonable {
-    public let id:String, type:String, place:String, country:Country?
+    public let id:String, type:String, place:String, subdivision:SovereignStateSubdivisionWrapper?
     
-    public init(id: String, type: String, place: String, country: Country?) {
+    public init(id: String, type: String, place: String, subdivision: (any SovereignStateSubdivision)?) {
         self.id = id
         self.type = type
         self.place = place
-        self.country = country
+        self.subdivision = subdivision?.wrapped()
     }
 }

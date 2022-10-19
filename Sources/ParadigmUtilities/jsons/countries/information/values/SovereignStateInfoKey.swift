@@ -8,10 +8,9 @@
 import Foundation
 
 public struct SovereignStateInfoKey : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, notes:String?, yearOfData:Int, values:[SovereignStateInfoValue], sources:EventSources?
+    public let info:SovereignStateInfo, notes:String?, yearOfData:Int, values:[SovereignStateInfoValue], sources:EventSources?
     
-    public init(type: SovereignStateInformationType, info: SovereignStateInfo, notes: String?, yearOfData: Int, values: [SovereignStateInfoValue], sources: EventSources?) {
-        self.type = type
+    public init(info: SovereignStateInfo, notes: String?, yearOfData: Int, values: [SovereignStateInfoValue], sources: EventSources?) {
         self.info = info
         self.notes = notes
         self.yearOfData = yearOfData

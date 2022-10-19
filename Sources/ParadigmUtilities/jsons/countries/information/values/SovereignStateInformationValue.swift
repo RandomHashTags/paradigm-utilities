@@ -8,17 +8,16 @@
 import Foundation
 
 public protocol SovereignStateInformationValue : Jsonable {
-    var type:SovereignStateInformationType { get }
-    var info:SovereignStateInfo { get }
     var sources:EventSources? { get }
 }
 
+/*
 public struct SovereignStateInformationValueProtocolWrapper : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, sources:EventSources?
+    public let sources:EventSources?
     
-    public init(type: SovereignStateInformationType, info: SovereignStateInfo, sources: EventSources?) {
-        self.type = type
+    public init(info: SovereignStateInfo, sources: EventSources?) {
         self.info = info
         self.sources = sources
     }
 }
+*/

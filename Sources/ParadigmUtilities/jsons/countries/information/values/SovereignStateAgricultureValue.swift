@@ -8,10 +8,9 @@
 import Foundation
 
 public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, worldRank:Int, maxWorldRank:Int, yearOfData:Int, value:Double, suffix:String, isEstimate:Bool, sources:EventSources?
+    public let info:SovereignStateInfo, worldRank:Int, maxWorldRank:Int, yearOfData:Int, value:Double, suffix:String, isEstimate:Bool, sources:EventSources?
     
     public init(info: SovereignStateInfo, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Double, suffix:String, isEstimate: Bool, sources: EventSources?) {
-        type = .agriculture
         self.info = info
         self.worldRank = worldRank
         self.maxWorldRank = maxWorldRank

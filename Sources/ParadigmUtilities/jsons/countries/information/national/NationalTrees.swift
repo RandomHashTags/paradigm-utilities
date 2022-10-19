@@ -8,11 +8,9 @@
 import Foundation
 
 public struct NationalTrees : SovereignStateInformationValue {
-    public let type:SovereignStateInformationType, info:SovereignStateInfo, pictures:[WikipediaPicture], sources:EventSources?
+    public let pictures:[WikipediaPicture], sources:EventSources?
     
     public init(pictures: [WikipediaPicture], sources: EventSources?) {
-        type = .national
-        info = .national_trees
         self.pictures = pictures
         self.sources = sources
     }
