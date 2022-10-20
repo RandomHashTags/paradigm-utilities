@@ -8,6 +8,8 @@
 import Foundation
 
 public struct HomeResponse : Jsonable {
+    public static var LATEST:HomeResponse! = nil
+    
     public let countries:HomeResponseCountries?, government:HomeResponseGovernment?, stock_market:HomeResponseStockMarket?, upcoming_events:HomeResponseUpcomingEvents?, weather:HomeResponseWeather?
     
     public init(countries: HomeResponseCountries?, government: HomeResponseGovernment?, stock_market: HomeResponseStockMarket?, upcoming_events: HomeResponseUpcomingEvents?, weather: HomeResponseWeather?) {

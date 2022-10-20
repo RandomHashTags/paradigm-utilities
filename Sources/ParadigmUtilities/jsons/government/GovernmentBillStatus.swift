@@ -37,8 +37,8 @@ public extension GovernmentBillStatus where Self : RawRepresentable, RawValue ==
 }
 
 public extension Country {
-    func valueOfGovernmentBillStatus(_ identifier: String) -> (any GovernmentBillStatus)? {
-        return getGovernmentBillStatuses()?.first(where: { $0.getIdentifier().elementsEqual(identifier) })
+    func valueOfGovernmentBillStatus(_ string: String) -> (any GovernmentBillStatus)? {
+        return getGovernmentBillStatuses()?.first(where: { $0.getIdentifier().elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
     }
     func getGovernmentBillStatuses() -> [any GovernmentBillStatus]? {
         switch self {

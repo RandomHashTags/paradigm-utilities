@@ -17,8 +17,8 @@ public enum GovernmentChambers {
     }
 }
 public extension Country {
-    func valueOfGovernmentChamber(_ identifier: String) -> (any GovernmentChamber)? {
-        return getGovernmentChambers()?.first(where: { $0.getIdentifier().elementsEqual(identifier) })
+    func valueOfGovernmentChamber(_ string: String) -> (any GovernmentChamber)? {
+        return getGovernmentChambers()?.first(where: { $0.getIdentifier().elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
     }
     func getGovernmentChambers() -> [any GovernmentChamber]? {
         return GovernmentChambers.get(self)
