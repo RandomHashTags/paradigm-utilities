@@ -12,7 +12,7 @@ public struct HomeResponseWeather : Jsonable {
     public var alerts:[Country:[WeatherEvent]]?
     /// [Country, [SovereignStateSubdivision?, [Magnitude, [PreEarthquake]]]]
     public var earthquakes:[Country?:[String:[String:[PreEarthquake]]]]?
-    public let natural_events:NaturalWeatherEventsResponse?
+    public var natural_events:NaturalWeatherEventsResponse?
     
     public init(alerts: [Country:[WeatherEvent]]?, earthquakes: [Country:[String:[String:[PreEarthquake]]]]?, natural_events: NaturalWeatherEventsResponse?) {
         self.alerts = alerts

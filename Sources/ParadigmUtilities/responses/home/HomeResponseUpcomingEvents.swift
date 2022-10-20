@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HomeResponseUpcomingEvents : Jsonable {
-    public let holidays_near:[EventDate:[PreHoliday]], events:[UpcomingEventType:[PreUpcomingEvent]], movie_production_companies:MovieProductionCompaniesResponse?
+    public var holidays_near:[EventDate:[PreHoliday]], events:[UpcomingEventType:[PreUpcomingEvent]], movie_production_companies:MovieProductionCompaniesResponse?
     
     public init(holidays_near: [EventDate:[PreHoliday]], events: [UpcomingEventType:[PreUpcomingEvent]], movie_production_companies:MovieProductionCompaniesResponse?) {
         self.holidays_near = holidays_near
