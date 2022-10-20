@@ -8,7 +8,11 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct HomeResponseWeather : Jsonable {
+public final class HomeResponseWeather : Jsonable {
+    public static func == (lhs: HomeResponseWeather, rhs: HomeResponseWeather) -> Bool {
+        return lhs.alerts == rhs.alerts && lhs.earthquakes == rhs.earthquakes && lhs.natural_events == rhs.natural_events
+    }
+    
     public var alerts:[Country:[WeatherEvent]]?
     /// [Country, [SovereignStateSubdivision?, [Magnitude, [PreEarthquake]]]]
     public var earthquakes:[Country?:[String:[String:[PreEarthquake]]]]?
@@ -18,5 +22,11 @@ public struct HomeResponseWeather : Jsonable {
         self.alerts = alerts
         self.earthquakes = earthquakes
         self.natural_events = natural_events
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(alerts)
+        hasher.combine(earthquakes)
+        hasher.combine(natural_events)
     }
 }
