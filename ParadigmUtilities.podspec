@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ParadigmUtilities'
-  s.version = '1.0.11'
+  s.version = '1.0.12'
   s.summary = 'Shared library between the Server and Client.'
   s.homepage = 'https://github.com/RandomHashTags/paradigm-utilities'
   s.license = { :type => 'CC0 1.0 Universal', :file => 'LICENSE.txt' }
@@ -12,7 +12,7 @@ Pod::Spec.new do |s|
   s.swift_versions = ['5.6', '5.7']
   s.cocoapods_version = '>= 1.5.0'
   s.source_files = 'Sources/**/*'
-  s.dependency 'SwiftSovereignStates', '~> 1.1.3'
+  s.dependency 'SwiftSovereignStates', '~> 1.1.5'
   s.dependency 'ZippyJSON', '~> 1.2.5'
   s.dependency 'GEOSwift', '~> 9.0.0'
 end

@@ -17,7 +17,7 @@ let package = Package(
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
-        .package(url: "https://github.com/randomhashtags/swift-sovereign-states.git", from: "1.1.3"),
+        .package(url: "https://github.com/randomhashtags/swift-sovereign-states.git", from: "1.1.4"),
         .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "9.0.0"),
         .package(url: "https://github.com/michaeleisel/ZippyJSON.git", from: "1.2.5"),
     ],
