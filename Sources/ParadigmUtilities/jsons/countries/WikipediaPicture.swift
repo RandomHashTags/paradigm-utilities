@@ -8,9 +8,10 @@
 import Foundation
 
 public struct WikipediaPicture : Jsonable {
-    public let name:String, title:String?, imageURL:String
+    public let key:String, name:String, title:String?, imageURL:String
     
-    public init(name: String, title: String?, imageURL: String) {
+    public init(key: String, name: String, title: String?, imageURL: String) {
+        self.key = key
         self.name = name
         self.title = title
         self.imageURL = imageURL
