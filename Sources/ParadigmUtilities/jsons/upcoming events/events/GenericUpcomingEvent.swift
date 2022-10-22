@@ -17,7 +17,9 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public let type:UpcomingEventType, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
     public let customTypeSingularName:String?
     
-    public let title:String, description:String?, location:String?, imageURL:String?, youtubeVideoIDs:[String]?, sources:EventSources
+    public let title:String, description:String?, location:String?, imageURL:String?
+    public var youtubeVideoIDs:[String]?
+    public let sources:EventSources
     public let hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     

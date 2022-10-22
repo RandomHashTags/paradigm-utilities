@@ -65,7 +65,7 @@ public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventCodingKeys {
 }
 
 public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
-    public let missionName:String, missionDescription:String, missionType:String, windowStart:Int64, windowEnd:Int64, exactDay:Bool?, exactTime:Bool?, status:String, probability:String, videoURL:String?
+    public let missionName:String, missionDescription:String, missionType:String, windowStart:Int64, windowEnd:Int64?, exactDay:Bool?, exactTime:Bool?, status:String, probability:String, videoURL:String?
     
     public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mission: SpaceRocketLaunchMission) {
         missionName = mission.name
@@ -87,7 +87,7 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         missionDescription = try container.decode(String.self, forKey: .missionDescription)
         missionType = try container.decode(String.self, forKey: .missionType)
         windowStart = try container.decode(Int64.self, forKey: .windowStart)
-        windowEnd = try container.decode(Int64.self, forKey: .windowEnd)
+        windowEnd = try container.decodeIfPresent(Int64.self, forKey: .windowEnd)
         exactDay = try container.decodeIfPresent(Bool.self, forKey: .exactDay)
         exactTime = try container.decodeIfPresent(Bool.self, forKey: .exactTime)
         status = try container.decode(String.self, forKey: .status)

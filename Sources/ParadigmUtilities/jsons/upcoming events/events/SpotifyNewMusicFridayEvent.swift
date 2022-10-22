@@ -29,9 +29,9 @@ public enum SpotifyNewMusicFridayEventCodingKeys : String, UpcomingEventCodingKe
 public final class SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
     public let tracks:[SpotifyTrack]
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, tracks: [SpotifyTrack]) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, tracks: [SpotifyTrack]) {
         self.tracks = tracks
-        super.init(type: UpcomingEventType.spotify_new_music_friday, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.spotify_new_music_friday, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

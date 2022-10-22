@@ -42,14 +42,14 @@ public enum WOTDEventCodingKeys : String, UpcomingEventCodingKeys {
 }
 
 public final class WOTDEvent : GenericUpcomingEvent {
-    public let examples:[String], pronunciationURL:String?, syllables:String, grammarType:String
+    public let examples:[String]?, pronunciationURL:String?, syllables:String, grammarType:String
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, examples: [String], pronunciationURL: String?, syllables: String, grammarType: String) {
+    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, examples: [String]?, pronunciationURL: String?, syllables: String, grammarType: String) {
         self.examples = examples
         self.pronunciationURL = pronunciationURL
         self.syllables = syllables
         self.grammarType = grammarType
-        super.init(type: UpcomingEventType.word_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.word_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {
