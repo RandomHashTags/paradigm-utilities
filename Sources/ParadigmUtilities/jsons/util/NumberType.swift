@@ -12,8 +12,4 @@ public enum NumberType : String, CaseIterable, Jsonable {
     case double
     case float
     case long
-    
-    public static func valueOf(_ string: String) -> NumberType? {
-        return NumberType.allCases.first(where: { string.elementsEqual("\($0)") })
-    }
 }

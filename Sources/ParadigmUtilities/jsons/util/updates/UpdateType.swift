@@ -13,9 +13,4 @@ public enum UpdateType : String, CaseIterable, Jsonable {
     case removal
     case performance_improvement
     case change
-    
-    public static func valueOf(_ string: String?) -> UpdateType? {
-        guard let string:String = string else { return nil }
-        return UpdateType.allCases.first(where: { string.elementsEqual("\($0)") })
-    }
 }

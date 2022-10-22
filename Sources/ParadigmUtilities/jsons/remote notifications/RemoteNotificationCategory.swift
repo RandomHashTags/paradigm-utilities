@@ -13,9 +13,6 @@ public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     //case video_game
     case weather
     
-    public static func valueOf(_ string: String) -> RemoteNotificationCategory? {
-        return RemoteNotificationCategory.allCases.first(where: { string.elementsEqual("\($0)") })
-    }
     public static func valueOf(subcategory: String) -> (any RemoteNotificationSubcategory)? {
         for category in RemoteNotificationCategory.allCases {
             for sub in category.getSubcategories() {

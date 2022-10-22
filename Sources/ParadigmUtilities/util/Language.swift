@@ -46,6 +46,6 @@ public enum Language : String, CaseIterable {
     
     public static func valueOf(_ string: String?) -> Language? {
         guard let string:String = string else { return nil }
-        return Language.allCases.first(where: { string.compare("\($0)") == .orderedSame || string.compare($0.rawValue) == .orderedSame })
+        return Language(rawValue: string) ?? Language.allCases.first(where: { string.compare("\($0)") == .orderedSame || string.compare($0.rawValue) == .orderedSame })
     }
 }
