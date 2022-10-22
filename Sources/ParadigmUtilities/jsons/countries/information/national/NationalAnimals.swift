@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct NationalAnimals : SovereignStateInformationValue {
+public struct NationalAnimals : SovereignStateNationalValue {
     public let pictures:[WikipediaPicture], sources:EventSources?
     
     public init(pictures: [WikipediaPicture], sources: EventSources?) {

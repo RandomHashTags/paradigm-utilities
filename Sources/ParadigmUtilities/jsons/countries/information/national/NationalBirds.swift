@@ -1,13 +1,13 @@
 //
-//  NationalTrees.swift
+//  NationalBirds.swift
 //  
 //
-//  Created by Evan Anderson on 10/12/22.
+//  Created by Evan Anderson on 10/22/22.
 //
 
 import Foundation
 
-public struct NationalTrees : SovereignStateNationalValue {
+public struct NationalBirds : SovereignStateNationalValue {
     public let pictures:[WikipediaPicture], sources:EventSources?
     
     public init(pictures: [WikipediaPicture], sources: EventSources?) {

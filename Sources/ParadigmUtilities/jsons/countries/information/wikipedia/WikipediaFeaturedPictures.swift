@@ -8,9 +8,10 @@
 import Foundation
 
 public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
-    public let pictures:[WikipediaPicture], sources:EventSources?
+    public let imageURLPrefix:String, pictures:[WikipediaPicture], sources:EventSources?
     
-    public init(pictures: [WikipediaPicture], sources: EventSources?) {
+    public init(imageURLPrefix: String, pictures: [WikipediaPicture], sources: EventSources?) {
+        self.imageURLPrefix = imageURLPrefix
         self.pictures = pictures
         self.sources = sources
     }

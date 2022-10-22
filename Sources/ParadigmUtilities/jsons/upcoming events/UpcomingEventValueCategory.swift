@@ -28,6 +28,7 @@ public enum UpcomingEventValueCategory : String, Jsonable {
     case ticketmaster_venues
     case video_game_details
     case video_game_genres
+    case wikipedia_todays_featured_picture
     case word_of_the_day_details
     case word_of_the_day_post_details
     case wrestling_details

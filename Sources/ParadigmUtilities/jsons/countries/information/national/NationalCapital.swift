@@ -8,10 +8,11 @@
 import Foundation
 
 public struct NationalCapital : SovereignStateInformationValue {
-    public let place:String, sources:EventSources?
+    public let place:String, notes:String?, sources:EventSources?
     
-    public init(place: String, sources: EventSources?) {
+    public init(place: String, notes: String?, sources: EventSources?) {
         self.place = place
+        self.notes = notes
         self.sources = sources
     }
 }

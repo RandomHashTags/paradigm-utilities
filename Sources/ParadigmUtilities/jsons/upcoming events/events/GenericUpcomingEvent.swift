@@ -84,6 +84,8 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
                 return try decoder.decode(TicketmasterMusicEvent.self, from: data)
             case .video_game:
                 return try decoder.decode(VideoGameEvent.self, from: data)
+            case .wikipedia_todays_featured_picture:
+                return try decoder.decode(WikipediaTodaysFeaturedPictureEvent.self, from: data)
             case .word_of_the_day:
                 return try decoder.decode(WOTDEvent.self, from: data)
             default:
