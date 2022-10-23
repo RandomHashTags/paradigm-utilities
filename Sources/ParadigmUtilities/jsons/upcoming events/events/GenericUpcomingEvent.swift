@@ -14,22 +14,24 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         return lhs.type == rhs.type && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
     }
     
-    public let type:UpcomingEventType, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
+    public let type:UpcomingEventType, id:String?, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
     public let customTypeSingularName:String?
     
-    public let title:String, description:String?, location:String?, imageURL:String?
+    public let title:String, tag:String?, description:String?, location:String?, imageURL:String?
     public var youtubeVideoIDs:[String]?
     public let sources:EventSources
     public let hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     
-    public init(type: UpcomingEventType, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?) {
+    public init(type: UpcomingEventType, id: String? = nil, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
         self.type = type
+        self.id = id
         self.eventDate = eventDate
         self.exactStartMilliseconds = exactStartMilliseconds
         self.exactEndMilliseconds = exactEndMilliseconds
         self.customTypeSingularName = customTypeSingularName
         self.title = title
+        self.tag = tag
         self.description = description
         self.location = location
         self.imageURL = imageURL

@@ -10,6 +10,7 @@ import SwiftSovereignStates
 
 public protocol UpcomingEventProtocol : Jsonable {
     var type:UpcomingEventType { get }
+    var id:String? { get }
     var eventDate:EventDate! { get }
     var exactStartMilliseconds:Int64! { get }
     var exactEndMilliseconds:Int64! { get }
@@ -29,12 +30,13 @@ public extension UpcomingEventProtocol {
     }
     
     func getIdentifier() -> String {
+        let prefix:String = id?.appending("_") ?? ""
         if let eventDate:EventDate = eventDate {
-            return ParadigmUtilities.getEventDateIdentifier(dateString: eventDate.getDateString(), title: title)
+            return prefix + ParadigmUtilities.getEventDateIdentifier(dateString: eventDate.getDateString(), title: title)
         } else if let exactStartMilliseconds:Int64 = exactStartMilliseconds {
-            return ParadigmUtilities.getEventDateIdentifier(exactTimeMilliseconds: exactStartMilliseconds, title: title)
+            return prefix + ParadigmUtilities.getEventDateIdentifier(exactTimeMilliseconds: exactStartMilliseconds, title: title)
         } else {
-            return ParadigmUtilities.getEventDateIdentifier(dateString: "NIL", title: title)
+            return prefix + ParadigmUtilities.getEventDateIdentifier(dateString: "NIL", title: title)
         }
     }
 }

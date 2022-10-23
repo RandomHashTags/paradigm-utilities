@@ -12,8 +12,8 @@ public final class TVShowEpisode : Jsonable {
         return lhs.id == rhs.id
     }
     
-    public let id:Int, name:String, season:Int, number:Int, runtime:Int?, summary:String?, imageURL:String?, airstamp:String?, airdate:String, airtime:String
-    public let _embedded:TVShowInfoEmbedded?
+    public let id:Int, name:String, season:Int, number:Int?, runtime:Int?, summary:String?, image:TVShowImage?, airstamp:String, airdate:String, airtime:String
+    public let _embedded:TVShowEpisodeEmbedded?
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(id)
