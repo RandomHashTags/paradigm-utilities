@@ -6,10 +6,15 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public enum GovernmentChamberUnitedStates : String, CaseIterable, GovernmentChamber {
     case house
     case senate
+    
+    public func getCountry() -> Country {
+        return Country.united_states
+    }
     
     public func getName() -> String {
         switch self {

@@ -44,6 +44,10 @@ public extension RemoteNotificationSubcategory {
         return nil
     }
     
+    func wrapped() -> RemoteNotificationSubcategoryWrapper {
+        return RemoteNotificationSubcategoryWrapper(self)
+    }
+    
     /*func getSubcategoryFolderPath(type: RemoteNotificationDeviceTokenType) -> FolderPath {
         return Folder.device_tokens_type_category_subcategory.getPath(replacements: ["type": "\(type)", "category": "\(getCategory())", "subcategory": "\(self)"])
     }
@@ -68,7 +72,7 @@ public extension RemoteNotificationSubcategory {
 public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcategory {
     public let subcategory:any RemoteNotificationSubcategory
     
-    public init(subcategory: any RemoteNotificationSubcategory) {
+    public init(_ subcategory: any RemoteNotificationSubcategory) {
         self.subcategory = subcategory
     }
     public init(from decoder: Decoder) throws {

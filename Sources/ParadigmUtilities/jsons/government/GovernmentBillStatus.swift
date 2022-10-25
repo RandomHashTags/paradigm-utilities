@@ -10,6 +10,7 @@ import SwiftSovereignStates
 
 public protocol GovernmentBillStatus : Jsonable {
     func getCountry() -> Country
+    func getCacheID() -> String
     func getIdentifier() -> String
     func getName() -> String
     func getControllerTitle() -> String
@@ -17,6 +18,13 @@ public protocol GovernmentBillStatus : Jsonable {
 public extension GovernmentBillStatus {
     static func == (lhs: Self, rhs: Self) -> Bool {
         return lhs.getCountry() == rhs.getCountry() && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
+    }
+    
+    func getCacheID() -> String {
+        return getCountry().getCacheID() + "," + getIdentifier()
+    }
+    func wrapped() -> GovernmentBillStatusWrapper {
+        return GovernmentBillStatusWrapper(self)
     }
     
     func hash(into hasher: inout Hasher) {
@@ -52,7 +60,7 @@ public extension Country {
 public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
     public let status:any GovernmentBillStatus
     
-    public init(status: any GovernmentBillStatus) {
+    public init(_ status: any GovernmentBillStatus) {
         self.status = status
     }
     public init(from decoder: Decoder) throws {

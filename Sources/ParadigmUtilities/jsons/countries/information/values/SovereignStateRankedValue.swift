@@ -11,6 +11,6 @@ public protocol SovereignStateRankedValue : SovereignStateIdentifiableValue {
     var worldRank:Int { get }
     var maxWorldRank:Int { get }
     var value:Double { get }
-    var suffix:String { get }
+    var suffix:String? { get }
     var isEstimate:Bool { get }
 }
