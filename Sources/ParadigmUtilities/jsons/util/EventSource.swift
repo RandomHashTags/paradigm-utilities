@@ -18,12 +18,12 @@ public struct EventSource : Jsonable {
         self.url = url
     }
     
-    public func getKeyValue(key: EventSourceTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: EventSourceTranslationKeys) -> Any? {
         switch key {
         case .siteName: return siteName
         }
     }
-    public mutating func setKeyValue<T>(key: EventSourceTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: EventSourceTranslationKeys, value: T) {
         switch key {
         case .siteName:
             self.siteName = value as! String

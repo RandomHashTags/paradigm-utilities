@@ -18,12 +18,12 @@ public struct NationalAnthem : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: NationalAnthemTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: NationalAnthemTranslationKeys) -> Any? {
         switch key {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: NationalAnthemTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: NationalAnthemTranslationKeys, value: T) {
         switch key {
         case .sources:
             sources = value as? EventSources

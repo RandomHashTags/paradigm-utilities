@@ -25,13 +25,13 @@ public struct WikipediaPicture : Jsonable {
         return title ?? name
     }
     
-    public func getKeyValue(key: WikipediaPictureTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WikipediaPictureTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .title: return title
         }
     }
-    public mutating func setKeyValue<T>(key: WikipediaPictureTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WikipediaPictureTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

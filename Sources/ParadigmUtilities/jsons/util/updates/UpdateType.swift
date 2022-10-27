@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpdateType : String, CaseIterable, JsonableNoTranslationKeys {
+public enum UpdateType : String, CaseIterable, Jsonable {
     case addition
     case bug_fix
     case removal

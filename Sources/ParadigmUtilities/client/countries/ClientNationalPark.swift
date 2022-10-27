@@ -27,14 +27,14 @@ public struct ClientNationalPark : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: ClientNationalParkTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: ClientNationalParkTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .description: return description
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: ClientNationalParkTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: ClientNationalParkTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

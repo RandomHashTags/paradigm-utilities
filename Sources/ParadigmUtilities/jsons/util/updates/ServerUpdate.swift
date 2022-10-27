@@ -21,13 +21,13 @@ public struct ServerUpdate : Jsonable {
         self.requiresPremium = requiresPremium ? true : nil
     }
     
-    public func getKeyValue(key: ServerUpdateTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: ServerUpdateTranslationKeys) -> Any? {
         switch key {
         case .summary: return summary
         case .related: return related
         }
     }
-    public mutating func setKeyValue<T>(key: ServerUpdateTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: ServerUpdateTranslationKeys, value: T) {
         switch key {
         case .summary:
             summary = value as! String

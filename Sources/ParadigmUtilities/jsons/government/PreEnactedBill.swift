@@ -21,12 +21,12 @@ public struct PreEnactedBill : Jsonable {
         self.status = status.wrapped()
     }
     
-    public func getKeyValue(key: PreEnactedBillTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreEnactedBillTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         }
     }
-    public mutating func setKeyValue<T>(key: PreEnactedBillTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreEnactedBillTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

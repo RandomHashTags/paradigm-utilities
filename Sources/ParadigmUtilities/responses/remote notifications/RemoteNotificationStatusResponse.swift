@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct RemoteNotificationStatusResponse : JsonableNoTranslationKeys {
+public struct RemoteNotificationStatusResponse : Jsonable {
     public let value:Bool
     
     public init(value: Bool) {

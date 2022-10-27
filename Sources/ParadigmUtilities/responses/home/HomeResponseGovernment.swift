@@ -25,12 +25,12 @@ public final class HomeResponseGovernment : HomeResponseProtocol {
         hasher.combine(recent_activity)
     }
     
-    public func getKeyValue(key: HomeResponseGovernmentTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HomeResponseGovernmentTranslationKeys) -> Any? {
         switch key {
         case .recent_activity: return recent_activity
         }
     }
-    public func setKeyValue<T>(key: HomeResponseGovernmentTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: HomeResponseGovernmentTranslationKeys, value: T) {
         switch key {
         case .recent_activity:
             recent_activity = value as! [Country:[GovernmentRecentActivityResponse]]

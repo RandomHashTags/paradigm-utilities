@@ -22,13 +22,13 @@ public struct CIAServices : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: CIAServicesTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: CIAServicesTranslationKeys) -> Any? {
         switch key {
         case .values: return values
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: CIAServicesTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: CIAServicesTranslationKeys, value: T) {
         switch key {
         case .values:
             values = value as! [CIAValue]

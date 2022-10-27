@@ -26,7 +26,7 @@ public struct ClientWikipediaEvent : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: ClientWikipediaEventTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: ClientWikipediaEventTranslationKeys) -> Any? {
         switch key {
         case .description: return description
         case .hyperlinks: return hyperlinks
@@ -34,7 +34,7 @@ public struct ClientWikipediaEvent : Jsonable {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: ClientWikipediaEventTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: ClientWikipediaEventTranslationKeys, value: T) {
         switch key {
         case .description:
             description = value as! String

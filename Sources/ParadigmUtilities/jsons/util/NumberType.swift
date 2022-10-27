@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum NumberType : String, CaseIterable, JsonableNoTranslationKeys {
+public enum NumberType : String, CaseIterable, Jsonable {
     case integer
     case double
     case float

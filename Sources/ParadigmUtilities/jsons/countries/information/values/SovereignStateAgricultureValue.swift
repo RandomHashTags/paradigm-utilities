@@ -29,13 +29,13 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateAgricultureValueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateAgricultureValueTranslationKeys) -> Any? {
         switch key {
         case .suffix: return suffix
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateAgricultureValueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateAgricultureValueTranslationKeys, value: T) {
         switch key {
         case .suffix:
             suffix = value as? String

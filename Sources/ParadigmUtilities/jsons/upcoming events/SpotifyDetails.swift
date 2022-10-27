@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SpotifyDetails : JsonableNoTranslationKeys {
+public struct SpotifyDetails : Jsonable {
     public let total_tracks:Int, imageURL:String, available_markets:[String], url:String
     
     public init(total_tracks: Int, imageURL: String, available_markets: [String], url: String) {

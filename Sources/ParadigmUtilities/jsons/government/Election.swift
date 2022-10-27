@@ -24,12 +24,12 @@ public struct Election : Jsonable {
         self.city = city?.wrapped()
     }
     
-    public func getKeyValue(key: ElectionTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: ElectionTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         }
     }
-    public mutating func setKeyValue<T>(key: ElectionTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: ElectionTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

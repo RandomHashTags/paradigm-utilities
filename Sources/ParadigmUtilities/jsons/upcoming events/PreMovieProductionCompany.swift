@@ -21,13 +21,13 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
         self.imageURL = imageURL
     }
     
-    public func getKeyValue(key: PreMovieProductionCompanyTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreMovieProductionCompanyTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .aliases: return aliases
         }
     }
-    public mutating func setKeyValue<T>(key: PreMovieProductionCompanyTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreMovieProductionCompanyTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

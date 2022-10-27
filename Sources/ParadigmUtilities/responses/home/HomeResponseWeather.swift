@@ -32,14 +32,14 @@ public final class HomeResponseWeather : HomeResponseProtocol {
         hasher.combine(natural_events)
     }
     
-    public func getKeyValue(key: HomeResponseWeatherTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HomeResponseWeatherTranslationKeys) -> Any? {
         switch key {
         case .alerts: return alerts
         case .earthquakes: return earthquakes
         case .natural_events: return natural_events
         }
     }
-    public func setKeyValue<T>(key: HomeResponseWeatherTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: HomeResponseWeatherTranslationKeys, value: T) {
         switch key {
         case .alerts:
             alerts = value as? [Country:[WeatherEvent]]

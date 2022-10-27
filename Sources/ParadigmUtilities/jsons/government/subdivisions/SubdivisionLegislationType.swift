@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SubdivisionLegislationType : String, JsonableNoTranslationKeys {
+public enum SubdivisionLegislationType : String, Jsonable {
     case index
     case chapter
     case section

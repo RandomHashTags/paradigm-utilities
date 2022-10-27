@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct CountryFilterRankingResponse : JsonableNoTranslationKeys {
+public struct CountryFilterRankingResponse : Jsonable {
     public let id:String, rankings:[Country:Int]
     
     public init(id: String, rankings: [Country:Int]) {

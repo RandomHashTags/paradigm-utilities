@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct EventDate : Comparable, JsonableNoTranslationKeys {
+public struct EventDate : Comparable, Jsonable {
     private static var sameHourComponents:DateComponents = {
         var components:DateComponents = DateComponents()
         components.hour = 0

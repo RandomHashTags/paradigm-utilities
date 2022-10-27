@@ -28,7 +28,7 @@ public extension Country {
     }
 }
 
-public protocol GovernmentChamber : JsonableNoTranslationKeys {
+public protocol GovernmentChamber : Jsonable {
     func getCountry() -> Country
     func getCacheID() -> String
     func getIdentifier() -> String

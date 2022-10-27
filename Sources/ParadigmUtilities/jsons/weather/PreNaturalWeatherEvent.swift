@@ -22,13 +22,13 @@ public struct PreNaturalWeatherEvent : Jsonable {
         self.subdivision = subdivision?.wrapped()
     }
     
-    public func getKeyValue(key: PreNaturalWeatherEventTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreNaturalWeatherEventTranslationKeys) -> Any? {
         switch key {
         case .place: return place
         case .tag: return tag
         }
     }
-    public mutating func setKeyValue<T>(key: PreNaturalWeatherEventTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreNaturalWeatherEventTranslationKeys, value: T) {
         switch key {
         case .place:
             place = value as! String

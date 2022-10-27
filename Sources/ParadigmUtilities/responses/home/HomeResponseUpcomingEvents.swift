@@ -14,12 +14,13 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
         return lhs.holidays_near == rhs.holidays_near && lhs.events == rhs.events && lhs.movie_production_companies == rhs.movie_production_companies
     }
     
-    public var holidays_near:[EventDate:[PreHoliday]]?, events:[UpcomingEventType:[PreUpcomingEvent]]?, movie_production_companies:MovieProductionCompaniesResponse?
+    public var holidays_near:[EventDate:[PreHoliday]]?, events:[UpcomingEventType:[PreUpcomingEvent]]?
+    @CodableOmittable public var movie_production_companies:MovieProductionCompaniesResponse?
     
-    public init(holidays_near: [EventDate:[PreHoliday]]?, events: [UpcomingEventType:[PreUpcomingEvent]]?, movie_production_companies:MovieProductionCompaniesResponse?) {
+    public init(holidays_near: [EventDate:[PreHoliday]]?, events: [UpcomingEventType:[PreUpcomingEvent]]?, movie_production_companies: MovieProductionCompaniesResponse?) {
         self.holidays_near = holidays_near
         self.events = events
-        self.movie_production_companies = movie_production_companies
+        self._movie_production_companies = CodableOmittable(movie_production_companies)
     }
     
     public func hash(into hasher: inout Hasher) {
@@ -28,14 +29,14 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
         hasher.combine(movie_production_companies)
     }
     
-    public func getKeyValue(key: HomeResponseUpcomingEventsTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HomeResponseUpcomingEventsTranslationKeys) -> Any? {
         switch key {
         case .holidays_near: return holidays_near
         case .events: return events
         case .movie_production_companies: return movie_production_companies
         }
     }
-    public func setKeyValue<T>(key: HomeResponseUpcomingEventsTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: HomeResponseUpcomingEventsTranslationKeys, value: T) {
         switch key {
         case .holidays_near:
             holidays_near = value as? [EventDate:[PreHoliday]]
@@ -44,7 +45,7 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
             events = value as? [UpcomingEventType:[PreUpcomingEvent]]
             break
         case .movie_production_companies:
-            movie_production_companies = value as? MovieProductionCompaniesResponse
+            _movie_production_companies = CodableOmittable(value as? MovieProductionCompaniesResponse)
             break
         }
     }

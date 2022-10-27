@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public protocol GovernmentBillStatus : JsonableNoTranslationKeys {
+public protocol GovernmentBillStatus : Jsonable {
     func getCountry() -> Country
     func getCacheID() -> String
     func getIdentifier() -> String

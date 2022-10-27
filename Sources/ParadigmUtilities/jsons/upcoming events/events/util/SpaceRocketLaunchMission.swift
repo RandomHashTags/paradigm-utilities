@@ -28,7 +28,7 @@ public struct SpaceRocketLaunchMission : Jsonable {
         self.videoURL = videoURL
     }
     
-    public func getKeyValue(key: SpaceRocketLaunchMissionTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SpaceRocketLaunchMissionTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .description: return description
@@ -37,7 +37,7 @@ public struct SpaceRocketLaunchMission : Jsonable {
         case .probability: return probability
         }
     }
-    public mutating func setKeyValue<T>(key: SpaceRocketLaunchMissionTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SpaceRocketLaunchMissionTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

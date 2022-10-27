@@ -20,12 +20,12 @@ public struct UpdateRelatedContent : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: UpdateRelatedContentTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: UpdateRelatedContentTranslationKeys) -> Any? {
         switch key {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: UpdateRelatedContentTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: UpdateRelatedContentTranslationKeys, value: T) {
         switch key {
         case .sources:
             sources = value as? EventSources

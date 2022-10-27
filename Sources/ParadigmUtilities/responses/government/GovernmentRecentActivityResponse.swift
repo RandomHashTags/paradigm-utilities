@@ -16,12 +16,12 @@ public struct GovernmentRecentActivityResponse : Jsonable {
         self.recent_activity = recent_activity
     }
     
-    public func getKeyValue(key: GovernmentRecentActivityResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: GovernmentRecentActivityResponseTranslationKeys) -> Any? {
         switch key {
         case .recent_activity: return recent_activity
         }
     }
-    public mutating func setKeyValue<T>(key: GovernmentRecentActivityResponseTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: GovernmentRecentActivityResponseTranslationKeys, value: T) {
         switch key {
         case .recent_activity:
             recent_activity = value as! [PreEnactedBill]

@@ -21,12 +21,12 @@ public struct PreEarthquake : Jsonable {
         self.city = city?.wrapped()
     }
     
-    public func getKeyValue(key: PreEarthquakeTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreEarthquakeTranslationKeys) -> Any? {
         switch key {
         case .place: return place
         }
     }
-    public mutating func setKeyValue<T>(key: PreEarthquakeTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreEarthquakeTranslationKeys, value: T) {
         switch key {
         case .place:
             place = value as! String

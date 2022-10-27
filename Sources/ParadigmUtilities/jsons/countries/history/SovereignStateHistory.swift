@@ -17,13 +17,13 @@ public struct SovereignStateHistory : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateHistoryTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateHistoryTranslationKeys) -> Any? {
         switch key {
         case .summaryEvents: return summaryEvents
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateHistoryTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateHistoryTranslationKeys, value: T) {
         switch key {
         case .summaryEvents:
             summaryEvents = value as! [HistoricalEvent]

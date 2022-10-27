@@ -18,14 +18,14 @@ public struct WikipediaStatisticsElevation : Jsonable {
         self.median = median
     }
     
-    public func getKeyValue(key: WikipediaStatisticsElevationTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WikipediaStatisticsElevationTranslationKeys) -> Any? {
         switch key {
         case .lowest: return lowest
         case .highest: return highest
         case .median: return median
         }
     }
-    public mutating func setKeyValue<T>(key: WikipediaStatisticsElevationTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsElevationTranslationKeys, value: T) {
         switch key {
         case .lowest:
             lowest = value as? String

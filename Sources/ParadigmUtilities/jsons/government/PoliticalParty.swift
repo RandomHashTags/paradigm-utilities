@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PoliticalParty : String, CaseIterable, JsonableNoTranslationKeys {
+public enum PoliticalParty : String, CaseIterable, Jsonable {
     case democrat
     case independent
     case libertarian

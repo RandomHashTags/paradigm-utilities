@@ -34,7 +34,7 @@ public final class HomeResponse : Jsonable {
         hasher.combine(weather)
     }
     
-    public func getKeyValue(key: HomeResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HomeResponseTranslationKeys) -> Any? {
         switch key {
         case .countries: return countries
         case .government: return government
@@ -43,7 +43,7 @@ public final class HomeResponse : Jsonable {
         case .weather: return weather
         }
     }
-    public func setKeyValue<T>(key: HomeResponseTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: HomeResponseTranslationKeys, value: T) {
         switch key {
         case .countries:
             countries = value as? HomeResponseCountries

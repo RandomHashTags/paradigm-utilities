@@ -8,7 +8,7 @@
 import Foundation
 import ZippyJSON
 
-public enum UpcomingEventType : String, CaseIterable, JsonableNoTranslationKeys {
+public enum UpcomingEventType : String, CaseIterable, Jsonable {
     case astronomy_picture_of_the_day
     case earth_observatory_image_of_the_day
     case joke_of_the_day

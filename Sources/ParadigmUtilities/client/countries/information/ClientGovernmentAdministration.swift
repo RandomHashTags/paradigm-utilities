@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ClientGovernmentAdministration : JsonableNoTranslationKeys {
+public struct ClientGovernmentAdministration : Jsonable {
     public let current_version:Int, all_versions:[Int]
     
     public init(current_version: Int, all_versions: [Int]) {

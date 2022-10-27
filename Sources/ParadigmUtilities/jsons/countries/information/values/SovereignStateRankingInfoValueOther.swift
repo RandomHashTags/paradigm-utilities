@@ -26,13 +26,13 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
         self.suffix = suffix
     }
     
-    public func getKeyValue(key: SovereignStateRankingInfoValueOtherTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateRankingInfoValueOtherTranslationKeys) -> Any? {
         switch key {
         case .description: return description
         case .suffix: return suffix
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueOtherTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateRankingInfoValueOtherTranslationKeys, value: T) {
         switch key {
         case .description:
             description = value as! String

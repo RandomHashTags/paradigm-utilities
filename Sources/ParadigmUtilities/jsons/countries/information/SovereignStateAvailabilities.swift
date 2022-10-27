@@ -18,12 +18,12 @@ public struct SovereignStateAvailabilities : Jsonable {
         self.availabilities = availabilities
     }
     
-    public func getKeyValue(key: SovereignStateAvailabilitiesTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateAvailabilitiesTranslationKeys) -> Any? {
         switch key {
         case .availabilities: return availabilities
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateAvailabilitiesTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateAvailabilitiesTranslationKeys, value: T) {
         switch key {
         case .availabilities:
             availabilities = value as! [ClientSovereignStateAvailability]

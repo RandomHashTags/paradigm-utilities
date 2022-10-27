@@ -27,12 +27,12 @@ public final class CountryFiltersResponse : Jsonable {
         hasher.combine(filters)
     }
     
-    public func getKeyValue(key: CountryFiltersResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: CountryFiltersResponseTranslationKeys) -> Any? {
         switch key {
         case .filters: return filters
         }
     }
-    public func setKeyValue<T>(key: CountryFiltersResponseTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: CountryFiltersResponseTranslationKeys, value: T) {
         switch key {
         case .filters:
             filters = value as? [CountryFilter]

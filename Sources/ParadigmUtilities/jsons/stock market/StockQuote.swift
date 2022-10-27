@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct StockQuote : JsonableNoTranslationKeys {
+public struct StockQuote : Jsonable {
     public let open:Float?, high:Float?, low:Float?, change:Float, changePercent:String, price:Float
     
     public init(open: Float?, high: Float?, low: Float?, change: Float, changePercent: String, price: Float) {

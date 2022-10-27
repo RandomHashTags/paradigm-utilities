@@ -32,13 +32,13 @@ public final class SovereignStateInformation : Jsonable {
         hasher.combine(nonstatic)
     }
     
-    public func getKeyValue(key: SovereignStateInformationTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateInformationTranslationKeys) -> Any? {
         switch key {
         case ._static: return _static
         case .nonstatic: return nonstatic
         }
     }
-    public func setKeyValue<T>(key: SovereignStateInformationTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: SovereignStateInformationTranslationKeys, value: T) {
         switch key {
         case ._static:
             _static = value as? SovereignStateStaticInformation

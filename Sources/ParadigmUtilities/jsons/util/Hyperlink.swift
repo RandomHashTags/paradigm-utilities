@@ -18,12 +18,12 @@ public struct Hyperlink : Jsonable {
         self.url = url
     }
     
-    public func getKeyValue(key: HyperlinkTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HyperlinkTranslationKeys) -> Any? {
         switch key {
         case .text: return text
         }
     }
-    public mutating func setKeyValue<T>(key: HyperlinkTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: HyperlinkTranslationKeys, value: T) {
         switch key {
         case .text:
             text = value as! String

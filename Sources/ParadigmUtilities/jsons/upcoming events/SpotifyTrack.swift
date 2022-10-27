@@ -23,12 +23,12 @@ public struct SpotifyTrack : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SpotifyTrackTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SpotifyTrackTranslationKeys) -> Any? {
         switch key {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SpotifyTrackTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SpotifyTrackTranslationKeys, value: T) {
         switch key {
         case .sources:
             sources = value as? EventSources
@@ -41,7 +41,7 @@ public enum SpotifyTrackTranslationKeys : String, JsonableTranslationKey {
     case sources
 }
 
-public struct SpotifyArtist : JsonableNoTranslationKeys {
+public struct SpotifyArtist : Jsonable {
     public let id:String, name:String
     
     public init(id: String, name: String) {

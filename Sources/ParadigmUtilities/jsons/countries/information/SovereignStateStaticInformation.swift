@@ -55,7 +55,7 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateStaticInformationTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateStaticInformationTranslationKeys) -> Any? {
         switch key {
         case .availabilities: return availabilities
         case .agriculture: return agriculture
@@ -76,7 +76,7 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateStaticInformationTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateStaticInformationTranslationKeys, value: T) {
         switch key {
         case .availabilities:
             availabilities = value as? SovereignStateAvailabilities

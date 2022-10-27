@@ -24,12 +24,12 @@ public struct PreNationalPark : SovereignStateInformationValue {
         sources = nil
     }
     
-    public func getKeyValue(key: PreNationalParkTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreNationalParkTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         }
     }
-    public mutating func setKeyValue<T>(key: PreNationalParkTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreNationalParkTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

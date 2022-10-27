@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PresentationType : String, CaseIterable, JsonableNoTranslationKeys {
+public enum PresentationType : String, CaseIterable, Jsonable {
     case award_ceremony
     case conference
     case conference_developer

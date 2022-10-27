@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct TVShowEpisodeEmbedded : JsonableNoTranslationKeys {
+public struct TVShowEpisodeEmbedded : Jsonable {
     public let show:TVShowInfo?
 }

@@ -29,7 +29,7 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
         return PreMovieProductionCompany(id: id, name: name, aliases: aliases, imageURL: imageURL)
     }
     
-    public func getKeyValue(key: MovieProductionCompanyTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: MovieProductionCompanyTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .aliases: return aliases
@@ -37,7 +37,7 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: MovieProductionCompanyTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: MovieProductionCompanyTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

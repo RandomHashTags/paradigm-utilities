@@ -14,25 +14,25 @@ public final class HomeResponseCountries : HomeResponseProtocol {
         return lhs.filters == rhs.filters
     }
     
-    public var filters:CountryFiltersResponse?
+    @CodableOmittable public var filters:CountryFiltersResponse?
     
     public init(filters: CountryFiltersResponse?) {
-        self.filters = filters
+        _filters = CodableOmittable(filters)
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(filters)
     }
     
-    public func getKeyValue(key: HomeResponseCountriesTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HomeResponseCountriesTranslationKeys) -> Any? {
         switch key {
         case .filters: return filters
         }
     }
-    public func setKeyValue<T>(key: HomeResponseCountriesTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: HomeResponseCountriesTranslationKeys, value: T) {
         switch key {
         case .filters:
-            filters = value as? CountryFiltersResponse
+            _filters = CodableOmittable(value as? CountryFiltersResponse)
             break
         }
     }

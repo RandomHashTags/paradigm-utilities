@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct PingResponse : JsonableNoTranslationKeys {
+public struct PingResponse : Jsonable {
     public let response_versions:ResponseVersions
     
     public init(response_versions: ResponseVersions) {

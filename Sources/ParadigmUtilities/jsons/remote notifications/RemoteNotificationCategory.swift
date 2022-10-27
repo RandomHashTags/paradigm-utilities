@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum RemoteNotificationCategory : String, CaseIterable, JsonableNoTranslationKeys {
+public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     case apple
     //case playstation
     //case video_game

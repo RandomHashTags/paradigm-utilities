@@ -23,13 +23,13 @@ public struct SubdivisionStatuteItem : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SubdivisionStatuteItemTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SubdivisionStatuteItemTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SubdivisionStatuteItemTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SubdivisionStatuteItemTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

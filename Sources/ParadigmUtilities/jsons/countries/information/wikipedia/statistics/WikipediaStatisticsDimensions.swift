@@ -17,13 +17,13 @@ public struct WikipediaStatisticsDimensions : Jsonable {
         self.width = width
     }
     
-    public func getKeyValue(key: WikipediaStatisticsDimensionsTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WikipediaStatisticsDimensionsTranslationKeys) -> Any? {
         switch key {
         case .length: return length
         case .width: return width
         }
     }
-    public mutating func setKeyValue<T>(key: WikipediaStatisticsDimensionsTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsDimensionsTranslationKeys, value: T) {
         switch key {
         case .length:
             length = value as? String

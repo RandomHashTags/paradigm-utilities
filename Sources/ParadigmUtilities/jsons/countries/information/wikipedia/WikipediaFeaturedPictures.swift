@@ -19,13 +19,13 @@ public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: WikipediaFeaturedPicturesTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WikipediaFeaturedPicturesTranslationKeys) -> Any? {
         switch key {
         case .pictures: return pictures
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: WikipediaFeaturedPicturesTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WikipediaFeaturedPicturesTranslationKeys, value: T) {
         switch key {
         case .pictures:
             pictures = value as! [WikipediaPicture]

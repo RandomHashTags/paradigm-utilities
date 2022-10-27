@@ -19,13 +19,13 @@ public struct TravelAdvisory : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateInformationValueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateInformationValueTranslationKeys) -> Any? {
         switch key {
         case .description: return description
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateInformationValueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateInformationValueTranslationKeys, value: T) {
         switch key {
         case .description:
             description = value as! String

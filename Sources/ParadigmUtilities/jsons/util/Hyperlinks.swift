@@ -55,12 +55,12 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
         hyperlinks.append(contentsOf: newElements)
     }
     
-    public func getKeyValue(key: HyperlinksTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: HyperlinksTranslationKeys) -> Any? {
         switch key {
         case .hyperlinks: return hyperlinks
         }
     }
-    public mutating func setKeyValue<T>(key: HyperlinksTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: HyperlinksTranslationKeys, value: T) {
         switch key {
         case .hyperlinks:
             hyperlinks = value as! [Hyperlink]

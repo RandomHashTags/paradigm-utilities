@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct TVShowExternals : JsonableNoTranslationKeys {
+public struct TVShowExternals : Jsonable {
     public let tvrage:Int?, thetvdb:Int?, imdb:String?
 }

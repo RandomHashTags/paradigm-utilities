@@ -5,7 +5,7 @@ import ZippyJSON
 final class ParadigmUtilitiesTests: XCTestCase {
     func testExample() async throws {
         let decoder:ZippyJSONDecoder = ZippyJSONDecoder()
-        let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init(wrappedValue: "smol", omitted: true)
+        let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
         let big_boy:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
         let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy)
         
@@ -70,12 +70,12 @@ private struct TestBro : Jsonable {
     @CodableOmittable
     var small_boy:String?
     
-    func getKeyValue(key: TestBroTranslationKeys) -> Any? {
+    func getTranslationKeyValue(key: TestBroTranslationKeys) -> Any? {
         switch key {
         case .big_boy: return big_boy
         }
     }
-    mutating func setKeyValue<T>(key: TestBroTranslationKeys, value: T) {
+    mutating func setTranslationKeyValue<T>(key: TestBroTranslationKeys, value: T) {
         switch key {
         case .big_boy:
             big_boy = value as! String

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MovieRatings : JsonableNoTranslationKeys {
+public struct MovieRatings : Jsonable {
     public let rotten_tomatoes:String?
     
     public init(rotten_tomatoes: String?) {

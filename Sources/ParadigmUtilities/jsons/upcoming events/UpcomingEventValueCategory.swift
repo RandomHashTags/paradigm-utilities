@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueCategory : String, JsonableNoTranslationKeys {
+public enum UpcomingEventValueCategory : String, Jsonable {
     case astronomy_picture_of_the_day
     case joke_of_the_day
     case mlb

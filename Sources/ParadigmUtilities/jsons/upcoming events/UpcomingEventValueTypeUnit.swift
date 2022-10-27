@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueTypeUnit : String, CaseIterable, JsonableNoTranslationKeys {
+public enum UpcomingEventValueTypeUnit : String, CaseIterable, Jsonable {
     case kilometers
     case meters
     case centimeters

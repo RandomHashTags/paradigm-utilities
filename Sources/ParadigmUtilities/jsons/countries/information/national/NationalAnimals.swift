@@ -17,13 +17,13 @@ public struct NationalAnimals : SovereignStateNationalValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: NationalAnimalsTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: NationalAnimalsTranslationKeys) -> Any? {
         switch key {
         case .pictures: return pictures
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: NationalAnimalsTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: NationalAnimalsTranslationKeys, value: T) {
         switch key {
         case .pictures:
             pictures = value as! [WikipediaPicture]

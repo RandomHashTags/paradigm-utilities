@@ -19,13 +19,13 @@ public struct NationalCapital : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: NationalCapitalTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: NationalCapitalTranslationKeys) -> Any? {
         switch key {
         case .notes: return notes
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: NationalCapitalTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: NationalCapitalTranslationKeys, value: T) {
         switch key {
         case .notes:
             notes = value as? String

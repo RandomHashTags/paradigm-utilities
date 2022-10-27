@@ -10,16 +10,23 @@ import SwiftSovereignStates
 import ZippyJSON
 
 public protocol Jsonable : Hashable, Codable {
-    associatedtype TranslationKeys : JsonableTranslationKey
+    associatedtype TranslationKeys : JsonableTranslationKey = NoTranslationKeys
+    associatedtype OmittableKeys : JsonableOmittableKey = NoOmittableKeys
     
     func getTranslations() -> [Language:String]?
     //func getFolderPath() -> FolderPath?
-    func getKeyValue(key: TranslationKeys) -> Any?
-    mutating func setKeyValue<T>(key: TranslationKeys, value: T)
+    
+    func getTranslationKeyValue(key: TranslationKeys) -> Any?
+    mutating func setTranslationKeyValue<T>(key: TranslationKeys, value: T)
+    
+    func getOmittableKeyValue<T: Hashable>(key: OmittableKeys) -> CodableOmittable<T>?
 }
 public extension Jsonable {
-    func getKeys() -> TranslationKeys.AllCases {
+    func getTranslationKeys() -> TranslationKeys.AllCases {
         return TranslationKeys.allCases
+    }
+    func getOmittableKeys() -> OmittableKeys.AllCases {
+        return OmittableKeys.allCases
     }
     func getTranslations() -> [Language:String]? {
         return nil
@@ -37,16 +44,23 @@ public extension Jsonable {
         return String(data: data, encoding: .utf8)
     }
     
-    func getKeyValue<T>(_ key: TranslationKeys) -> T? {
-        return getKeyValue(key: key) as? T
-    }
-    func getKeyValue(key: TranslationKeys) -> Any? {
-        return nil
-    }
-    mutating func setKeyValue<T>(key: TranslationKeys, value: T) {
+    func getTranslationKeyValue<T>(_ key: TranslationKeys) -> T? {
+        return getTranslationKeyValue(key: key) as? T
     }
 }
 
+public extension Jsonable where TranslationKeys == NoTranslationKeys {
+    func getTranslationKeyValue(key: TranslationKeys) -> Any? {
+        return nil
+    }
+    mutating func setTranslationKeyValue<T>(key: TranslationKeys, value: T) {
+    }
+}
+public extension Jsonable where OmittableKeys == NoOmittableKeys {
+    func getOmittableKeyValue<T: Hashable>(key: OmittableKeys) -> CodableOmittable<T>? {
+        return nil
+    }
+}
 
 public protocol JsonableTranslationKey : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
     func isTranslatable() -> Bool
@@ -56,14 +70,27 @@ public extension JsonableTranslationKey {
         return true
     }
 }
-
-public protocol JsonableNoTranslationKeys : Jsonable where TranslationKeys == NoTranslationKeys {
-}
-
 public enum NoTranslationKeys : String, JsonableTranslationKey {
     case bruh
     
     public func isTranslatable() -> Bool {
+        return false
+    }
+}
+
+
+public protocol JsonableOmittableKey : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
+    func isOmittable() -> Bool
+}
+public extension JsonableOmittableKey {
+    func isOmittable() -> Bool {
+        return true
+    }
+}
+public enum NoOmittableKeys : String, JsonableOmittableKey {
+    case bruh
+    
+    public func isOmittable() -> Bool {
         return false
     }
 }

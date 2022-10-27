@@ -17,12 +17,12 @@ public struct WeatherAlertsResponse : Jsonable {
         self.alerts = alerts
     }
     
-    public func getKeyValue(key: WeatherAlertsResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WeatherAlertsResponseTranslationKeys) -> Any? {
         switch key {
         case .alerts: return alerts
         }
     }
-    public mutating func setKeyValue<T>(key: WeatherAlertsResponseTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WeatherAlertsResponseTranslationKeys, value: T) {
         switch key {
         case .alerts:
             alerts = value as? [WeatherEvent]

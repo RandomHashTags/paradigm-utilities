@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ITunesDetails : JsonableNoTranslationKeys {
+public struct ITunesDetails : Jsonable {
     public let artistViewUrl:String, collectionViewUrl:String, amgArtistId:Int?, imageURL:String
     
     public init(artistViewUrl: String, collectionViewUrl: String, amgArtistId: Int?, imageURL: String) {

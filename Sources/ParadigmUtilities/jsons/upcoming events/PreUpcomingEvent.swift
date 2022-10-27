@@ -41,7 +41,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         self.homeTeam = homeTeam
     }
     
-    public func getKeyValue(key: PreUpcomingEventTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreUpcomingEventTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         case .tag: return tag
@@ -50,7 +50,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         case .homeTeam: return homeTeam
         }
     }
-    public mutating func setKeyValue<T>(key: PreUpcomingEventTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreUpcomingEventTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

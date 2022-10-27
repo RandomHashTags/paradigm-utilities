@@ -23,13 +23,13 @@ public struct HistoricalEvent : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: HistoricalEventCodingKeys) -> Any? {
+    public func getTranslationKeyValue(key: HistoricalEventCodingKeys) -> Any? {
         switch key {
         case .title: return title
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: HistoricalEventCodingKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: HistoricalEventCodingKeys, value: T) {
         switch key {
         case .title:
             title = value as? String

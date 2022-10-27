@@ -12,7 +12,10 @@ public struct CodableOmittable<T : Codable & Hashable> : Codable, Hashable {
     public let wrappedValue:T?
     public var omitted:Bool
     
-    public init(wrappedValue: T?, omitted: Bool) {
+    public init(_ wrappedValue: T?) {
+        self.init(wrappedValue, omitted: wrappedValue == nil)
+    }
+    public init(_ wrappedValue: T?, omitted: Bool) {
         self.wrappedValue = wrappedValue
         self.omitted = omitted
     }
@@ -33,6 +36,6 @@ extension KeyedDecodingContainer {
         if let value:CodableOmittable<T> = try decodeIfPresent(value, forKey: key) {
             return value
         }
-        return CodableOmittable<T>(wrappedValue: nil, omitted: true)
+        return CodableOmittable<T>(nil)
     }
 }

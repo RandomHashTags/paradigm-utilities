@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ResponseVersions : JsonableNoTranslationKeys {
+public struct ResponseVersions : Jsonable {
     public let apiVersion:Int, serverVersion:SemanticVersion, appVersion:SemanticVersion
     
     public let country_filters:Int

@@ -71,7 +71,12 @@ public final class EventSources : Jsonable {
         return sources.first(where: { $0.siteName.lowercased().starts(with: "wikipedia: ") })
     }
     
-    public func setKeyValue<T>(key: EventSourcesTranslationKeys, value: T) {
+    public func getTranslationKeyValue(key: EventSourcesTranslationKeys) -> Any? {
+        switch key {
+        case .sources: return sources
+        }
+    }
+    public func setTranslationKeyValue<T>(key: EventSourcesTranslationKeys, value: T) {
         switch key {
         case .sources:
             sources = value as! [EventSource]

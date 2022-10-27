@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WeatherAlertTime : JsonableNoTranslationKeys {
+public struct WeatherAlertTime : Jsonable {
     public let sent:Int64, effective:Int64, expires:Int64, ends:Int64?
     
     public init(sent: Int64, effective: Int64, expires: Int64, ends: Int64?) {

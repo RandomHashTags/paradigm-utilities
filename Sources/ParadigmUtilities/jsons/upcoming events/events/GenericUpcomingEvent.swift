@@ -109,7 +109,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         return nil
     }
     
-    public func getKeyValue(key: GenericUpcomingEventTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: GenericUpcomingEventTranslationKeys) -> Any? {
         switch key {
         case .customTypeSingularName: return customTypeSingularName
         case .title: return title
@@ -119,7 +119,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         case .hyperlinks: return hyperlinks
         }
     }
-    public func setKeyValue<T>(key: GenericUpcomingEventTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: GenericUpcomingEventTranslationKeys, value: T) {
         switch key {
         case .customTypeSingularName:
             customTypeSingularName = value as? String

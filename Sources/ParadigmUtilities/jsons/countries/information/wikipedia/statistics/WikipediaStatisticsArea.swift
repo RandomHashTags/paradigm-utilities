@@ -18,14 +18,14 @@ public struct WikipediaStatisticsArea : Jsonable {
         self.land = land
     }
     
-    public func getKeyValue(key: WikipediaStatisticsAreaTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WikipediaStatisticsAreaTranslationKeys) -> Any? {
         switch key {
         case .total: return total
         case .water: return water
         case .land: return land
         }
     }
-    public mutating func setKeyValue<T>(key: WikipediaStatisticsAreaTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsAreaTranslationKeys, value: T) {
         switch key {
         case .total:
             total = value as? String

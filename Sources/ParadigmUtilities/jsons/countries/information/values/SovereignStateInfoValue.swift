@@ -18,14 +18,14 @@ public struct SovereignStateInfoValue : Jsonable {
         self.description = description
     }
     
-    public func getKeyValue(key: SovereignStateInfoValueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateInfoValueTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         case .value: return value
         case .description: return description
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateInfoValueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateInfoValueTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

@@ -23,14 +23,14 @@ public struct SovereignStateInfoKey : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateInfoKeyTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateInfoKeyTranslationKeys) -> Any? {
         switch key {
         case .notes: return notes
         case .values: return values
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateInfoKeyTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateInfoKeyTranslationKeys, value: T) {
         switch key {
         case .notes:
             notes = value as? String

@@ -7,6 +7,6 @@
 
 import Foundation
 
-public struct TVShowSchedule : JsonableNoTranslationKeys {
+public struct TVShowSchedule : Jsonable {
     public let time:String, days:[String]
 }

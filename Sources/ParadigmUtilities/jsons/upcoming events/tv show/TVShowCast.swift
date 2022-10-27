@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TVShowCast : JsonableNoTranslationKeys {
+public struct TVShowCast : Jsonable {
     public let person:TVShowPerson?
     public let character:TVShowPerson?
     public let `self`:Bool, voice:Bool

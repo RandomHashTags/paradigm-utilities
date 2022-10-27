@@ -37,14 +37,14 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateRankingInfoValueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateRankingInfoValueTranslationKeys) -> Any? {
         switch key {
         case .suffix: return suffix
         case .values: return values
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateRankingInfoValueTranslationKeys, value: T) {
         switch key {
         case .suffix:
             suffix = value as? String

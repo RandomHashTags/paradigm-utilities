@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct TVShowInfo : JsonableNoTranslationKeys {
+public struct TVShowInfo : Jsonable {
     public let id:Int, name:String, type:String, language:String, genres:[String], image:TVShowImage?, summary:String?, status:String, url:String
     public let runtime:Int?, averageRuntime:Int?, weight:Int
     public let premiered:String, ended:String?, schedule:TVShowSchedule

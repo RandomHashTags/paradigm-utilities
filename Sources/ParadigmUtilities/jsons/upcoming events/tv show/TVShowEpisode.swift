@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class TVShowEpisode : JsonableNoTranslationKeys {
+public final class TVShowEpisode : Jsonable {
     public static func == (lhs: TVShowEpisode, rhs: TVShowEpisode) -> Bool {
         return lhs.id == rhs.id
     }

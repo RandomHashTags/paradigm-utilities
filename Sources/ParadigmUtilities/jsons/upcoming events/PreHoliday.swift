@@ -31,13 +31,13 @@ public struct PreHoliday : Jsonable {
         countries?.append(country)
     }
     
-    public func getKeyValue(key: PreHolidayTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: PreHolidayTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         case .celebrators: return celebrators
         }
     }
-    public mutating func setKeyValue<T>(key: PreHolidayTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: PreHolidayTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

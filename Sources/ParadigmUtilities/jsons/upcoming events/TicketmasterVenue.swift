@@ -28,7 +28,7 @@ public struct TicketmasterVenue : Jsonable {
         self.url = url
     }
     
-    public func getKeyValue(key: TicketmasterVenueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: TicketmasterVenueTranslationKeys) -> Any? {
         switch key {
         case .general_rule: return general_rule
         case .child_rule: return child_rule
@@ -36,7 +36,7 @@ public struct TicketmasterVenue : Jsonable {
         case .accessible_seating_info: return accessible_seating_info
         }
     }
-    public mutating func setKeyValue<T>(key: TicketmasterVenueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: TicketmasterVenueTranslationKeys, value: T) {
         switch key {
         case .general_rule:
             general_rule = value as? String

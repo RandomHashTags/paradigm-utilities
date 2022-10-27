@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Stock : JsonableNoTranslationKeys {
+public struct Stock : Jsonable {
     public let symbol:String, shortName:String, longName:String?, regularMarket:StockQuote, postMarket:StockQuote?
     
     public init(symbol: String, shortName: String, longName: String?, regularMarket: StockQuote, postMarket: StockQuote?) {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueCellType : String, CaseIterable, JsonableNoTranslationKeys {
+public enum UpcomingEventValueCellType : String, CaseIterable, Jsonable {
     case audio
     case label
     case label_expandable

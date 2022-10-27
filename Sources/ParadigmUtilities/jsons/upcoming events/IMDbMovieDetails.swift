@@ -30,13 +30,13 @@ public struct IMDbMovieDetails : Jsonable {
         self.source = source
     }
     
-    public func getKeyValue(key: IMDbMovieDetailsTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: IMDbMovieDetailsTranslationKeys) -> Any? {
         switch key {
         case .rating_reason: return rating_reason
         case .genres: return genres
         }
     }
-    public mutating func setKeyValue<T>(key: IMDbMovieDetailsTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: IMDbMovieDetailsTranslationKeys, value: T) {
         switch key {
         case .rating_reason:
             rating_reason = value as? String

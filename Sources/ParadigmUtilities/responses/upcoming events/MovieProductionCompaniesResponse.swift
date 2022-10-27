@@ -29,12 +29,12 @@ public final class MovieProductionCompaniesResponse : Jsonable {
         hasher.combine(companies)
     }
     
-    public func getKeyValue(key: MovieProductionCompaniesResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: MovieProductionCompaniesResponseTranslationKeys) -> Any? {
         switch key {
         case .companies: return companies
         }
     }
-    public func setKeyValue<T>(key: MovieProductionCompaniesResponseTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: MovieProductionCompaniesResponseTranslationKeys, value: T) {
         switch key {
         case .companies:
             companies = value as? [PreMovieProductionCompany]

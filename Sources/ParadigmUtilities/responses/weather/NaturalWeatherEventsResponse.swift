@@ -29,14 +29,14 @@ public final class NaturalWeatherEventsResponse : Jsonable {
         hasher.combine(wildfires)
     }
     
-    public func getKeyValue(key: NaturalWeatherEventsResponseTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: NaturalWeatherEventsResponseTranslationKeys) -> Any? {
         switch key {
         case .severe_storms: return severe_storms
         case .volcanoes: return volcanoes
         case .wildfires: return wildfires
         }
     }
-    public func setKeyValue<T>(key: NaturalWeatherEventsResponseTranslationKeys, value: T) {
+    public func setTranslationKeyValue<T>(key: NaturalWeatherEventsResponseTranslationKeys, value: T) {
         switch key {
         case .severe_storms:
             severe_storms = value as? [Country?:[PreNaturalWeatherEvent]]

@@ -25,14 +25,14 @@ public struct GovernmentPreAdministrationBill : Jsonable {
         self.date = date
     }
     
-    public func getKeyValue(key: GovernmentPreAdministrationBillTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: GovernmentPreAdministrationBillTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         case .committees: return committees
         case .notes: return notes
         }
     }
-    public mutating func setKeyValue<T>(key: GovernmentPreAdministrationBillTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: GovernmentPreAdministrationBillTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

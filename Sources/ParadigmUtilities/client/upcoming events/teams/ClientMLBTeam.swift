@@ -20,12 +20,12 @@ public struct ClientMLBTeam : Jsonable {
         self.wikipediaURL = wikipediaURL
     }
     
-    public func getKeyValue(key: ClientMLBTeamTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: ClientMLBTeamTranslationKeys) -> Any? {
         switch key {
         case .name: return name
         }
     }
-    public mutating func setKeyValue<T>(key: ClientMLBTeamTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: ClientMLBTeamTranslationKeys, value: T) {
         switch key {
         case .name:
             name = value as! String

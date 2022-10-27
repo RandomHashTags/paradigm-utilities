@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum GovernmentPoliticianPosition : String, CaseIterable, JsonableNoTranslationKeys {
+public enum GovernmentPoliticianPosition : String, CaseIterable, Jsonable {
     case president
     case vice_president
     

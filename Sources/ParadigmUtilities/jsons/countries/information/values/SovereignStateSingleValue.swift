@@ -24,7 +24,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         self.sources = sources
     }
     
-    public func getKeyValue(key: SovereignStateSingleValueTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: SovereignStateSingleValueTranslationKeys) -> Any? {
         switch key {
         case .notes: return notes
         case .value: return value
@@ -32,7 +32,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: SovereignStateSingleValueTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: SovereignStateSingleValueTranslationKeys, value: T) {
         switch key {
         case .notes:
             notes = value as? String

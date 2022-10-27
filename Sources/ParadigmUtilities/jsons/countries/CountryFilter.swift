@@ -18,12 +18,12 @@ public struct CountryFilter : Jsonable {
         self.title = title
     }
     
-    public func getKeyValue(key: CountryFilterTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: CountryFilterTranslationKeys) -> Any? {
         switch key {
         case .title: return title
         }
     }
-    public mutating func setKeyValue<T>(key: CountryFilterTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: CountryFilterTranslationKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

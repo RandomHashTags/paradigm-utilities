@@ -20,12 +20,12 @@ public struct WeatherEvent : Jsonable {
         self.defcon = defcon
     }
     
-    public func getKeyValue(key: WeatherEventTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: WeatherEventTranslationKeys) -> Any? {
         switch key {
         case .event: return event
         }
     }
-    public mutating func setKeyValue<T>(key: WeatherEventTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: WeatherEventTranslationKeys, value: T) {
         switch key {
         case .event:
             event = value as! String

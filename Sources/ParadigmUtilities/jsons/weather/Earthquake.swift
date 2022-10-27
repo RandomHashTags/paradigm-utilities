@@ -30,13 +30,13 @@ public struct Earthquake : Jsonable {
         self.sources = sources
     }
     
-    public func getKeyValue(key: EarthquakeTranslationKeys) -> Any? {
+    public func getTranslationKeyValue(key: EarthquakeTranslationKeys) -> Any? {
         switch key {
         case .cause: return cause
         case .sources: return sources
         }
     }
-    public mutating func setKeyValue<T>(key: EarthquakeTranslationKeys, value: T) {
+    public mutating func setTranslationKeyValue<T>(key: EarthquakeTranslationKeys, value: T) {
         switch key {
         case .cause:
             cause = value as! String
