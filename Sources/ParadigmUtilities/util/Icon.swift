@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum Icon : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum Icon : String, CaseIterable, JsonableNoTranslationKeys {
     case emoji_drink_coffee = "☕"
     
     case emoji_food_apple = "🍎"

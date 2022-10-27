@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueType : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum UpcomingEventValueType : String, CaseIterable, JsonableNoTranslationKeys {
     case array_string
     case boolean
     case int

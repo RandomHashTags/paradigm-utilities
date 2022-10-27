@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public protocol GovernmentBillStatus : Jsonable {
+public protocol GovernmentBillStatus : JsonableNoTranslationKeys {
     func getCountry() -> Country
     func getCacheID() -> String
     func getIdentifier() -> String
@@ -58,8 +58,6 @@ public extension Country {
 
 
 public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
-    public typealias TranslationKeys = NoTranslationKeys
-    
     public let status:any GovernmentBillStatus
     
     public init(_ status: any GovernmentBillStatus) {

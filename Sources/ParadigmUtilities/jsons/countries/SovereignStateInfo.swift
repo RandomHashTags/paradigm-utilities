@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum SovereignStateInfo : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum SovereignStateInfo : String, CaseIterable, JsonableNoTranslationKeys {    
     case agriculture_food_apple_production
     case agriculture_food_apricot_production
     case agriculture_food_artichoke_production

@@ -57,6 +57,9 @@ public extension JsonableTranslationKey {
     }
 }
 
+public protocol JsonableNoTranslationKeys : Jsonable where TranslationKeys == NoTranslationKeys {
+}
+
 public enum NoTranslationKeys : String, JsonableTranslationKey {
     case bruh
     

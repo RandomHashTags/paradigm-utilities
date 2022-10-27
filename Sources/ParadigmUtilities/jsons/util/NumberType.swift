@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum NumberType : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum NumberType : String, CaseIterable, JsonableNoTranslationKeys {
     case integer
     case double
     case float

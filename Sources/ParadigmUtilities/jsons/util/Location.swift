@@ -8,9 +8,7 @@
 import Foundation
 import CoreLocation
 
-public struct Location : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct Location : JsonableNoTranslationKeys {
     public let longitude:Double, latitude:Double
     
     public init(longitude: Double, latitude: Double) {

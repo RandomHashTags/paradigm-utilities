@@ -41,9 +41,7 @@ public enum SpotifyTrackTranslationKeys : String, JsonableTranslationKey {
     case sources
 }
 
-public struct SpotifyArtist : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct SpotifyArtist : JsonableNoTranslationKeys {
     public let id:String, name:String
     
     public init(id: String, name: String) {

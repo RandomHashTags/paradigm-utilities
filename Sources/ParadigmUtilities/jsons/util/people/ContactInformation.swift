@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct ContactInformation : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct ContactInformation : JsonableNoTranslationKeys {
     public let address:String?, office:String?, phoneNumber:String?, faxNumber:String?, contactFormURL:String?
     
     public init(address: String?, office: String?, phoneNumber: String?, faxNumber: String?, contactFormURL: String?) {

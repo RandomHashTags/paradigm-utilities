@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct MovieRatings : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct MovieRatings : JsonableNoTranslationKeys {
     public let rotten_tomatoes:String?
     
     public init(rotten_tomatoes: String?) {

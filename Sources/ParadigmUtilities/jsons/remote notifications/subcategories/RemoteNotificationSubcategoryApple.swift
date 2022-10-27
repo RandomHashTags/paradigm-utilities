@@ -8,8 +8,6 @@
 import Foundation
 
 public enum RemoteNotificationSubcategoryApple : String, CaseIterable, RemoteNotificationSubcategory {
-    public typealias TranslationKeys = NoTranslationKeys
-    
     case ios_update
     case ipados_update
     case macos_update

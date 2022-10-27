@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum PresentationType : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum PresentationType : String, CaseIterable, JsonableNoTranslationKeys {
     case award_ceremony
     case conference
     case conference_developer

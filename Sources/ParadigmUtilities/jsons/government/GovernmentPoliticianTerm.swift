@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct GovernmentPoliticianTerm : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct GovernmentPoliticianTerm : JsonableNoTranslationKeys {
     public let position:GovernmentPoliticianPosition, start:EventDate, end:EventDate?, party:PoliticalParty, how:String?, subdivision:SovereignStateSubdivisionWrapper?, district:Int?, contactInformation:ContactInformation?
     
     public init(position: GovernmentPoliticianPosition, start: EventDate, end: EventDate?, party: PoliticalParty, how: String?, subdivision: (any SovereignStateSubdivision)?, district: Int?, contactInformation: ContactInformation?) {

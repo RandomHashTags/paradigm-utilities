@@ -7,8 +7,6 @@
 
 import Foundation
 
-public struct TVShowWebChannel : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct TVShowWebChannel : JsonableNoTranslationKeys {
     public let id:Int, name:String, country:TVShowCountry?, officialSite:String?
 }

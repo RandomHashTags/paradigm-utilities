@@ -7,8 +7,6 @@
 
 import Foundation
 
-public struct TVShowImage : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct TVShowImage : JsonableNoTranslationKeys {
     public let medium:String, original:String
 }

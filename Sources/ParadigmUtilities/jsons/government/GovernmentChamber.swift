@@ -28,7 +28,7 @@ public extension Country {
     }
 }
 
-public protocol GovernmentChamber : Jsonable {
+public protocol GovernmentChamber : JsonableNoTranslationKeys {
     func getCountry() -> Country
     func getCacheID() -> String
     func getIdentifier() -> String
@@ -54,9 +54,7 @@ public extension GovernmentChamber where Self : CaseIterable {
     }
 }
 
-public struct GovernmentChamberWrapper : GovernmentChamber {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct GovernmentChamberWrapper : GovernmentChamber {    
     public let chamber:any GovernmentChamber
     
     public init(_ chamber: any GovernmentChamber) {

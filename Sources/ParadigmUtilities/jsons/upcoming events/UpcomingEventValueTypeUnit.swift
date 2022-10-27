@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventValueTypeUnit : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum UpcomingEventValueTypeUnit : String, CaseIterable, JsonableNoTranslationKeys {
     case kilometers
     case meters
     case centimeters

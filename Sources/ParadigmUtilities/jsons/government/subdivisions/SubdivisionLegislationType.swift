@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum SubdivisionLegislationType : String, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum SubdivisionLegislationType : String, JsonableNoTranslationKeys {
     case index
     case chapter
     case section

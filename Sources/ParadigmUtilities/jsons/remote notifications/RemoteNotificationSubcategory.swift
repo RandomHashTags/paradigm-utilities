@@ -19,7 +19,7 @@ public enum RemoteNotificationSubcategories {
     }
 }
 
-public protocol RemoteNotificationSubcategory : Jsonable {
+public protocol RemoteNotificationSubcategory : JsonableNoTranslationKeys {
     func getCategory() -> RemoteNotificationCategory
     func getIdentifier() -> String
     func getName() -> String
@@ -70,8 +70,6 @@ public extension RemoteNotificationSubcategory {
 }
 
 public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcategory {
-    public typealias TranslationKeys = NoTranslationKeys
-    
     public let subcategory:any RemoteNotificationSubcategory
     
     public init(_ subcategory: any RemoteNotificationSubcategory) {

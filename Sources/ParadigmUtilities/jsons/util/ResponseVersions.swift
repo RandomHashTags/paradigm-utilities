@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct ResponseVersions : Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public struct ResponseVersions : JsonableNoTranslationKeys {
     public let apiVersion:Int, serverVersion:SemanticVersion, appVersion:SemanticVersion
     
     public let country_filters:Int

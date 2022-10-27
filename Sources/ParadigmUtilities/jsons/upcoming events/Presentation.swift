@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum Presentation : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum Presentation : String, CaseIterable, JsonableNoTranslationKeys {
     case apple_event
     case apple_event_wwdc
     case arm_devsummit

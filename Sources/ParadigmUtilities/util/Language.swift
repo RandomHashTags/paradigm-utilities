@@ -7,9 +7,7 @@
 
 import Foundation
 
-public enum Language : String, CaseIterable, Jsonable {
-    public typealias TranslationKeys = NoTranslationKeys
-    
+public enum Language : String, CaseIterable, JsonableNoTranslationKeys {
     case arabic = "ar"
     case azerbaijani = "az"
     case bengali = "bn"
