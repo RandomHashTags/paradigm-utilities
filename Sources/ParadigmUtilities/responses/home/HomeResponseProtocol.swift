@@ -7,5 +7,5 @@
 
 import Foundation
 
-protocol HomeResponseProtocol : Jsonable {
+public protocol HomeResponseProtocol : Jsonable {
 }
