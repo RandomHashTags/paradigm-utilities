@@ -8,5 +8,11 @@
 import Foundation
 
 public struct MovieRatings : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let rotten_tomatoes:String?
+    
+    public init(rotten_tomatoes: String?) {
+        self.rotten_tomatoes = rotten_tomatoes
+    }
 }

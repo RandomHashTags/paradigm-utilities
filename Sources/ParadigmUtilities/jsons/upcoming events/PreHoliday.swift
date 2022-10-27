@@ -9,8 +9,11 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreHoliday : Jsonable {
-    public let id:String, name:String, type:String, emoji:String?, celebrators:String?
-    public var countries:[Country]?
+    public typealias TranslationKeys = PreHolidayTranslationKeys
+    
+    public let id:String
+    public var name:String, type:String, emoji:String?
+    public var celebrators:String?, countries:[Country]?
     
     public init(id: String, name: String, type: String, emoji: String?, celebrators: String?, countries: [Country]? = nil) {
         self.id = id
@@ -27,4 +30,26 @@ public struct PreHoliday : Jsonable {
         }
         countries?.append(country)
     }
+    
+    public func getKeyValue(key: PreHolidayTranslationKeys) -> Any? {
+        switch key {
+        case .name: return name
+        case .celebrators: return celebrators
+        }
+    }
+    public mutating func setKeyValue<T>(key: PreHolidayTranslationKeys, value: T) {
+        switch key {
+        case .name:
+            name = value as! String
+            break
+        case .celebrators:
+            celebrators = value as? String
+            break
+        }
+    }
+}
+
+public enum PreHolidayTranslationKeys : String, JsonableTranslationKey {
+    case name
+    case celebrators
 }

@@ -7,10 +7,12 @@
 
 import Foundation
 
-public struct EventSources : Jsonable {
-    enum CodingKeys: CodingKey {
-        case sources
+public final class EventSources : Jsonable {
+    public static func == (lhs: EventSources, rhs: EventSources) -> Bool {
+        return lhs.sources.elementsEqual(rhs.sources)
     }
+    
+    public typealias TranslationKeys = EventSourcesTranslationKeys
     
     private var sources:[EventSource]
     
@@ -30,6 +32,9 @@ public struct EventSources : Jsonable {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
         try container.encode(self.sources)
     }
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(sources)
+    }
     
     public var count : Int {
         return sources.count
@@ -41,22 +46,40 @@ public struct EventSources : Jsonable {
         return sources.first
     }
     
-    public mutating func append(_ source: EventSource) {
+    public func append(_ source: EventSource) {
         sources.append(source)
     }
-    public mutating func append(_ sources: EventSources?) {
+    public func append(_ sources: EventSources?) {
         guard let sources:[EventSource] = sources?.sources else { return }
         self.sources.append(contentsOf: sources)
     }
-    public mutating func append(contentsOf: [EventSource]) {
+    public func append(contentsOf: [EventSource]) {
         sources.append(contentsOf: contentsOf)
     }
     
-    public mutating func sorted(by: (EventSource, EventSource) -> Bool) {
+    public func sorted(by: (EventSource, EventSource) -> Bool) {
         sources = sources.sorted(by: by)
+    }
+    public func setSources(_ sources: EventSources) {
+        self.sources = sources.sources
+    }
+    public func setSources(_ sources: [EventSource]) {
+        self.sources = sources
     }
     
     public func getWikipediaSource() -> EventSource? {
         return sources.first(where: { $0.siteName.lowercased().starts(with: "wikipedia: ") })
     }
+    
+    public func setKeyValue<T>(key: EventSourcesTranslationKeys, value: T) {
+        switch key {
+        case .sources:
+            sources = value as! [EventSource]
+            break
+        }
+    }
+}
+
+public enum EventSourcesTranslationKeys : String, JsonableTranslationKey {
+    case sources
 }

@@ -8,6 +8,8 @@
 import Foundation
 
 public struct RemoteNotificationStatusResponse : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let value:Bool
     
     public init(value: Bool) {

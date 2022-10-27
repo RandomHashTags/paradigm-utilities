@@ -8,6 +8,8 @@
 import Foundation
 
 public enum PoliticalParty : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case democrat
     case independent
     case libertarian

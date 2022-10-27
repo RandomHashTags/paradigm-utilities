@@ -8,6 +8,8 @@
 import Foundation
 
 public enum SovereignStateAvailabilityCategory : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case communication_service
     case digital_payment_method
     case digital_storage_service

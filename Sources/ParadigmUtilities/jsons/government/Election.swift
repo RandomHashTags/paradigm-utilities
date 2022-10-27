@@ -9,7 +9,11 @@ import Foundation
 import SwiftSovereignStates
 
 public struct Election : Jsonable {
-    public let id:String, name:String, date:EventDate, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?
+    public typealias TranslationKeys = ElectionTranslationKeys
+    
+    public let id:String
+    public var name:String
+    public let date:EventDate, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?
     
     public init(id: String, name: String, date: EventDate, country: Country, subdivision: (any SovereignStateSubdivision)? = nil, city: (any SovereignStateCity)? = nil) {
         self.id = id
@@ -19,4 +23,21 @@ public struct Election : Jsonable {
         self.subdivision = subdivision?.wrapped()
         self.city = city?.wrapped()
     }
+    
+    public func getKeyValue(key: ElectionTranslationKeys) -> Any? {
+        switch key {
+        case .name: return name
+        }
+    }
+    public mutating func setKeyValue<T>(key: ElectionTranslationKeys, value: T) {
+        switch key {
+        case .name:
+            name = value as! String
+            break
+        }
+    }
+}
+
+public enum ElectionTranslationKeys : String, JsonableTranslationKey {
+    case name
 }

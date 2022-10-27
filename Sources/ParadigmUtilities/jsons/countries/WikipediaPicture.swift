@@ -8,7 +8,11 @@
 import Foundation
 
 public struct WikipediaPicture : Jsonable {
-    public let key:String, name:String, title:String?, imageURL:String
+    public typealias TranslationKeys = WikipediaPictureTranslationKeys
+    
+    public let key:String
+    public var name:String, title:String?
+    public let imageURL:String
     
     public init(key: String, name: String, title: String?, imageURL: String) {
         self.key = key
@@ -20,4 +24,26 @@ public struct WikipediaPicture : Jsonable {
     public func getTag() -> String {
         return title ?? name
     }
+    
+    public func getKeyValue(key: WikipediaPictureTranslationKeys) -> Any? {
+        switch key {
+        case .name: return name
+        case .title: return title
+        }
+    }
+    public mutating func setKeyValue<T>(key: WikipediaPictureTranslationKeys, value: T) {
+        switch key {
+        case .name:
+            name = value as! String
+            break
+        case .title:
+            title = value as? String
+            break
+        }
+    }
+}
+
+public enum WikipediaPictureTranslationKeys : String, JsonableTranslationKey {
+    case name
+    case title
 }

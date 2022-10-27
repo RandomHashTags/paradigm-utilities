@@ -8,6 +8,8 @@
 import Foundation
 
 public struct GovernmentPrePolitician : Person {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let id:String, name:HumanName, party:PoliticalParty, imageURL:String?
     
     public init(id: String, name: HumanName, party: PoliticalParty, imageURL: String?) {

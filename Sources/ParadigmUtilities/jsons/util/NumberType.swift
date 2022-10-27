@@ -8,6 +8,8 @@
 import Foundation
 
 public enum NumberType : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case integer
     case double
     case float

@@ -8,6 +8,8 @@
 import Foundation
 
 public enum UpcomingEventValueTypeUnit : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case kilometers
     case meters
     case centimeters

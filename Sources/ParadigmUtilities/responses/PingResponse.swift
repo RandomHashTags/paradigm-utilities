@@ -8,6 +8,8 @@
 import Foundation
 
 public struct PingResponse : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let response_versions:ResponseVersions
     
     public init(response_versions: ResponseVersions) {

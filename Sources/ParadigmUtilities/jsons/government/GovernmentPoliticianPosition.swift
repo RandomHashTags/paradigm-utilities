@@ -8,6 +8,8 @@
 import Foundation
 
 public enum GovernmentPoliticianPosition : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case president
     case vice_president
     

@@ -8,6 +8,8 @@
 import Foundation
 
 public enum UpcomingEventValueCategoryPosition : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case pre_content
     case above_description
     case below_description

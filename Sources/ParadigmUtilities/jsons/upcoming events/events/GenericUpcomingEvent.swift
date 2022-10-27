@@ -10,17 +10,20 @@ import SwiftSovereignStates
 import ZippyJSON
 
 public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
+    public typealias TranslationKeys = GenericUpcomingEventTranslationKeys
+    
     public static func == (lhs: GenericUpcomingEvent, rhs: GenericUpcomingEvent) -> Bool {
         return lhs.type == rhs.type && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
     }
     
     public let type:UpcomingEventType, id:String?, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public let customTypeSingularName:String?
+    public var customTypeSingularName:String?
     
-    public let title:String, tag:String?, description:String?, location:String?, imageURL:String?
+    public var title:String, tag:String?, description:String?
+    public let location:String?, imageURL:String?
     public var youtubeVideoIDs:[String]?
-    public let sources:EventSources
-    public let hyperlinks:Hyperlinks?
+    public var sources:EventSources
+    public var hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     
     public init(type: UpcomingEventType, id: String? = nil, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
@@ -105,4 +108,46 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
         return nil
     }
+    
+    public func getKeyValue(key: GenericUpcomingEventTranslationKeys) -> Any? {
+        switch key {
+        case .customTypeSingularName: return customTypeSingularName
+        case .title: return title
+        case .tag: return tag
+        case .description: return description
+        case .sources: return sources
+        case .hyperlinks: return hyperlinks
+        }
+    }
+    public func setKeyValue<T>(key: GenericUpcomingEventTranslationKeys, value: T) {
+        switch key {
+        case .customTypeSingularName:
+            customTypeSingularName = value as? String
+            break
+        case .title:
+            title = value as! String
+            break
+        case .tag:
+            tag = value as? String
+            break
+        case .description:
+            description = value as? String
+            break
+        case .sources:
+            sources = value as! EventSources
+            break
+        case .hyperlinks:
+            hyperlinks = value as? Hyperlinks
+            break
+        }
+    }
+}
+
+public enum GenericUpcomingEventTranslationKeys : String, JsonableTranslationKey {
+    case customTypeSingularName
+    case title
+    case tag
+    case description
+    case sources
+    case hyperlinks
 }

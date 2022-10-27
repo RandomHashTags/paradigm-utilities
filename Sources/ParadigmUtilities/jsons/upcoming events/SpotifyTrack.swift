@@ -8,7 +8,10 @@
 import Foundation
 
 public struct SpotifyTrack : Jsonable {
-    public let name:String, duration:Int64, artists:[SpotifyArtist]?, imageURL:String?, explicit:Bool, previewURL:String?, sources:EventSources?
+    public typealias TranslationKeys = SpotifyTrackTranslationKeys
+    
+    public let name:String, duration:Int64, artists:[SpotifyArtist]?, imageURL:String?, explicit:Bool, previewURL:String?
+    public var sources:EventSources?
     
     public init(name: String, duration: Int64, artists: [SpotifyArtist]?, imageURL: String?, explicit: Bool, previewURL: String?, sources: EventSources?) {
         self.name = name
@@ -19,9 +22,28 @@ public struct SpotifyTrack : Jsonable {
         self.previewURL = previewURL
         self.sources = sources
     }
+    
+    public func getKeyValue(key: SpotifyTrackTranslationKeys) -> Any? {
+        switch key {
+        case .sources: return sources
+        }
+    }
+    public mutating func setKeyValue<T>(key: SpotifyTrackTranslationKeys, value: T) {
+        switch key {
+        case .sources:
+            sources = value as? EventSources
+            break
+        }
+    }
+}
+
+public enum SpotifyTrackTranslationKeys : String, JsonableTranslationKey {
+    case sources
 }
 
 public struct SpotifyArtist : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let id:String, name:String
     
     public init(id: String, name: String) {

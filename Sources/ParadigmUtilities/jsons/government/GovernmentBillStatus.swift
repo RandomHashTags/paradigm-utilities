@@ -58,6 +58,8 @@ public extension Country {
 
 
 public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let status:any GovernmentBillStatus
     
     public init(_ status: any GovernmentBillStatus) {

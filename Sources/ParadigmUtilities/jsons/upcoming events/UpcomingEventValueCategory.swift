@@ -8,6 +8,8 @@
 import Foundation
 
 public enum UpcomingEventValueCategory : String, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case astronomy_picture_of_the_day
     case joke_of_the_day
     case mlb

@@ -8,10 +8,30 @@
 import Foundation
 
 public struct SovereignStateAvailabilities : Jsonable {
-    public let imageURLPrefix:String, availabilities:[ClientSovereignStateAvailability]
+    public typealias TranslationKeys = SovereignStateAvailabilitiesTranslationKeys
+    
+    public let imageURLPrefix:String
+    public var availabilities:[ClientSovereignStateAvailability]
     
     public init(imageURLPrefix: String, availabilities: [ClientSovereignStateAvailability]) {
         self.imageURLPrefix = imageURLPrefix
         self.availabilities = availabilities
     }
+    
+    public func getKeyValue(key: SovereignStateAvailabilitiesTranslationKeys) -> Any? {
+        switch key {
+        case .availabilities: return availabilities
+        }
+    }
+    public mutating func setKeyValue<T>(key: SovereignStateAvailabilitiesTranslationKeys, value: T) {
+        switch key {
+        case .availabilities:
+            availabilities = value as! [ClientSovereignStateAvailability]
+            break
+        }
+    }
+}
+
+public enum SovereignStateAvailabilitiesTranslationKeys : String, JsonableTranslationKey {
+    case availabilities
 }

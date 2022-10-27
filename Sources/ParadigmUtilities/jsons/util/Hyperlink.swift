@@ -8,11 +8,30 @@
 import Foundation
 
 public struct Hyperlink : Jsonable {
-    public let text:String
+    public typealias TranslationKeys = HyperlinkTranslationKeys
+    
+    public var text:String
     public var url:String
     
     public init(text: String, url: String) {
         self.text = text
         self.url = url
     }
+    
+    public func getKeyValue(key: HyperlinkTranslationKeys) -> Any? {
+        switch key {
+        case .text: return text
+        }
+    }
+    public mutating func setKeyValue<T>(key: HyperlinkTranslationKeys, value: T) {
+        switch key {
+        case .text:
+            text = value as! String
+            break
+        }
+    }
+}
+
+public enum HyperlinkTranslationKeys : String, JsonableTranslationKey {
+    case text
 }

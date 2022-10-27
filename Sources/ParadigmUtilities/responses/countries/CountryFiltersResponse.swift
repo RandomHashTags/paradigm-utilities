@@ -8,6 +8,8 @@
 import Foundation
 
 public final class CountryFiltersResponse : Jsonable {
+    public typealias TranslationKeys = CountryFiltersResponseTranslationKeys
+    
     public static func == (lhs: CountryFiltersResponse, rhs: CountryFiltersResponse) -> Bool {
         return lhs.response_version == rhs.response_version && lhs.filters == rhs.filters
     }
@@ -24,4 +26,21 @@ public final class CountryFiltersResponse : Jsonable {
         hasher.combine(response_version)
         hasher.combine(filters)
     }
+    
+    public func getKeyValue(key: CountryFiltersResponseTranslationKeys) -> Any? {
+        switch key {
+        case .filters: return filters
+        }
+    }
+    public func setKeyValue<T>(key: CountryFiltersResponseTranslationKeys, value: T) {
+        switch key {
+        case .filters:
+            filters = value as? [CountryFilter]
+            break
+        }
+    }
+}
+
+public enum CountryFiltersResponseTranslationKeys : String, JsonableTranslationKey {
+    case filters
 }

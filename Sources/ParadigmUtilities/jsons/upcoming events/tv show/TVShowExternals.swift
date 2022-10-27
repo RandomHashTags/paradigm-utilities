@@ -8,5 +8,7 @@
 import Foundation
 
 public struct TVShowExternals : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let tvrage:Int?, thetvdb:Int?, imdb:String?
 }

@@ -8,11 +8,32 @@
 import Foundation
 
 public struct GovernmentBillAction : Jsonable {
-    public let chamber:String?, title:String, time:TimeInterval
+    public typealias TranslationKeys = GovernmentBillActionTranslationKeys
+    
+    public let chamber:String?
+    public var title:String
+    public let time:TimeInterval
     
     public init(chamber: (any GovernmentChamber)?, title: String, time: TimeInterval) {
         self.chamber = chamber?.getIdentifier()
         self.title = title
         self.time = time
     }
+    
+    public func getKeyValue(key: GovernmentBillActionTranslationKeys) -> Any? {
+        switch key {
+        case .title: return title
+        }
+    }
+    public mutating func setKeyValue<T>(key: GovernmentBillActionTranslationKeys, value: T) {
+        switch key {
+        case .title:
+            title = value as! String
+            break
+        }
+    }
+}
+
+public enum GovernmentBillActionTranslationKeys : String, JsonableTranslationKey {
+    case title
 }

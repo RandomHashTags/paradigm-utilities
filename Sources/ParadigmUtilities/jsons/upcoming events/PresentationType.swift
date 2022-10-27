@@ -8,6 +8,8 @@
 import Foundation
 
 public enum PresentationType : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case award_ceremony
     case conference
     case conference_developer

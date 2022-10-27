@@ -13,6 +13,8 @@ import MapKit
 #endif
 
 public final class WeatherZone : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public static func == (lhs: WeatherZone, rhs: WeatherZone) -> Bool {
         return lhs.name.elementsEqual(rhs.name) && lhs.nameSuffix == rhs.nameSuffix && lhs.subdivision == rhs.subdivision && lhs.geometry == rhs.geometry
     }

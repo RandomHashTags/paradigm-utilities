@@ -8,6 +8,8 @@
 import Foundation
 
 public struct EventDate : Comparable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     private static var sameHourComponents:DateComponents = {
         var components:DateComponents = DateComponents()
         components.hour = 0

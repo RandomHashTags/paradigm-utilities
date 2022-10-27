@@ -8,6 +8,8 @@
 import Foundation
 
 public struct SemanticVersion : Jsonable, Comparable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public static func < (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
         let leftMajor:Int = lhs.major, rightMajor:Int = rhs.major
         let leftMinor:Int = lhs.minor, rightMinor:Int = rhs.minor

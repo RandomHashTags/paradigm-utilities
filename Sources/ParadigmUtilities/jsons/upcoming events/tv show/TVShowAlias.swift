@@ -8,5 +8,7 @@
 import Foundation
 
 public struct TVShowAlias : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let name:String, country:TVShowCountry?
 }

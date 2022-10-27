@@ -9,9 +9,28 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WeatherAlertsResponse : Jsonable {
-    public let alerts:[WeatherEvent]?
+    public typealias TranslationKeys = WeatherAlertsResponseTranslationKeys
+    
+    public var alerts:[WeatherEvent]?
     
     public init(alerts: [WeatherEvent]?) {
         self.alerts = alerts
     }
+    
+    public func getKeyValue(key: WeatherAlertsResponseTranslationKeys) -> Any? {
+        switch key {
+        case .alerts: return alerts
+        }
+    }
+    public mutating func setKeyValue<T>(key: WeatherAlertsResponseTranslationKeys, value: T) {
+        switch key {
+        case .alerts:
+            alerts = value as? [WeatherEvent]
+            break
+        }
+    }
+}
+
+public enum WeatherAlertsResponseTranslationKeys : String, JsonableTranslationKey {
+    case alerts
 }

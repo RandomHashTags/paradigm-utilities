@@ -8,6 +8,8 @@
 import Foundation
 
 public enum SubdivisionLegislationType : String, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case index
     case chapter
     case section

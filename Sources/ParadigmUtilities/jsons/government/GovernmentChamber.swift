@@ -55,6 +55,8 @@ public extension GovernmentChamber where Self : CaseIterable {
 }
 
 public struct GovernmentChamberWrapper : GovernmentChamber {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let chamber:any GovernmentChamber
     
     public init(_ chamber: any GovernmentChamber) {

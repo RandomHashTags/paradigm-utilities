@@ -8,30 +8,34 @@
 import Foundation
 
 public struct SovereignStateStaticInformation : SovereignStateInformationValue {
-    public let availabilities:SovereignStateAvailabilities?
+    public typealias TranslationKeys = SovereignStateStaticInformationTranslationKeys
     
-    public let agriculture:[SovereignStateAgricultureValue]?
-    public let info:[SovereignStateInfoKey]?
-    public let legalities:[SovereignStateInfoKey]?
+    public let response_version:Int
+    public var availabilities:SovereignStateAvailabilities?
+    
+    public var agriculture:[SovereignStateAgricultureValue]?
+    public var info:[SovereignStateInfoKey]?
+    public var legalities:[SovereignStateInfoKey]?
     public var rankings:[SovereignStateRankingInfoValue]?
-    public let single_values:[SovereignStateSingleValue]?
+    public var single_values:[SovereignStateSingleValue]?
     
-    public let national_animals:NationalAnimals?
-    public let national_anthem:NationalAnthem?
-    public let national_capital:NationalCapital?
-    public let national_trees:NationalTrees?
+    public var national_animals:NationalAnimals?
+    public var national_anthem:NationalAnthem?
+    public var national_capital:NationalCapital?
+    public var national_trees:NationalTrees?
     
-    public let cia_services:CIAServices?
-    public let history:SovereignStateHistory?
-    public let wikipedia:SovereignStateWikipedia?
-    public let wikipedia_featured_pictures:WikipediaFeaturedPictures?
+    public var cia_services:CIAServices?
+    public var history:SovereignStateHistory?
+    public var wikipedia:SovereignStateWikipedia?
+    public var wikipedia_featured_pictures:WikipediaFeaturedPictures?
     
-    public let national_parks:[PreNationalPark]?
-    public let volcanoes:[PreVolcano]?
+    public var national_parks:[PreNationalPark]?
+    public var volcanoes:[PreVolcano]?
     
-    public let sources:EventSources?
+    public var sources:EventSources?
     
-    public init(availabilities: SovereignStateAvailabilities?, agriculture: [SovereignStateAgricultureValue]?, info: [SovereignStateInfoKey]?, legalities: [SovereignStateInfoKey]?, rankings: [SovereignStateRankingInfoValue]?, single_values: [SovereignStateSingleValue]?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, national_parks: [PreNationalPark]?, volcanoes: [PreVolcano]?, sources: EventSources?) {
+    public init(response_version: Int, availabilities: SovereignStateAvailabilities?, agriculture: [SovereignStateAgricultureValue]?, info: [SovereignStateInfoKey]?, legalities: [SovereignStateInfoKey]?, rankings: [SovereignStateRankingInfoValue]?, single_values: [SovereignStateSingleValue]?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, national_parks: [PreNationalPark]?, volcanoes: [PreVolcano]?, sources: EventSources?) {
+        self.response_version = response_version
         self.availabilities = availabilities
         self.agriculture = agriculture
         self.info = info
@@ -50,4 +54,101 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         self.volcanoes = volcanoes
         self.sources = sources
     }
+    
+    public func getKeyValue(key: SovereignStateStaticInformationTranslationKeys) -> Any? {
+        switch key {
+        case .availabilities: return availabilities
+        case .agriculture: return agriculture
+        case .info: return info
+        case .legalities: return legalities
+        case .rankings: return rankings
+        case .single_values: return single_values
+        case .national_animals: return national_animals
+        case .national_anthem: return national_anthem
+        case .national_capital: return national_capital
+        case .national_trees: return national_trees
+        case .cia_services: return cia_services
+        case .history: return history
+        case .wikipedia: return wikipedia
+        case .wikipedia_featured_pictures: return wikipedia_featured_pictures
+        case .national_parks: return national_parks
+        case .volcanoes: return volcanoes
+        case .sources: return sources
+        }
+    }
+    public mutating func setKeyValue<T>(key: SovereignStateStaticInformationTranslationKeys, value: T) {
+        switch key {
+        case .availabilities:
+            availabilities = value as? SovereignStateAvailabilities
+            break
+        case .agriculture:
+            agriculture = value as? [SovereignStateAgricultureValue]
+            break
+        case .info:
+            info = value as? [SovereignStateInfoKey]
+            break
+        case .legalities:
+            legalities = value as? [SovereignStateInfoKey]
+            break
+        case .rankings:
+            rankings = value as? [SovereignStateRankingInfoValue]
+            break
+        case .single_values:
+            single_values = value as? [SovereignStateSingleValue]
+            break
+        case .national_animals:
+            national_animals = value as? NationalAnimals
+            break
+        case .national_anthem:
+            national_anthem = value as? NationalAnthem
+            break
+        case .national_capital:
+            national_capital = value as? NationalCapital
+            break
+        case .national_trees:
+            national_trees = value as? NationalTrees
+            break
+        case .cia_services:
+            cia_services = value as? CIAServices
+            break
+        case .history:
+            history = value as? SovereignStateHistory
+            break
+        case .wikipedia:
+            wikipedia = value as? SovereignStateWikipedia
+            break
+        case .wikipedia_featured_pictures:
+            wikipedia_featured_pictures = value as? WikipediaFeaturedPictures
+            break
+        case .national_parks:
+            national_parks = value as? [PreNationalPark]
+            break
+        case .volcanoes:
+            volcanoes = value as? [PreVolcano]
+            break
+        case .sources:
+            sources = value as? EventSources
+            break
+        }
+    }
+}
+
+public enum SovereignStateStaticInformationTranslationKeys : String, JsonableTranslationKey {
+    case availabilities
+    case agriculture
+    case info
+    case legalities
+    case rankings
+    case single_values
+    case national_animals
+    case national_anthem
+    case national_capital
+    case national_trees
+    case cia_services
+    case history
+    case wikipedia
+    case wikipedia_featured_pictures
+    case national_parks
+    case volcanoes
+    case sources
 }

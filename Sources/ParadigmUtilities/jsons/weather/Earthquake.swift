@@ -9,7 +9,12 @@ import Foundation
 import SwiftSovereignStates
 
 public struct Earthquake : Jsonable {
-    public let country:Country?, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, cause:String, magnitude:Float, place:String, exactTimeMilliseconds:Int64, lastUpdated:Int64, depthKM:Float?, location:Location, sources:EventSources
+    public typealias TranslationKeys = EarthquakeTranslationKeys
+    
+    public let country:Country?, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?
+    public var cause:String
+    public let magnitude:Float, place:String, exactTimeMilliseconds:Int64, lastUpdated:Int64, depthKM:Float?, location:Location
+    public var sources:EventSources
     
     public init(country: Country?, subdivision: (any SovereignStateSubdivision)?, city: (any SovereignStateCity)?, cause: String, magnitude: Float, place: String, exactTimeMilliseconds: Int64, lastUpdated: Int64, depthKM: Float?, location: Location, sources: EventSources) {
         self.country = country
@@ -24,4 +29,26 @@ public struct Earthquake : Jsonable {
         self.location = location
         self.sources = sources
     }
+    
+    public func getKeyValue(key: EarthquakeTranslationKeys) -> Any? {
+        switch key {
+        case .cause: return cause
+        case .sources: return sources
+        }
+    }
+    public mutating func setKeyValue<T>(key: EarthquakeTranslationKeys, value: T) {
+        switch key {
+        case .cause:
+            cause = value as! String
+            break
+        case .sources:
+            sources = value as! EventSources
+            break
+        }
+    }
+}
+
+public enum EarthquakeTranslationKeys : String, JsonableTranslationKey {
+    case cause
+    case sources
 }

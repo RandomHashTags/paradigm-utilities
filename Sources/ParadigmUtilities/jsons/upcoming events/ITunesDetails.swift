@@ -8,6 +8,8 @@
 import Foundation
 
 public struct ITunesDetails : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let artistViewUrl:String, collectionViewUrl:String, amgArtistId:Int?, imageURL:String
     
     public init(artistViewUrl: String, collectionViewUrl: String, amgArtistId: Int?, imageURL: String) {

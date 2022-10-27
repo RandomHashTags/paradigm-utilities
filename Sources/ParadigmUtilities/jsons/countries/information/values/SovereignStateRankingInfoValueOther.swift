@@ -8,7 +8,10 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValueOther : Jsonable {
-    public let value:Double?, valueType:NumberType, description:String, suffix:String?
+    public typealias TranslationKeys = SovereignStateRankingInfoValueOtherTranslationKeys
+    
+    public let value:Double?, valueType:NumberType
+    public var description:String, suffix:String?
     
     public init(value: Int?, description: String, suffix: String?) {
         self.init(value: value != nil ? Double(value!) : nil, valueType: .integer, description: description, suffix: suffix)
@@ -22,4 +25,26 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
         self.description = description
         self.suffix = suffix
     }
+    
+    public func getKeyValue(key: SovereignStateRankingInfoValueOtherTranslationKeys) -> Any? {
+        switch key {
+        case .description: return description
+        case .suffix: return suffix
+        }
+    }
+    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueOtherTranslationKeys, value: T) {
+        switch key {
+        case .description:
+            description = value as! String
+            break
+        case .suffix:
+            suffix = value as? String
+            break
+        }
+    }
+}
+
+public enum SovereignStateRankingInfoValueOtherTranslationKeys : String, JsonableTranslationKey {
+    case description
+    case suffix
 }

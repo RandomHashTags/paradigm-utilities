@@ -8,5 +8,7 @@
 import Foundation
 
 public struct TVShowEpisodeEmbedded : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let show:TVShowInfo?
 }

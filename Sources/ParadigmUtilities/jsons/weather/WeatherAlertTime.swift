@@ -8,6 +8,8 @@
 import Foundation
 
 public struct WeatherAlertTime : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let sent:Int64, effective:Int64, expires:Int64, ends:Int64?
     
     public init(sent: Int64, effective: Int64, expires: Int64, ends: Int64?) {

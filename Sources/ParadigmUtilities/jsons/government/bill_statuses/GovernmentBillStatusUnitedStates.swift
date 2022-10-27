@@ -9,6 +9,8 @@ import Foundation
 import SwiftSovereignStates
 
 public enum GovernmentBillStatusUnitedStates : String, CaseIterable, GovernmentBillStatus {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case introduced
     case committee_consideration
     //case floor_consideration

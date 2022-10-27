@@ -8,6 +8,8 @@
 import Foundation
 
 public enum RemoteNotificationSubcategoryWeather : String, CaseIterable, RemoteNotificationSubcategory {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case local_alert
     
     public func getCategory() -> RemoteNotificationCategory {

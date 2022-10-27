@@ -9,7 +9,12 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ClientNationalPark : Jsonable {
-    public let id:String, name:String, description:String?, imageURL:String?, country:Country, countries:[Country], subdivisions:[SovereignStateSubdivisionWrapper], sources:EventSources
+    public typealias TranslationKeys = ClientNationalParkTranslationKeys
+    
+    public let id:String
+    public var name:String, description:String?
+    public let imageURL:String?, country:Country, countries:[Country], subdivisions:[SovereignStateSubdivisionWrapper]
+    public var sources:EventSources
     
     public init(id: String, name: String, description: String?, imageURL: String? = nil, country: Country, countries: [Country], subdivisions: [any SovereignStateSubdivision], sources: EventSources) {
         self.id = id
@@ -21,4 +26,31 @@ public struct ClientNationalPark : Jsonable {
         self.subdivisions = subdivisions.map({ $0.wrapped() })
         self.sources = sources
     }
+    
+    public func getKeyValue(key: ClientNationalParkTranslationKeys) -> Any? {
+        switch key {
+        case .name: return name
+        case .description: return description
+        case .sources: return sources
+        }
+    }
+    public mutating func setKeyValue<T>(key: ClientNationalParkTranslationKeys, value: T) {
+        switch key {
+        case .name:
+            name = value as! String
+            break
+        case .description:
+            description = value as? String
+            break
+        case .sources:
+            sources = value as! EventSources
+            break
+        }
+    }
+}
+
+public enum ClientNationalParkTranslationKeys : String, JsonableTranslationKey {
+    case name
+    case description
+    case sources
 }

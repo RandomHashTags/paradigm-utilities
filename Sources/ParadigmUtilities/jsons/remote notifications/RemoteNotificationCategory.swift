@@ -8,6 +8,8 @@
 import Foundation
 
 public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     case apple
     //case playstation
     //case video_game

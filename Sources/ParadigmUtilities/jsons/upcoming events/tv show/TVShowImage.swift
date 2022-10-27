@@ -8,5 +8,7 @@
 import Foundation
 
 public struct TVShowImage : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let medium:String, original:String
 }

@@ -12,6 +12,8 @@ private enum CodingKeys: CodingKey {
     case hyperlinks
 }
 public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
+    public typealias TranslationKeys = HyperlinksTranslationKeys
+    
     public let imageURLPrefix:String
     
     private var hyperlinks:[Hyperlink], hyperlinkCount:Int = -1
@@ -52,4 +54,21 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     public mutating func append(contentsOf newElements: [Hyperlink]) {
         hyperlinks.append(contentsOf: newElements)
     }
+    
+    public func getKeyValue(key: HyperlinksTranslationKeys) -> Any? {
+        switch key {
+        case .hyperlinks: return hyperlinks
+        }
+    }
+    public mutating func setKeyValue<T>(key: HyperlinksTranslationKeys, value: T) {
+        switch key {
+        case .hyperlinks:
+            hyperlinks = value as! [Hyperlink]
+            break
+        }
+    }
+}
+
+public enum HyperlinksTranslationKeys : String, JsonableTranslationKey {
+    case hyperlinks
 }

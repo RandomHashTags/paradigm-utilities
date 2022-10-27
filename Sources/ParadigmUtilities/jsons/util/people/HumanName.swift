@@ -8,6 +8,8 @@
 import Foundation
 
 public struct HumanName : Jsonable {
+    public typealias TranslationKeys = NoTranslationKeys
+    
     public let first:String, middle:String?, last:String
     
     public init(first: String, middle: String? = nil, last: String) {

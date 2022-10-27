@@ -8,7 +8,10 @@
 import Foundation
 
 public struct WikipediaStatistics : Jsonable {
-    public let area:WikipediaStatisticsArea?, elevation:WikipediaStatisticsElevation?, dimensions:WikipediaStatisticsDimensions?, population:WikipediaStatisticsPopulation?, governmentURL:String?
+    public typealias TranslationKeys = WikipediaStatisticsTranslationKeys
+    
+    public var area:WikipediaStatisticsArea?, elevation:WikipediaStatisticsElevation?, dimensions:WikipediaStatisticsDimensions?, population:WikipediaStatisticsPopulation?
+    public let governmentURL:String?
     
     public init(area: WikipediaStatisticsArea?, elevation: WikipediaStatisticsElevation?, dimensions: WikipediaStatisticsDimensions?, population: WikipediaStatisticsPopulation?, governmentURL: String?) {
         self.area = area
@@ -17,43 +20,37 @@ public struct WikipediaStatistics : Jsonable {
         self.population = population
         self.governmentURL = governmentURL
     }
-}
-
-public struct WikipediaStatisticsArea : Jsonable {
-    public let total:String?, water:String?, land:String?
     
-    public init(total: String?, water: String?, land: String?) {
-        self.total = total
-        self.water = water
-        self.land = land
+    public func getKeyValue(key: WikipediaStatisticsTranslationKeys) -> Any? {
+        switch key {
+        case .area: return area
+        case .elevation: return elevation
+        case .dimensions: return dimensions
+        case .population: return population
+        }
+    }
+    public mutating func setKeyValue<T>(key: WikipediaStatisticsTranslationKeys, value: T) {
+        switch key {
+        case .area:
+            area = value as? WikipediaStatisticsArea
+            break
+        case .elevation:
+            elevation = value as? WikipediaStatisticsElevation
+            break
+        case .dimensions:
+            dimensions = value as? WikipediaStatisticsDimensions
+            break
+        case .population:
+            population = value as? WikipediaStatisticsPopulation
+            break
+        }
     }
 }
 
-public struct WikipediaStatisticsElevation : Jsonable {
-    public let lowest:String?, highest:String?, median:String?
-    
-    public init(lowest: String?, highest: String?, median: String?) {
-        self.lowest = lowest
-        self.highest = highest
-        self.median = median
-    }
-}
 
-public struct WikipediaStatisticsDimensions : Jsonable {
-    public let length:String?, width:String?
-    
-    public init(length: String?, width: String?) {
-        self.length = length
-        self.width = width
-    }
-}
-
-public struct WikipediaStatisticsPopulation : Jsonable {
-    public let total:String?, density:String?, medianHouseholdIncome:String?
-    
-    public init(total: String?, density: String?, medianHouseholdIncome: String?) {
-        self.total = total
-        self.density = density
-        self.medianHouseholdIncome = medianHouseholdIncome
-    }
+public enum WikipediaStatisticsTranslationKeys : String, JsonableTranslationKey {
+    case area
+    case elevation
+    case dimensions
+    case population
 }

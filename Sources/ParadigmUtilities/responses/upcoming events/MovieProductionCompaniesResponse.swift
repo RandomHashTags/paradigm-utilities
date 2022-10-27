@@ -8,6 +8,8 @@
 import Foundation
 
 public final class MovieProductionCompaniesResponse : Jsonable {
+    public typealias TranslationKeys = MovieProductionCompaniesResponseTranslationKeys
+    
     public static func == (lhs: MovieProductionCompaniesResponse, rhs: MovieProductionCompaniesResponse) -> Bool {
         return lhs.response_version == rhs.response_version && lhs.imageURLPrefix.elementsEqual(rhs.imageURLPrefix) && lhs.companies == rhs.companies
     }
@@ -26,4 +28,21 @@ public final class MovieProductionCompaniesResponse : Jsonable {
         hasher.combine(imageURLPrefix)
         hasher.combine(companies)
     }
+    
+    public func getKeyValue(key: MovieProductionCompaniesResponseTranslationKeys) -> Any? {
+        switch key {
+        case .companies: return companies
+        }
+    }
+    public func setKeyValue<T>(key: MovieProductionCompaniesResponseTranslationKeys, value: T) {
+        switch key {
+        case .companies:
+            companies = value as? [PreMovieProductionCompany]
+            break
+        }
+    }
+}
+
+public enum MovieProductionCompaniesResponseTranslationKeys : String, JsonableTranslationKey {
+    case companies
 }

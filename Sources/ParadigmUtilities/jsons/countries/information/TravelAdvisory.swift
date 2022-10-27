@@ -8,11 +8,36 @@
 import Foundation
 
 public struct TravelAdvisory : SovereignStateInformationValue {
-    public let id:String, description:String, sources:EventSources?
+    public typealias TranslationKeys = SovereignStateInformationValueTranslationKeys
+    
+    public let id:String
+    public var description:String, sources:EventSources?
     
     public init(id: String, description: String, sources: EventSources?) {
         self.id = id
         self.description = description
         self.sources = sources
     }
+    
+    public func getKeyValue(key: SovereignStateInformationValueTranslationKeys) -> Any? {
+        switch key {
+        case .description: return description
+        case .sources: return sources
+        }
+    }
+    public mutating func setKeyValue<T>(key: SovereignStateInformationValueTranslationKeys, value: T) {
+        switch key {
+        case .description:
+            description = value as! String
+            break
+        case .sources:
+            sources = value as? EventSources
+            break
+        }
+    }
+}
+
+public enum SovereignStateInformationValueTranslationKeys : String, JsonableTranslationKey {
+    case description
+    case sources
 }
