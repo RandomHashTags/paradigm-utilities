@@ -9,6 +9,7 @@ import Foundation
 
 public final class HomeResponseCountries : HomeResponseProtocol {
     public typealias TranslationKeys = HomeResponseCountriesTranslationKeys
+    public typealias OmittableKeys = HomeResponseCountriesOmittableKeys
     
     public static func == (lhs: HomeResponseCountries, rhs: HomeResponseCountries) -> Bool {
         return lhs.filters == rhs.filters
@@ -36,8 +37,24 @@ public final class HomeResponseCountries : HomeResponseProtocol {
             break
         }
     }
+    
+    public func getOmittableKeyValue(key: HomeResponseCountriesOmittableKeys) -> (any CodableOmittableProtocol)? {
+        switch key {
+        case .filters: return _filters
+        }
+    }
+    public func setOmittableKeyValue<T: CodableOmittableProtocol>(key: HomeResponseCountriesOmittableKeys, value: T) {
+        switch key {
+        case .filters:
+            _filters = value as! CodableOmittable<CountryFiltersResponse>
+            break
+        }
+    }
 }
 
 public enum HomeResponseCountriesTranslationKeys : String, JsonableTranslationKey {
+    case filters
+}
+public enum HomeResponseCountriesOmittableKeys : String, JsonableOmittableKey {
     case filters
 }

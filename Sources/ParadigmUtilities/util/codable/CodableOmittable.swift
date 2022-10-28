@@ -7,8 +7,15 @@
 
 import Foundation
 
+public protocol CodableOmittableProtocol : Codable, Hashable {
+    associatedtype T : Codable & Hashable
+    
+    var wrappedValue:T? { get }
+    var omitted:Bool { get set }
+}
+
 @propertyWrapper
-public struct CodableOmittable<T : Codable & Hashable> : Codable, Hashable {
+public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtocol {
     public let wrappedValue:T?
     public var omitted:Bool
     
@@ -27,8 +34,8 @@ public struct CodableOmittable<T : Codable & Hashable> : Codable, Hashable {
 
 extension KeyedEncodingContainer {
     public mutating func encode<T>(_ value: CodableOmittable<T>, forKey key: KeyedEncodingContainer<K>.Key) throws {
-        guard let wrappedValue:T = value.wrappedValue, !value.omitted else { return }
-        try encode(wrappedValue, forKey: key)
+        guard !value.omitted else { return }
+        try encode(value.wrappedValue, forKey: key)
     }
 }
 extension KeyedDecodingContainer {

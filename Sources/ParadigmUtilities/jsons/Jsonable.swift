@@ -19,7 +19,8 @@ public protocol Jsonable : Hashable, Codable {
     func getTranslationKeyValue(key: TranslationKeys) -> Any?
     mutating func setTranslationKeyValue<T>(key: TranslationKeys, value: T)
     
-    func getOmittableKeyValue<T: Hashable>(key: OmittableKeys) -> CodableOmittable<T>?
+    func getOmittableKeyValue(key: OmittableKeys) -> (any CodableOmittableProtocol)?
+    mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: OmittableKeys, value: T)
 }
 public extension Jsonable {
     func getTranslationKeys() -> TranslationKeys.AllCases {
@@ -57,8 +58,10 @@ public extension Jsonable where TranslationKeys == NoTranslationKeys {
     }
 }
 public extension Jsonable where OmittableKeys == NoOmittableKeys {
-    func getOmittableKeyValue<T: Hashable>(key: OmittableKeys) -> CodableOmittable<T>? {
+    func getOmittableKeyValue(key: OmittableKeys) -> (any CodableOmittableProtocol)? {
         return nil
+    }
+    mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: OmittableKeys, value: T) {
     }
 }
 

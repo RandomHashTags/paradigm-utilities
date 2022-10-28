@@ -9,15 +9,19 @@ import Foundation
 
 public struct WikipediaStatistics : Jsonable {
     public typealias TranslationKeys = WikipediaStatisticsTranslationKeys
+    public typealias OmittableKeys = WikipediaStatisticsOmittableKeys
     
-    public var area:WikipediaStatisticsArea?, elevation:WikipediaStatisticsElevation?, dimensions:WikipediaStatisticsDimensions?, population:WikipediaStatisticsPopulation?
+    @CodableOmittable public var area:WikipediaStatisticsArea?
+    @CodableOmittable public var elevation:WikipediaStatisticsElevation?
+    @CodableOmittable public var dimensions:WikipediaStatisticsDimensions?
+    @CodableOmittable public var population:WikipediaStatisticsPopulation?
     public let governmentURL:String?
     
     public init(area: WikipediaStatisticsArea?, elevation: WikipediaStatisticsElevation?, dimensions: WikipediaStatisticsDimensions?, population: WikipediaStatisticsPopulation?, governmentURL: String?) {
-        self.area = area
-        self.elevation = elevation
-        self.dimensions = dimensions
-        self.population = population
+        self._area = CodableOmittable(area)
+        self._elevation = CodableOmittable(elevation)
+        self._dimensions = CodableOmittable(dimensions)
+        self._population = CodableOmittable(population)
         self.governmentURL = governmentURL
     }
     
@@ -32,23 +36,53 @@ public struct WikipediaStatistics : Jsonable {
     public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsTranslationKeys, value: T) {
         switch key {
         case .area:
-            area = value as? WikipediaStatisticsArea
+            _area = CodableOmittable(value as? WikipediaStatisticsArea)
             break
         case .elevation:
-            elevation = value as? WikipediaStatisticsElevation
+            _elevation = CodableOmittable(value as? WikipediaStatisticsElevation)
             break
         case .dimensions:
-            dimensions = value as? WikipediaStatisticsDimensions
+            _dimensions = CodableOmittable(value as? WikipediaStatisticsDimensions)
             break
         case .population:
-            population = value as? WikipediaStatisticsPopulation
+            _population = CodableOmittable(value as? WikipediaStatisticsPopulation)
+            break
+        }
+    }
+    
+    public func getOmittableKeyValue(key: WikipediaStatisticsOmittableKeys) -> (any CodableOmittableProtocol)? {
+        switch key {
+        case .area: return _area
+        case .elevation: return _elevation
+        case .dimensions: return _dimensions
+        case .population: return _population
+        }
+    }
+    public mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: WikipediaStatisticsOmittableKeys, value: T) {
+        switch key {
+        case .area:
+            _area = value as! CodableOmittable<WikipediaStatisticsArea>
+            break
+        case .elevation:
+            _elevation = value as! CodableOmittable<WikipediaStatisticsElevation>
+            break
+        case .dimensions:
+            _dimensions = value as! CodableOmittable<WikipediaStatisticsDimensions>
+            break
+        case .population:
+            _population = value as! CodableOmittable<WikipediaStatisticsPopulation>
             break
         }
     }
 }
 
-
 public enum WikipediaStatisticsTranslationKeys : String, JsonableTranslationKey {
+    case area
+    case elevation
+    case dimensions
+    case population
+}
+public enum WikipediaStatisticsOmittableKeys : String, JsonableOmittableKey {
     case area
     case elevation
     case dimensions

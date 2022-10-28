@@ -9,6 +9,7 @@ import Foundation
 
 public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
     public typealias TranslationKeys = HomeResponseUpcomingEventsTranslationKeys
+    public typealias OmittableKeys = HomeResponseUpcomingEventsOmittableKeys
     
     public static func == (lhs: HomeResponseUpcomingEvents, rhs: HomeResponseUpcomingEvents) -> Bool {
         return lhs.holidays_near == rhs.holidays_near && lhs.events == rhs.events && lhs.movie_production_companies == rhs.movie_production_companies
@@ -49,11 +50,27 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
             break
         }
     }
+    
+    public func getOmittableKeyValue(key: HomeResponseUpcomingEventsOmittableKeys) -> (any CodableOmittableProtocol)? {
+        switch key {
+        case .movie_production_companies: return _movie_production_companies
+        }
+    }
+    public func setOmittableKeyValue<T: CodableOmittableProtocol>(key: HomeResponseUpcomingEventsOmittableKeys, value: T) {
+        switch key {
+        case .movie_production_companies:
+            _movie_production_companies = value as! CodableOmittable<MovieProductionCompaniesResponse>
+            break
+        }
+    }
 }
 
 
 public enum HomeResponseUpcomingEventsTranslationKeys : String, JsonableTranslationKey {
     case holidays_near
     case events
+    case movie_production_companies
+}
+public enum HomeResponseUpcomingEventsOmittableKeys : String, JsonableOmittableKey {
     case movie_production_companies
 }

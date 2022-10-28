@@ -21,8 +21,12 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let string:String = String(data: data, encoding: .utf8)!
         XCTAssert(string.elementsEqual("{\"big_boy\":\"" + big_boy + "\",\"number\":1}"), "invalid string; string=" + string)
         
-        let decoded:TestBro = try ZippyJSONDecoder().decode(TestBro.self, from: data)
+        var decoded:TestBro = try ZippyJSONDecoder().decode(TestBro.self, from: data)
         XCTAssert(decoded.toString()!.elementsEqual(string))
+        var dud:CodableOmittable<String> = decoded.getOmittableKeyValue(key: .small_boy) as! CodableOmittable<String>
+        dud.omitted = false
+        decoded.setOmittableKeyValue(key: .small_boy, value: dud)
+        XCTAssert(decoded.toString()!.elementsEqual(string) == false)
     }
     
     private func testSovereignStateInformation(_ decoder: ZippyJSONDecoder) throws {
@@ -63,12 +67,11 @@ final class ParadigmUtilitiesTests: XCTestCase {
 
 private struct TestBro : Jsonable {
     typealias TranslationKeys = TestBroTranslationKeys
+    typealias OmittableKeys = TestBroOmittableKeys
     
     var big_boy:String
     let number:Int
-    
-    @CodableOmittable
-    var small_boy:String?
+    @CodableOmittable var small_boy:String?
     
     func getTranslationKeyValue(key: TestBroTranslationKeys) -> Any? {
         switch key {
@@ -82,7 +85,23 @@ private struct TestBro : Jsonable {
             break
         }
     }
+    
+    func getOmittableKeyValue(key: TestBroOmittableKeys) -> (any CodableOmittableProtocol)? {
+        switch key {
+        case .small_boy: return _small_boy
+        }
+    }
+    mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: TestBroOmittableKeys, value: T) {
+        switch key {
+        case .small_boy:
+            _small_boy = value as! CodableOmittable<String>
+            break
+        }
+    }
 }
 private enum TestBroTranslationKeys : String, JsonableTranslationKey {
     case big_boy
+}
+private enum TestBroOmittableKeys : String, JsonableOmittableKey {
+    case small_boy
 }
