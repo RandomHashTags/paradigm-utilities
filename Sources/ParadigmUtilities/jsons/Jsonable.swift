@@ -45,8 +45,20 @@ public extension Jsonable {
         return String(data: data, encoding: .utf8)
     }
     
+    func getTranslationKeyValue(_ string: String) -> Any? {
+        guard let key:TranslationKeys = TranslationKeys(rawValue: string) else { return nil }
+        return getTranslationKeyValue(key: key)
+    }
     func getTranslationKeyValue<T>(_ key: TranslationKeys) -> T? {
         return getTranslationKeyValue(key: key) as? T
+    }
+    
+    func getOmittableKeyValue(_ string: String) -> (any CodableOmittableProtocol)? {
+        guard let key:OmittableKeys = OmittableKeys(rawValue: string) else { return nil }
+        return getOmittableKeyValue(key: key)
+    }
+    func getOmittableKeyValue(_ key: OmittableKeys) -> (any CodableOmittableProtocol)? {
+        return getOmittableKeyValue(key: key)
     }
 }
 
