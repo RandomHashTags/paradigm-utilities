@@ -9,3 +9,5 @@ import Foundation
 
 public protocol HomeResponseProtocol : Jsonable {
 }
+public struct HomeResponseEmpty : HomeResponseProtocol {
+}

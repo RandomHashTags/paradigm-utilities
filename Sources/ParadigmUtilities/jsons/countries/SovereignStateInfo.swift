@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum SovereignStateInfo : String, CaseIterable, Jsonable {    
+public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case agriculture_food_apple_production
     case agriculture_food_apricot_production
     case agriculture_food_artichoke_production
@@ -183,10 +183,6 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case value_system_of_government
     case value_traffic_side
     case value_voting_age
-    
-    public static func valueOf(string: String) -> SovereignStateInfo? {
-        return SovereignStateInfo.allCases.first(where: { string.compare($0.getName()) == .orderedSame || string.elementsEqual("\($0)") })
-    }
     
     public func getName() -> String {
         switch self {
