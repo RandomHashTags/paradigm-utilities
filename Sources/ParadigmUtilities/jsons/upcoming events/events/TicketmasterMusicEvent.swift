@@ -82,7 +82,7 @@ public enum TicketmasterMusicEventCodingKeys : String, UpcomingEventCodingKeys {
 public final class TicketmasterMusicEvent : GenericUpcomingEvent {
     public let accessibility:String?, ageRestriction:String?, healthCheckSummary:String?, healthCheckDescription:String?, pleaseNote:String?, seatMapURL:String?, ticketLimit:String?, priceRangeCurrency:String?, priceRangeMax:Float?, priceRangeMin:Float?, priceRangeString:String?, venues:[TicketmasterVenue]?
     
-    public init(exactStartMilliseconds:Int64, exactEndMilliseconds:Int64, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, accessibility: String?, ageRestriction: String?, healthCheckSummary: String?, healthCheckDescription: String?, pleaseNote: String?, seatMapURL: String?, ticketLimit: String?, priceRangeCurrency: String?, priceRangeMax: Float?, priceRangeMin: Float?, priceRangeString: String?, venues: [TicketmasterVenue]?) {
+    public init(exactStartMilliseconds: Int64, exactEndMilliseconds: Int64!, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, accessibility: String?, ageRestriction: String?, healthCheckSummary: String?, healthCheckDescription: String?, pleaseNote: String?, seatMapURL: String?, ticketLimit: String?, priceRangeCurrency: String?, priceRangeMax: Float?, priceRangeMin: Float?, priceRangeString: String?, venues: [TicketmasterVenue]?) {
         self.accessibility = accessibility
         self.ageRestriction = ageRestriction
         self.healthCheckSummary = healthCheckSummary
