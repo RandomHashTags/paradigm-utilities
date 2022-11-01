@@ -10,9 +10,9 @@ import Foundation
 public struct GovernmentRecentActivityResponse : Jsonable {
     public typealias TranslationKeys = GovernmentRecentActivityResponseTranslationKeys
     
-    public var recent_activity:[PreEnactedBill]
+    public var recent_activity:[GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]
     
-    public init(recent_activity: [PreEnactedBill]) {
+    public init(recent_activity: [GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]) {
         self.recent_activity = recent_activity
     }
     
@@ -24,7 +24,7 @@ public struct GovernmentRecentActivityResponse : Jsonable {
     public mutating func setTranslationKeyValue<T>(key: GovernmentRecentActivityResponseTranslationKeys, value: T) {
         switch key {
         case .recent_activity:
-            recent_activity = value as! [PreEnactedBill]
+            recent_activity = value as! [GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]
             break
         }
     }

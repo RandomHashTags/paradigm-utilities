@@ -8,6 +8,9 @@
 import Foundation
 import SwiftSovereignStates
 import ZippyJSON
+#if canImport(Vapor)
+import Vapor
+#endif
 
 public protocol Jsonable : Hashable, Codable {
     associatedtype TranslationKeys : JsonableTranslationKey = NoTranslationKeys
@@ -15,6 +18,11 @@ public protocol Jsonable : Hashable, Codable {
     
     func getTranslations() -> [Language:String]?
     //func getFolderPath() -> FolderPath?
+    
+    func toData() -> Data?
+    func toData(language: Language, omittedKeys: [String]?) async -> Data?
+    func toString() -> String?
+    func toString(language: Language, omittedKeys: [String]?) async -> String?
     
     func getTranslationKeyValue(key: TranslationKeys) -> Any?
     mutating func setTranslationKeyValue<T>(key: TranslationKeys, value: T)
@@ -39,9 +47,16 @@ public extension Jsonable {
     func toData() -> Data? {
         return try? JSONEncoder().encode(self)
     }
+    func toData(language: Language, omittedKeys: [String]?) async -> Data? {
+        return toData()
+    }
     
     func toString() -> String? {
         guard let data:Data = toData() else { return nil }
+        return String(data: data, encoding: .utf8)
+    }
+    func toString(language: Language, omittedKeys: [String]?) async -> String? {
+        guard let data:Data = await toData(language: language, omittedKeys: omittedKeys) else { return nil }
         return String(data: data, encoding: .utf8)
     }
     
@@ -61,6 +76,33 @@ public extension Jsonable {
         return getOmittableKeyValue(key: key)
     }
 }
+#if canImport(Vapor)
+public extension Jsonable : AsyncResponseEncodable {
+    func encodeResponse(for request: Request) async throws -> Response {
+        let client:ParadigmClient = request.paradigm_client
+        let language:Language = client.language, omittValues:[String]? = client.query.getOmittValues()
+        let string:String = await self.toString(language: language, omittedKeys: omittValues) ?? "{}"
+        var headers:HTTPHeaders = HTTPHeaders()
+        headers.add(name: .contentType, value: "application/json")
+        return Response(status: .ok, version: .http1_1, headers: headers, body: .init(stringLiteral: string))
+    }
+}
+public extension URLQueryContainer {
+    func get(key: String) -> String? {
+        do {
+            return try get(at: key)
+        } catch {
+            return nil
+        }
+    }
+    func getOmitt() -> String? {
+        return get(key: "omitt")
+    }
+    func getOmittValues() -> [String]? {
+        return getOmitt()?.components(separatedBy: ",")
+    }
+}
+#endif
 
 public extension Jsonable where TranslationKeys == NoTranslationKeys {
     func getTranslationKeyValue(key: TranslationKeys) -> Any? {

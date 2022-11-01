@@ -15,11 +15,11 @@ public struct SovereignStateInfoKey : SovereignStateInformationValue {
     public var yearOfData:Int
     public var values:[SovereignStateInfoValue], sources:EventSources?
     
-    public init(info: SovereignStateInfo, notes: String?, yearOfData: Int, values: [SovereignStateInfoValue], sources: EventSources?) {
+    public init(info: SovereignStateInfo, notes: String?, yearOfData: Int, values: [SovereignStateInfoValue?], sources: EventSources?) {
         self.info = info
         self.notes = notes
         self.yearOfData = yearOfData
-        self.values = values
+        self.values = values.compactMap({ $0 })
         self.sources = sources
     }
     
