@@ -30,7 +30,8 @@ let package = Package(
             dependencies: [
                 .product(name: "SwiftSovereignStates", package: "swift-sovereign-states"),
                 .product(name: "GEOSwift", package: "GEOSwift"),
-                .product(name: "ZippyJSON", package: "ZippyJSON")
+                .product(name: "ZippyJSON", package: "ZippyJSON"),
+                .product(name: "Vapor", package: "vapor")
             ]),
         .testTarget(
             name: "ParadigmUtilitiesTests",

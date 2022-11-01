@@ -12,7 +12,7 @@ import ZippyJSON
 import Vapor
 #endif
 
-public protocol Jsonable : Hashable, Codable {
+public protocol JsonableProtocol : Hashable, Codable {
     associatedtype TranslationKeys : JsonableTranslationKey = NoTranslationKeys
     associatedtype OmittableKeys : JsonableOmittableKey = NoOmittableKeys
     
@@ -30,7 +30,45 @@ public protocol Jsonable : Hashable, Codable {
     func getOmittableKeyValue(key: OmittableKeys) -> (any CodableOmittableProtocol)?
     mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: OmittableKeys, value: T)
 }
+
+#if canImport(Vapor)
+public protocol Jsonable : JsonableProtocol, AsyncResponseEncodable {
+}
 public extension Jsonable {
+    func encodeResponse(for request: Request) async throws -> Response {
+        let language:Language = request.language, omittValues:[String]? = request.query.getOmittValues()
+        let string:String = await self.toString(language: language, omittedKeys: omittValues) ?? "{}"
+        var headers:HTTPHeaders = HTTPHeaders()
+        headers.add(name: .contentType, value: "application/json")
+        return Response(status: .ok, version: .http1_1, headers: headers, body: .init(stringLiteral: string))
+    }
+}
+public extension Request {
+    var language : Language {
+        guard let targetLanguage:String = headers.first(name: "Language") else { return Language.english }
+        return Language.valueOf(targetLanguage) ?? Language.english
+    }
+}
+public extension URLQueryContainer {
+    func get(key: String) -> String? {
+        do {
+            return try get(at: key)
+        } catch {
+            return nil
+        }
+    }
+    func getOmitt() -> String? {
+        return get(key: "omitt")
+    }
+    func getOmittValues() -> [String]? {
+        return getOmitt()?.components(separatedBy: ",")
+    }
+}
+#else
+public protocol Jsonable : JsonableProtocol {
+}
+#endif
+public extension JsonableProtocol {
     func getTranslationKeys() -> TranslationKeys.AllCases {
         return TranslationKeys.allCases
     }
@@ -76,42 +114,15 @@ public extension Jsonable {
         return getOmittableKeyValue(key: key)
     }
 }
-#if canImport(Vapor)
-public extension Jsonable : AsyncResponseEncodable {
-    func encodeResponse(for request: Request) async throws -> Response {
-        let client:ParadigmClient = request.paradigm_client
-        let language:Language = client.language, omittValues:[String]? = client.query.getOmittValues()
-        let string:String = await self.toString(language: language, omittedKeys: omittValues) ?? "{}"
-        var headers:HTTPHeaders = HTTPHeaders()
-        headers.add(name: .contentType, value: "application/json")
-        return Response(status: .ok, version: .http1_1, headers: headers, body: .init(stringLiteral: string))
-    }
-}
-public extension URLQueryContainer {
-    func get(key: String) -> String? {
-        do {
-            return try get(at: key)
-        } catch {
-            return nil
-        }
-    }
-    func getOmitt() -> String? {
-        return get(key: "omitt")
-    }
-    func getOmittValues() -> [String]? {
-        return getOmitt()?.components(separatedBy: ",")
-    }
-}
-#endif
 
-public extension Jsonable where TranslationKeys == NoTranslationKeys {
+public extension JsonableProtocol where TranslationKeys == NoTranslationKeys {
     func getTranslationKeyValue(key: TranslationKeys) -> Any? {
         return nil
     }
     mutating func setTranslationKeyValue<T>(key: TranslationKeys, value: T) {
     }
 }
-public extension Jsonable where OmittableKeys == NoOmittableKeys {
+public extension JsonableProtocol where OmittableKeys == NoOmittableKeys {
     func getOmittableKeyValue(key: OmittableKeys) -> (any CodableOmittableProtocol)? {
         return nil
     }
