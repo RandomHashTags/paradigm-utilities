@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientSovereignStateAvailability : Jsonable {
-    public typealias TranslationKeys = ClientSovereignStateAvailabilityTranslationKeys
+    public typealias ValueKeys = ClientSovereignStateAvailabilityValueKeys
     
     public let info:SovereignStateInfo, primaryCategory:SovereignStateAvailabilityCategory, imageURL:String?, value:Bool
     public var sources:EventSources?
@@ -21,20 +21,39 @@ public struct ClientSovereignStateAvailability : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: ClientSovereignStateAvailabilityTranslationKeys) -> Any? {
+    public func getKeyValue(key: ClientSovereignStateAvailabilityValueKeys) -> Any? {
         switch key {
+        case .info: return info
+        case .primaryCategory: return primaryCategory
+        case .imageURL: return imageURL
+        case .value: return value
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: ClientSovereignStateAvailabilityTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ClientSovereignStateAvailabilityValueKeys, value: T) {
         switch key {
         case .sources:
             sources = value as? EventSources
+            break
+        default:
             break
         }
     }
 }
 
-public enum ClientSovereignStateAvailabilityTranslationKeys : String, JsonableTranslationKey {
+public enum ClientSovereignStateAvailabilityValueKeys : String, JsonableValueKeys {
+    case info
+    case primaryCategory
+    case imageURL
+    case value
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

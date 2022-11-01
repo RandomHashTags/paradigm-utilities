@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateStaticInformation : SovereignStateInformationValue {
-    public typealias TranslationKeys = SovereignStateStaticInformationTranslationKeys
+    public typealias ValueKeys = SovereignStateStaticInformationValueKeys
     
     public let response_version:Int
     public var availabilities:SovereignStateAvailabilities?
@@ -55,8 +55,9 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateStaticInformationTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateStaticInformationValueKeys) -> Any? {
         switch key {
+        case .response_version: return response_version
         case .availabilities: return availabilities
         case .agriculture: return agriculture
         case .info: return info
@@ -76,7 +77,7 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateStaticInformationTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateStaticInformationValueKeys, value: T) {
         switch key {
         case .availabilities:
             availabilities = value as? SovereignStateAvailabilities
@@ -129,11 +130,14 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum SovereignStateStaticInformationTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateStaticInformationValueKeys : String, JsonableValueKeys {
+    case response_version
     case availabilities
     case agriculture
     case info
@@ -151,4 +155,8 @@ public enum SovereignStateStaticInformationTranslationKeys : String, JsonableTra
     case national_parks
     case volcanoes
     case sources
+    
+    public func isTranslatable() -> Bool {
+        return self != .response_version
+    }
 }

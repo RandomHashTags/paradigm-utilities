@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreElection : Jsonable {
-    public typealias TranslationKeys = PreElectionTranslationKeys
+    public typealias ValueKeys = PreElectionValueKeys
     
     public let id:String
     public var name:String
@@ -22,20 +22,37 @@ public struct PreElection : Jsonable {
         self.country = country
     }
     
-    public func getTranslationKeyValue(key: PreElectionTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreElectionValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .name: return name
+        case .date: return date
+        case .country: return country
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreElectionTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreElectionValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
+            break
+        default:
             break
         }
     }
 }
 
-public enum PreElectionTranslationKeys : String, JsonableTranslationKey {
+public enum PreElectionValueKeys : String, JsonableValueKeys {
+    case id
     case name
+    case date
+    case country
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name:
+            return true
+        default:
+            return false
+        }
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SubdivisionStatute : Jsonable {
-    public typealias TranslationKeys = SubdivisionStatuteTranslationKeys
+    public typealias ValueKeys = SubdivisionStatuteValueKeys
     
     public var title:String, description:String?, subdivisions:[SubdivisionStatuteSubdivision]?, sources:EventSources
     
@@ -19,7 +19,7 @@ public struct SubdivisionStatute : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SubdivisionStatuteTranslationKeys) -> Any? {
+    public func getKeyValue(key: SubdivisionStatuteValueKeys) -> Any? {
         switch key {
         case .title: return title
         case .description: return description
@@ -27,7 +27,7 @@ public struct SubdivisionStatute : Jsonable {
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SubdivisionStatuteTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SubdivisionStatuteValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -45,9 +45,16 @@ public struct SubdivisionStatute : Jsonable {
     }
 }
 
-public enum SubdivisionStatuteTranslationKeys : String, JsonableTranslationKey {
+public enum SubdivisionStatuteValueKeys : String, JsonableValueKeys {
     case title
     case description
     case subdivisions
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .title, .description, .subdivisions, .sources:
+            return true
+        }
+    }
 }

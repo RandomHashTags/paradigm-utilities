@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NationalBirds : SovereignStateNationalValue {
-    public typealias TranslationKeys = NationalBirdsTranslationKeys
+    public typealias ValueKeys = NationalBirdsValueKeys
     
     public var pictures:[WikipediaPicture], sources:EventSources?
     
@@ -17,13 +17,13 @@ public struct NationalBirds : SovereignStateNationalValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: NationalBirdsTranslationKeys) -> Any? {
+    public func getKeyValue(key: NationalBirdsValueKeys) -> Any? {
         switch key {
         case .pictures: return pictures
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: NationalBirdsTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: NationalBirdsValueKeys, value: T) {
         switch key {
         case .pictures:
             pictures = value as! [WikipediaPicture]
@@ -35,7 +35,14 @@ public struct NationalBirds : SovereignStateNationalValue {
     }
 }
 
-public enum NationalBirdsTranslationKeys : String, JsonableTranslationKey {
+public enum NationalBirdsValueKeys : String, JsonableValueKeys {
     case pictures
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .pictures, .sources:
+            return true
+        }
+    }
 }

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreNationalPark : SovereignStateInformationValue {
-    public typealias TranslationKeys = PreNationalParkTranslationKeys
+    public typealias ValueKeys = PreNationalParkValueKeys
     
     public let id:String
     public var name:String
@@ -24,20 +24,39 @@ public struct PreNationalPark : SovereignStateInformationValue {
         sources = nil
     }
     
-    public func getTranslationKeyValue(key: PreNationalParkTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreNationalParkValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .name: return name
+        case .imageURL: return imageURL
+        case .country: return country
+        case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreNationalParkTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreNationalParkValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
+            break
+        default:
             break
         }
     }
 }
 
-public enum PreNationalParkTranslationKeys : String, JsonableTranslationKey {
+public enum PreNationalParkValueKeys : String, JsonableValueKeys {
+    case id
     case name
+    case imageURL
+    case country
+    case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name:
+            return true
+        default:
+            return false
+        }
+    }
 }

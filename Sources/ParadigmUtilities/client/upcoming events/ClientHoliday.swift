@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientHoliday : Jsonable {
-    public typealias TranslationKeys = ClientHolidayTranslationKeys
+    public typealias ValueKeys = ClientHolidayValueKeys
     
     public let response_version:Int, id:String
     public var name:String, description:String, aliases:[String]?
@@ -26,14 +26,19 @@ public struct ClientHoliday : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: ClientHolidayTranslationKeys) -> Any? {
+    public func getKeyValue(key: ClientHolidayValueKeys) -> Any? {
         switch key {
+        case .response_version: return response_version
+        case .id: return id
         case .name: return name
         case .description: return description
         case .aliases: return aliases
+        case .imageURL: return imageURL
+        case .type: return type
+        case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: ClientHolidayTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ClientHolidayValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
@@ -44,12 +49,28 @@ public struct ClientHoliday : Jsonable {
         case .aliases:
             aliases = value as? [String]
             break
+        default:
+            break
         }
     }
 }
 
-public enum ClientHolidayTranslationKeys : String, JsonableTranslationKey {
+public enum ClientHolidayValueKeys : String, JsonableValueKeys {
+    case response_version
+    case id
     case name
     case description
     case aliases
+    case imageURL
+    case type
+    case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name, .description, .aliases, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

@@ -23,10 +23,9 @@ final class ParadigmUtilitiesTests: XCTestCase {
         
         var decoded:TestBro = try ZippyJSONDecoder().decode(TestBro.self, from: data)
         XCTAssert(decoded.toString()!.elementsEqual(string))
-        var dud:CodableOmittable<String> = decoded.getOmittableKeyValue(key: .small_boy) as! CodableOmittable<String>
-        dud.omitted = false
-        decoded.setOmittableKeyValue(key: .small_boy, value: dud)
-        XCTAssert(decoded.toString()!.elementsEqual(string) == false)
+        decoded.setOmittKeyValue(.small_boy, value: false)
+        let decodedString:String = decoded.toString()!
+        XCTAssert(decodedString.elementsEqual(string) == false, decodedString)
     }
     
     private func testSovereignStateInformation(_ decoder: ZippyJSONDecoder) throws {
@@ -66,42 +65,47 @@ final class ParadigmUtilitiesTests: XCTestCase {
 }
 
 private struct TestBro : Jsonable {
-    typealias TranslationKeys = TestBroTranslationKeys
-    typealias OmittableKeys = TestBroOmittableKeys
+    typealias ValueKeys = TestBroValueKeys
     
     var big_boy:String
     let number:Int
     @CodableOmittable var small_boy:String?
     
-    func getTranslationKeyValue(key: TestBroTranslationKeys) -> Any? {
+    func getKeyValue(key: TestBroValueKeys) -> Any? {
         switch key {
         case .big_boy: return big_boy
+        case .small_boy: return _small_boy
         }
     }
-    mutating func setTranslationKeyValue<T>(key: TestBroTranslationKeys, value: T) {
+    mutating func setKeyValue<T>(key: TestBroValueKeys, value: T) {
         switch key {
         case .big_boy:
             big_boy = value as! String
             break
-        }
-    }
-    
-    func getOmittableKeyValue(key: TestBroOmittableKeys) -> (any CodableOmittableProtocol)? {
-        switch key {
-        case .small_boy: return _small_boy
-        }
-    }
-    mutating func setOmittableKeyValue<T: CodableOmittableProtocol>(key: TestBroOmittableKeys, value: T) {
-        switch key {
         case .small_boy:
             _small_boy = value as! CodableOmittable<String>
             break
         }
     }
 }
-private enum TestBroTranslationKeys : String, JsonableTranslationKey {
+private enum TestBroValueKeys : String, JsonableValueKeys {
     case big_boy
-}
-private enum TestBroOmittableKeys : String, JsonableOmittableKey {
     case small_boy
+    
+    func isTranslatable() -> Bool {
+        switch self {
+        case .big_boy:
+            return true
+        default:
+            return false
+        }
+    }
+    func isOmittable() -> Bool {
+        switch self {
+        case .small_boy:
+            return true
+        default:
+            return false
+        }
+    }
 }

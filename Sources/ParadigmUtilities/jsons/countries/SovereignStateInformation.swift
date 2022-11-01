@@ -9,8 +9,7 @@ import Foundation
 import ZippyJSON
 
 public final class SovereignStateInformation : Jsonable {
-    public typealias TranslationKeys = SovereignStateInformationTranslationKeys
-    public typealias OmittableKeys = SovereignStateInformationOmittableKeys
+    public typealias ValueKeys = SovereignStateInformationValueKeys
     
     public static func == (lhs: SovereignStateInformation, rhs: SovereignStateInformation) -> Bool {
         return lhs.administration == rhs.administration && lhs._static == rhs._static && lhs.nonstatic == rhs.nonstatic
@@ -27,35 +26,19 @@ public final class SovereignStateInformation : Jsonable {
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(administration)
-        hasher.combine(_static)
+        hasher.combine(_administration)
+        hasher.combine(__static)
         hasher.combine(nonstatic)
     }
     
-    public func getTranslationKeyValue(key: SovereignStateInformationTranslationKeys) -> Any? {
-        switch key {
-        case ._static: return _static
-        case .nonstatic: return nonstatic
-        }
-    }
-    public func setTranslationKeyValue<T>(key: SovereignStateInformationTranslationKeys, value: T) {
-        switch key {
-        case ._static:
-            __static = CodableOmittable(value as? SovereignStateStaticInformation)
-            break
-        case .nonstatic:
-            nonstatic = value as? SovereignStateNonStaticInformation
-            break
-        }
-    }
-    
-    public func getOmittableKeyValue(key: SovereignStateInformationOmittableKeys) -> (any CodableOmittableProtocol)? {
+    public func getKeyValue(key: SovereignStateInformationValueKeys) -> Any? {
         switch key {
         case .administration: return _administration
         case ._static: return __static
+        case .nonstatic: return nonstatic
         }
     }
-    public func setOmittableKeyValue<T: CodableOmittableProtocol>(key: SovereignStateInformationOmittableKeys, value: T) {
+    public func setKeyValue<T>(key: SovereignStateInformationValueKeys, value: T) {
         switch key {
         case .administration:
             _administration = value as! CodableOmittable<ClientGovernmentAdministration>
@@ -63,15 +46,32 @@ public final class SovereignStateInformation : Jsonable {
         case ._static:
             __static = value as! CodableOmittable<SovereignStateStaticInformation>
             break
+        case .nonstatic:
+            nonstatic = value as? SovereignStateNonStaticInformation
+            break
         }
     }
 }
 
-public enum SovereignStateInformationTranslationKeys : String, JsonableTranslationKey {
-    case _static
-    case nonstatic
-}
-public enum SovereignStateInformationOmittableKeys : String, JsonableOmittableKey {
+public enum SovereignStateInformationValueKeys : String, JsonableValueKeys {
     case administration
     case _static
+    case nonstatic
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case ._static, .nonstatic:
+            return true
+        default:
+            return false
+        }
+    }
+    public func isOmittable() -> Bool {
+        switch self {
+        case .administration, ._static:
+            return true
+        default:
+            return false
+        }
+    }
 }

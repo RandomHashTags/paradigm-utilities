@@ -8,7 +8,7 @@
 import Foundation
 
 public struct PreEnactedBill : Jsonable {
-    public typealias TranslationKeys = PreEnactedBillTranslationKeys
+    public typealias ValueKeys = PreEnactedBillValueKeys
     
     public let id:String
     public var title:String
@@ -21,20 +21,37 @@ public struct PreEnactedBill : Jsonable {
         self.status = status.wrapped()
     }
     
-    public func getTranslationKeyValue(key: PreEnactedBillTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreEnactedBillValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .title: return title
+        case .chamber: return chamber
+        case .status: return status
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreEnactedBillTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreEnactedBillValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
+            break
+        default:
             break
         }
     }
 }
 
-public enum PreEnactedBillTranslationKeys : String, JsonableTranslationKey {
+public enum PreEnactedBillValueKeys : String, JsonableValueKeys {
+    case id
     case title
+    case chamber
+    case status
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .title:
+            return true
+        default:
+            return false
+        }
+    }
 }

@@ -8,8 +8,7 @@
 import Foundation
 
 public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
-    public typealias TranslationKeys = HomeResponseUpcomingEventsTranslationKeys
-    public typealias OmittableKeys = HomeResponseUpcomingEventsOmittableKeys
+    public typealias ValueKeys = HomeResponseUpcomingEventsValueKeys
     
     public static func == (lhs: HomeResponseUpcomingEvents, rhs: HomeResponseUpcomingEvents) -> Bool {
         return lhs.holidays_near == rhs.holidays_near && lhs.events == rhs.events && lhs.movie_production_companies == rhs.movie_production_companies
@@ -27,17 +26,17 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
     public func hash(into hasher: inout Hasher) {
         hasher.combine(holidays_near)
         hasher.combine(events)
-        hasher.combine(movie_production_companies)
+        hasher.combine(_movie_production_companies)
     }
     
-    public func getTranslationKeyValue(key: HomeResponseUpcomingEventsTranslationKeys) -> Any? {
+    public func getKeyValue(key: HomeResponseUpcomingEventsValueKeys) -> Any? {
         switch key {
         case .holidays_near: return holidays_near
         case .events: return events
-        case .movie_production_companies: return movie_production_companies
+        case .movie_production_companies: return _movie_production_companies
         }
     }
-    public func setTranslationKeyValue<T>(key: HomeResponseUpcomingEventsTranslationKeys, value: T) {
+    public func setKeyValue<T>(key: HomeResponseUpcomingEventsValueKeys, value: T) {
         switch key {
         case .holidays_near:
             holidays_near = value as? [EventDate:[PreHoliday]]
@@ -46,19 +45,6 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
             events = value as? [UpcomingEventType:[PreUpcomingEvent]]
             break
         case .movie_production_companies:
-            _movie_production_companies = CodableOmittable(value as? MovieProductionCompaniesResponse)
-            break
-        }
-    }
-    
-    public func getOmittableKeyValue(key: HomeResponseUpcomingEventsOmittableKeys) -> (any CodableOmittableProtocol)? {
-        switch key {
-        case .movie_production_companies: return _movie_production_companies
-        }
-    }
-    public func setOmittableKeyValue<T: CodableOmittableProtocol>(key: HomeResponseUpcomingEventsOmittableKeys, value: T) {
-        switch key {
-        case .movie_production_companies:
             _movie_production_companies = value as! CodableOmittable<MovieProductionCompaniesResponse>
             break
         }
@@ -66,11 +52,23 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
 }
 
 
-public enum HomeResponseUpcomingEventsTranslationKeys : String, JsonableTranslationKey {
+public enum HomeResponseUpcomingEventsValueKeys : String, JsonableValueKeys {
     case holidays_near
     case events
     case movie_production_companies
-}
-public enum HomeResponseUpcomingEventsOmittableKeys : String, JsonableOmittableKey {
-    case movie_production_companies
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .holidays_near, .events, .movie_production_companies:
+            return true
+        }
+    }
+    public func isOmittable() -> Bool {
+        switch self {
+        case .movie_production_companies:
+            return true
+        default:
+            return false
+        }
+    }
 }

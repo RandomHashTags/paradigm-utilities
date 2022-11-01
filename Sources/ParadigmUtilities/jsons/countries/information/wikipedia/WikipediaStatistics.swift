@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatistics : Jsonable {
-    public typealias TranslationKeys = WikipediaStatisticsTranslationKeys
+    public typealias ValueKeys = WikipediaStatisticsValueKeys
     
     public var area:WikipediaStatisticsArea?
     public var elevation:WikipediaStatisticsElevation?
@@ -24,15 +24,16 @@ public struct WikipediaStatistics : Jsonable {
         self.governmentURL = governmentURL
     }
     
-    public func getTranslationKeyValue(key: WikipediaStatisticsTranslationKeys) -> Any? {
+    public func getKeyValue(key: WikipediaStatisticsValueKeys) -> Any? {
         switch key {
         case .area: return area
         case .elevation: return elevation
         case .dimensions: return dimensions
         case .population: return population
+        case .governmentURL: return governmentURL
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WikipediaStatisticsValueKeys, value: T) {
         switch key {
         case .area:
             area = value as? WikipediaStatisticsArea
@@ -46,13 +47,25 @@ public struct WikipediaStatistics : Jsonable {
         case .population:
             population = value as? WikipediaStatisticsPopulation
             break
+        default:
+            break
         }
     }
 }
 
-public enum WikipediaStatisticsTranslationKeys : String, JsonableTranslationKey {
+public enum WikipediaStatisticsValueKeys : String, JsonableValueKeys {
     case area
     case elevation
     case dimensions
     case population
+    case governmentURL
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .area, .elevation, .dimensions, .population:
+            return true
+        default:
+            return false
+        }
+    }
 }

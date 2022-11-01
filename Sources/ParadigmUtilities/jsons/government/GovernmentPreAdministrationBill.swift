@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct GovernmentPreAdministrationBill : Jsonable {
-    public typealias TranslationKeys = GovernmentPreAdministrationBillTranslationKeys
+    public typealias ValueKeys = GovernmentPreAdministrationBillValueKeys
     
     public let chamber:GovernmentChamberWrapper, statuses:[GovernmentBillStatusWrapper], id:String
     public var title:String, committees:String?, notes:String?
@@ -25,14 +25,18 @@ public struct GovernmentPreAdministrationBill : Jsonable {
         self.date = date
     }
     
-    public func getTranslationKeyValue(key: GovernmentPreAdministrationBillTranslationKeys) -> Any? {
+    public func getKeyValue(key: GovernmentPreAdministrationBillValueKeys) -> Any? {
         switch key {
+        case .chamber: return chamber
+        case .statuses: return statuses
+        case .id: return id
         case .title: return title
         case .committees: return committees
         case .notes: return notes
+        case .date: return date
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: GovernmentPreAdministrationBillTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: GovernmentPreAdministrationBillValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -43,12 +47,27 @@ public struct GovernmentPreAdministrationBill : Jsonable {
         case .notes:
             notes = value as? String
             break
+        default:
+            break
         }
     }
 }
 
-public enum GovernmentPreAdministrationBillTranslationKeys : String, JsonableTranslationKey {
+public enum GovernmentPreAdministrationBillValueKeys : String, JsonableValueKeys {
+    case chamber
+    case statuses
+    case id
     case title
     case committees
     case notes
+    case date
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .title, .committees, .notes:
+            return true
+        default:
+            return false
+        }
+    }
 }

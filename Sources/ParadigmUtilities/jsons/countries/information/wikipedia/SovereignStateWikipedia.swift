@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateWikipedia : SovereignStateInformationValue {
-    public typealias TranslationKeys = SovereignStateWikipediaTranslationKeys
+    public typealias ValueKeys = SovereignStateWikipediaValueKeys
     
     public var paragraph:String
     public let url:String
@@ -22,14 +22,15 @@ public struct SovereignStateWikipedia : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateWikipediaTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateWikipediaValueKeys) -> Any? {
         switch key {
         case .paragraph: return paragraph
+        case .url: return url
         case .statistics: return statistics
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateWikipediaTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateWikipediaValueKeys, value: T) {
         switch key {
         case .paragraph:
             paragraph = value as! String
@@ -40,12 +41,24 @@ public struct SovereignStateWikipedia : SovereignStateInformationValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum SovereignStateWikipediaTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateWikipediaValueKeys : String, JsonableValueKeys {
     case paragraph
+    case url
     case statistics
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .paragraph, .statistics, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

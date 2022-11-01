@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsDimensions : Jsonable {
-    public typealias TranslationKeys = WikipediaStatisticsDimensionsTranslationKeys
+    public typealias ValueKeys = WikipediaStatisticsDimensionsValueKeys
     
     public var length:String?, width:String?
     
@@ -17,13 +17,13 @@ public struct WikipediaStatisticsDimensions : Jsonable {
         self.width = width
     }
     
-    public func getTranslationKeyValue(key: WikipediaStatisticsDimensionsTranslationKeys) -> Any? {
+    public func getKeyValue(key: WikipediaStatisticsDimensionsValueKeys) -> Any? {
         switch key {
         case .length: return length
         case .width: return width
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsDimensionsTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WikipediaStatisticsDimensionsValueKeys, value: T) {
         switch key {
         case .length:
             length = value as? String
@@ -35,7 +35,14 @@ public struct WikipediaStatisticsDimensions : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsDimensionsTranslationKeys : String, JsonableTranslationKey {
+public enum WikipediaStatisticsDimensionsValueKeys : String, JsonableValueKeys {
     case length
     case width
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .length, .width:
+            return true
+        }
+    }
 }

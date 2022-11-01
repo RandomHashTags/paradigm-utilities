@@ -8,7 +8,7 @@
 import Foundation
 
 public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
-    public typealias TranslationKeys = PreMovieProductionCompanyTranslationKeys
+    public typealias ValueKeys = PreMovieProductionCompanyValueKeys
     
     public let id:String
     public var name:String, aliases:[String]?
@@ -21,13 +21,15 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
         self.imageURL = imageURL
     }
     
-    public func getTranslationKeyValue(key: PreMovieProductionCompanyTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreMovieProductionCompanyValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .name: return name
         case .aliases: return aliases
+        case .imageURL: return imageURL
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreMovieProductionCompanyTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreMovieProductionCompanyValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
@@ -35,11 +37,24 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
         case .aliases:
             aliases = value as? [String]
             break
+        default:
+            break
         }
     }
 }
 
-public enum PreMovieProductionCompanyTranslationKeys : String, JsonableTranslationKey {
+public enum PreMovieProductionCompanyValueKeys : String, JsonableValueKeys {
+    case id
     case name
     case aliases
+    case imageURL
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name, .aliases:
+            return true
+        default:
+            return false
+        }
+    }
 }

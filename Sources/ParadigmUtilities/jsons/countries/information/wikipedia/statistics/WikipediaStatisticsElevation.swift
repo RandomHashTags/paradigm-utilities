@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsElevation : Jsonable {
-    public typealias TranslationKeys = WikipediaStatisticsElevationTranslationKeys
+    public typealias ValueKeys = WikipediaStatisticsElevationValueKeys
     
     public var lowest:String?, highest:String?, median:String?
     
@@ -18,14 +18,14 @@ public struct WikipediaStatisticsElevation : Jsonable {
         self.median = median
     }
     
-    public func getTranslationKeyValue(key: WikipediaStatisticsElevationTranslationKeys) -> Any? {
+    public func getKeyValue(key: WikipediaStatisticsElevationValueKeys) -> Any? {
         switch key {
         case .lowest: return lowest
         case .highest: return highest
         case .median: return median
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsElevationTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WikipediaStatisticsElevationValueKeys, value: T) {
         switch key {
         case .lowest:
             lowest = value as? String
@@ -40,8 +40,15 @@ public struct WikipediaStatisticsElevation : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsElevationTranslationKeys : String, JsonableTranslationKey {
+public enum WikipediaStatisticsElevationValueKeys : String, JsonableValueKeys {
     case lowest
     case highest
     case median
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .lowest, .highest, .median:
+            return true
+        }
+    }
 }

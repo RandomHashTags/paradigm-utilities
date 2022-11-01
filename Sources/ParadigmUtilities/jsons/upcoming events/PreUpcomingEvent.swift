@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreUpcomingEvent : UpcomingEventProtocol {
-    public typealias TranslationKeys = PreUpcomingEventTranslationKeys
+    public typealias ValueKeys = PreUpcomingEventValueKeys
     
     public let type:UpcomingEventType, id:String?, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
     public var title:String, tag:String
@@ -41,16 +41,28 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         self.homeTeam = homeTeam
     }
     
-    public func getTranslationKeyValue(key: PreUpcomingEventTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreUpcomingEventValueKeys) -> Any? {
         switch key {
+        case .type: return type
+        case .id: return id
+        case .eventDate: return eventDate
+        case .exactStartMilliseconds: return exactStartMilliseconds
+        case .exactEndMilliseconds: return exactEndMilliseconds
         case .title: return title
         case .tag: return tag
+        case .imageURL: return imageURL
+        case .countries: return countries
+        case .subdivisions: return subdivisions
         case .customTypeSingularName: return customTypeSingularName
+        case .clientEmoji: return clientEmoji
+        case .url: return url
+        case .productionCompanies: return productionCompanies
+        case .popularity: return popularity
         case .awayTeam: return awayTeam
         case .homeTeam: return homeTeam
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreUpcomingEventTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreUpcomingEventValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -67,14 +79,37 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         case .homeTeam:
             homeTeam = value as? ClientMLBTeam
             break
+        default:
+            break
         }
     }
 }
 
-public enum PreUpcomingEventTranslationKeys : String, JsonableTranslationKey {
+public enum PreUpcomingEventValueKeys : String, JsonableValueKeys {
+    case type
+    case id
+    case eventDate
+    case exactStartMilliseconds
+    case exactEndMilliseconds
     case title
     case tag
+    case imageURL
+    case countries
+    case subdivisions
     case customTypeSingularName
+    case clientEmoji
+    case url
+    case productionCompanies
+    case popularity
     case awayTeam
     case homeTeam
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .title, .tag, .customTypeSingularName, .awayTeam, .homeTeam:
+            return true
+        default:
+            return false
+        }
+    }
 }

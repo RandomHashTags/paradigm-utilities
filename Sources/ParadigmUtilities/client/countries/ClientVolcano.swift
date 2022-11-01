@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ClientVolcano : Jsonable {
-    public typealias TranslationKeys = ClientVolcanoTranslationKeys
+    public typealias ValueKeys = ClientVolcanoValueKeys
     
     public let id:String
     public var name:String
@@ -28,14 +28,18 @@ public struct ClientVolcano : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: ClientVolcanoTranslationKeys) -> Any? {
+    public func getKeyValue(key: ClientVolcanoValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .name: return name
+        case .type: return type
         case .summary: return summary
+        case .imageURL: return imageURL
+        case .country: return country
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: ClientVolcanoTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ClientVolcanoValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
@@ -46,12 +50,27 @@ public struct ClientVolcano : Jsonable {
         case .sources:
             sources = value as! EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum ClientVolcanoTranslationKeys : String, JsonableTranslationKey {
+public enum ClientVolcanoValueKeys : String, JsonableValueKeys {
+    case id
     case name
+    case type
     case summary
+    case imageURL
+    case country
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name, .summary, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

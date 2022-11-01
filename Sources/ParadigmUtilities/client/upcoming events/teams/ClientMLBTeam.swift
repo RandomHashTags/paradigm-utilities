@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientMLBTeam : Jsonable {
-    public typealias TranslationKeys = ClientMLBTeamTranslationKeys
+    public typealias ValueKeys = ClientMLBTeamValueKeys
     
     public var name:String
     public let scheduleURL:String, logoURL:String, wikipediaURL:String
@@ -20,20 +20,37 @@ public struct ClientMLBTeam : Jsonable {
         self.wikipediaURL = wikipediaURL
     }
     
-    public func getTranslationKeyValue(key: ClientMLBTeamTranslationKeys) -> Any? {
+    public func getKeyValue(key: ClientMLBTeamValueKeys) -> Any? {
         switch key {
         case .name: return name
+        case .scheduleURL: return scheduleURL
+        case .logoURL: return logoURL
+        case .wikipediaURL: return wikipediaURL
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: ClientMLBTeamTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ClientMLBTeamValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
+            break
+        default:
             break
         }
     }
 }
 
-public enum ClientMLBTeamTranslationKeys : String, JsonableTranslationKey {
+public enum ClientMLBTeamValueKeys : String, JsonableValueKeys {
     case name
+    case scheduleURL
+    case logoURL
+    case wikipediaURL
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name:
+            return true
+        default:
+            return false
+        }
+    }
 }

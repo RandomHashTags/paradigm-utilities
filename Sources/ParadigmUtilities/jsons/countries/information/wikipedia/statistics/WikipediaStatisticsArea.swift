@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsArea : Jsonable {
-    public typealias TranslationKeys = WikipediaStatisticsAreaTranslationKeys
+    public typealias ValueKeys = WikipediaStatisticsAreaValueKeys
     
     public var total:String?, water:String?, land:String?
     
@@ -18,14 +18,14 @@ public struct WikipediaStatisticsArea : Jsonable {
         self.land = land
     }
     
-    public func getTranslationKeyValue(key: WikipediaStatisticsAreaTranslationKeys) -> Any? {
+    public func getKeyValue(key: WikipediaStatisticsAreaValueKeys) -> Any? {
         switch key {
         case .total: return total
         case .water: return water
         case .land: return land
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WikipediaStatisticsAreaTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WikipediaStatisticsAreaValueKeys, value: T) {
         switch key {
         case .total:
             total = value as? String
@@ -40,8 +40,15 @@ public struct WikipediaStatisticsArea : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsAreaTranslationKeys : String, JsonableTranslationKey {
+public enum WikipediaStatisticsAreaValueKeys : String, JsonableValueKeys {
     case total
     case water
     case land
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .total, .water, .land:
+            return true
+        }
+    }
 }

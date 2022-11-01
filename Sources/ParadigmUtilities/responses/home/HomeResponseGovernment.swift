@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public final class HomeResponseGovernment : HomeResponseProtocol {
-    public typealias TranslationKeys = HomeResponseGovernmentTranslationKeys
+    public typealias ValueKeys = HomeResponseGovernmentValueKeys
     
     public static func == (lhs: HomeResponseGovernment, rhs: HomeResponseGovernment) -> Bool {
         return lhs.recent_activity == rhs.recent_activity
@@ -25,12 +25,12 @@ public final class HomeResponseGovernment : HomeResponseProtocol {
         hasher.combine(recent_activity)
     }
     
-    public func getTranslationKeyValue(key: HomeResponseGovernmentTranslationKeys) -> Any? {
+    public func getKeyValue(key: HomeResponseGovernmentValueKeys) -> Any? {
         switch key {
         case .recent_activity: return recent_activity
         }
     }
-    public func setTranslationKeyValue<T>(key: HomeResponseGovernmentTranslationKeys, value: T) {
+    public func setKeyValue<T>(key: HomeResponseGovernmentValueKeys, value: T) {
         switch key {
         case .recent_activity:
             recent_activity = value as! [Country:[GovernmentRecentActivityResponse]]
@@ -39,6 +39,13 @@ public final class HomeResponseGovernment : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseGovernmentTranslationKeys : String, JsonableTranslationKey {
+public enum HomeResponseGovernmentValueKeys : String, JsonableValueKeys {
     case recent_activity
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .recent_activity:
+            return true
+        }
+    }
 }

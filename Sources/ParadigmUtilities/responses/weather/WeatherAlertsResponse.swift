@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WeatherAlertsResponse : Jsonable {
-    public typealias TranslationKeys = WeatherAlertsResponseTranslationKeys
+    public typealias ValueKeys = WeatherAlertsResponseValueKeys
     
     public var alerts:[WeatherEvent]?
     
@@ -17,12 +17,12 @@ public struct WeatherAlertsResponse : Jsonable {
         self.alerts = alerts
     }
     
-    public func getTranslationKeyValue(key: WeatherAlertsResponseTranslationKeys) -> Any? {
+    public func getKeyValue(key: WeatherAlertsResponseValueKeys) -> Any? {
         switch key {
         case .alerts: return alerts
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WeatherAlertsResponseTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WeatherAlertsResponseValueKeys, value: T) {
         switch key {
         case .alerts:
             alerts = value as? [WeatherEvent]
@@ -31,6 +31,13 @@ public struct WeatherAlertsResponse : Jsonable {
     }
 }
 
-public enum WeatherAlertsResponseTranslationKeys : String, JsonableTranslationKey {
+public enum WeatherAlertsResponseValueKeys : String, JsonableValueKeys {
     case alerts
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .alerts:
+            return true
+        }
+    }
 }

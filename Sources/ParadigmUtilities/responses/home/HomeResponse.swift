@@ -8,8 +8,7 @@
 import Foundation
 
 public final class HomeResponse : Jsonable {
-    public typealias TranslationKeys = HomeResponseTranslationKeys
-    public typealias OmittableKeys = HomeResponseOmittableKeys
+    public typealias ValueKeys = HomeResponseValueKeys
     
     public static func == (lhs: HomeResponse, rhs: HomeResponse) -> Bool {
         return lhs.countries == rhs.countries && lhs.government == rhs.government && lhs.stock_market == rhs.stock_market && lhs.upcoming_events == rhs.upcoming_events && lhs.weather == rhs.weather
@@ -32,31 +31,31 @@ public final class HomeResponse : Jsonable {
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(countries)
-        hasher.combine(government)
-        hasher.combine(stock_market)
+        hasher.combine(_government)
+        hasher.combine(_stock_market)
         hasher.combine(upcoming_events)
         hasher.combine(weather)
     }
     
-    public func getTranslationKeyValue(key: HomeResponseTranslationKeys) -> Any? {
+    public func getKeyValue(key: HomeResponseValueKeys) -> Any? {
         switch key {
         case .countries: return countries
-        case .government: return government
-        case .stock_market: return stock_market
+        case .government: return _government
+        case .stock_market: return _stock_market
         case .upcoming_events: return upcoming_events
         case .weather: return weather
         }
     }
-    public func setTranslationKeyValue<T>(key: HomeResponseTranslationKeys, value: T) {
+    public func setKeyValue<T>(key: HomeResponseValueKeys, value: T) {
         switch key {
         case .countries:
             countries = value as? HomeResponseCountries
             break
         case .government:
-            _government = CodableOmittable(value as? HomeResponseGovernment)
+            _government = value as! CodableOmittable<HomeResponseGovernment>
             break
         case .stock_market:
-            _stock_market = CodableOmittable(value as? HomeResponseStockMarket)
+            _stock_market = value as! CodableOmittable<HomeResponseStockMarket>
             break
         case .upcoming_events:
             upcoming_events = value as? HomeResponseUpcomingEvents
@@ -66,33 +65,27 @@ public final class HomeResponse : Jsonable {
             break
         }
     }
-    
-    public func getOmittableKeyValue(key: HomeResponseOmittableKeys) -> (any CodableOmittableProtocol)? {
-        switch key {
-        case .government: return _government
-        case .stock_market: return _stock_market
-        }
-    }
-    public func setOmittableKeyValue<T: CodableOmittableProtocol>(key: OmittableKeys, value: T) {
-        switch key {
-        case .government:
-            _government = value as! CodableOmittable<HomeResponseGovernment>
-            break
-        case .stock_market:
-            _stock_market = value as! CodableOmittable<HomeResponseStockMarket>
-            break
-        }
-    }
 }
 
-public enum HomeResponseTranslationKeys : String, JsonableTranslationKey {
+public enum HomeResponseValueKeys : String, JsonableValueKeys {
     case countries
     case government
     case stock_market
     case upcoming_events
     case weather
-}
-public enum HomeResponseOmittableKeys : String, JsonableOmittableKey {
-    case government
-    case stock_market
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .countries, .government, .stock_market, .upcoming_events, .weather:
+            return true
+        }
+    }
+    public func isOmittable() -> Bool {
+        switch self {
+        case .government, .stock_market:
+            return true
+        default:
+            return false
+        }
+    }
 }

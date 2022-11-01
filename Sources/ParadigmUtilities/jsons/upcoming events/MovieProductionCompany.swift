@@ -8,7 +8,7 @@
 import Foundation
 
 public struct MovieProductionCompany : MovieProductionCompanyProtocol {
-    public typealias TranslationKeys = MovieProductionCompanyTranslationKeys
+    public typealias ValueKeys = MovieProductionCompanyValueKeys
     
     public let response_version:Int, id:String
     public var name:String, aliases:[String]?, description:String
@@ -29,15 +29,18 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
         return PreMovieProductionCompany(id: id, name: name, aliases: aliases, imageURL: imageURL)
     }
     
-    public func getTranslationKeyValue(key: MovieProductionCompanyTranslationKeys) -> Any? {
+    public func getKeyValue(key: MovieProductionCompanyValueKeys) -> Any? {
         switch key {
+        case .response_version: return response_version
+        case .id: return id
         case .name: return name
         case .aliases: return aliases
         case .description: return description
+        case .imageURL: return imageURL
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: MovieProductionCompanyTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: MovieProductionCompanyValueKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
@@ -51,13 +54,27 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
         case .sources:
             sources = value as! EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum MovieProductionCompanyTranslationKeys : String, JsonableTranslationKey {
+public enum MovieProductionCompanyValueKeys : String, JsonableValueKeys {
+    case response_version
+    case id
     case name
     case aliases
     case description
+    case imageURL
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .name, .aliases, .description, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

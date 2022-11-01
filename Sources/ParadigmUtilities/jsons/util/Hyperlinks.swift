@@ -12,7 +12,7 @@ private enum CodingKeys: CodingKey {
     case hyperlinks
 }
 public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
-    public typealias TranslationKeys = HyperlinksTranslationKeys
+    public typealias ValueKeys = HyperlinksValueKeys
     
     public let imageURLPrefix:String
     
@@ -55,12 +55,12 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
         hyperlinks.append(contentsOf: newElements)
     }
     
-    public func getTranslationKeyValue(key: HyperlinksTranslationKeys) -> Any? {
+    public func getKeyValue(key: HyperlinksValueKeys) -> Any? {
         switch key {
         case .hyperlinks: return hyperlinks
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: HyperlinksTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: HyperlinksValueKeys, value: T) {
         switch key {
         case .hyperlinks:
             hyperlinks = value as! [Hyperlink]
@@ -69,6 +69,13 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     }
 }
 
-public enum HyperlinksTranslationKeys : String, JsonableTranslationKey {
+public enum HyperlinksValueKeys : String, JsonableValueKeys {
     case hyperlinks
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .hyperlinks:
+            return true
+        }
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateHistory : SovereignStateInformationValue {
-    public typealias TranslationKeys = SovereignStateHistoryTranslationKeys
+    public typealias ValueKeys = SovereignStateHistoryValueKeys
     
     public var summaryEvents:[HistoricalEvent], sources:EventSources?
     
@@ -17,13 +17,13 @@ public struct SovereignStateHistory : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateHistoryTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateHistoryValueKeys) -> Any? {
         switch key {
         case .summaryEvents: return summaryEvents
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateHistoryTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateHistoryValueKeys, value: T) {
         switch key {
         case .summaryEvents:
             summaryEvents = value as! [HistoricalEvent]
@@ -35,7 +35,14 @@ public struct SovereignStateHistory : SovereignStateInformationValue {
     }
 }
 
-public enum SovereignStateHistoryTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateHistoryValueKeys : String, JsonableValueKeys {
     case summaryEvents
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .summaryEvents, .sources:
+            return true
+        }
+    }
 }

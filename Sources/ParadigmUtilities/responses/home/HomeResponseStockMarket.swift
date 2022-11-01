@@ -8,8 +8,6 @@
 import Foundation
 
 public final class HomeResponseStockMarket : HomeResponseProtocol {
-    public typealias TranslationKeys = NoTranslationKeys
-    
     public static func == (lhs: HomeResponseStockMarket, rhs: HomeResponseStockMarket) -> Bool {
         return true
     }

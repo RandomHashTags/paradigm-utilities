@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GovernmentAdministrationBill : Jsonable {
-    public typealias TranslationKeys = GovernmentAdministrationBillTranslationKeys
+    public typealias ValueKeys = GovernmentAdministrationBillValueKeys
     
     public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
@@ -23,7 +23,7 @@ public struct GovernmentAdministrationBill : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: GovernmentAdministrationBillTranslationKeys) -> Any? {
+    public func getKeyValue(key: GovernmentAdministrationBillValueKeys) -> Any? {
         switch key {
         case .title: return title
         case .sponsor: return sponsor
@@ -35,7 +35,7 @@ public struct GovernmentAdministrationBill : Jsonable {
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: GovernmentAdministrationBillTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: GovernmentAdministrationBillValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -65,7 +65,7 @@ public struct GovernmentAdministrationBill : Jsonable {
     }
 }
 
-public enum GovernmentAdministrationBillTranslationKeys : String, JsonableTranslationKey {
+public enum GovernmentAdministrationBillValueKeys : String, JsonableValueKeys {
     case title
     case sponsor
     case summary
@@ -74,4 +74,8 @@ public enum GovernmentAdministrationBillTranslationKeys : String, JsonableTransl
     case cosponsors
     case actions
     case sources
+    
+    public func isTranslatable() -> Bool {
+        return true
+    }
 }

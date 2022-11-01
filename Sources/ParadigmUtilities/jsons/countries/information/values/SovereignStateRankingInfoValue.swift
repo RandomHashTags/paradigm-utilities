@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
-    public typealias TranslationKeys = SovereignStateRankingInfoValueTranslationKeys
+    public typealias ValueKeys = SovereignStateRankingInfoValueValueKeys
     
     public let info:SovereignStateInfo, defcon:Int
     public var worldRank:Int, maxWorldRank:Int
@@ -37,14 +37,22 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateRankingInfoValueTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateRankingInfoValueValueKeys) -> Any? {
         switch key {
+        case .info: return info
+        case .defcon: return defcon
+        case .worldRank: return worldRank
+        case .maxWorldRank: return maxWorldRank
+        case .yearOfData: return yearOfData
+        case .value: return value
+        case .valueType: return valueType
         case .suffix: return suffix
+        case .isEstimate: return isEstimate
         case .values: return values
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateRankingInfoValueTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueValueKeys, value: T) {
         switch key {
         case .suffix:
             suffix = value as? String
@@ -55,12 +63,31 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum SovereignStateRankingInfoValueTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateRankingInfoValueValueKeys : String, JsonableValueKeys {
+    case info
+    case defcon
+    case worldRank
+    case maxWorldRank
+    case yearOfData
+    case value
+    case valueType
     case suffix
+    case isEstimate
     case values
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .suffix, .values, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

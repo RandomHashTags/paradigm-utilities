@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct IMDbMovieDetails : Jsonable {
-    public typealias TranslationKeys = IMDbMovieDetailsTranslationKeys
+    public typealias ValueKeys = IMDbMovieDetailsValueKeys
     
     public let rating:String?
     public var rating_reason:String?
@@ -30,13 +30,19 @@ public struct IMDbMovieDetails : Jsonable {
         self.source = source
     }
     
-    public func getTranslationKeyValue(key: IMDbMovieDetailsTranslationKeys) -> Any? {
+    public func getKeyValue(key: IMDbMovieDetailsValueKeys) -> Any? {
         switch key {
+        case .rating: return rating
         case .rating_reason: return rating_reason
+        case .runtime_seconds: return runtime_seconds
         case .genres: return genres
+        case .imdb_rating: return imdb_rating
+        case .imageURL: return imageURL
+        case .countries: return countries
+        case .source: return source
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: IMDbMovieDetailsTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: IMDbMovieDetailsValueKeys, value: T) {
         switch key {
         case .rating_reason:
             rating_reason = value as? String
@@ -44,11 +50,28 @@ public struct IMDbMovieDetails : Jsonable {
         case .genres:
             genres = value as? [String]
             break
+        default:
+            break
         }
     }
 }
 
-public enum IMDbMovieDetailsTranslationKeys : String, JsonableTranslationKey {
+public enum IMDbMovieDetailsValueKeys : String, JsonableValueKeys {
+    case rating
     case rating_reason
+    case runtime_seconds
     case genres
+    case imdb_rating
+    case imageURL
+    case countries
+    case source
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .rating_reason, .genres:
+            return true
+        default:
+            return false
+        }
+    }
 }

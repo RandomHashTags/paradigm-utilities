@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreEarthquake : Jsonable {
-    public typealias TranslationKeys = PreEarthquakeTranslationKeys
+    public typealias ValueKeys = PreEarthquakeValueKeys
     
     public let id:String
     public var place:String
@@ -21,20 +21,35 @@ public struct PreEarthquake : Jsonable {
         self.city = city?.wrapped()
     }
     
-    public func getTranslationKeyValue(key: PreEarthquakeTranslationKeys) -> Any? {
+    public func getKeyValue(key: PreEarthquakeValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .place: return place
+        case .city: return city
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: PreEarthquakeTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: PreEarthquakeValueKeys, value: T) {
         switch key {
         case .place:
             place = value as! String
+            break
+        default:
             break
         }
     }
 }
 
-public enum PreEarthquakeTranslationKeys : String, JsonableTranslationKey {
+public enum PreEarthquakeValueKeys : String, JsonableValueKeys {
+    case id
     case place
+    case city
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .place:
+            return true
+        default:
+            return false
+        }
+    }
 }

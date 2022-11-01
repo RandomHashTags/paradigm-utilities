@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GovernmentRecentActivityResponse : Jsonable {
-    public typealias TranslationKeys = GovernmentRecentActivityResponseTranslationKeys
+    public typealias ValueKeys = GovernmentRecentActivityResponseValueKeys
     
     public var recent_activity:[GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]
     
@@ -16,12 +16,12 @@ public struct GovernmentRecentActivityResponse : Jsonable {
         self.recent_activity = recent_activity
     }
     
-    public func getTranslationKeyValue(key: GovernmentRecentActivityResponseTranslationKeys) -> Any? {
+    public func getKeyValue(key: GovernmentRecentActivityResponseValueKeys) -> Any? {
         switch key {
         case .recent_activity: return recent_activity
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: GovernmentRecentActivityResponseTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: GovernmentRecentActivityResponseValueKeys, value: T) {
         switch key {
         case .recent_activity:
             recent_activity = value as! [GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]
@@ -30,6 +30,13 @@ public struct GovernmentRecentActivityResponse : Jsonable {
     }
 }
 
-public enum GovernmentRecentActivityResponseTranslationKeys : String, JsonableTranslationKey {
+public enum GovernmentRecentActivityResponseValueKeys : String, JsonableValueKeys {
     case recent_activity
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .recent_activity:
+            return true
+        }
+    }
 }

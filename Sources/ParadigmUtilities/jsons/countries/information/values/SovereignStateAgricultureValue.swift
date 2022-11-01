@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
-    public typealias TranslationKeys = SovereignStateAgricultureValueTranslationKeys
+    public typealias ValueKeys = SovereignStateAgricultureValueValueKeys
     
     public let info:SovereignStateInfo, worldRank:Int
     public var maxWorldRank:Int
@@ -29,13 +29,20 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateAgricultureValueTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateAgricultureValueValueKeys) -> Any? {
         switch key {
+        case .info: return info
+        case .worldRank: return worldRank
+        case .maxWorldRank: return maxWorldRank
+        case .yearOfData: return yearOfData
+        case .value: return value
+        case .valueType: return valueType
         case .suffix: return suffix
+        case .isEstimate: return isEstimate
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateAgricultureValueTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateAgricultureValueValueKeys, value: T) {
         switch key {
         case .suffix:
             suffix = value as? String
@@ -43,11 +50,29 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum SovereignStateAgricultureValueTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateAgricultureValueValueKeys : String, JsonableValueKeys {
+    case info
+    case worldRank
+    case maxWorldRank
+    case yearOfData
+    case value
+    case valueType
     case suffix
+    case isEstimate
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .suffix, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

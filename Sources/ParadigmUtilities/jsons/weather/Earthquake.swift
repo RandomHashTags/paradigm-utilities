@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct Earthquake : Jsonable {
-    public typealias TranslationKeys = EarthquakeTranslationKeys
+    public typealias ValueKeys = EarthquakeValueKeys
     
     public let country:Country?, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?
     public var cause:String
@@ -30,13 +30,22 @@ public struct Earthquake : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: EarthquakeTranslationKeys) -> Any? {
+    public func getKeyValue(key: EarthquakeValueKeys) -> Any? {
         switch key {
+        case .country: return country
+        case .subdivision: return subdivision
+        case .city: return city
         case .cause: return cause
+        case .magnitude: return magnitude
+        case .place: return place
+        case .exactTimeMilliseconds: return exactTimeMilliseconds
+        case .lastUpdated: return lastUpdated
+        case .depthKM: return depthKM
+        case .location: return location
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: EarthquakeTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: EarthquakeValueKeys, value: T) {
         switch key {
         case .cause:
             cause = value as! String
@@ -44,11 +53,31 @@ public struct Earthquake : Jsonable {
         case .sources:
             sources = value as! EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum EarthquakeTranslationKeys : String, JsonableTranslationKey {
+public enum EarthquakeValueKeys : String, JsonableValueKeys {
+    case country
+    case subdivision
+    case city
     case cause
+    case magnitude
+    case place
+    case exactTimeMilliseconds
+    case lastUpdated
+    case depthKM
+    case location
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .cause, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

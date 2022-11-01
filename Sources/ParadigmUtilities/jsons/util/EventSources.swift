@@ -12,7 +12,7 @@ public final class EventSources : Jsonable {
         return lhs.sources.elementsEqual(rhs.sources)
     }
     
-    public typealias TranslationKeys = EventSourcesTranslationKeys
+    public typealias ValueKeys = EventSourcesValueKeys
     
     private var sources:[EventSource]
     
@@ -71,12 +71,12 @@ public final class EventSources : Jsonable {
         return sources.first(where: { $0.siteName.lowercased().starts(with: "wikipedia: ") })
     }
     
-    public func getTranslationKeyValue(key: EventSourcesTranslationKeys) -> Any? {
+    public func getKeyValue(key: EventSourcesValueKeys) -> Any? {
         switch key {
         case .sources: return sources
         }
     }
-    public func setTranslationKeyValue<T>(key: EventSourcesTranslationKeys, value: T) {
+    public func setKeyValue<T>(key: EventSourcesValueKeys, value: T) {
         switch key {
         case .sources:
             sources = value as! [EventSource]
@@ -85,6 +85,13 @@ public final class EventSources : Jsonable {
     }
 }
 
-public enum EventSourcesTranslationKeys : String, JsonableTranslationKey {
+public enum EventSourcesValueKeys : String, JsonableValueKeys {
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .sources:
+            return true
+        }
+    }
 }

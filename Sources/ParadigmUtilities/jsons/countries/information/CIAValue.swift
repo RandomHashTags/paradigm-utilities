@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CIAValue : SovereignStateInformationValue {
-    public typealias TranslationKeys = CIAValueTranslationKeys
+    public typealias ValueKeys = CIAValueValueKeys
     
     public let id:String
     public var title:String, value:String, sources:EventSources?
@@ -20,15 +20,16 @@ public struct CIAValue : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: CIAValueTranslationKeys) -> Any? {
+    public func getKeyValue(key: CIAValueValueKeys) -> Any? {
         switch key {
+        case .id: return id
         case .title: return title
         case .value: return value
         case .sources: return sources
         }
     }
     
-    public mutating func setTranslationKeyValue<T>(key: CIAValueTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: CIAValueValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -39,12 +40,24 @@ public struct CIAValue : SovereignStateInformationValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum CIAValueTranslationKeys : String, JsonableTranslationKey {
+public enum CIAValueValueKeys : String, JsonableValueKeys {
+    case id
     case title
     case value
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .title, .value, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

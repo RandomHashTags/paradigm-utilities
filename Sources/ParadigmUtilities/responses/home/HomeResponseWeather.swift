@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public final class HomeResponseWeather : HomeResponseProtocol {
-    public typealias TranslationKeys = HomeResponseWeatherTranslationKeys
+    public typealias ValueKeys = HomeResponseWeatherValueKeys
     
     public static func == (lhs: HomeResponseWeather, rhs: HomeResponseWeather) -> Bool {
         return lhs.alerts == rhs.alerts && lhs.earthquakes == rhs.earthquakes && lhs.natural_events == rhs.natural_events
@@ -32,14 +32,14 @@ public final class HomeResponseWeather : HomeResponseProtocol {
         hasher.combine(natural_events)
     }
     
-    public func getTranslationKeyValue(key: HomeResponseWeatherTranslationKeys) -> Any? {
+    public func getKeyValue(key: HomeResponseWeatherValueKeys) -> Any? {
         switch key {
         case .alerts: return alerts
         case .earthquakes: return earthquakes
         case .natural_events: return natural_events
         }
     }
-    public func setTranslationKeyValue<T>(key: HomeResponseWeatherTranslationKeys, value: T) {
+    public func setKeyValue<T>(key: HomeResponseWeatherValueKeys, value: T) {
         switch key {
         case .alerts:
             alerts = value as? [Country:[WeatherEvent]]
@@ -54,8 +54,15 @@ public final class HomeResponseWeather : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseWeatherTranslationKeys : String, JsonableTranslationKey {
+public enum HomeResponseWeatherValueKeys : String, JsonableValueKeys {
     case alerts
     case earthquakes
     case natural_events
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .alerts, .earthquakes, .natural_events:
+            return true
+        }
+    }
 }

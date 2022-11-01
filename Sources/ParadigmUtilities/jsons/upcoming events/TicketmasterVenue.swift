@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct TicketmasterVenue : Jsonable {
-    public typealias TranslationKeys = TicketmasterVenueTranslationKeys
+    public typealias ValueKeys = TicketmasterVenueValueKeys
     
     public let name:String, imageURL:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?
     public var general_rule:String?, child_rule:String?, parking_detail:String?, accessible_seating_info:String?, url:String
@@ -28,15 +28,21 @@ public struct TicketmasterVenue : Jsonable {
         self.url = url
     }
     
-    public func getTranslationKeyValue(key: TicketmasterVenueTranslationKeys) -> Any? {
+    public func getKeyValue(key: TicketmasterVenueValueKeys) -> Any? {
         switch key {
+        case .name: return name
+        case .imageURL: return imageURL
+        case .country: return country
+        case .subdivision: return subdivision
+        case .city: return city
+        case .location: return location
         case .general_rule: return general_rule
         case .child_rule: return child_rule
         case .parking_detail: return parking_detail
         case .accessible_seating_info: return accessible_seating_info
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: TicketmasterVenueTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: TicketmasterVenueValueKeys, value: T) {
         switch key {
         case .general_rule:
             general_rule = value as? String
@@ -50,13 +56,30 @@ public struct TicketmasterVenue : Jsonable {
         case .accessible_seating_info:
             accessible_seating_info = value as? String
             break
+        default:
+            break
         }
     }
 }
 
-public enum TicketmasterVenueTranslationKeys : String, JsonableTranslationKey {
+public enum TicketmasterVenueValueKeys : String, JsonableValueKeys {
+    case name
+    case imageURL
+    case country
+    case subdivision
+    case city
+    case location
     case general_rule
     case child_rule
     case parking_detail
     case accessible_seating_info
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .general_rule, .child_rule, .parking_detail, .accessible_seating_info:
+            return true
+        default:
+            return false
+        }
+    }
 }

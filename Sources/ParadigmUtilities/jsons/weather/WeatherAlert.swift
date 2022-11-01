@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WeatherAlert : Jsonable {
-    public typealias TranslationKeys = WeatherAlertTranslationKeys
+    public typealias ValueKeys = WeatherAlertValueKeys
     
     public var event:String, certainty:String?, headline:String?, instruction:String?, description:String
     public let zones:[WeatherZone]
@@ -31,17 +31,21 @@ public struct WeatherAlert : Jsonable {
         self.source = source
     }
     
-    public func getTranslationKeyValue(key: WeatherAlertTranslationKeys) -> Any? {
+    public func getKeyValue(key: WeatherAlertValueKeys) -> Any? {
         switch key {
         case .event: return event
         case .certainty: return certainty
         case .headline: return headline
         case .instruction: return instruction
         case .description: return description
+        case .zones: return zones
+        case .subdivisions: return subdivisions
+        case .defcon: return defcon
+        case .time: return time
         case .source: return source
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WeatherAlertTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WeatherAlertValueKeys, value: T) {
         switch key {
         case .event:
             event = value as! String
@@ -61,15 +65,30 @@ public struct WeatherAlert : Jsonable {
         case .source:
             source = value as! EventSource
             break
+        default:
+            break
         }
     }
 }
 
-public enum WeatherAlertTranslationKeys : String, JsonableTranslationKey {
+public enum WeatherAlertValueKeys : String, JsonableValueKeys {
     case event
     case certainty
     case headline
     case instruction
     case description
+    case zones
+    case subdivisions
+    case defcon
+    case time
     case source
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .event, .certainty, .headline, .instruction, .description, .source:
+            return true
+        default:
+            return false
+        }
+    }
 }

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateNonStaticInformation : SovereignStateInformationValue {
-    public typealias TranslationKeys = SovereignStateNonStaticInformationTranslationKeys
+    public typealias ValueKeys = SovereignStateNonStaticInformationValueKeys
     
     public var travel_advisories:[TravelAdvisory]?, sources:EventSources?
     
@@ -17,13 +17,13 @@ public struct SovereignStateNonStaticInformation : SovereignStateInformationValu
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: SovereignStateNonStaticInformationTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateNonStaticInformationValueKeys) -> Any? {
         switch key {
         case .travel_advisories: return travel_advisories
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateNonStaticInformationTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateNonStaticInformationValueKeys, value: T) {
         switch key {
         case .travel_advisories:
             travel_advisories = value as? [TravelAdvisory]
@@ -35,7 +35,14 @@ public struct SovereignStateNonStaticInformation : SovereignStateInformationValu
     }
 }
 
-public enum SovereignStateNonStaticInformationTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateNonStaticInformationValueKeys : String, JsonableValueKeys {
     case travel_advisories
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .travel_advisories, .sources:
+            return true
+        }
+    }
 }

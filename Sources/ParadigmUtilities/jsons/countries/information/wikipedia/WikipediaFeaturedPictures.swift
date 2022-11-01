@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
-    public typealias TranslationKeys = WikipediaFeaturedPicturesTranslationKeys
+    public typealias ValueKeys = WikipediaFeaturedPicturesValueKeys
     
     public let imageURLPrefix:String
     public var pictures:[WikipediaPicture], sources:EventSources?
@@ -19,13 +19,14 @@ public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: WikipediaFeaturedPicturesTranslationKeys) -> Any? {
+    public func getKeyValue(key: WikipediaFeaturedPicturesValueKeys) -> Any? {
         switch key {
+        case .imageURLPrefix: return imageURLPrefix
         case .pictures: return pictures
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: WikipediaFeaturedPicturesTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: WikipediaFeaturedPicturesValueKeys, value: T) {
         switch key {
         case .pictures:
             pictures = value as! [WikipediaPicture]
@@ -33,11 +34,23 @@ public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum WikipediaFeaturedPicturesTranslationKeys : String, JsonableTranslationKey {
+public enum WikipediaFeaturedPicturesValueKeys : String, JsonableValueKeys {
+    case imageURLPrefix
     case pictures
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .pictures, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }

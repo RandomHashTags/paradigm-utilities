@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValueOther : Jsonable {
-    public typealias TranslationKeys = SovereignStateRankingInfoValueOtherTranslationKeys
+    public typealias ValueKeys = SovereignStateRankingInfoValueOtherValueKeys
     
     public let value:Double?, valueType:NumberType
     public var description:String, suffix:String?
@@ -26,13 +26,15 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
         self.suffix = suffix
     }
     
-    public func getTranslationKeyValue(key: SovereignStateRankingInfoValueOtherTranslationKeys) -> Any? {
+    public func getKeyValue(key: SovereignStateRankingInfoValueOtherValueKeys) -> Any? {
         switch key {
+        case .value: return value
+        case .valueType: return valueType
         case .description: return description
         case .suffix: return suffix
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: SovereignStateRankingInfoValueOtherTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueOtherValueKeys, value: T) {
         switch key {
         case .description:
             description = value as! String
@@ -40,11 +42,24 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
         case .suffix:
             suffix = value as? String
             break
+        default:
+            break
         }
     }
 }
 
-public enum SovereignStateRankingInfoValueOtherTranslationKeys : String, JsonableTranslationKey {
+public enum SovereignStateRankingInfoValueOtherValueKeys : String, JsonableValueKeys {
+    case value
+    case valueType
     case description
     case suffix
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .description, .suffix:
+            return true
+        default:
+            return false
+        }
+    }
 }

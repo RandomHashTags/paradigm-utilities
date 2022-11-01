@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ClientWikipediaEvent : Jsonable {
-    public typealias TranslationKeys = ClientWikipediaEventTranslationKeys
+    public typealias ValueKeys = ClientWikipediaEventValueKeys
     
     public let images:[String]?
     public var description:String, hyperlinks:Hyperlinks?
@@ -26,15 +26,18 @@ public struct ClientWikipediaEvent : Jsonable {
         self.sources = sources
     }
     
-    public func getTranslationKeyValue(key: ClientWikipediaEventTranslationKeys) -> Any? {
+    public func getKeyValue(key: ClientWikipediaEventValueKeys) -> Any? {
         switch key {
+        case .images: return images
         case .description: return description
         case .hyperlinks: return hyperlinks
+        case .countries: return countries
+        case .subdivisions: return subdivisions
         case .tags: return tags
         case .sources: return sources
         }
     }
-    public mutating func setTranslationKeyValue<T>(key: ClientWikipediaEventTranslationKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ClientWikipediaEventValueKeys, value: T) {
         switch key {
         case .description:
             description = value as! String
@@ -48,13 +51,27 @@ public struct ClientWikipediaEvent : Jsonable {
         case .sources:
             sources = value as? EventSources
             break
+        default:
+            break
         }
     }
 }
 
-public enum ClientWikipediaEventTranslationKeys : String, JsonableTranslationKey {
+public enum ClientWikipediaEventValueKeys : String, JsonableValueKeys {
+    case images
     case description
     case hyperlinks
+    case countries
+    case subdivisions
     case tags
     case sources
+    
+    public func isTranslatable() -> Bool {
+        switch self {
+        case .description, .hyperlinks, .tags, .sources:
+            return true
+        default:
+            return false
+        }
+    }
 }
