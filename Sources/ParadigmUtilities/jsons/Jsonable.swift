@@ -91,6 +91,15 @@ public extension JsonableProtocol {
         return String(data: data, encoding: .utf8)
     }
     
+    func getKeyValue(_ key: String) -> Any? {
+        guard let key:ValueKeys = ValueKeys(rawValue: key) else { return nil }
+        return getKeyValue(key: key)
+    }
+    mutating func setKeyValue<T>(_ key: String, value: T) {
+        guard let key:ValueKeys = ValueKeys(rawValue: key) else { return }
+        setKeyValue(key: key, value: value)
+    }
+    
     func getOmittableKeyValue(_ string: String) -> (any CodableOmittableProtocol)? {
         guard let key:ValueKeys = ValueKeys(rawValue: string) else { return nil }
         return getOmittableKeyValue(key)
