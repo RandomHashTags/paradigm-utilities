@@ -20,7 +20,7 @@ public final class HomeResponseWeather : HomeResponseProtocol {
     public var earthquakes:[Country?:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]?
     public var natural_events:NaturalWeatherEventsResponse?
     
-    public init(alerts: [Country:[WeatherEvent]]?, earthquakes: [Country:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]?, natural_events: NaturalWeatherEventsResponse?) {
+    public init(alerts: [Country:[WeatherEvent]]?, earthquakes: [Country?:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]?, natural_events: NaturalWeatherEventsResponse?) {
         self.alerts = alerts
         self.earthquakes = earthquakes
         self.natural_events = natural_events
