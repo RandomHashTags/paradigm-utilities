@@ -13,6 +13,6 @@ Pod::Spec.new do |s|
   s.cocoapods_version = '>= 1.5.0'
   s.source_files = 'Sources/**/*'
   s.dependency 'SwiftSovereignStates', '~> 1.1.9'
-  s.dependency 'ZippyJSON', '~> 1.2.5'
+  s.dependency 'ZippyJSON', '~> 1.2.10'
   s.dependency 'GEOSwift', '~> 9.0.0'
 end
