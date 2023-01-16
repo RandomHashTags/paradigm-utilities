@@ -78,7 +78,7 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         status = mission.status
         probability = mission.probability
         videoURL = mission.videoURL
-        super.init(type: UpcomingEventType.space_rocket_launch, eventDate: nil, exactStartMilliseconds: exactStartMilliseconds, exactEndMilliseconds: exactEndMilliseconds, customTypeSingularName: nil, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.space_rocket_launch, event_date: nil, exact_start: exactStartMilliseconds, exact_end: exactEndMilliseconds, custom_type_singular_name: nil, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

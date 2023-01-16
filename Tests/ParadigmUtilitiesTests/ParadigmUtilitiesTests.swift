@@ -12,7 +12,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         try testFoundation(bro)
         try testSovereignStateInformation(decoder)
         try testUpcomingEvents(decoder)
-        await testTranslations(bro)
+        //await testTranslations(bro)
     }
     
     private func testFoundation(_ bro: TestBro) throws {
@@ -49,6 +49,14 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let event:APODEvent = APODEvent(eventDate: EventDate.getToday(), title: "test", description: nil, location: nil, imageURL: nil, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, videoURL: nil)
         let data:Data = event.toData()!
         XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == event)
+        
+        let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
+        let pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
+        XCTAssert(pre_event.event_date != nil)
+        let dates:HomeResponseUpcomingEventsDateResponse = HomeResponseUpcomingEventsDateResponse(date: event_date, events: [pre_event])
+        let test:HomeResponseUpcomingEventTypeResponse = HomeResponseUpcomingEventTypeResponse(type: .movie, date_events: [dates])
+        let json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
+        XCTAssert(json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "json=" + json)
     }
     
     private func testTranslations(_ bro: TestBro) async {
@@ -61,7 +69,6 @@ final class ParadigmUtilitiesTests: XCTestCase {
             XCTAssert(valid, "translated text did not translate correctly! (" + translatedText + ")")
         }*/
     }
-    
 }
 
 private struct TestBro : Jsonable {

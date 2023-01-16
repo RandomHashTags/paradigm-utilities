@@ -14,10 +14,10 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
         return lhs.holidays_near == rhs.holidays_near && lhs.events == rhs.events && lhs.movie_production_companies == rhs.movie_production_companies
     }
     
-    public var holidays_near:[EventDate:[PreHoliday]]?, events:[UpcomingEventType:[PreUpcomingEvent]]?
+    public var holidays_near:[EventDate:[PreHoliday]]?, events:[HomeResponseUpcomingEventTypeResponse]?
     @CodableOmittable public var movie_production_companies:MovieProductionCompaniesResponse?
-    
-    public init(holidays_near: [EventDate:[PreHoliday]]?, events: [UpcomingEventType:[PreUpcomingEvent]]?, movie_production_companies: MovieProductionCompaniesResponse?) {
+        
+    public init(holidays_near: [EventDate:[PreHoliday]]?, events: [HomeResponseUpcomingEventTypeResponse]?, movie_production_companies: MovieProductionCompaniesResponse?) {
         self.holidays_near = holidays_near
         self.events = events
         self._movie_production_companies = CodableOmittable(movie_production_companies)
@@ -42,7 +42,7 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
             holidays_near = value as? [EventDate:[PreHoliday]]
             break
         case .events:
-            events = value as? [UpcomingEventType:[PreUpcomingEvent]]
+            events = value as? [HomeResponseUpcomingEventTypeResponse]
             break
         case .movie_production_companies:
             _movie_production_companies = value as! CodableOmittable<MovieProductionCompaniesResponse>
@@ -51,6 +51,35 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
     }
 }
 
+public struct HomeResponseUpcomingEventTypeResponse : Jsonable {
+    public let type:UpcomingEventType
+    @CodableOmittable public var date_events:[HomeResponseUpcomingEventsDateResponse]?
+    @CodableOmittable public var exact_time_events:[HomeResponseUpcomingEventsExactTimesResponse]?
+    
+    public init(type: UpcomingEventType, date_events: [HomeResponseUpcomingEventsDateResponse]? = nil, exact_time_events: [HomeResponseUpcomingEventsExactTimesResponse]? = nil) {
+        self.type = type
+        self._date_events = CodableOmittable(date_events)
+        self._exact_time_events = CodableOmittable(exact_time_events)
+    }
+}
+public struct HomeResponseUpcomingEventsDateResponse : Jsonable {
+    public let date:EventDate
+    public let events:[PreUpcomingEvent]
+    
+    public init(date: EventDate, events: [PreUpcomingEvent]) {
+        self.date = date
+        self.events = events
+    }
+}
+public struct HomeResponseUpcomingEventsExactTimesResponse : Jsonable {
+    public let time:Int64
+    public let events:[PreUpcomingEvent]
+    
+    public init(time: Int64, events: [PreUpcomingEvent]) {
+        self.time = time
+        self.events = events
+    }
+}
 
 public enum HomeResponseUpcomingEventsValueKeys : String, JsonableValueKeys {
     case holidays_near

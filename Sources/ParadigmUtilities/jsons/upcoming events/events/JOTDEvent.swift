@@ -25,7 +25,7 @@ public final class JOTDEvent : GenericUpcomingEvent {
         self.copyright = copyright
         self.question = question
         self.answer = answer
-        super.init(type: UpcomingEventType.joke_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.joke_of_the_day, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

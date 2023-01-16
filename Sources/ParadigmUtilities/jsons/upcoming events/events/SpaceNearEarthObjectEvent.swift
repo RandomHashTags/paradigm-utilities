@@ -56,7 +56,7 @@ public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         self.estimatedDiameterMax = estimatedDiameterMax
         self.estimatedDiameterMin = estimatedDiameterMin
         self.relativeVelocity = relativeVelocity
-        super.init(type: UpcomingEventType.space_near_earth_object, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.space_near_earth_object, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: youtubeVideoIDs, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

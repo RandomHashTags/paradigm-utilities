@@ -21,7 +21,7 @@ public final class WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
     
     public init(eventDate: EventDate!, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, videoURL: String?) {
         self.videoURL = videoURL
-        super.init(type: UpcomingEventType.wikipedia_todays_featured_picture, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.wikipedia_todays_featured_picture, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     required init(from decoder: Decoder) throws {

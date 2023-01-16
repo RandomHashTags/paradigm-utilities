@@ -20,7 +20,7 @@ public final class ScienceYearReviewEvent : GenericUpcomingEvent {
     
     public init(eventDate: EventDate!, title: String, description: String?, location: String?, imageURL: String?, years: [Int:[ClientWikipediaEvent]]) {
         self.years = years
-        super.init(type: UpcomingEventType.science_year_review, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil)
+        super.init(type: UpcomingEventType.science_year_review, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil)
     }
     
     public required init(from decoder: Decoder) throws {

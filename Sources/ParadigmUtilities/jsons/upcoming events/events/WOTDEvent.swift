@@ -49,7 +49,7 @@ public final class WOTDEvent : GenericUpcomingEvent {
         self.pronunciationURL = pronunciationURL
         self.syllables = syllables
         self.grammarType = grammarType
-        super.init(type: UpcomingEventType.word_of_the_day, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, youtubeVideoIDs: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.word_of_the_day, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

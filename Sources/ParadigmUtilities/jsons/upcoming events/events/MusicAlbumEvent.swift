@@ -36,7 +36,7 @@ public final class MusicAlbumEvent : GenericUpcomingEvent {
         self.artist = artist
         self.spotifyDetails = spotifyDetails
         self.itunesDetails = itunesDetails
-        super.init(type: UpcomingEventType.music_album, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.music_album, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

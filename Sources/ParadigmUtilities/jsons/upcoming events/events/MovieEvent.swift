@@ -51,7 +51,7 @@ public final class MovieEvent : GenericUpcomingEvent {
         self.ratings = ratings
         self.imdbInfo = imdbInfo
         self.productionCompanies = productionCompanies
-        super.init(type: UpcomingEventType.movie, eventDate: eventDate, title: title, description: description, location: location, imageURL: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.movie, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {

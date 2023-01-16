@@ -16,29 +16,29 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         return lhs.type == rhs.type && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
     }
     
-    public let type:UpcomingEventType, id:String?, eventDate:EventDate!, exactStartMilliseconds:Int64!, exactEndMilliseconds:Int64!
-    public var customTypeSingularName:String?
+    public var type:UpcomingEventType!, id:String?, event_date:EventDate?, exact_start:Int64?, exact_end:Int64?
+    public var custom_type_singular_name:String?
     
     public var title:String, tag:String?, description:String?
-    public let location:String?, imageURL:String?
-    public var youtubeVideoIDs:[String]?
+    public let location:String?, image_url:String?
+    public var youtube_video_ids:[String]?
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     
-    public init(type: UpcomingEventType, id: String? = nil, eventDate: EventDate!, exactStartMilliseconds: Int64! = nil, exactEndMilliseconds: Int64! = nil, customTypeSingularName: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, imageURL: String?, youtubeVideoIDs: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
+    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, custom_type_singular_name: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
         self.type = type
         self.id = id
-        self.eventDate = eventDate
-        self.exactStartMilliseconds = exactStartMilliseconds
-        self.exactEndMilliseconds = exactEndMilliseconds
-        self.customTypeSingularName = customTypeSingularName
+        self.event_date = event_date
+        self.exact_start = exact_start
+        self.exact_end = exact_end
+        self.custom_type_singular_name = custom_type_singular_name
         self.title = title
         self.tag = tag
         self.description = description
         self.location = location
-        self.imageURL = imageURL
-        self.youtubeVideoIDs = youtubeVideoIDs
+        self.image_url = image_url
+        self.youtube_video_ids = youtube_video_ids
         self.sources = sources
         self.hyperlinks = hyperlinks
         self.countries = countries
@@ -113,16 +113,16 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         switch key {
         case .type: return type
         case .id: return id
-        case .eventDate: return eventDate
-        case .exactStartMilliseconds: return exactStartMilliseconds
-        case .exactEndMilliseconds: return exactEndMilliseconds
-        case .customTypeSingularName: return customTypeSingularName
+        case .event_date: return event_date
+        case .exact_start: return exact_start
+        case .exact_end: return exact_end
+        case .custom_type_singular_name: return custom_type_singular_name
         case .title: return title
         case .tag: return tag
         case .description: return description
         case .location: return location
-        case .imageURL: return imageURL
-        case .youtubeVideoIDs: return youtubeVideoIDs
+        case .image_url: return image_url
+        case .youtube_video_ids: return youtube_video_ids
         case .sources: return sources
         case .hyperlinks: return hyperlinks
         case .countries: return countries
@@ -131,8 +131,8 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     }
     public func setKeyValue<T>(key: GenericUpcomingEventValueKeys, value: T) {
         switch key {
-        case .customTypeSingularName:
-            customTypeSingularName = value as? String
+        case .custom_type_singular_name:
+            custom_type_singular_name = value as? String
             break
         case .title:
             title = value as! String
@@ -158,16 +158,16 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
 public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
     case type
     case id
-    case eventDate
-    case exactStartMilliseconds
-    case exactEndMilliseconds
-    case customTypeSingularName
+    case event_date
+    case exact_start
+    case exact_end
+    case custom_type_singular_name
     case title
     case tag
     case description
     case location
-    case imageURL
-    case youtubeVideoIDs
+    case image_url
+    case youtube_video_ids
     case sources
     case hyperlinks
     case countries
@@ -175,7 +175,7 @@ public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .customTypeSingularName, .title, .tag, .description, .sources, .hyperlinks:
+        case .custom_type_singular_name, .title, .tag, .description, .sources, .hyperlinks:
             return true
         default:
             return false
