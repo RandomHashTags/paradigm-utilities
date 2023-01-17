@@ -58,10 +58,10 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let upcoming_events_json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
         XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"id\":\"test_movie_title\",\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
         
-        let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: "?")
+        let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: nil)
         let holidays_near:[HomeResponseUpcomingEventHolidaysResponse] = [HomeResponseUpcomingEventHolidaysResponse(date: event_date, holidays: [pre_holiday])]
         let holidays_near_json:String = String(data: try JSONEncoder().encode(holidays_near), encoding: .utf8)!
-        XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"id\":\"test_holiday\",\"emoji\":\"?\",\"type\":\"fun\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
+        XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
     private func testTranslations(_ bro: TestBro) async {
