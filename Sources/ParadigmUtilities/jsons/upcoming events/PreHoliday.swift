@@ -11,16 +11,16 @@ import SwiftSovereignStates
 public struct PreHoliday : Jsonable {
     public typealias ValueKeys = PreHolidayValueKeys
     
-    public let id:String
-    public var name:String, type:String, emoji:String?
-    public var celebrators:String?, countries:[Country]?
+    public let type:String, id:String
+    public var name:String
+    public let emoji:String?
+    public var countries:[Country]?
     
-    public init(id: String, name: String, type: String, emoji: String?, celebrators: String?, countries: [Country]? = nil) {
+    public init(type: String, id: String, name: String, emoji: String?, countries: [Country]? = nil) {
+        self.type = type
         self.id = id
         self.name = name
-        self.type = type
         self.emoji = emoji
-        self.celebrators = celebrators
         self.countries = countries
     }
     
@@ -33,11 +33,10 @@ public struct PreHoliday : Jsonable {
     
     public func getKeyValue(key: PreHolidayValueKeys) -> Any? {
         switch key {
+        case .type: return type
         case .id: return id
         case .name: return name
-        case .type: return type
         case .emoji: return emoji
-        case .celebrators: return celebrators
         case .countries: return countries
         }
     }
@@ -46,9 +45,6 @@ public struct PreHoliday : Jsonable {
         case .name:
             name = value as! String
             break
-        case .celebrators:
-            celebrators = value as? String
-            break
         default:
             break
         }
@@ -56,16 +52,15 @@ public struct PreHoliday : Jsonable {
 }
 
 public enum PreHolidayValueKeys : String, JsonableValueKeys {
+    case type
     case id
     case name
-    case type
     case emoji
-    case celebrators
     case countries
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .name, .celebrators:
+        case .name:
             return true
         default:
             return false
