@@ -14,10 +14,10 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
         return lhs.holidays_near == rhs.holidays_near && lhs.events == rhs.events && lhs.movie_production_companies == rhs.movie_production_companies
     }
     
-    public var holidays_near:[EventDate:[PreHoliday]]?, events:[HomeResponseUpcomingEventTypeResponse]?
+    public var holidays_near:[HomeResponseUpcomingEventHolidaysResponse]?, events:[HomeResponseUpcomingEventTypeResponse]?
     @CodableOmittable public var movie_production_companies:MovieProductionCompaniesResponse?
         
-    public init(holidays_near: [EventDate:[PreHoliday]]?, events: [HomeResponseUpcomingEventTypeResponse]?, movie_production_companies: MovieProductionCompaniesResponse?) {
+    public init(holidays_near: [HomeResponseUpcomingEventHolidaysResponse]?, events: [HomeResponseUpcomingEventTypeResponse]?, movie_production_companies: MovieProductionCompaniesResponse?) {
         self.holidays_near = holidays_near
         self.events = events
         self._movie_production_companies = CodableOmittable(movie_production_companies)
@@ -39,7 +39,7 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
     public func setKeyValue<T>(key: HomeResponseUpcomingEventsValueKeys, value: T) {
         switch key {
         case .holidays_near:
-            holidays_near = value as? [EventDate:[PreHoliday]]
+            holidays_near = value as? [HomeResponseUpcomingEventHolidaysResponse]
             break
         case .events:
             events = value as? [HomeResponseUpcomingEventTypeResponse]
@@ -48,6 +48,16 @@ public final class HomeResponseUpcomingEvents : HomeResponseProtocol {
             _movie_production_companies = value as! CodableOmittable<MovieProductionCompaniesResponse>
             break
         }
+    }
+}
+
+public struct HomeResponseUpcomingEventHolidaysResponse : Jsonable {
+    public let date:EventDate
+    public let holidays:[PreHoliday]
+    
+    public init(date: EventDate, holidays: [PreHoliday]) {
+        self.date = date
+        self.holidays = holidays
     }
 }
 
