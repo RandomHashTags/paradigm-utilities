@@ -7,11 +7,7 @@
 
 import Foundation
 
-public final class HomeResponseStockMarket : HomeResponseProtocol {
-    public static func == (lhs: HomeResponseStockMarket, rhs: HomeResponseStockMarket) -> Bool {
-        return true
-    }
-    
+public struct HomeResponseStockMarket : HomeResponseProtocol {
     public func hash(into hasher: inout Hasher) {
     }
 }

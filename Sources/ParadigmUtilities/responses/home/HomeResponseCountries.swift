@@ -7,12 +7,8 @@
 
 import Foundation
 
-public final class HomeResponseCountries : HomeResponseProtocol {
+public struct HomeResponseCountries : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseCountriesValueKeys
-    
-    public static func == (lhs: HomeResponseCountries, rhs: HomeResponseCountries) -> Bool {
-        return lhs.filters == rhs.filters
-    }
     
     @CodableOmittable public var filters:CountryFiltersResponse?
     
@@ -29,7 +25,7 @@ public final class HomeResponseCountries : HomeResponseProtocol {
         case .filters: return _filters
         }
     }
-    public func setKeyValue<T>(key: HomeResponseCountriesValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: HomeResponseCountriesValueKeys, value: T) {
         switch key {
         case .filters:
             _filters = value as! CodableOmittable<CountryFiltersResponse>

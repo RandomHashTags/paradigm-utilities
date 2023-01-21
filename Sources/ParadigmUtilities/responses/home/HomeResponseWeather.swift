@@ -8,12 +8,8 @@
 import Foundation
 import SwiftSovereignStates
 
-public final class HomeResponseWeather : HomeResponseProtocol {
+public struct HomeResponseWeather : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseWeatherValueKeys
-    
-    public static func == (lhs: HomeResponseWeather, rhs: HomeResponseWeather) -> Bool {
-        return lhs.alerts == rhs.alerts && lhs.earthquakes == rhs.earthquakes && lhs.natural_events == rhs.natural_events
-    }
     
     public var alerts:[Country:[WeatherEvent]]?
     /// [Country, [SovereignStateSubdivision?, [Magnitude, [PreEarthquake]]]]
@@ -39,7 +35,7 @@ public final class HomeResponseWeather : HomeResponseProtocol {
         case .natural_events: return natural_events
         }
     }
-    public func setKeyValue<T>(key: HomeResponseWeatherValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: HomeResponseWeatherValueKeys, value: T) {
         switch key {
         case .alerts:
             alerts = value as? [Country:[WeatherEvent]]

@@ -8,12 +8,8 @@
 import Foundation
 import SwiftSovereignStates
 
-public final class HomeResponseGovernment : HomeResponseProtocol {
+public struct HomeResponseGovernment : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseGovernmentValueKeys
-    
-    public static func == (lhs: HomeResponseGovernment, rhs: HomeResponseGovernment) -> Bool {
-        return lhs.recent_activity == rhs.recent_activity
-    }
     
     public var recent_activity:[Country:[GovernmentRecentActivityResponse]]
     
@@ -30,7 +26,7 @@ public final class HomeResponseGovernment : HomeResponseProtocol {
         case .recent_activity: return recent_activity
         }
     }
-    public func setKeyValue<T>(key: HomeResponseGovernmentValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: HomeResponseGovernmentValueKeys, value: T) {
         switch key {
         case .recent_activity:
             recent_activity = value as! [Country:[GovernmentRecentActivityResponse]]
