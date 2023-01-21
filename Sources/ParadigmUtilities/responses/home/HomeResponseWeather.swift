@@ -13,10 +13,10 @@ public struct HomeResponseWeather : HomeResponseProtocol {
     
     public var alerts:[Country:[WeatherEvent]]?
     /// [Country, [SovereignStateSubdivision?, [Magnitude, [PreEarthquake]]]]
-    public var earthquakes:[Country?:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]?
+    public var earthquakes:[CountryEarthquakesResponse]?
     public var natural_events:NaturalWeatherEventsResponse?
     
-    public init(alerts: [Country:[WeatherEvent]]?, earthquakes: [Country?:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]?, natural_events: NaturalWeatherEventsResponse?) {
+    public init(alerts: [Country:[WeatherEvent]]?, earthquakes: [CountryEarthquakesResponse]?, natural_events: NaturalWeatherEventsResponse?) {
         self.alerts = alerts
         self.earthquakes = earthquakes
         self.natural_events = natural_events
@@ -35,7 +35,7 @@ public struct HomeResponseWeather : HomeResponseProtocol {
             alerts = value as? [Country:[WeatherEvent]]
             break
         case .earthquakes:
-            earthquakes = value as? [Country?:[SovereignStateSubdivisionWrapper?:[String:[PreEarthquake]]]]
+            earthquakes = value as? [CountryEarthquakesResponse]
             break
         case .natural_events:
             natural_events = value as? NaturalWeatherEventsResponse

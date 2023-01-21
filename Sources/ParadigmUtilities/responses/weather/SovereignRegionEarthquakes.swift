@@ -13,6 +13,11 @@ public struct SovereignRegionEarthquakes : Jsonable {
     public let magnitude:String
     public var quakes:[PreEarthquake]
     
+    public init(magnitude: String, quakes: [PreEarthquake]) {
+        self.magnitude = magnitude
+        self.quakes = quakes
+    }
+    
     public func getKeyValue(key: SovereignRegionEarthquakesValueKeys) -> Any? {
         switch key {
         case .quakes: return quakes

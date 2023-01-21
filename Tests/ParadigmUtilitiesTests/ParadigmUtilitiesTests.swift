@@ -1,6 +1,7 @@
 import XCTest
 import ParadigmUtilities
 import ZippyJSON
+import SwiftSovereignStates
 
 final class ParadigmUtilitiesTests: XCTestCase {
     func testExample() async throws {
@@ -12,6 +13,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         try testFoundation(bro)
         try testSovereignStateInformation(decoder)
         try testUpcomingEvents(decoder)
+        try testWeather(decoder)
         //await testTranslations(bro)
     }
     
@@ -62,6 +64,12 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let holidays_near:[HomeResponseUpcomingEventHolidaysResponse] = [HomeResponseUpcomingEventHolidaysResponse(date: event_date, holidays: [pre_holiday])]
         let holidays_near_json:String = String(data: try JSONEncoder().encode(holidays_near), encoding: .utf8)!
         XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
+    }
+    
+    private func testWeather(_ decoder: ZippyJSONDecoder) throws {
+        let test:[CountryEarthquakesResponse] = [Country.united_states:[SubdivisionsUnitedStates.minnesota.wrapped():["5.0":[PreEarthquake(id: "test", place: "nowhere", city: nil)]]]]
+        let test_string:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
+        print(test_string)
     }
     
     private func testTranslations(_ bro: TestBro) async {

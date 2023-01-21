@@ -14,6 +14,11 @@ public struct SubdivisionEarthquakesResponse : Jsonable {
     public let subdivision:SovereignStateSubdivisionWrapper?
     public var magnitudes:[SovereignRegionEarthquakes]
     
+    public init(subdivision: (any SovereignStateSubdivision)?, magnitudes: [SovereignRegionEarthquakes]) {
+        self.subdivision = subdivision?.wrapped()
+        self.magnitudes = magnitudes
+    }
+    
     public func getKeyValue(key: SubdivisionEarthquakesResponseValueKeys) -> Any? {
         switch key {
         case .magnitudes: return magnitudes

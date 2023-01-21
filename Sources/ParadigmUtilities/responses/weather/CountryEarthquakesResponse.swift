@@ -14,6 +14,11 @@ public struct CountryEarthquakesResponse : Jsonable {
     public let country:Country?
     public var subdivisions:[SubdivisionEarthquakesResponse]
     
+    public init(country: Country?, subdivisions: [SubdivisionEarthquakesResponse]) {
+        self.country = country
+        self.subdivisions = subdivisions
+    }
+    
     public func getKeyValue(key: CountryEarthquakesResponseValueKeys) -> Any? {
         switch key {
         case .subdivisions: return subdivisions
