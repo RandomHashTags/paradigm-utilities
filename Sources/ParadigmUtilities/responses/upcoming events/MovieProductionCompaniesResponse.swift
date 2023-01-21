@@ -7,12 +7,8 @@
 
 import Foundation
 
-public final class MovieProductionCompaniesResponse : Jsonable {
+public struct MovieProductionCompaniesResponse : Jsonable {
     public typealias ValueKeys = MovieProductionCompaniesResponseValueKeys
-    
-    public static func == (lhs: MovieProductionCompaniesResponse, rhs: MovieProductionCompaniesResponse) -> Bool {
-        return lhs.response_version == rhs.response_version && lhs.imageURLPrefix.elementsEqual(rhs.imageURLPrefix) && lhs.companies == rhs.companies
-    }
     
     public let response_version:Int, imageURLPrefix:String
     public var companies:[PreMovieProductionCompany]!
@@ -23,12 +19,6 @@ public final class MovieProductionCompaniesResponse : Jsonable {
         self.companies = companies
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(response_version)
-        hasher.combine(imageURLPrefix)
-        hasher.combine(companies)
-    }
-    
     public func getKeyValue(key: MovieProductionCompaniesResponseValueKeys) -> Any? {
         switch key {
         case .response_version: return response_version
@@ -36,7 +26,7 @@ public final class MovieProductionCompaniesResponse : Jsonable {
         case .companies: return companies
         }
     }
-    public func setKeyValue<T>(key: MovieProductionCompaniesResponseValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: MovieProductionCompaniesResponseValueKeys, value: T) {
         switch key {
         case .companies:
             companies = value as? [PreMovieProductionCompany]

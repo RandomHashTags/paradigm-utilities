@@ -26,14 +26,6 @@ public struct HomeResponse : Jsonable {
         self.weather = weather
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(_countries)
-        hasher.combine(_government)
-        hasher.combine(_stock_market)
-        hasher.combine(upcoming_events)
-        hasher.combine(weather)
-    }
-    
     public func getKeyValue(key: HomeResponseValueKeys) -> Any? {
         switch key {
         case .countries: return _countries

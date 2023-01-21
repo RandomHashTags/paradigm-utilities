@@ -22,12 +22,6 @@ public struct HomeResponseWeather : HomeResponseProtocol {
         self.natural_events = natural_events
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(alerts)
-        hasher.combine(earthquakes)
-        hasher.combine(natural_events)
-    }
-    
     public func getKeyValue(key: HomeResponseWeatherValueKeys) -> Any? {
         switch key {
         case .alerts: return alerts

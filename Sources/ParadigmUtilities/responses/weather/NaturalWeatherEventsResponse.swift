@@ -8,12 +8,8 @@
 import Foundation
 import SwiftSovereignStates
 
-public final class NaturalWeatherEventsResponse : Jsonable {
+public struct NaturalWeatherEventsResponse : Jsonable {
     public typealias ValueKeys = NaturalWeatherEventsResponseValueKeys
-    
-    public static func == (lhs: NaturalWeatherEventsResponse, rhs: NaturalWeatherEventsResponse) -> Bool {
-        return lhs.severe_storms == rhs.severe_storms && lhs.volcanoes == rhs.volcanoes && lhs.wildfires == rhs.wildfires
-    }
     
     public var severe_storms:[Country?:[PreNaturalWeatherEvent]]?, volcanoes:[Country?:[PreNaturalWeatherEvent]]?, wildfires:[Country?:[PreNaturalWeatherEvent]]?
     
@@ -23,12 +19,6 @@ public final class NaturalWeatherEventsResponse : Jsonable {
         self.wildfires = wildfires
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(severe_storms)
-        hasher.combine(volcanoes)
-        hasher.combine(wildfires)
-    }
-    
     public func getKeyValue(key: NaturalWeatherEventsResponseValueKeys) -> Any? {
         switch key {
         case .severe_storms: return severe_storms
@@ -36,7 +26,7 @@ public final class NaturalWeatherEventsResponse : Jsonable {
         case .wildfires: return wildfires
         }
     }
-    public func setKeyValue<T>(key: NaturalWeatherEventsResponseValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: NaturalWeatherEventsResponseValueKeys, value: T) {
         switch key {
         case .severe_storms:
             severe_storms = value as? [Country?:[PreNaturalWeatherEvent]]

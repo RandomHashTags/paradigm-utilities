@@ -17,10 +17,6 @@ public struct HomeResponseGovernment : HomeResponseProtocol {
         self.recent_activity = recent_activity
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(recent_activity)
-    }
-    
     public func getKeyValue(key: HomeResponseGovernmentValueKeys) -> Any? {
         switch key {
         case .recent_activity: return recent_activity

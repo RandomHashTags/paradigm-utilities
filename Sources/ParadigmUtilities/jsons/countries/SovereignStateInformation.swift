@@ -8,12 +8,8 @@
 import Foundation
 import ZippyJSON
 
-public final class SovereignStateInformation : Jsonable {
+public struct SovereignStateInformation : Jsonable {
     public typealias ValueKeys = SovereignStateInformationValueKeys
-    
-    public static func == (lhs: SovereignStateInformation, rhs: SovereignStateInformation) -> Bool {
-        return lhs.administration == rhs.administration && lhs._static == rhs._static && lhs.nonstatic == rhs.nonstatic
-    }
     
     @CodableOmittable public var administration:ClientGovernmentAdministration?
     @CodableOmittable public var _static:SovereignStateStaticInformation?
@@ -25,12 +21,6 @@ public final class SovereignStateInformation : Jsonable {
         self.nonstatic = nonstatic
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(_administration)
-        hasher.combine(__static)
-        hasher.combine(nonstatic)
-    }
-    
     public func getKeyValue(key: SovereignStateInformationValueKeys) -> Any? {
         switch key {
         case .administration: return _administration
@@ -38,7 +28,7 @@ public final class SovereignStateInformation : Jsonable {
         case .nonstatic: return nonstatic
         }
     }
-    public func setKeyValue<T>(key: SovereignStateInformationValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: SovereignStateInformationValueKeys, value: T) {
         switch key {
         case .administration:
             _administration = value as! CodableOmittable<ClientGovernmentAdministration>

@@ -7,15 +7,7 @@
 
 import Foundation
 
-public final class TVShowEpisode : Jsonable {
-    public static func == (lhs: TVShowEpisode, rhs: TVShowEpisode) -> Bool {
-        return lhs.id == rhs.id
-    }
-    
+public struct TVShowEpisode : Jsonable {
     public let id:Int, name:String, season:Int, number:Int?, runtime:Int?, summary:String?, image:TVShowImage?, airstamp:String, airdate:String, airtime:String
     public let _embedded:TVShowEpisodeEmbedded?
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
-    }
 }

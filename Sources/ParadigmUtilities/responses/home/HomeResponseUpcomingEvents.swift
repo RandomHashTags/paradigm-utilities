@@ -20,12 +20,6 @@ public struct HomeResponseUpcomingEvents : HomeResponseProtocol {
         self._movie_production_companies = CodableOmittable(movie_production_companies)
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(_holidays_near)
-        hasher.combine(events)
-        hasher.combine(_movie_production_companies)
-    }
-    
     public func getKeyValue(key: HomeResponseUpcomingEventsValueKeys) -> Any? {
         switch key {
         case .holidays_near: return _holidays_near
