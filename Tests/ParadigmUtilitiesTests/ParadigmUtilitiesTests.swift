@@ -67,9 +67,17 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func testWeather(_ decoder: ZippyJSONDecoder) throws {
-        let test:[CountryEarthquakesResponse] = [Country.united_states:[SubdivisionsUnitedStates.minnesota.wrapped():["5.0":[PreEarthquake(id: "test", place: "nowhere", city: nil)]]]]
+        let test:[CountryEarthquakesResponse] = [
+            CountryEarthquakesResponse(country: Country.united_states, subdivisions: [
+                SubdivisionEarthquakesResponse(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
+                    SovereignRegionEarthquakes(magnitude: "5.0", quakes: [
+                        PreEarthquake(id: "test", place: "nowhere", city: nil)
+                    ])
+                ])
+            ])
+        ]
         let test_string:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
-        print(test_string)
+        XCTAssert(test_string.elementsEqual("[{\"country\":\"united_states\",\"subdivisions\":[{\"magnitudes\":[{\"magnitude\":\"5.0\",\"quakes\":[{\"id\":\"test\",\"place\":\"nowhere\"}]}],\"subdivision\":\"united_states_minnesota\"}]}]"), "test_string=" + test_string)
     }
     
     private func testTranslations(_ bro: TestBro) async {
