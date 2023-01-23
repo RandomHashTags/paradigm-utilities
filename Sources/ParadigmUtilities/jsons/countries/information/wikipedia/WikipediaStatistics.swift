@@ -14,14 +14,14 @@ public struct WikipediaStatistics : Jsonable {
     public var elevation:WikipediaStatisticsElevation?
     public var dimensions:WikipediaStatisticsDimensions?
     public var population:WikipediaStatisticsPopulation?
-    public let governmentURL:String?
+    public let government_url:String?
     
-    public init(area: WikipediaStatisticsArea?, elevation: WikipediaStatisticsElevation?, dimensions: WikipediaStatisticsDimensions?, population: WikipediaStatisticsPopulation?, governmentURL: String?) {
+    public init(area: WikipediaStatisticsArea?, elevation: WikipediaStatisticsElevation?, dimensions: WikipediaStatisticsDimensions?, population: WikipediaStatisticsPopulation?, government_url: String?) {
         self.area = area
         self.elevation = elevation
         self.dimensions = dimensions
         self.population = population
-        self.governmentURL = governmentURL
+        self.government_url = government_url
     }
     
     public func getKeyValue(key: WikipediaStatisticsValueKeys) -> Any? {
@@ -30,7 +30,7 @@ public struct WikipediaStatistics : Jsonable {
         case .elevation: return elevation
         case .dimensions: return dimensions
         case .population: return population
-        case .governmentURL: return governmentURL
+        case .government_url: return government_url
         }
     }
     public mutating func setKeyValue<T>(key: WikipediaStatisticsValueKeys, value: T) {
@@ -58,7 +58,7 @@ public enum WikipediaStatisticsValueKeys : String, JsonableValueKeys {
     case elevation
     case dimensions
     case population
-    case governmentURL
+    case government_url
     
     public func isTranslatable() -> Bool {
         switch self {
