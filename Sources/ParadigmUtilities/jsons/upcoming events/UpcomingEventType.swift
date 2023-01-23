@@ -251,7 +251,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .astronomy_picture_of_the_day: return APODEventValueKeys.allCases
         case .joke_of_the_day: return JOTDEventValueKeys.allCases
         case .movie: return MovieEventValueKeys.allCases
-        case .music_album: return MusicAlbumEventCodingKeys.allCases
+        case .music_album: return MusicAlbumEventValueKeys.allCases
         case .science_year_review: return ScienceYearReviewEventCodingKeys.allCases
         case .space_event: return SpaceEventCodingKeys.allCases
         case .space_lunar_eclipse: return SpaceLunarEclipseEventCodingKeys.allCases
