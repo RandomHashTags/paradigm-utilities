@@ -40,9 +40,6 @@ extension KeyedEncodingContainer {
 }
 extension KeyedDecodingContainer {
     public func decode<T>(_ value: CodableOmittable<T>.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> CodableOmittable<T> {
-        if let value:CodableOmittable<T> = try decodeIfPresent(value, forKey: key) {
-            return value
-        }
-        return CodableOmittable<T>(nil)
+        return try decodeIfPresent(value, forKey: key) ?? CodableOmittable<T>(nil)
     }
 }
