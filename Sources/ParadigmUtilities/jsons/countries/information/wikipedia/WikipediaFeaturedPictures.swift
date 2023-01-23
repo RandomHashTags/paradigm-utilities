@@ -10,18 +10,18 @@ import Foundation
 public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
     public typealias ValueKeys = WikipediaFeaturedPicturesValueKeys
     
-    public let imageURLPrefix:String
+    public let image_url_prefix:String
     public var pictures:[WikipediaPicture], sources:EventSources?
     
-    public init(imageURLPrefix: String, pictures: [WikipediaPicture], sources: EventSources?) {
-        self.imageURLPrefix = imageURLPrefix
+    public init(image_url_prefix: String, pictures: [WikipediaPicture], sources: EventSources?) {
+        self.image_url_prefix = image_url_prefix
         self.pictures = pictures
         self.sources = sources
     }
     
     public func getKeyValue(key: WikipediaFeaturedPicturesValueKeys) -> Any? {
         switch key {
-        case .imageURLPrefix: return imageURLPrefix
+        case .image_url_prefix: return image_url_prefix
         case .pictures: return pictures
         case .sources: return sources
         }
@@ -41,7 +41,7 @@ public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
 }
 
 public enum WikipediaFeaturedPicturesValueKeys : String, JsonableValueKeys {
-    case imageURLPrefix
+    case image_url_prefix
     case pictures
     case sources
     
