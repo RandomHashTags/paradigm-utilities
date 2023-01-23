@@ -8,13 +8,13 @@
 import Foundation
 
 public struct ContactInformation : Jsonable {
-    public let address:String?, office:String?, phoneNumber:String?, faxNumber:String?, contactFormURL:String?
+    public let address:String?, office:String?, phone_number:String?, fax_number:String?, contact_form_url:String?
     
-    public init(address: String?, office: String?, phoneNumber: String?, faxNumber: String?, contactFormURL: String?) {
+    public init(address: String?, office: String?, phone_number: String?, fax_number: String?, contact_form_url: String?) {
         self.address = address
         self.office = office
-        self.phoneNumber = phoneNumber
-        self.faxNumber = faxNumber
-        self.contactFormURL = contactFormURL
+        self.phone_number = phone_number
+        self.fax_number = fax_number
+        self.contact_form_url = contact_form_url
     }
 }
