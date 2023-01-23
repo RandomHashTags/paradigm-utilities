@@ -15,15 +15,15 @@ public struct ClientVolcano : Jsonable {
     public var name:String
     public let type:String
     public var summary:String?
-    public let imageURL:String?, country:Country
+    public let image_url:String?, country:Country
     public var sources:EventSources
     
-    public init(id: String, name: String, type: String, summary: String?, imageURL: String?, country: Country, sources: EventSources) {
+    public init(id: String, name: String, type: String, summary: String?, image_url: String?, country: Country, sources: EventSources) {
         self.id = id
         self.name = name
         self.type = type
         self.summary = summary
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.country = country
         self.sources = sources
     }
@@ -34,7 +34,7 @@ public struct ClientVolcano : Jsonable {
         case .name: return name
         case .type: return type
         case .summary: return summary
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .country: return country
         case .sources: return sources
         }
@@ -61,7 +61,7 @@ public enum ClientVolcanoValueKeys : String, JsonableValueKeys {
     case name
     case type
     case summary
-    case imageURL
+    case image_url
     case country
     case sources
     
