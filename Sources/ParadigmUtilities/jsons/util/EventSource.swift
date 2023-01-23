@@ -10,24 +10,24 @@ import Foundation
 public struct EventSource : Jsonable {
     public typealias ValueKeys = EventSourceValueKeys
     
-    public var siteName:String
+    public var name:String
     public let url:String
     
-    public init(siteName: String, url: String) {
-        self.siteName = siteName
+    public init(name: String, url: String) {
+        self.name = name
         self.url = url
     }
     
     public func getKeyValue(key: EventSourceValueKeys) -> Any? {
         switch key {
-        case .siteName: return siteName
+        case .name: return name
         case .url: return url
         }
     }
     public mutating func setKeyValue<T>(key: EventSourceValueKeys, value: T) {
         switch key {
-        case .siteName:
-            self.siteName = value as! String
+        case .name:
+            self.name = value as! String
             break
         default:
             break
@@ -36,12 +36,12 @@ public struct EventSource : Jsonable {
 }
 
 public enum EventSourceValueKeys : String, JsonableValueKeys {
-    case siteName
+    case name
     case url
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .siteName:
+        case .name:
             return true
         default:
             return false

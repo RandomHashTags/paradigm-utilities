@@ -68,7 +68,7 @@ public final class EventSources : Jsonable {
     }
     
     public func getWikipediaSource() -> EventSource? {
-        return sources.first(where: { $0.siteName.lowercased().starts(with: "wikipedia: ") })
+        return sources.first(where: { $0.name.lowercased().starts(with: "wikipedia: ") })
     }
     
     public func getKeyValue(key: EventSourcesValueKeys) -> Any? {
