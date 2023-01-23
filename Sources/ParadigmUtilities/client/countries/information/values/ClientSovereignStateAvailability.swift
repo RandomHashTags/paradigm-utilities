@@ -10,13 +10,13 @@ import Foundation
 public struct ClientSovereignStateAvailability : Jsonable {
     public typealias ValueKeys = ClientSovereignStateAvailabilityValueKeys
     
-    public let info:SovereignStateInfo, primaryCategory:SovereignStateAvailabilityCategory, imageURL:String?, value:Bool
+    public let info:SovereignStateInfo, primary_category:SovereignStateAvailabilityCategory, image_url:String?, value:Bool
     public var sources:EventSources?
     
-    public init(info: SovereignStateInfo, primaryCategory: SovereignStateAvailabilityCategory, imageURL: String?, value: Bool, sources: EventSources?) {
+    public init(info: SovereignStateInfo, primary_category: SovereignStateAvailabilityCategory, image_url: String?, value: Bool, sources: EventSources?) {
         self.info = info
-        self.primaryCategory = primaryCategory
-        self.imageURL = imageURL
+        self.primary_category = primary_category
+        self.image_url = image_url
         self.value = value
         self.sources = sources
     }
@@ -24,8 +24,8 @@ public struct ClientSovereignStateAvailability : Jsonable {
     public func getKeyValue(key: ClientSovereignStateAvailabilityValueKeys) -> Any? {
         switch key {
         case .info: return info
-        case .primaryCategory: return primaryCategory
-        case .imageURL: return imageURL
+        case .primary_category: return primary_category
+        case .image_url: return image_url
         case .value: return value
         case .sources: return sources
         }
@@ -43,8 +43,8 @@ public struct ClientSovereignStateAvailability : Jsonable {
 
 public enum ClientSovereignStateAvailabilityValueKeys : String, JsonableValueKeys {
     case info
-    case primaryCategory
-    case imageURL
+    case primary_category
+    case image_url
     case value
     case sources
     
