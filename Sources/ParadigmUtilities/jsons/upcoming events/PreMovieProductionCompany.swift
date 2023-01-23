@@ -26,7 +26,7 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
         case .id: return id
         case .name: return name
         case .aliases: return aliases
-        case .imageURL: return image_url
+        case .image_url: return image_url
         }
     }
     public mutating func setKeyValue<T>(key: PreMovieProductionCompanyValueKeys, value: T) {
@@ -47,7 +47,7 @@ public enum PreMovieProductionCompanyValueKeys : String, JsonableValueKeys {
     case id
     case name
     case aliases
-    case imageURL
+    case image_url
     
     public func isTranslatable() -> Bool {
         switch self {
