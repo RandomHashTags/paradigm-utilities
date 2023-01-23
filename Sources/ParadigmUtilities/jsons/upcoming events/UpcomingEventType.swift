@@ -258,7 +258,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .space_near_earth_object: return SpaceNearEarthObjectEventCodingKeys.allCases
         case .space_rocket_launch: return SpaceRocketLaunchEventCodingKeys.allCases
         case .sport_mlb: return MLBEventCodingKeys.allCases
-        case .sport_professional_wrestling: return ProfessionalWrestlingEventCodingKeys.allCases
+        case .sport_professional_wrestling: return ProfessionalWrestlingEventValueKeys.allCases
         case .spotify_new_music_friday: return SpotifyNewMusicFridayEventCodingKeys.allCases
         case .ticketmaster_music_event: return TicketmasterMusicEventCodingKeys.allCases
         case .video_game: return VideoGameEventCodingKeys.allCases

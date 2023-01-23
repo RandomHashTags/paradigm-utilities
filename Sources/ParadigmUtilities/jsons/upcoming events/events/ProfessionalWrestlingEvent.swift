@@ -8,36 +8,36 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum ProfessionalWrestlingEventCodingKeys : String, UpcomingEventValueKeys {
-    case mainEvent
-    case notes
-    
-    public func getCategory() -> UpcomingEventValueCategory {
-        return UpcomingEventValueCategory.wrestling_details
-    }
-}
-
 public final class ProfessionalWrestlingEvent : GenericUpcomingEvent {
-    public let mainEvent:String, notes:String?
+    public let main_event:String, notes:String?
     
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mainEvent: String, notes: String?) {
-        self.mainEvent = mainEvent
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, main_event: String, notes: String?) {
+        self.main_event = main_event
         self.notes = notes
-        super.init(type: UpcomingEventType.sport_professional_wrestling, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+        super.init(type: UpcomingEventType.sport_professional_wrestling, event_date: event_date, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
     public required init(from decoder: Decoder) throws {
-        let container:KeyedDecodingContainer = try decoder.container(keyedBy: ProfessionalWrestlingEventCodingKeys.self)
-        mainEvent = try container.decode(String.self, forKey: .mainEvent)
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: ProfessionalWrestlingEventValueKeys.self)
+        main_event = try container.decode(String.self, forKey: .main_event)
         notes = try container.decodeIfPresent(String.self, forKey: .notes)
         try super.init(from: decoder)
     }
     
     public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
-        guard let key:ProfessionalWrestlingEventCodingKeys = key as? ProfessionalWrestlingEventCodingKeys else { return nil }
+        guard let key:ProfessionalWrestlingEventValueKeys = key as? ProfessionalWrestlingEventValueKeys else { return nil }
         switch key {
-        case .mainEvent: return mainEvent
+        case .main_event: return main_event
         case .notes: return notes
         }
+    }
+}
+
+public enum ProfessionalWrestlingEventValueKeys : String, UpcomingEventValueKeys {
+    case main_event
+    case notes
+    
+    public func getCategory() -> UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.wrestling_details
     }
 }
