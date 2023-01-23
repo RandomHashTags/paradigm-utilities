@@ -12,13 +12,13 @@ public struct WikipediaPicture : Jsonable {
     
     public let key:String
     public var name:String, title:String?
-    public let imageURL:String
+    public let image_url:String
     
-    public init(key: String, name: String, title: String?, imageURL: String) {
+    public init(key: String, name: String, title: String?, image_url: String) {
         self.key = key
         self.name = name
         self.title = title
-        self.imageURL = imageURL
+        self.image_url = image_url
     }
     
     public func getTag() -> String {
@@ -30,7 +30,7 @@ public struct WikipediaPicture : Jsonable {
         case .key: return self.key
         case .name: return name
         case .title: return title
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         }
     }
     public mutating func setKeyValue<T>(key: WikipediaPictureValueKeys, value: T) {
@@ -51,7 +51,7 @@ public enum WikipediaPictureValueKeys : String, JsonableValueKeys {
     case key
     case name
     case title
-    case imageURL
+    case image_url
     
     public func isTranslatable() -> Bool {
         switch self {
