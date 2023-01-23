@@ -11,12 +11,12 @@ import SwiftSovereignStates
 public struct TicketmasterVenue : Jsonable {
     public typealias ValueKeys = TicketmasterVenueValueKeys
     
-    public let name:String, imageURL:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?
+    public let name:String, image_url:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?
     public var general_rule:String?, child_rule:String?, parking_detail:String?, accessible_seating_info:String?, url:String
     
-    public init(name: String, imageURL: String?, country: Country, subdivision: (any SovereignStateSubdivision)?, city: (any SovereignStateCity)?, location: Location?, general_rule: String?, child_rule: String?, parking_detail: String?, accessible_seating_info: String?, url: String) {
+    public init(name: String, image_url: String?, country: Country, subdivision: (any SovereignStateSubdivision)?, city: (any SovereignStateCity)?, location: Location?, general_rule: String?, child_rule: String?, parking_detail: String?, accessible_seating_info: String?, url: String) {
         self.name = name
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.country = country
         self.subdivision = subdivision?.wrapped()
         self.city = city?.wrapped()
@@ -31,7 +31,7 @@ public struct TicketmasterVenue : Jsonable {
     public func getKeyValue(key: TicketmasterVenueValueKeys) -> Any? {
         switch key {
         case .name: return name
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .country: return country
         case .subdivision: return subdivision
         case .city: return city
@@ -64,7 +64,7 @@ public struct TicketmasterVenue : Jsonable {
 
 public enum TicketmasterVenueValueKeys : String, JsonableValueKeys {
     case name
-    case imageURL
+    case image_url
     case country
     case subdivision
     case city
