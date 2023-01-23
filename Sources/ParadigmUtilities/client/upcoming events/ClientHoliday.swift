@@ -12,16 +12,16 @@ public struct ClientHoliday : Jsonable {
     
     public let response_version:Int, id:String
     public var name:String, description:String, aliases:[String]?
-    public let imageURL:String?, type:String
+    public let image_url:String?, type:String
     public var sources:EventSources?
     
-    public init(response_version: Int, id: String, name: String, description: String, aliases: [String]?, imageURL: String?, type: String, sources: EventSources?) {
+    public init(response_version: Int, id: String, name: String, description: String, aliases: [String]?, image_url: String?, type: String, sources: EventSources?) {
         self.response_version = response_version
         self.id = id
         self.name = name
         self.description = description
         self.aliases = aliases
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.type = type
         self.sources = sources
     }
@@ -33,7 +33,7 @@ public struct ClientHoliday : Jsonable {
         case .name: return name
         case .description: return description
         case .aliases: return aliases
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .type: return type
         case .sources: return sources
         }
@@ -61,7 +61,7 @@ public enum ClientHolidayValueKeys : String, JsonableValueKeys {
     case name
     case description
     case aliases
-    case imageURL
+    case image_url
     case type
     case sources
     
