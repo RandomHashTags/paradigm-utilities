@@ -11,16 +11,16 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
     public typealias ValueKeys = SovereignStateSingleValueValueKeys
     
     public let info:SovereignStateInfo
-    public var notes:String?, value:String, valueDescription:String?
+    public var notes:String?, value:String, value_description:String?
     public let year_of_data:Int
     public var sources:EventSources?
     
-    public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int, sources: EventSources?) {
+    public init(info: SovereignStateInfo, notes: String?, value: String, value_description: String?, year_of_data: Int, sources: EventSources?) {
         self.info = info
         self.notes = notes
         self.value = value
-        self.valueDescription = valueDescription
-        self.year_of_data = yearOfData
+        self.value_description = value_description
+        self.year_of_data = year_of_data
         self.sources = sources
     }
     
@@ -29,8 +29,8 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         case .info: return info
         case .notes: return notes
         case .value: return value
-        case .valueDescription: return valueDescription
-        case .yearOfData: return year_of_data
+        case .value_description: return value_description
+        case .year_of_data: return year_of_data
         case .sources: return sources
         }
     }
@@ -42,8 +42,8 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         case .value:
             self.value = value as! String
             break
-        case .valueDescription:
-            valueDescription = value as? String
+        case .value_description:
+            value_description = value as? String
             break
         case .sources:
             sources = value as? EventSources
@@ -58,13 +58,13 @@ public enum SovereignStateSingleValueValueKeys : String, JsonableValueKeys {
     case info
     case notes
     case value
-    case valueDescription
-    case yearOfData
+    case value_description
+    case year_of_data
     case sources
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .notes, .value, .valueDescription, .sources:
+        case .notes, .value, .value_description, .sources:
             return true
         default:
             return false
