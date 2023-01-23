@@ -10,19 +10,19 @@ import Foundation
 public struct MovieProductionCompaniesResponse : Jsonable {
     public typealias ValueKeys = MovieProductionCompaniesResponseValueKeys
     
-    public let response_version:Int, imageURLPrefix:String
+    public let response_version:Int, image_url_prefix:String
     public var companies:[PreMovieProductionCompany]
     
-    public init(response_version: Int, imageURLPrefix: String, companies: [PreMovieProductionCompany]!) {
+    public init(response_version: Int, image_url_prefix: String, companies: [PreMovieProductionCompany]!) {
         self.response_version = response_version
-        self.imageURLPrefix = imageURLPrefix
+        self.image_url_prefix = image_url_prefix
         self.companies = companies
     }
     
     public func getKeyValue(key: MovieProductionCompaniesResponseValueKeys) -> Any? {
         switch key {
         case .response_version: return response_version
-        case .imageURLPrefix: return imageURLPrefix
+        case .image_url_prefix: return image_url_prefix
         case .companies: return companies
         }
     }
@@ -39,7 +39,7 @@ public struct MovieProductionCompaniesResponse : Jsonable {
 
 public enum MovieProductionCompaniesResponseValueKeys : String, JsonableValueKeys {
     case response_version
-    case imageURLPrefix
+    case image_url_prefix
     case companies
     
     public func isTranslatable() -> Bool {
