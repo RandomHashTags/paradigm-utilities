@@ -14,21 +14,21 @@ import MapKit
 
 public final class WeatherZone : Jsonable {
     public static func == (lhs: WeatherZone, rhs: WeatherZone) -> Bool {
-        return lhs.name.elementsEqual(rhs.name) && lhs.nameSuffix == rhs.nameSuffix && lhs.subdivision == rhs.subdivision && lhs.geometry == rhs.geometry
+        return lhs.name.elementsEqual(rhs.name) && lhs.name_suffix == rhs.name_suffix && lhs.subdivision == rhs.subdivision && lhs.geometry == rhs.geometry
     }
     
-    public let name:String, nameSuffix:String?, subdivision:SovereignStateSubdivisionWrapper?, geometry:Geometry
+    public let name:String, name_suffix:String?, subdivision:SovereignStateSubdivisionWrapper?, geometry:Geometry
     
-    public init(name: String, nameSuffix: String?, subdivision: (any SovereignStateSubdivision)?, geometry: Geometry) {
+    public init(name: String, name_suffix: String?, subdivision: (any SovereignStateSubdivision)?, geometry: Geometry) {
         self.name = name
-        self.nameSuffix = nameSuffix
+        self.name_suffix = name_suffix
         self.subdivision = subdivision?.wrapped()
         self.geometry = geometry
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-        hasher.combine(nameSuffix)
+        hasher.combine(name_suffix)
         hasher.combine(subdivision)
         hasher.combine(geometry)
     }
