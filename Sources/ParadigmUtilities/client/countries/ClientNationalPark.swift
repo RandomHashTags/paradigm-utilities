@@ -13,14 +13,14 @@ public struct ClientNationalPark : Jsonable {
     
     public let id:String
     public var name:String, description:String?
-    public let imageURL:String?, country:Country, countries:[Country], subdivisions:[SovereignStateSubdivisionWrapper]
+    public let image_url:String?, country:Country, countries:[Country], subdivisions:[SovereignStateSubdivisionWrapper]
     public var sources:EventSources
     
-    public init(id: String, name: String, description: String?, imageURL: String? = nil, country: Country, countries: [Country], subdivisions: [any SovereignStateSubdivision], sources: EventSources) {
+    public init(id: String, name: String, description: String?, image_url: String? = nil, country: Country, countries: [Country], subdivisions: [any SovereignStateSubdivision], sources: EventSources) {
         self.id = id
         self.name = name
         self.description = description
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.country = country
         self.countries = countries
         self.subdivisions = subdivisions.map({ $0.wrapped() })
@@ -32,7 +32,7 @@ public struct ClientNationalPark : Jsonable {
         case .id: return id
         case .name: return name
         case .description: return description
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .country: return country
         case .countries: return countries
         case .subdivisions: return subdivisions
@@ -60,7 +60,7 @@ public enum ClientNationalParkValueKeys : String, JsonableValueKeys {
     case id
     case name
     case description
-    case imageURL
+    case image_url
     case country
     case countries
     case subdivisions
