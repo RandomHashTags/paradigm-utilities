@@ -13,13 +13,13 @@ public struct PreVolcano : SovereignStateInformationValue {
     
     public let id:String
     public var name:String
-    public let imageURL:String?, country:Country
+    public let image_url:String?, country:Country
     public var sources:EventSources?
     
-    public init(id: String, name: String, imageURL: String?, country: Country) {
+    public init(id: String, name: String, image_url: String?, country: Country) {
         self.id = id
         self.name = name
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.country = country
         sources = nil
     }
@@ -28,7 +28,7 @@ public struct PreVolcano : SovereignStateInformationValue {
         switch key {
         case .id: return id
         case .name: return name
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .country: return country
         case .sources: return sources
         }
@@ -47,7 +47,7 @@ public struct PreVolcano : SovereignStateInformationValue {
 public enum PreVolcanoValueKeys : String, JsonableValueKeys {
     case id
     case name
-    case imageURL
+    case image_url
     case country
     case sources
     
