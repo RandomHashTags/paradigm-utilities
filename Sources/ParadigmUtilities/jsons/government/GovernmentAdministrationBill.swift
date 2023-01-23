@@ -10,13 +10,13 @@ import Foundation
 public struct GovernmentAdministrationBill : Jsonable {
     public typealias ValueKeys = GovernmentAdministrationBillValueKeys
     
-    public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policyArea:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
+    public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policy_area:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
     public init(title: String, sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
         self.title = title
         self.sponsor = sponsor
         self.summary = summary
-        self.policyArea = policyArea?.rawValue
+        self.policy_area = policyArea?.rawValue
         self.subjects = subjects
         self.cosponsors = cosponsors
         self.actions = actions
@@ -28,7 +28,7 @@ public struct GovernmentAdministrationBill : Jsonable {
         case .title: return title
         case .sponsor: return sponsor
         case .summary: return summary
-        case .policyArea: return policyArea
+        case .policy_area: return policy_area
         case .subjects: return subjects
         case .cosponsors: return cosponsors
         case .actions: return actions
@@ -46,8 +46,8 @@ public struct GovernmentAdministrationBill : Jsonable {
         case .summary:
             summary = value as? String
             break
-        case .policyArea:
-            policyArea = value as? String
+        case .policy_area:
+            policy_area = value as? String
             break
         case .subjects:
             subjects = value as? [String]
@@ -69,7 +69,7 @@ public enum GovernmentAdministrationBillValueKeys : String, JsonableValueKeys {
     case title
     case sponsor
     case summary
-    case policyArea
+    case policy_area
     case subjects
     case cosponsors
     case actions
