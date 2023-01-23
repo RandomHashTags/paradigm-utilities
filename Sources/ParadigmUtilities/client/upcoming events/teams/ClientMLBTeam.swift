@@ -11,21 +11,21 @@ public struct ClientMLBTeam : Jsonable {
     public typealias ValueKeys = ClientMLBTeamValueKeys
     
     public var name:String
-    public let scheduleURL:String, logoURL:String, wikipediaURL:String
+    public let schedule_url:String, logo_url:String, wikipedia_url:String
     
-    public init(name: String, scheduleURL: String, logoURL: String, wikipediaURL: String) {
+    public init(name: String, schedule_url: String, logo_url: String, wikipedia_url: String) {
         self.name = name
-        self.scheduleURL = scheduleURL
-        self.logoURL = logoURL
-        self.wikipediaURL = wikipediaURL
+        self.schedule_url = schedule_url
+        self.logo_url = logo_url
+        self.wikipedia_url = wikipedia_url
     }
     
     public func getKeyValue(key: ClientMLBTeamValueKeys) -> Any? {
         switch key {
         case .name: return name
-        case .scheduleURL: return scheduleURL
-        case .logoURL: return logoURL
-        case .wikipediaURL: return wikipediaURL
+        case .schedule_url: return schedule_url
+        case .logo_url: return logo_url
+        case .wikipedia_url: return wikipedia_url
         }
     }
     public mutating func setKeyValue<T>(key: ClientMLBTeamValueKeys, value: T) {
@@ -41,9 +41,9 @@ public struct ClientMLBTeam : Jsonable {
 
 public enum ClientMLBTeamValueKeys : String, JsonableValueKeys {
     case name
-    case scheduleURL
-    case logoURL
-    case wikipediaURL
+    case schedule_url
+    case logo_url
+    case wikipedia_url
     
     public func isTranslatable() -> Bool {
         switch self {
