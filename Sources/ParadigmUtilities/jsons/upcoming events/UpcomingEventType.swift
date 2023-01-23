@@ -263,7 +263,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .ticketmaster_music_event: return TicketmasterMusicEventValueKeys.allCases
         case .video_game: return VideoGameEventValueKeys.allCases
         case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEventValueKeys.allCases
-        case .word_of_the_day: return WOTDEventCodingKeys.allCases
+        case .word_of_the_day: return WOTDEventValueKeys.allCases
         default: return nil
         }
     }

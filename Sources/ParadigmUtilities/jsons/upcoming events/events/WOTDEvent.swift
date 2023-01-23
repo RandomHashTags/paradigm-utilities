@@ -8,11 +8,42 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum WOTDEventCodingKeys : String, UpcomingEventValueKeys {
+public final class WOTDEvent : GenericUpcomingEvent {
+    public let examples:[String]?, pronunciation_url:String?, syllables:String, grammar_type:String
+    
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, examples: [String]?, pronunciation_url: String?, syllables: String, grammar_type: String) {
+        self.examples = examples
+        self.pronunciation_url = pronunciation_url
+        self.syllables = syllables
+        self.grammar_type = grammar_type
+        super.init(type: UpcomingEventType.word_of_the_day, event_date: event_date, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: WOTDEventValueKeys.self)
+        examples = try container.decode([String].self, forKey: .examples)
+        pronunciation_url = try container.decodeIfPresent(String.self, forKey: .pronunciation_url)
+        syllables = try container.decode(String.self, forKey: .syllables)
+        grammar_type = try container.decode(String.self, forKey: .grammar_type)
+        try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
+        guard let key:WOTDEventValueKeys = key as? WOTDEventValueKeys else { return nil }
+        switch key {
+        case .examples: return examples
+        case .pronunciation_url: return pronunciation_url
+        case .syllables: return syllables
+        case .grammar_type: return grammar_type
+        }
+    }
+}
+
+public enum WOTDEventValueKeys : String, UpcomingEventValueKeys {
     case examples
-    case pronunciationURL
+    case pronunciation_url
     case syllables
-    case grammarType
+    case grammar_type
     
     public func getCategory() -> UpcomingEventValueCategory {
         switch self {
@@ -25,7 +56,7 @@ public enum WOTDEventCodingKeys : String, UpcomingEventValueKeys {
     
     public func getValueCellType() -> UpcomingEventValueCellType {
         switch self {
-        case .pronunciationURL:
+        case .pronunciation_url:
             return UpcomingEventValueCellType.audio
         default:
             return UpcomingEventValueCellType.label
@@ -35,39 +66,8 @@ public enum WOTDEventCodingKeys : String, UpcomingEventValueKeys {
         switch self {
         case .examples: return "Examples:\n\n"
         case .syllables: return "Syllables: "
-        case .grammarType: return "Type: "
+        case .grammar_type: return "Type: "
         default: return nil
-        }
-    }
-}
-
-public final class WOTDEvent : GenericUpcomingEvent {
-    public let examples:[String]?, pronunciationURL:String?, syllables:String, grammarType:String
-    
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, examples: [String]?, pronunciationURL: String?, syllables: String, grammarType: String) {
-        self.examples = examples
-        self.pronunciationURL = pronunciationURL
-        self.syllables = syllables
-        self.grammarType = grammarType
-        super.init(type: UpcomingEventType.word_of_the_day, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container:KeyedDecodingContainer = try decoder.container(keyedBy: WOTDEventCodingKeys.self)
-        examples = try container.decode([String].self, forKey: .examples)
-        pronunciationURL = try container.decodeIfPresent(String.self, forKey: .pronunciationURL)
-        syllables = try container.decode(String.self, forKey: .syllables)
-        grammarType = try container.decode(String.self, forKey: .grammarType)
-        try super.init(from: decoder)
-    }
-    
-    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
-        guard let key:WOTDEventCodingKeys = key as? WOTDEventCodingKeys else { return nil }
-        switch key {
-        case .examples: return examples
-        case .pronunciationURL: return pronunciationURL
-        case .syllables: return syllables
-        case .grammarType: return grammarType
         }
     }
 }
