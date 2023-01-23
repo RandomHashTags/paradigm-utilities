@@ -11,7 +11,7 @@ public struct MovieProductionCompaniesResponse : Jsonable {
     public typealias ValueKeys = MovieProductionCompaniesResponseValueKeys
     
     public let response_version:Int, imageURLPrefix:String
-    public var companies:[PreMovieProductionCompany]!
+    public var companies:[PreMovieProductionCompany]
     
     public init(response_version: Int, imageURLPrefix: String, companies: [PreMovieProductionCompany]!) {
         self.response_version = response_version
@@ -29,7 +29,7 @@ public struct MovieProductionCompaniesResponse : Jsonable {
     public mutating func setKeyValue<T>(key: MovieProductionCompaniesResponseValueKeys, value: T) {
         switch key {
         case .companies:
-            companies = value as? [PreMovieProductionCompany]
+            companies = value as! [PreMovieProductionCompany]
             break
         default:
             break
