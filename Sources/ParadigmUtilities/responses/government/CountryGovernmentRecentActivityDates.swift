@@ -13,6 +13,11 @@ public struct CountryGovernmentRecentActivityDates : Jsonable {
     public let date:EventDate
     public var activity:[GovernmentPreAdministrationBill]
     
+    public init(date: EventDate, activity: [GovernmentPreAdministrationBill]) {
+        self.date = date
+        self.activity = activity
+    }
+    
     public func getKeyValue(key: CountryGovernmentRecentActivityDatesValueKeys) -> Any? {
         switch key {
         case .activity: return activity
