@@ -12,9 +12,9 @@ public struct CountryGovernmentRecentActivity : Jsonable {
     public typealias ValueKeys = CountryGovernmentRecentActivityValueKeys
     
     public let country:Country
-    public var activity:[GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]] // TODO: fix invalid JSON when encoded | how to format?
+    public var activity:[CountryGovernmentRecentActivityChamber]
     
-    public init(country: Country, activity: [GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]) {
+    public init(country: Country, activity: [CountryGovernmentRecentActivityChamber]) {
         self.country = country
         self.activity = activity
     }
@@ -27,7 +27,7 @@ public struct CountryGovernmentRecentActivity : Jsonable {
     public mutating func setKeyValue<T>(key: CountryGovernmentRecentActivityValueKeys, value: T) {
         switch key {
         case .activity:
-            activity = value as! [GovernmentBillStatusWrapper:[EventDate:[GovernmentPreAdministrationBill]]]
+            activity = value as! [CountryGovernmentRecentActivityChamber]
             break
         }
     }
@@ -37,9 +37,6 @@ public enum CountryGovernmentRecentActivityValueKeys : String, JsonableValueKeys
     case activity
     
     public func isTranslatable() -> Bool {
-        switch self {
-        case .activity:
-            return true
-        }
+        return true
     }
 }
