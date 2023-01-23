@@ -11,9 +11,9 @@ import SwiftSovereignStates
 public struct HomeResponseGovernment : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseGovernmentValueKeys
     
-    public var recent_activity:[Country:[GovernmentRecentActivityResponse]]
+    public var recent_activity:[CountryGovernmentRecentActivity]
     
-    public init(recent_activity: [Country:[GovernmentRecentActivityResponse]]) {
+    public init(recent_activity: [CountryGovernmentRecentActivity]) {
         self.recent_activity = recent_activity
     }
     
@@ -25,7 +25,7 @@ public struct HomeResponseGovernment : HomeResponseProtocol {
     public mutating func setKeyValue<T>(key: HomeResponseGovernmentValueKeys, value: T) {
         switch key {
         case .recent_activity:
-            recent_activity = value as! [Country:[GovernmentRecentActivityResponse]]
+            recent_activity = value as! [CountryGovernmentRecentActivity]
             break
         }
     }
