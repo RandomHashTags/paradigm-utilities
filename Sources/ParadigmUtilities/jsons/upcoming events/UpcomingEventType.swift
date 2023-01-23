@@ -253,7 +253,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .movie: return MovieEventValueKeys.allCases
         case .music_album: return MusicAlbumEventValueKeys.allCases
         case .science_year_review: return ScienceYearReviewEventValueKeys.allCases
-        case .space_event: return SpaceEventCodingKeys.allCases
+        case .space_event: return SpaceEventValueKeys.allCases
         case .space_lunar_eclipse: return SpaceLunarEclipseEventCodingKeys.allCases
         case .space_near_earth_object: return SpaceNearEarthObjectEventCodingKeys.allCases
         case .space_rocket_launch: return SpaceRocketLaunchEventCodingKeys.allCases
