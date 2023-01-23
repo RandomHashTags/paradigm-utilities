@@ -8,9 +8,9 @@
 import Foundation
 
 public protocol SovereignStateRankedValue : SovereignStateIdentifiableValue {
-    var worldRank:Int { get }
-    var maxWorldRank:Int { get }
+    var world_rank:Int { get }
+    var world_rank_max:Int { get }
     var value:Double { get }
     var suffix:String? { get }
-    var isEstimate:Bool { get }
+    var is_estimate:Bool { get }
 }

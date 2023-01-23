@@ -9,5 +9,5 @@ import Foundation
 
 public protocol SovereignStateIdentifiableValue : SovereignStateInformationValue {
     var info:SovereignStateInfo { get }
-    var yearOfData:Int { get }
+    var year_of_data:Int { get }
 }

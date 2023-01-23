@@ -11,10 +11,10 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
     public typealias ValueKeys = SovereignStateRankingInfoValueValueKeys
     
     public let info:SovereignStateInfo, defcon:Int
-    public var worldRank:Int, maxWorldRank:Int
-    public let yearOfData:Int, value:Double, valueType:NumberType
+    public var world_rank:Int, world_rank_max:Int
+    public let year_of_data:Int, value:Double, valueType:NumberType
     public var suffix:String?
-    public let isEstimate:Bool
+    public let is_estimate:Bool
     public var values:[SovereignStateRankingInfoValueOther]?, sources:EventSources?
     
     public init(info: SovereignStateInfo, defcon: Int, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Int, suffix: String?, isEstimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
@@ -26,13 +26,13 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
     public init(info: SovereignStateInfo, defcon: Int, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Double, valueType: NumberType, suffix: String?, isEstimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
         self.info = info
         self.defcon = defcon
-        self.worldRank = worldRank
-        self.maxWorldRank = maxWorldRank
-        self.yearOfData = yearOfData
+        self.world_rank = worldRank
+        self.world_rank_max = maxWorldRank
+        self.year_of_data = yearOfData
         self.value = value
         self.valueType = valueType
         self.suffix = suffix
-        self.isEstimate = isEstimate
+        self.is_estimate = isEstimate
         self.values = values
         self.sources = sources
     }
@@ -41,13 +41,13 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         switch key {
         case .info: return info
         case .defcon: return defcon
-        case .worldRank: return worldRank
-        case .maxWorldRank: return maxWorldRank
-        case .yearOfData: return yearOfData
+        case .worldRank: return world_rank
+        case .maxWorldRank: return world_rank_max
+        case .yearOfData: return year_of_data
         case .value: return value
         case .valueType: return valueType
         case .suffix: return suffix
-        case .isEstimate: return isEstimate
+        case .isEstimate: return is_estimate
         case .values: return values
         case .sources: return sources
         }

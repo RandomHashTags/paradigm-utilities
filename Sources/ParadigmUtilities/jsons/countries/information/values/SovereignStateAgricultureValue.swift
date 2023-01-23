@@ -10,35 +10,35 @@ import Foundation
 public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
     public typealias ValueKeys = SovereignStateAgricultureValueValueKeys
     
-    public let info:SovereignStateInfo, worldRank:Int
-    public var maxWorldRank:Int
-    public let yearOfData:Int, value:Double, valueType:NumberType
+    public let info:SovereignStateInfo, world_rank:Int
+    public var world_rank_max:Int
+    public let year_of_data:Int, value:Double, value_type:NumberType
     public var suffix:String?
-    public let isEstimate:Bool
+    public let is_estimate:Bool
     public var sources:EventSources?
     
-    public init(info: SovereignStateInfo, worldRank: Int, maxWorldRank: Int, yearOfData: Int, value: Int, suffix: String?, isEstimate: Bool, sources: EventSources?) {
+    public init(info: SovereignStateInfo, world_rank: Int, world_rank_max: Int, year_of_data: Int, value: Int, suffix: String?, is_estimate: Bool, sources: EventSources?) {
         self.info = info
-        self.worldRank = worldRank
-        self.maxWorldRank = maxWorldRank
-        self.yearOfData = yearOfData
+        self.world_rank = world_rank
+        self.world_rank_max = world_rank_max
+        self.year_of_data = year_of_data
         self.value = Double(value)
-        self.valueType = NumberType.integer
+        self.value_type = NumberType.integer
         self.suffix = suffix
-        self.isEstimate = isEstimate
+        self.is_estimate = is_estimate
         self.sources = sources
     }
     
     public func getKeyValue(key: SovereignStateAgricultureValueValueKeys) -> Any? {
         switch key {
         case .info: return info
-        case .worldRank: return worldRank
-        case .maxWorldRank: return maxWorldRank
-        case .yearOfData: return yearOfData
+        case .world_rank: return world_rank
+        case .world_rank_max: return world_rank_max
+        case .year_of_data: return year_of_data
         case .value: return value
-        case .valueType: return valueType
+        case .value_type: return value_type
         case .suffix: return suffix
-        case .isEstimate: return isEstimate
+        case .is_estimate: return is_estimate
         case .sources: return sources
         }
     }
@@ -58,13 +58,13 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
 
 public enum SovereignStateAgricultureValueValueKeys : String, JsonableValueKeys {
     case info
-    case worldRank
-    case maxWorldRank
-    case yearOfData
+    case world_rank
+    case world_rank_max
+    case year_of_data
     case value
-    case valueType
+    case value_type
     case suffix
-    case isEstimate
+    case is_estimate
     case sources
     
     public func isTranslatable() -> Bool {

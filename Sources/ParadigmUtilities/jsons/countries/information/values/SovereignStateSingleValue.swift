@@ -12,7 +12,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
     
     public let info:SovereignStateInfo
     public var notes:String?, value:String, valueDescription:String?
-    public let yearOfData:Int
+    public let year_of_data:Int
     public var sources:EventSources?
     
     public init(info: SovereignStateInfo, notes: String?, value: String, valueDescription: String?, yearOfData: Int, sources: EventSources?) {
@@ -20,7 +20,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         self.notes = notes
         self.value = value
         self.valueDescription = valueDescription
-        self.yearOfData = yearOfData
+        self.year_of_data = yearOfData
         self.sources = sources
     }
     
@@ -30,7 +30,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
         case .notes: return notes
         case .value: return value
         case .valueDescription: return valueDescription
-        case .yearOfData: return yearOfData
+        case .yearOfData: return year_of_data
         case .sources: return sources
         }
     }
