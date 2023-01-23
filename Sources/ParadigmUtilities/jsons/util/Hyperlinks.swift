@@ -8,18 +8,18 @@
 import Foundation
 
 private enum CodingKeys: CodingKey {
-    case imageURLPrefix
+    case image_url_prefix
     case hyperlinks
 }
 public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     public typealias ValueKeys = HyperlinksValueKeys
     
-    public let imageURLPrefix:String
+    public let image_url_prefix:String
     
-    private var hyperlinks:[Hyperlink], hyperlinkCount:Int = -1
+    private var hyperlinks:[Hyperlink], hyperlink_count:Int = -1
     
-    public init(imageURLPrefix: String, hyperlinks: [Hyperlink] = [Hyperlink]()) {
-        self.imageURLPrefix = imageURLPrefix
+    public init(image_url_prefix: String, hyperlinks: [Hyperlink] = [Hyperlink]()) {
+        self.image_url_prefix = image_url_prefix
         self.hyperlinks = hyperlinks
     }
     
@@ -32,21 +32,21 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     
     public func encode(to encoder: Encoder) throws {
         var container:KeyedEncodingContainer = encoder.container(keyedBy: CodingKeys.self)
-        try container.encode(self.imageURLPrefix, forKey: .imageURLPrefix)
+        try container.encode(self.image_url_prefix, forKey: .image_url_prefix)
         try container.encode(self.hyperlinks, forKey: .hyperlinks)
     }
     
     public init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: CodingKeys.self)
-        self.imageURLPrefix = try container.decode(String.self, forKey: .imageURLPrefix)
+        self.image_url_prefix = try container.decode(String.self, forKey: .image_url_prefix)
         self.hyperlinks = try container.decode([Hyperlink].self, forKey: .hyperlinks)
     }
     
     public mutating func next() -> Hyperlink? {
-        let nextNumber:Int = hyperlinkCount + 1
+        let nextNumber:Int = hyperlink_count + 1
         guard nextNumber < hyperlinks.count else { return nil }
-        hyperlinkCount = nextNumber
-        return hyperlinks[hyperlinkCount]
+        hyperlink_count = nextNumber
+        return hyperlinks[hyperlink_count]
     }
     public mutating func append(_ hyperlink: Hyperlink) {
         hyperlinks.append(hyperlink)

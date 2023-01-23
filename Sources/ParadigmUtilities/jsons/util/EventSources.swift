@@ -53,6 +53,9 @@ public final class EventSources : Jsonable {
         guard let sources:[EventSource] = sources?.sources else { return }
         self.sources.append(contentsOf: sources)
     }
+    public func append(_ sources: EventSources) {
+        self.sources.append(contentsOf: sources.sources)
+    }
     public func append(contentsOf: [EventSource]) {
         sources.append(contentsOf: contentsOf)
     }
