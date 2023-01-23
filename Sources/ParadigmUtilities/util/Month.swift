@@ -47,20 +47,10 @@ public enum Month : Int, CaseIterable {
         }
     }
     public func previous() -> Month {
-        switch self {
-        case .january:
-            return .december
-        default:
-            return Month.valueOf(rawValue-1)!
-        }
+        return self == .january ? .december : Month.valueOf(rawValue-1)!
     }
     public func next() -> Month {
-        switch self {
-        case .december:
-            return .january
-        default:
-            return Month.valueOf(rawValue+1)!
-        }
+        return self == .december ? .january : Month.valueOf(rawValue+1)!
     }
     
     public func maxLength() -> Int {
