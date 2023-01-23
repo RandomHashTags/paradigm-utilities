@@ -20,6 +20,7 @@ public struct CountryGovernmentRecentActivityChamber : Jsonable {
     
     public func getKeyValue(key: CountryGovernmentRecentActivityChamberValueKeys) -> Any? {
         switch key {
+        case .chamber: return chamber
         case .dates: return dates
         }
     }
@@ -28,14 +29,22 @@ public struct CountryGovernmentRecentActivityChamber : Jsonable {
         case .dates:
             dates = value as! [CountryGovernmentRecentActivityDates]
             break
+        default:
+            break
         }
     }
 }
 
 public enum CountryGovernmentRecentActivityChamberValueKeys : String, JsonableValueKeys {
+    case chamber
     case dates
     
     public func isTranslatable() -> Bool {
-        return true
+        switch self {
+        case .dates:
+            return true
+        default:
+            return false
+        }
     }
 }

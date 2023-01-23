@@ -14,13 +14,15 @@ public struct HomeResponse : Jsonable {
     
     @CodableOmittable public var countries:HomeResponseCountries?
     @CodableOmittable public var government:HomeResponseGovernment?
+    @CodableOmittable public var news:HomeResponseNews?
     @CodableOmittable public var stock_market:HomeResponseStockMarket?
     public var upcoming_events:HomeResponseUpcomingEvents?
     @CodableOmittable public var weather:HomeResponseWeather?
     
-    public init(countries: HomeResponseCountries?, government: HomeResponseGovernment?, stock_market: HomeResponseStockMarket?, upcoming_events: HomeResponseUpcomingEvents?, weather: HomeResponseWeather?) {
+    public init(countries: HomeResponseCountries?, government: HomeResponseGovernment?, news: HomeResponseNews?, stock_market: HomeResponseStockMarket?, upcoming_events: HomeResponseUpcomingEvents?, weather: HomeResponseWeather?) {
         self._countries = CodableOmittable(countries)
         self._government = CodableOmittable(government)
+        self._news = CodableOmittable(news)
         self._stock_market = CodableOmittable(stock_market)
         self.upcoming_events = upcoming_events
         self._weather = CodableOmittable(weather)
@@ -30,6 +32,7 @@ public struct HomeResponse : Jsonable {
         switch key {
         case .countries: return _countries
         case .government: return _government
+        case .news: return _news
         case .stock_market: return _stock_market
         case .upcoming_events: return upcoming_events
         case .weather: return _weather
@@ -42,6 +45,9 @@ public struct HomeResponse : Jsonable {
             break
         case .government:
             _government = value as! CodableOmittable<HomeResponseGovernment>
+            break
+        case .news:
+            _news = value as! CodableOmittable<HomeResponseNews>
             break
         case .stock_market:
             _stock_market = value as! CodableOmittable<HomeResponseStockMarket>
@@ -59,6 +65,7 @@ public struct HomeResponse : Jsonable {
 public enum HomeResponseValueKeys : String, JsonableValueKeys {
     case countries
     case government
+    case news
     case stock_market
     case upcoming_events
     case weather
@@ -68,7 +75,7 @@ public enum HomeResponseValueKeys : String, JsonableValueKeys {
     }
     public func isOmittable() -> Bool {
         switch self {
-        case .countries, .government, .stock_market, .weather:
+        case .countries, .government, .news, .stock_market, .weather:
             return true
         default:
             return false

@@ -22,6 +22,7 @@ public struct HomeResponseUpcomingEventTypeResponse : Jsonable {
     
     public func getKeyValue(key: HomeResponseUpcomingEventTypeResponseValueKeys) -> Any? {
         switch key {
+        case .type: return type
         case .date_events: return _date_events
         case .exact_time_events: return _exact_time_events
         }
@@ -34,11 +35,14 @@ public struct HomeResponseUpcomingEventTypeResponse : Jsonable {
         case .exact_time_events:
             _exact_time_events = value as! CodableOmittable<[HomeResponseUpcomingEventsExactTimesResponse]>
             break
+        default:
+            break
         }
     }
 }
 
 public enum HomeResponseUpcomingEventTypeResponseValueKeys : String, JsonableValueKeys {
+    case type
     case date_events
     case exact_time_events
     
@@ -46,12 +50,16 @@ public enum HomeResponseUpcomingEventTypeResponseValueKeys : String, JsonableVal
         switch self {
         case .date_events, .exact_time_events:
             return true
+        default:
+            return false
         }
     }
     public func isOmittable() -> Bool {
         switch self {
         case .date_events, .exact_time_events:
             return true
+        default:
+            return false
         }
     }
 }

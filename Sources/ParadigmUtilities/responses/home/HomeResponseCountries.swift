@@ -16,10 +16,6 @@ public struct HomeResponseCountries : HomeResponseProtocol {
         _filters = CodableOmittable(filters)
     }
     
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(_filters)
-    }
-    
     public func getKeyValue(key: HomeResponseCountriesValueKeys) -> Any? {
         switch key {
         case .filters: return _filters
