@@ -9,5 +9,5 @@ import Foundation
 
 public protocol Person : Jsonable {
     var name:HumanName { get }
-    var imageURL:String? { get }
+    var image_url:String? { get }
 }

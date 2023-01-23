@@ -10,13 +10,13 @@ import Foundation
 public struct GovernmentPrePolitician : Person {
     public typealias ValueKeys = GovernmentPrePoliticianValueKeys
     
-    public let id:String, name:HumanName, party:PoliticalParty, imageURL:String?
+    public let id:String, name:HumanName, party:PoliticalParty, image_url:String?
     
-    public init(id: String, name: HumanName, party: PoliticalParty, imageURL: String?) {
+    public init(id: String, name: HumanName, party: PoliticalParty, image_url: String?) {
         self.id = id
         self.name = name
         self.party = party
-        self.imageURL = imageURL
+        self.image_url = image_url
     }
     
     public func getKeyValue(key: GovernmentPrePoliticianValueKeys) -> Any? {
@@ -24,7 +24,7 @@ public struct GovernmentPrePolitician : Person {
         case .id: return id
         case .name: return name
         case .party: return party
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         }
     }
     public mutating func setKeyValue<T>(key: GovernmentPrePoliticianValueKeys, value: T) {
@@ -35,7 +35,7 @@ public enum GovernmentPrePoliticianValueKeys : String, JsonableValueKeys {
     case id
     case name
     case party
-    case imageURL
+    case image_url
     
     public func isTranslatable() -> Bool {
         return false
