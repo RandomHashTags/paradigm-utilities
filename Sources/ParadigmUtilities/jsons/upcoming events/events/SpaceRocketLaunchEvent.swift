@@ -15,13 +15,13 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         mission_name = mission.name
         mission_description = mission.description
         mission_type = mission.type
-        window_start = mission.windowStart
-        window_end = mission.windowEnd
-        exact_day = mission.exactDay
-        exact_time = mission.exactTime
+        window_start = mission.window_start
+        window_end = mission.window_end
+        exact_day = mission.exact_day
+        exact_time = mission.exact_time
         status = mission.status
         probability = mission.probability
-        video_url = mission.videoURL
+        video_url = mission.video_url
         super.init(type: UpcomingEventType.space_rocket_launch, event_date: nil, exact_start: exact_start, exact_end: exact_end, custom_type_singular_name: nil, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }
     
