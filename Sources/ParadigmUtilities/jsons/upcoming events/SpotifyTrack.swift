@@ -10,16 +10,16 @@ import Foundation
 public struct SpotifyTrack : Jsonable {
     public typealias ValueKeys = SpotifyTrackValueKeys
     
-    public let name:String, duration:Int64, artists:[SpotifyArtist]?, imageURL:String?, explicit:Bool, previewURL:String?
+    public let name:String, duration:Int64, artists:[SpotifyArtist]?, image_url:String?, explicit:Bool, preview_url:String?
     public var sources:EventSources?
     
-    public init(name: String, duration: Int64, artists: [SpotifyArtist]?, imageURL: String?, explicit: Bool, previewURL: String?, sources: EventSources?) {
+    public init(name: String, duration: Int64, artists: [SpotifyArtist]?, image_url: String?, explicit: Bool, preview_url: String?, sources: EventSources?) {
         self.name = name
         self.duration = duration
         self.artists = artists
-        self.imageURL = imageURL
+        self.image_url = image_url
         self.explicit = explicit
-        self.previewURL = previewURL
+        self.preview_url = preview_url
         self.sources = sources
     }
     
@@ -28,9 +28,9 @@ public struct SpotifyTrack : Jsonable {
         case .name: return name
         case .duration: return duration
         case .artists: return artists
-        case .imageURL: return imageURL
+        case .image_url: return image_url
         case .explicit: return explicit
-        case .previewURL: return previewURL
+        case .preview_url: return preview_url
         case .sources: return sources
         }
     }
@@ -49,9 +49,9 @@ public enum SpotifyTrackValueKeys : String, JsonableValueKeys {
     case name
     case duration
     case artists
-    case imageURL
+    case image_url
     case explicit
-    case previewURL
+    case preview_url
     case sources
     
     public func isTranslatable() -> Bool {
