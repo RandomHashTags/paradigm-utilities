@@ -10,17 +10,17 @@ import Foundation
 public struct SovereignStateAvailabilities : Jsonable {
     public typealias ValueKeys = SovereignStateAvailabilitiesValueKeys
     
-    public let imageURLPrefix:String
+    public let image_url_prefix:String
     public var availabilities:[ClientSovereignStateAvailability]
     
-    public init(imageURLPrefix: String, availabilities: [ClientSovereignStateAvailability]) {
-        self.imageURLPrefix = imageURLPrefix
+    public init(image_url_prefix: String, availabilities: [ClientSovereignStateAvailability]) {
+        self.image_url_prefix = image_url_prefix
         self.availabilities = availabilities
     }
     
     public func getKeyValue(key: SovereignStateAvailabilitiesValueKeys) -> Any? {
         switch key {
-        case .imageURLPrefix: return imageURLPrefix
+        case .image_url_prefix: return image_url_prefix
         case .availabilities: return availabilities
         }
     }
@@ -36,7 +36,7 @@ public struct SovereignStateAvailabilities : Jsonable {
 }
 
 public enum SovereignStateAvailabilitiesValueKeys : String, JsonableValueKeys {
-    case imageURLPrefix
+    case image_url_prefix
     case availabilities
     
     public func isTranslatable() -> Bool {
