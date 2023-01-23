@@ -259,7 +259,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .space_rocket_launch: return SpaceRocketLaunchEventValueKeys.allCases
         case .sport_mlb: return MLBEventCodingKeys.allCases
         case .sport_professional_wrestling: return ProfessionalWrestlingEventValueKeys.allCases
-        case .spotify_new_music_friday: return SpotifyNewMusicFridayEventCodingKeys.allCases
+        case .spotify_new_music_friday: return SpotifyNewMusicFridayEventValueKeys.allCases
         case .ticketmaster_music_event: return TicketmasterMusicEventCodingKeys.allCases
         case .video_game: return VideoGameEventCodingKeys.allCases
         case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEventCodingKeys.allCases
