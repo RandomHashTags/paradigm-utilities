@@ -10,17 +10,17 @@ import Foundation
 public struct NationalAnthem : SovereignStateInformationValue {
     public typealias ValueKeys = NationalAnthemValueKeys
     
-    public let mp3URL:String
+    public let mp3_url:String
     public var sources:EventSources?
     
-    public init(mp3URL: String, sources: EventSources?) {
-        self.mp3URL = mp3URL
+    public init(mp3_url: String, sources: EventSources?) {
+        self.mp3_url = mp3_url
         self.sources = sources
     }
     
     public func getKeyValue(key: NationalAnthemValueKeys) -> Any? {
         switch key {
-        case .mp3URL: return mp3URL
+        case .mp3_url: return mp3_url
         case .sources: return sources
         }
     }
@@ -36,7 +36,7 @@ public struct NationalAnthem : SovereignStateInformationValue {
 }
 
 public enum NationalAnthemValueKeys : String, JsonableValueKeys {
-    case mp3URL
+    case mp3_url
     case sources
     
     public func isTranslatable() -> Bool {
