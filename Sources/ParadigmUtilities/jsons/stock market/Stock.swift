@@ -8,13 +8,13 @@
 import Foundation
 
 public struct Stock : Jsonable {
-    public let symbol:String, shortName:String, longName:String?, regularMarket:StockQuote, postMarket:StockQuote?
+    public let symbol:String, name_short:String, name_long:String?, market_regular:StockQuote, market_post:StockQuote?
     
-    public init(symbol: String, shortName: String, longName: String?, regularMarket: StockQuote, postMarket: StockQuote?) {
+    public init(symbol: String, name_short: String, name_long: String?, market_regular: StockQuote, market_post: StockQuote?) {
         self.symbol = symbol
-        self.shortName = shortName
-        self.longName = longName
-        self.regularMarket = regularMarket
-        self.postMarket = postMarket
+        self.name_short = name_short
+        self.name_long = name_long
+        self.market_regular = market_regular
+        self.market_post = market_post
     }
 }
