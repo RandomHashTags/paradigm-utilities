@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum SpaceRocketLaunchEventCodingKeys : String, UpcomingEventValueKeys {
     case missionName
     case missionDescription
     case missionType
@@ -96,7 +96,7 @@ public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:SpaceRocketLaunchEventCodingKeys = key as? SpaceRocketLaunchEventCodingKeys else { return nil }
         switch key {
         case .missionName: return missionName

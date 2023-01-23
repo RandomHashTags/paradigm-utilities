@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum SpaceLunarEclipseEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum SpaceLunarEclipseEventCodingKeys : String, UpcomingEventValueKeys {
     case timeGreatestMilliseconds
     case orbitalNode
     case saros
@@ -62,7 +62,7 @@ public final class SpaceLunarEclipseEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:SpaceLunarEclipseEventCodingKeys = key as? SpaceLunarEclipseEventCodingKeys else { return nil }
         switch key {
         case .timeGreatestMilliseconds: return timeGreatestMilliseconds

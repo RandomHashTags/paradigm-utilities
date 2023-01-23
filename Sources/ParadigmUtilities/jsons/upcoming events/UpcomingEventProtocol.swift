@@ -49,7 +49,7 @@ public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
     var hyperlinks:Hyperlinks? { get }
 }
 
-public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresentable where RawValue == String {
+public protocol UpcomingEventValueKeys : CaseIterable, CodingKey, RawRepresentable where RawValue == String {
     func getCategory() -> UpcomingEventValueCategory
     func getValueType() -> UpcomingEventValueType
     func getValueCellType() -> UpcomingEventValueCellType
@@ -57,7 +57,7 @@ public protocol UpcomingEventCodingKeys : CaseIterable, CodingKey, RawRepresenta
     func getValuePrefix() -> String?
     func getValueString() -> String?
 }
-public extension UpcomingEventCodingKeys {
+public extension UpcomingEventValueKeys {
     func getValueType() -> UpcomingEventValueType {
         return UpcomingEventValueType.defaultType()
     }

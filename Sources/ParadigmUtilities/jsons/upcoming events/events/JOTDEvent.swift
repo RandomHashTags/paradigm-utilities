@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum JOTDEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum JOTDEventCodingKeys : String, UpcomingEventValueKeys {
     case copyright
     case question
     case answer
@@ -36,7 +36,7 @@ public final class JOTDEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:JOTDEventCodingKeys = key as? JOTDEventCodingKeys else { return nil }
         switch key {
         case .copyright: return copyright

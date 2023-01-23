@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum WOTDEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum WOTDEventCodingKeys : String, UpcomingEventValueKeys {
     case examples
     case pronunciationURL
     case syllables
@@ -61,7 +61,7 @@ public final class WOTDEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:WOTDEventCodingKeys = key as? WOTDEventCodingKeys else { return nil }
         switch key {
         case .examples: return examples

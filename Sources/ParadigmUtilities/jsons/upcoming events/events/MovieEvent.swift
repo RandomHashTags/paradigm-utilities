@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum MovieEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum MovieEventCodingKeys : String, UpcomingEventValueKeys {
     case releaseInfo
     case ratings
     case imdbInfo
@@ -63,7 +63,7 @@ public final class MovieEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:MovieEventCodingKeys = key as? MovieEventCodingKeys else { return nil }
         switch key {
         case .releaseInfo: return releaseInfo

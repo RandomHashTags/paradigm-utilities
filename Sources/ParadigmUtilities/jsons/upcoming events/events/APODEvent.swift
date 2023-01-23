@@ -8,9 +8,34 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum APODEventCodingKeys : String, UpcomingEventCodingKeys {
+public final class APODEvent : GenericUpcomingEvent {
+    public let copyright:String?, video_url:String?
+    
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String?, video_url: String?) {
+        self.copyright = copyright
+        self.video_url = video_url
+        super.init(type: UpcomingEventType.astronomy_picture_of_the_day, event_date: event_date, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
+    }
+    
+    public required init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: APODEventValueKeys.self)
+        copyright = try container.decodeIfPresent(String.self, forKey: .copyright)
+        video_url = try container.decodeIfPresent(String.self, forKey: .video_url)
+        try super.init(from: decoder)
+    }
+    
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
+        guard let key:APODEventValueKeys = key as? APODEventValueKeys else { return nil }
+        switch key {
+        case .copyright: return copyright
+        case .video_url: return video_url
+        }
+    }
+}
+
+public enum APODEventValueKeys : String, UpcomingEventValueKeys {
     case copyright
-    case videoURL
+    case video_url
     
     public func getCategory() -> UpcomingEventValueCategory {
         return UpcomingEventValueCategory.astronomy_picture_of_the_day
@@ -20,7 +45,7 @@ public enum APODEventCodingKeys : String, UpcomingEventCodingKeys {
         switch self {
         case .copyright:
             return .image_copyright
-        case .videoURL:
+        case .video_url:
             return .video_url
         }
     }
@@ -31,31 +56,6 @@ public enum APODEventCodingKeys : String, UpcomingEventCodingKeys {
             return "Copyright: "
         default:
             return nil
-        }
-    }
-}
-
-public final class APODEvent : GenericUpcomingEvent {
-    public let copyright:String?, videoURL:String?
-    
-    public init(eventDate: EventDate, title: String, description: String?, location: String?, imageURL: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String?, videoURL: String?) {
-        self.copyright = copyright
-        self.videoURL = videoURL
-        super.init(type: UpcomingEventType.astronomy_picture_of_the_day, event_date: eventDate, title: title, description: description, location: location, image_url: imageURL, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
-    }
-    
-    public required init(from decoder: Decoder) throws {
-        let container:KeyedDecodingContainer = try decoder.container(keyedBy: APODEventCodingKeys.self)
-        copyright = try container.decodeIfPresent(String.self, forKey: .copyright)
-        videoURL = try container.decodeIfPresent(String.self, forKey: .videoURL)
-        try super.init(from: decoder)
-    }
-    
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
-        guard let key:APODEventCodingKeys = key as? APODEventCodingKeys else { return nil }
-        switch key {
-        case .copyright: return copyright
-        case .videoURL: return videoURL
         }
     }
 }

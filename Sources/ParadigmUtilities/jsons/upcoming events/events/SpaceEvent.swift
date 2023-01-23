@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum SpaceEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum SpaceEventCodingKeys : String, UpcomingEventValueKeys {
     case newsURL
     case videoURL
     
@@ -33,7 +33,7 @@ public final class SpaceEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:SpaceEventCodingKeys = key as? SpaceEventCodingKeys else { return nil }
         switch key {
         case .newsURL: return newsURL

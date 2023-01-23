@@ -48,7 +48,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func testUpcomingEvents(_ decoder: ZippyJSONDecoder) throws {
-        let event:APODEvent = APODEvent(eventDate: EventDate.getToday(), title: "test", description: nil, location: nil, imageURL: nil, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, videoURL: nil)
+        let event:APODEvent = APODEvent(event_date: EventDate.getToday(), title: "test", description: nil, location: nil, image_url: nil, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
         let data:Data = event.toData()!
         XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == event)
         

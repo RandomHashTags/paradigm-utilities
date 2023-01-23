@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum ProfessionalWrestlingEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum ProfessionalWrestlingEventCodingKeys : String, UpcomingEventValueKeys {
     case mainEvent
     case notes
     
@@ -33,7 +33,7 @@ public final class ProfessionalWrestlingEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:ProfessionalWrestlingEventCodingKeys = key as? ProfessionalWrestlingEventCodingKeys else { return nil }
         switch key {
         case .mainEvent: return mainEvent

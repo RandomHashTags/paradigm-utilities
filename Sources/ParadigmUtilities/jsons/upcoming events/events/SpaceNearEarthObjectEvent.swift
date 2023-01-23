@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum SpaceNearEarthObjectEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum SpaceNearEarthObjectEventCodingKeys : String, UpcomingEventValueKeys {
     case closeApproachEpoch
     case potentiallyHazardous
     case estimatedDiameterMax
@@ -69,7 +69,7 @@ public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:SpaceNearEarthObjectEventCodingKeys = key as? SpaceNearEarthObjectEventCodingKeys else { return nil }
         switch key {
         case .closeApproachEpoch: return closeApproachEpoch

@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum MLBEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum MLBEventCodingKeys : String, UpcomingEventValueKeys {
     case teamAway
     case teamHome
     
@@ -36,7 +36,7 @@ public final class MLBEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:MLBEventCodingKeys = key as? MLBEventCodingKeys else { return nil }
         switch key {
         case .teamAway: return teamAway

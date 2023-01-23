@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum WikipediaTodaysFeaturedPictureEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum WikipediaTodaysFeaturedPictureEventCodingKeys : String, UpcomingEventValueKeys {
     case videoURL
     
     public func getCategory() -> UpcomingEventValueCategory {
@@ -30,7 +30,7 @@ public final class WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:WikipediaTodaysFeaturedPictureEventCodingKeys = key as? WikipediaTodaysFeaturedPictureEventCodingKeys else { return nil }
         switch key {
         case .videoURL: return videoURL

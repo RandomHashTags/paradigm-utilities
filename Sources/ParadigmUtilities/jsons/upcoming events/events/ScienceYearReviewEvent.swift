@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum ScienceYearReviewEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum ScienceYearReviewEventCodingKeys : String, UpcomingEventValueKeys {
     case years
     
     public func getCategory() -> UpcomingEventValueCategory {
@@ -29,7 +29,7 @@ public final class ScienceYearReviewEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:ScienceYearReviewEventCodingKeys = key as? ScienceYearReviewEventCodingKeys else { return nil }
         switch key {
         case .years: return years

@@ -102,10 +102,10 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     }
     
     public func getValue(_ key: String) -> Any? {
-        guard let keys:[any UpcomingEventCodingKeys] = type.getCodingKeys(), let codingKey:any UpcomingEventCodingKeys = keys.first(where: { $0.rawValue.elementsEqual(key) }) else { return nil }
+        guard let keys:[any UpcomingEventValueKeys] = type.getCodingKeys(), let codingKey:any UpcomingEventValueKeys = keys.first(where: { $0.rawValue.elementsEqual(key) }) else { return nil }
         return getValue(codingKey)
     }
-    public func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         return nil
     }
     

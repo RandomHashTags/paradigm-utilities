@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum MusicAlbumEventCodingKeys : String, UpcomingEventCodingKeys {
+public enum MusicAlbumEventCodingKeys : String, UpcomingEventValueKeys {
     case artist
     case spotifyDetails
     case itunesDetails
@@ -47,7 +47,7 @@ public final class MusicAlbumEvent : GenericUpcomingEvent {
         try super.init(from: decoder)
     }
     
-    public override func getValue(_ key: any UpcomingEventCodingKeys) -> Any? {
+    public override func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
         guard let key:MusicAlbumEventCodingKeys = key as? MusicAlbumEventCodingKeys else { return nil }
         switch key {
         case .artist: return artist
