@@ -12,14 +12,14 @@ public struct SubdivisionStatuteItem : Jsonable {
     
     public let type:SubdivisionLegislationType, id:String
     public var title:String
-    public let isRepealed:Bool
+    public let is_repealed:Bool
     public var sources:EventSources
     
-    public init(type: SubdivisionLegislationType, id: String, title: String, isRepealed: Bool, sources: EventSources) {
+    public init(type: SubdivisionLegislationType, id: String, title: String, is_repealed: Bool, sources: EventSources) {
         self.type = type
         self.id = id
         self.title = title
-        self.isRepealed = isRepealed
+        self.is_repealed = is_repealed
         self.sources = sources
     }
     
@@ -28,7 +28,7 @@ public struct SubdivisionStatuteItem : Jsonable {
         case .type: return type
         case .id: return id
         case .title: return title
-        case .isRepeated: return isRepealed
+        case .is_repeated: return is_repealed
         case .sources: return sources
         }
     }
@@ -50,7 +50,7 @@ public enum SubdivisionStatuteItemValueKeys : String, JsonableValueKeys {
     case type
     case id
     case title
-    case isRepeated
+    case is_repeated
     case sources
     
     public func isTranslatable() -> Bool {
