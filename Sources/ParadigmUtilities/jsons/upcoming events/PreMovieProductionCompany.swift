@@ -12,13 +12,13 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
     
     public let id:String
     public var name:String, aliases:[String]?
-    public let imageURL:String?
+    public let image_url:String?
     
     public init(id: String, name: String, aliases: [String]?, imageURL: String?) {
         self.id = id
         self.name = name
         self.aliases = aliases
-        self.imageURL = imageURL
+        self.image_url = imageURL
     }
     
     public func getKeyValue(key: PreMovieProductionCompanyValueKeys) -> Any? {
@@ -26,7 +26,7 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
         case .id: return id
         case .name: return name
         case .aliases: return aliases
-        case .imageURL: return imageURL
+        case .imageURL: return image_url
         }
     }
     public mutating func setKeyValue<T>(key: PreMovieProductionCompanyValueKeys, value: T) {

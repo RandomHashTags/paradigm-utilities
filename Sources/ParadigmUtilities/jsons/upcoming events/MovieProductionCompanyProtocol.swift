@@ -10,5 +10,5 @@ import Foundation
 public protocol MovieProductionCompanyProtocol : Jsonable {
     var id:String { get }
     var name:String { get }
-    var imageURL:String? { get }
+    var image_url:String? { get }
 }
