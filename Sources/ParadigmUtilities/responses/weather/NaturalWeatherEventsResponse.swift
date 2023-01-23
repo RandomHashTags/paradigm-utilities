@@ -11,9 +11,9 @@ import SwiftSovereignStates
 public struct NaturalWeatherEventsResponse : Jsonable {
     public typealias ValueKeys = NaturalWeatherEventsResponseValueKeys
     
-    public var severe_storms:[Country?:[PreNaturalWeatherEvent]]?, volcanoes:[Country?:[PreNaturalWeatherEvent]]?, wildfires:[Country?:[PreNaturalWeatherEvent]]?
+    public var severe_storms:[CountryNaturalWeatherEvents]?, volcanoes:[CountryNaturalWeatherEvents]?, wildfires:[CountryNaturalWeatherEvents]?
     
-    public init(severe_storms: [Country?:[PreNaturalWeatherEvent]]?, volcanoes: [Country?:[PreNaturalWeatherEvent]]?, wildfires: [Country?:[PreNaturalWeatherEvent]]?) {
+    public init(severe_storms: [CountryNaturalWeatherEvents]?, volcanoes: [CountryNaturalWeatherEvents]?, wildfires: [CountryNaturalWeatherEvents]?) {
         self.severe_storms = severe_storms
         self.volcanoes = volcanoes
         self.wildfires = wildfires
@@ -29,13 +29,13 @@ public struct NaturalWeatherEventsResponse : Jsonable {
     public mutating func setKeyValue<T>(key: NaturalWeatherEventsResponseValueKeys, value: T) {
         switch key {
         case .severe_storms:
-            severe_storms = value as? [Country?:[PreNaturalWeatherEvent]]
+            severe_storms = value as? [CountryNaturalWeatherEvents]
             break
         case .volcanoes:
-            volcanoes = value as? [Country?:[PreNaturalWeatherEvent]]
+            volcanoes = value as? [CountryNaturalWeatherEvents]
             break
         case .wildfires:
-            wildfires = value as? [Country?:[PreNaturalWeatherEvent]]
+            wildfires = value as? [CountryNaturalWeatherEvents]
             break
         }
     }
@@ -47,9 +47,6 @@ public enum NaturalWeatherEventsResponseValueKeys : String, JsonableValueKeys {
     case wildfires
     
     public func isTranslatable() -> Bool {
-        switch self {
-        case .severe_storms, .volcanoes, .wildfires:
-            return true
-        }
+        return true
     }
 }
