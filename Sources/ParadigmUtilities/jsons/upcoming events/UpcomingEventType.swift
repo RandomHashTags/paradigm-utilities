@@ -249,7 +249,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
     public func getCodingKeys() -> [any UpcomingEventValueKeys]? {
         switch self {
         case .astronomy_picture_of_the_day: return APODEventValueKeys.allCases
-        case .joke_of_the_day: return JOTDEventCodingKeys.allCases
+        case .joke_of_the_day: return JOTDEventValueKeys.allCases
         case .movie: return MovieEventCodingKeys.allCases
         case .music_album: return MusicAlbumEventCodingKeys.allCases
         case .science_year_review: return ScienceYearReviewEventCodingKeys.allCases
