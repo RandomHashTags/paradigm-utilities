@@ -13,7 +13,8 @@ public struct NewsEvent : Jsonable {
     
     public let id:String
     public var name:String?, description:String?
-    public let image_url:String?, video_url:String?, sources:EventSources
+    public let image_url:String?, video_url:String?
+    public var sources:EventSources
     
     public let related_countries:[Country]?
     public let related_subdivisions:[SovereignStateSubdivisionWrapper]?
@@ -53,6 +54,9 @@ public struct NewsEvent : Jsonable {
         case .description:
             description = value as? String
             break
+        case .sources:
+            sources = value as! EventSources
+            break
         default:
             break
         }
@@ -73,7 +77,7 @@ public enum NewsEventValueKeys : String, JsonableValueKeys {
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .name, .description:
+        case .name, .description, .sources:
             return true
         default:
             return false
