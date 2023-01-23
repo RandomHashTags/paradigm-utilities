@@ -12,13 +12,13 @@ public struct SovereignStateInfoKey : SovereignStateInformationValue {
     
     public let info:SovereignStateInfo
     public var notes:String?
-    public var yearOfData:Int
+    public var year_of_data:Int
     public var values:[SovereignStateInfoValue], sources:EventSources?
     
-    public init(info: SovereignStateInfo, notes: String?, yearOfData: Int, values: [SovereignStateInfoValue?], sources: EventSources?) {
+    public init(info: SovereignStateInfo, notes: String?, year_of_data: Int, values: [SovereignStateInfoValue?], sources: EventSources?) {
         self.info = info
         self.notes = notes
-        self.yearOfData = yearOfData
+        self.year_of_data = year_of_data
         self.values = values.compactMap({ $0 })
         self.sources = sources
     }
@@ -27,7 +27,7 @@ public struct SovereignStateInfoKey : SovereignStateInformationValue {
         switch key {
         case .info: return info
         case .notes: return notes
-        case .yearOfData: return yearOfData
+        case .year_of_data: return year_of_data
         case .values: return values
         case .sources: return sources
         }
@@ -52,7 +52,7 @@ public struct SovereignStateInfoKey : SovereignStateInformationValue {
 public enum SovereignStateInfoKeyValueKeys : String, JsonableValueKeys {
     case info
     case notes
-    case yearOfData
+    case year_of_data
     case values
     case sources
     
