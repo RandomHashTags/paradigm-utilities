@@ -10,7 +10,7 @@ import Foundation
 public struct ClientHoliday : Jsonable {
     public typealias ValueKeys = ClientHolidayValueKeys
     
-    public let response_version:Int, id:String, began:EventDate?
+    public let response_version:Int, id:String, proclamation:EventDate?
     public var name:String, description:String, aliases:[String]?
     public let image_url:String?, type:String
     public var sources:EventSources?
@@ -18,7 +18,7 @@ public struct ClientHoliday : Jsonable {
     public init(response_version: Int, id: String, began: EventDate?, name: String, description: String, aliases: [String]?, image_url: String?, type: String, sources: EventSources?) {
         self.response_version = response_version
         self.id = id
-        self.began = began
+        self.proclamation = began
         self.name = name
         self.description = description
         self.aliases = aliases
@@ -31,7 +31,7 @@ public struct ClientHoliday : Jsonable {
         switch key {
         case .response_version: return response_version
         case .id: return id
-        case .began: return began
+        case .proclamation: return proclamation
         case .name: return name
         case .description: return description
         case .aliases: return aliases
@@ -60,7 +60,7 @@ public struct ClientHoliday : Jsonable {
 public enum ClientHolidayValueKeys : String, JsonableValueKeys {
     case response_version
     case id
-    case began
+    case proclamation
     case name
     case description
     case aliases
