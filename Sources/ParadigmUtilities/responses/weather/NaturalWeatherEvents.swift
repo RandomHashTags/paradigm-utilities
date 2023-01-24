@@ -1,5 +1,5 @@
 //
-//  NaturalWeatherEventsResponse.swift
+//  NaturalWeatherEvents.swift
 //  
 //
 //  Created by Evan Anderson on 10/16/22.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct NaturalWeatherEventsResponse : Jsonable {
+public struct NaturalWeatherEvents : Jsonable {
     public typealias ValueKeys = NaturalWeatherEventsResponseValueKeys
     
     public var severe_storms:[CountryNaturalWeatherEvents]?, volcanoes:[CountryNaturalWeatherEvents]?, wildfires:[CountryNaturalWeatherEvents]?

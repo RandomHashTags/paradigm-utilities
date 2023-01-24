@@ -21,6 +21,7 @@ public struct CountryNaturalWeatherEvents : Jsonable {
     
     public func getKeyValue(key: CountryNaturalWeatherEventsValueKeys) -> Any? {
         switch key {
+        case .country: return country
         case .events: return events
         }
     }
@@ -29,14 +30,22 @@ public struct CountryNaturalWeatherEvents : Jsonable {
         case .events:
             events = value as! [PreNaturalWeatherEvent]
             break
+        default:
+            break
         }
     }
 }
 
 public enum CountryNaturalWeatherEventsValueKeys : String, JsonableValueKeys {
+    case country
     case events
     
     public func isTranslatable() -> Bool {
-        return true
+        switch self {
+        case .events:
+            return true
+        default:
+            return false
+        }
     }
 }

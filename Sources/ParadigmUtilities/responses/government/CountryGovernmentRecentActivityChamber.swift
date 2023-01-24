@@ -11,9 +11,9 @@ public struct CountryGovernmentRecentActivityChamber : Jsonable {
     public typealias ValueKeys = CountryGovernmentRecentActivityChamberValueKeys
     
     public let chamber:GovernmentChamberWrapper
-    public var dates:[CountryGovernmentRecentActivityDates]
+    public var dates:[CountryGovernmentRecentActivityDate]
     
-    public init(chamber: GovernmentChamberWrapper, dates: [CountryGovernmentRecentActivityDates]) {
+    public init(chamber: GovernmentChamberWrapper, dates: [CountryGovernmentRecentActivityDate]) {
         self.chamber = chamber
         self.dates = dates
     }
@@ -27,7 +27,7 @@ public struct CountryGovernmentRecentActivityChamber : Jsonable {
     public mutating func setKeyValue<T>(key: CountryGovernmentRecentActivityChamberValueKeys, value: T) {
         switch key {
         case .dates:
-            dates = value as! [CountryGovernmentRecentActivityDates]
+            dates = value as! [CountryGovernmentRecentActivityDate]
             break
         default:
             break

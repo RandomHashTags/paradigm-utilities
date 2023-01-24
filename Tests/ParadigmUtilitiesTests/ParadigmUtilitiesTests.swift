@@ -67,10 +67,10 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func testWeather(_ decoder: ZippyJSONDecoder) throws {
-        let test:[CountryEarthquakesResponse] = [
-            CountryEarthquakesResponse(country: Country.united_states, subdivisions: [
-                SubdivisionEarthquakesResponse(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
-                    SovereignRegionEarthquakes(magnitude: "5.0", quakes: [
+        let test:[CountryEarthquakes] = [
+            CountryEarthquakes(country: Country.united_states, subdivisions: [
+                SubdivisionEarthquake(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
+                    SubdivisionEarthquakeMagnitude(magnitude: "5.0", quakes: [
                         PreEarthquake(id: "test", place: "nowhere", city: nil)
                     ])
                 ])

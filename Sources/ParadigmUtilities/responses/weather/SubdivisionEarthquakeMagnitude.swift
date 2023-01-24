@@ -1,5 +1,5 @@
 //
-//  SovereignRegionEarthquakes.swift
+//  SubdivisionEarthquakeMagnitude.swift
 //  
 //
 //  Created by Evan Anderson on 1/21/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SovereignRegionEarthquakes : Jsonable {
+public struct SubdivisionEarthquakeMagnitude : Jsonable {
     public typealias ValueKeys = SovereignRegionEarthquakesValueKeys
     
     public let magnitude:String
@@ -20,6 +20,7 @@ public struct SovereignRegionEarthquakes : Jsonable {
     
     public func getKeyValue(key: SovereignRegionEarthquakesValueKeys) -> Any? {
         switch key {
+        case .magnitude: return magnitude
         case .quakes: return quakes
         }
     }
@@ -29,14 +30,22 @@ public struct SovereignRegionEarthquakes : Jsonable {
         case .quakes:
             quakes = value as! [PreEarthquake]
             break
+        default:
+            break
         }
     }
 }
 
 public enum SovereignRegionEarthquakesValueKeys : String, JsonableValueKeys {
+    case magnitude
     case quakes
     
     public func isTranslatable() -> Bool {
-        return true
+        switch self {
+        case .quakes:
+            return true
+        default:
+            return false
+        }
     }
 }

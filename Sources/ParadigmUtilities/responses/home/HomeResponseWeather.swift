@@ -12,10 +12,10 @@ public struct HomeResponseWeather : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseWeatherValueKeys
     
     public var alerts:[CountryWeatherEventAlerts]?
-    public var earthquakes:[CountryEarthquakesResponse]?
-    public var natural_events:NaturalWeatherEventsResponse?
+    public var earthquakes:[CountryEarthquakes]?
+    public var natural_events:NaturalWeatherEvents?
     
-    public init(alerts: [CountryWeatherEventAlerts]?, earthquakes: [CountryEarthquakesResponse]?, natural_events: NaturalWeatherEventsResponse?) {
+    public init(alerts: [CountryWeatherEventAlerts]?, earthquakes: [CountryEarthquakes]?, natural_events: NaturalWeatherEvents?) {
         self.alerts = alerts
         self.earthquakes = earthquakes
         self.natural_events = natural_events
@@ -34,10 +34,10 @@ public struct HomeResponseWeather : HomeResponseProtocol {
             alerts = value as? [CountryWeatherEventAlerts]
             break
         case .earthquakes:
-            earthquakes = value as? [CountryEarthquakesResponse]
+            earthquakes = value as? [CountryEarthquakes]
             break
         case .natural_events:
-            natural_events = value as? NaturalWeatherEventsResponse
+            natural_events = value as? NaturalWeatherEvents
             break
         }
     }

@@ -1,5 +1,5 @@
 //
-//  CountryGovernmentRecentActivityDates.swift
+//  CountryGovernmentRecentActivityDate.swift
 //  
 //
 //  Created by Evan Anderson on 1/23/23.
@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CountryGovernmentRecentActivityDates : Jsonable {
+public struct CountryGovernmentRecentActivityDate : Jsonable {
     public typealias ValueKeys = CountryGovernmentRecentActivityDatesValueKeys
     
     public let date:EventDate
