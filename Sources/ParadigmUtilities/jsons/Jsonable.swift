@@ -47,11 +47,7 @@ public extension Request {
 }
 public extension URLQueryContainer {
     func get(key: String) -> String? {
-        do {
-            return try get(at: key)
-        } catch {
-            return nil
-        }
+        return try? get(at: key)
     }
     func getOmitt() -> String? {
         return get(key: "omitt")
@@ -65,6 +61,15 @@ public protocol Jsonable : JsonableProtocol {
 }
 #endif
 public extension JsonableProtocol {
+    func all_values_are_nil() -> Bool {
+        guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
+        let value:Bool = !ValueKeys.allCases.map({
+            guard let key_value:Any = getKeyValue(key: $0) else { return true }
+            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? [Any])?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
+        }).contains(false)
+        return value
+    }
+    
     func getValueKeys() -> ValueKeys.AllCases {
         return ValueKeys.allCases
     }

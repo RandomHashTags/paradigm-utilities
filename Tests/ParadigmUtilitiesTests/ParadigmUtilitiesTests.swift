@@ -14,6 +14,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         try testSovereignStateInformation(decoder)
         try testUpcomingEvents(decoder)
         try testWeather(decoder)
+        try test_home_responses(decoder)
         //await testTranslations(bro)
     }
     
@@ -50,7 +51,8 @@ final class ParadigmUtilitiesTests: XCTestCase {
     private func testUpcomingEvents(_ decoder: ZippyJSONDecoder) throws {
         let event:APODEvent = APODEvent(event_date: EventDate.getToday(), title: "test", description: nil, location: nil, image_url: nil, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
         let data:Data = event.toData()!
-        XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == event)
+        let event_string:String = String(data: data, encoding: .utf8)!
+        XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == event, event_string)
         
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
         let pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, id: "test_movie_title", event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
@@ -76,6 +78,34 @@ final class ParadigmUtilitiesTests: XCTestCase {
         ]
         let test_string:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
         XCTAssert(test_string.elementsEqual("[{\"country\":\"united_states\",\"magnitudes\":[{\"mag\":\"5.0\",\"quakes\":[{\"id\":\"test\",\"place\":\"nowhere\"}]}]}]"), "test_string=" + test_string)
+    }
+    
+    private func test_home_responses(_ decoder: ZippyJSONDecoder) throws {
+        let encoder:JSONEncoder = JSONEncoder()
+        
+        let countries:HomeResponseCountries = HomeResponseCountries(filters: nil)
+        
+        let government:HomeResponseGovernment = HomeResponseGovernment(recent_activity: [])
+        let news:HomeResponseNews = HomeResponseNews(regional: [])
+        let stock_market:HomeResponseStockMarket? = nil
+        let upcoming_events:HomeResponseUpcomingEvents = HomeResponseUpcomingEvents(holidays_near: nil, events: nil, movie_production_companies: nil)
+        
+        let weather_earthquakes:[CountryEarthquakes] = [
+            CountryEarthquakes(country: Country.united_states, magnitudes: [
+                PreEarthquakeMagnitude(mag: "5.0", quakes: [
+                    PreEarthquake(id: "mn3948u50294", place: "Rochester, Minnesota")
+                ])
+            ])
+        ]
+        let weather:HomeResponseWeather = HomeResponseWeather(alerts: nil, earthquakes: weather_earthquakes, natural_events: nil)
+        
+        let response:HomeResponse = HomeResponse(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
+        let response_data:Data = try encoder.encode(response)
+        let response_string:String = String(data: response_data, encoding: .utf8)!
+        print("response_string=" + response_string)
+        
+        let decoded_response:HomeResponse? = try? decoder.decode(HomeResponse.self, from: response_data)
+        XCTAssert(decoded_response != nil, "test_home_responses - decoded_response == nil")
     }
     
     private func testTranslations(_ bro: TestBro) async {

@@ -34,8 +34,9 @@ public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtoco
 
 extension KeyedEncodingContainer {
     public mutating func encode<T>(_ value: CodableOmittable<T>, forKey key: KeyedEncodingContainer<K>.Key) throws {
-        guard !value.omitted else { return }
-        try encode(value.wrappedValue, forKey: key)
+        let wrapped_value:T? = value.wrappedValue
+        guard !value.omitted && !((wrapped_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false) else { return }
+        try encode(wrapped_value, forKey: key)
     }
 }
 extension KeyedDecodingContainer {
