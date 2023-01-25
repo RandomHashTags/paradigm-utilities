@@ -2,7 +2,7 @@
 //  CountryEarthquakes.swift
 //  
 //
-//  Created by Evan Anderson on 1/21/23.
+//  Created by Evan Anderson on 1/25/23.
 //
 
 import Foundation
@@ -12,24 +12,24 @@ public struct CountryEarthquakes : Jsonable {
     public typealias ValueKeys = CountryEarthquakesValueKeys
     
     public let country:Country?
-    public var subdivisions:[SubdivisionEarthquake]
+    public var magnitudes:[PreEarthquakeMagnitude]
     
-    public init(country: Country?, subdivisions: [SubdivisionEarthquake]) {
+    public init(country: Country?, magnitudes: [PreEarthquakeMagnitude]) {
         self.country = country
-        self.subdivisions = subdivisions
+        self.magnitudes = magnitudes
     }
     
     public func getKeyValue(key: CountryEarthquakesValueKeys) -> Any? {
         switch key {
         case .country: return country
-        case .subdivisions: return subdivisions
+        case .magnitudes: return magnitudes
         }
     }
     
     public mutating func setKeyValue<T>(key: CountryEarthquakesValueKeys, value: T) {
         switch key {
-        case .subdivisions:
-            subdivisions = value as! [SubdivisionEarthquake]
+        case .magnitudes:
+            magnitudes = value as! [PreEarthquakeMagnitude]
             break
         default:
             break
@@ -39,11 +39,11 @@ public struct CountryEarthquakes : Jsonable {
 
 public enum CountryEarthquakesValueKeys : String, JsonableValueKeys {
     case country
-    case subdivisions
+    case magnitudes
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .subdivisions:
+        case .magnitudes:
             return true
         default:
             return false

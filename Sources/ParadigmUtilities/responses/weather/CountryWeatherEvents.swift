@@ -1,5 +1,5 @@
 //
-//  CountryWeatherEventAlerts.swift
+//  CountryWeatherEvents.swift
 //  
 //
 //  Created by Evan Anderson on 1/22/23.
@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct CountryWeatherEventAlerts : Jsonable {
+public struct CountryWeatherEvents : Jsonable {
     public typealias ValueKeys = CountryWeatherEventAlertsValueKeys
     
     public let country:Country

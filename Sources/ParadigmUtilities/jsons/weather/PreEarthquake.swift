@@ -13,19 +13,16 @@ public struct PreEarthquake : Jsonable {
     
     public let id:String
     public var place:String
-    public let city:SovereignStateCityWrapper?
     
-    public init(id: String, place: String, city: (any SovereignStateCity)?) {
+    public init(id: String, place: String) {
         self.id = id
         self.place = place
-        self.city = city?.wrapped()
     }
     
     public func getKeyValue(key: PreEarthquakeValueKeys) -> Any? {
         switch key {
         case .id: return id
         case .place: return place
-        case .city: return city
         }
     }
     public mutating func setKeyValue<T>(key: PreEarthquakeValueKeys, value: T) {
@@ -42,7 +39,6 @@ public struct PreEarthquake : Jsonable {
 public enum PreEarthquakeValueKeys : String, JsonableValueKeys {
     case id
     case place
-    case city
     
     public func isTranslatable() -> Bool {
         switch self {
