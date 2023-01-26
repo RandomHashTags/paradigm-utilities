@@ -116,12 +116,4 @@ public enum PreUpcomingEventValueKeys : String, JsonableValueKeys {
             return false
         }
     }
-    public func isOmittable() -> Bool {
-        switch self {
-        case .type, .event_date, .exact_start, .exact_end:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -39,10 +39,4 @@ public enum HomeResponseCountriesValueKeys : String, JsonableValueKeys {
             return true
         }
     }
-    public func isOmittable() -> Bool {
-        switch self {
-        case .filters:
-            return true
-        }
-    }
 }

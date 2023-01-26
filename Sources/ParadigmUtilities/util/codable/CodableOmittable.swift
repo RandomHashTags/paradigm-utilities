@@ -14,6 +14,7 @@ public protocol CodableOmittableProtocol : Codable, Hashable {
     var omitted:Bool { get set }
 }
 
+/// Used server-side to indicate that the variable can be removed, when encoded to JSON, when present in the client's `query`.
 @propertyWrapper
 public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtocol {
     public let wrappedValue:T?
