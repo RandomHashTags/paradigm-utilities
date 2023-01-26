@@ -57,27 +57,18 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
         let pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, id: "test_movie_title", event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
         XCTAssert(pre_event.event_date != nil)
-        let dates:HomeResponseUpcomingEventsDateResponse = HomeResponseUpcomingEventsDateResponse(date: event_date, events: [pre_event])
-        let test:HomeResponseUpcomingEventTypeResponse = HomeResponseUpcomingEventTypeResponse(type: .movie, date_events: [dates])
+        let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [pre_event])
+        let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
         XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"id\":\"test_movie_title\",\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
         
         let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: nil)
-        let holidays_near:[HomeResponseUpcomingEventHolidaysResponse] = [HomeResponseUpcomingEventHolidaysResponse(date: event_date, holidays: [pre_holiday])]
+        let holidays_near:[UpcomingEventDateHolidays] = [UpcomingEventDateHolidays(date: event_date, holidays: [pre_holiday])]
         let holidays_near_json:String = String(data: try JSONEncoder().encode(holidays_near), encoding: .utf8)!
         XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
     private func testWeather(_ decoder: ZippyJSONDecoder) throws {
-        let test:[CountryEarthquakes] = [
-            CountryEarthquakes(country: Country.united_states, magnitudes: [
-                PreEarthquakeMagnitude(mag: "5.0", quakes: [
-                    PreEarthquake(id: "test", place: "nowhere")
-                ])
-            ])
-        ]
-        let test_string:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
-        XCTAssert(test_string.elementsEqual("[{\"country\":\"united_states\",\"magnitudes\":[{\"mag\":\"5.0\",\"quakes\":[{\"id\":\"test\",\"place\":\"nowhere\"}]}]}]"), "test_string=" + test_string)
     }
     
     private func test_home_responses(_ decoder: ZippyJSONDecoder) throws {
@@ -88,8 +79,19 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let government:HomeResponseGovernment = HomeResponseGovernment(recent_activity: [])
         let news:HomeResponseNews = HomeResponseNews(regional: [])
         let stock_market:HomeResponseStockMarket? = nil
-        let upcoming_events:HomeResponseUpcomingEvents = HomeResponseUpcomingEvents(holidays_near: nil, events: nil, movie_production_companies: nil)
         
+        let upcoming_events_holidays_near:[UpcomingEventDateHolidays] = [
+            UpcomingEventDateHolidays(date: EventDate(year: 2023, month: Month.january, day: 1), holidays: [
+                PreHoliday(type: "test", id: "test_holiday", name: "Test Holiday", emoji: nil)
+            ])
+        ]
+        let upcoming_events:HomeResponseUpcomingEvents = HomeResponseUpcomingEvents(holidays_near: upcoming_events_holidays_near, events: nil, movie_production_companies: nil)
+        
+        let weather_alerts:[CountryWeatherEvents] = [
+            CountryWeatherEvents(country: Country.united_states, events: [
+                WeatherEvent(id: "blizzardwarning", event: "Blizzard Warning", defcon: 3)
+            ])
+        ]
         let weather_earthquakes:[CountryEarthquakes] = [
             CountryEarthquakes(country: Country.united_states, magnitudes: [
                 PreEarthquakeMagnitude(mag: "5.0", quakes: [
@@ -97,15 +99,16 @@ final class ParadigmUtilitiesTests: XCTestCase {
                 ])
             ])
         ]
-        let weather:HomeResponseWeather = HomeResponseWeather(alerts: nil, earthquakes: weather_earthquakes, natural_events: nil)
+        let weather:HomeResponseWeather = HomeResponseWeather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: nil)
         
         let response:HomeResponse = HomeResponse(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
-        print("response_string=" + response_string)
-        
-        let decoded_response:HomeResponse? = try? decoder.decode(HomeResponse.self, from: response_data)
-        XCTAssert(decoded_response != nil, "test_home_responses - decoded_response == nil")
+        let target_response_string:String = """
+{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}],"earthquakes":[{"country":"united_states","magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"Rochester, Minnesota"}]}]}]}}
+"""
+        //print("response_string=" + response_string)
+        XCTAssert(response_string.elementsEqual(target_response_string), "response_string=" + response_string)
     }
     
     private func testTranslations(_ bro: TestBro) async {

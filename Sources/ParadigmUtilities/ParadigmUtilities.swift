@@ -7,7 +7,7 @@ public enum ParadigmUtilities {
     
     public static func getNow() -> Date {
         var date:Date = Date()
-        while date.year < 2022 {
+        while date.year < 2023 {
             date = Date()
         }
         return date
