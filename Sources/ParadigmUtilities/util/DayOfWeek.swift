@@ -17,6 +17,6 @@ public enum DayOfWeek : Int, CaseIterable {
     case saturday = 7
     
     public static func valueOf(_ value: Int) -> DayOfWeek? {
-        return DayOfWeek.allCases.first(where: { value == $0.rawValue })
+        return DayOfWeek(rawValue: value)
     }
 }

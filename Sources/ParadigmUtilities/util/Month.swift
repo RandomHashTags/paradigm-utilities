@@ -27,7 +27,7 @@ public enum Month : Int, CaseIterable {
         return Month.allCases.first(where: { "\($0)".starts(with: key) })
     }
     public static func valueOf(_ monthValue: Int) -> Month? {
-        return Month.allCases.first(where: { $0.rawValue == monthValue })
+        return Month(rawValue: monthValue)
     }
     
     public func name() -> String {
