@@ -123,7 +123,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         case .video_game_events:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/1/1e/CDL_Logo.svg/1000px-CDL_Logo.svg.png"
         case .word_of_the_day:
-            return "https://www.trendingpod.com/wp-content/uploads/2017/12/1200px-Merriam-Webster_logo-1024x1024.png"
+            return "https://upload.wikimedia.org/wikipedia/commons/thumb/3/32/Merriam-Webster_logo.svg/1000px-Merriam-Webster_logo.svg.png"
         default:
             return nil
         }
