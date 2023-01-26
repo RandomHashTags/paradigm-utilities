@@ -54,6 +54,14 @@ public enum HomeResponseUpcomingEventTypeResponseValueKeys : String, JsonableVal
             return false
         }
     }
+    public func isOmittable() -> Bool {
+        switch self {
+        case .date_events, .exact_time_events:
+            return true
+        default:
+            return false
+        }
+    }
 }
 
 private protocol HomeResponseUpcomingEventsTimeResponse : Jsonable where ValueKeys == HomeResponseUpcomingEventsDateResponseValueKeys {

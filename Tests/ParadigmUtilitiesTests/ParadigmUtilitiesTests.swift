@@ -156,4 +156,12 @@ private enum TestBroValueKeys : String, JsonableValueKeys {
             return false
         }
     }
+    func isOmittable() -> Bool {
+        switch self {
+        case .small_boy:
+            return true
+        default:
+            return false
+        }
+    }
 }

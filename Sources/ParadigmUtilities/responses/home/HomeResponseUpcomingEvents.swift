@@ -53,4 +53,12 @@ public enum HomeResponseUpcomingEventsValueKeys : String, JsonableValueKeys {
             return true
         }
     }
+    public func isOmittable() -> Bool {
+        switch self {
+        case .holidays_near, .movie_production_companies:
+            return true
+        default:
+            return false
+        }
+    }
 }
