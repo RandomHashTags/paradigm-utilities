@@ -26,7 +26,7 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
     }
     
     public func toPreMovieProductionCompany() -> PreMovieProductionCompany {
-        return PreMovieProductionCompany(id: id, name: name, aliases: aliases, imageURL: image_url)
+        return PreMovieProductionCompany(id: id, name: name, aliases: aliases, image_url: image_url)
     }
     
     public func getKeyValue(key: MovieProductionCompanyValueKeys) -> Any? {

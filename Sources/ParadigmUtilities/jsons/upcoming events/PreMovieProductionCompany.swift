@@ -14,11 +14,11 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
     public var name:String, aliases:[String]?
     public let image_url:String?
     
-    public init(id: String, name: String, aliases: [String]?, imageURL: String?) {
+    public init(id: String, name: String, aliases: [String]?, image_url: String?) {
         self.id = id
         self.name = name
         self.aliases = aliases
-        self.image_url = imageURL
+        self.image_url = image_url
     }
     
     public func getKeyValue(key: PreMovieProductionCompanyValueKeys) -> Any? {
