@@ -12,7 +12,7 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
     
     public let id:String
     public var name:String, aliases:[String]?
-    public let image_url:String?
+    public var image_url:String?
     
     public init(id: String, name: String, aliases: [String]?, image_url: String?) {
         self.id = id
