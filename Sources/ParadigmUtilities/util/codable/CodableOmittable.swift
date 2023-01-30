@@ -10,14 +10,14 @@ import Foundation
 public protocol CodableOmittableProtocol : Codable, Hashable {
     associatedtype T : Codable & Hashable
     
-    var wrappedValue:T? { get }
+    var wrappedValue:T? { get set }
     var omitted:Bool { get set }
 }
 
 /// Used server-side to indicate that the variable can be removed, when encoded to JSON, when present in the client's `query`.
 @propertyWrapper
 public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtocol {
-    public let wrappedValue:T?
+    public var wrappedValue:T?
     public var omitted:Bool
     
     public init(_ wrappedValue: T?) {
