@@ -26,9 +26,16 @@ final class ParadigmUtilitiesTests: XCTestCase {
         
         var decoded:TestBro = try ZippyJSONDecoder().decode(TestBro.self, from: data)
         XCTAssert(decoded.toString()!.elementsEqual(string))
-        decoded.setOmittKeyValue(.small_boy, value: false)
+        decoded.setOmittableValue(.small_boy, value: false)
         let decodedString:String = decoded.toString()!
-        XCTAssert(decodedString.elementsEqual(string) == false, decodedString)
+        XCTAssert(!decodedString.elementsEqual(string), decodedString)
+        
+        let um:CodableOmittable<String>? = bro.getOmittable(.small_boy)
+        XCTAssert(um != nil, "testFoundation; um == nil")
+        XCTAssert(um?.wrappedValue?.elementsEqual("smol") ?? false)
+        um?.wrappedValue = nil
+        XCTAssert(um?.wrappedValue == nil)
+        XCTAssert(bro.small_boy == nil)
     }
     
     private func testSovereignStateInformation(_ decoder: ZippyJSONDecoder) throws {

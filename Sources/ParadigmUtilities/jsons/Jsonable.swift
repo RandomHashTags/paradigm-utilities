@@ -105,15 +105,18 @@ public extension JsonableProtocol {
         setKeyValue(key: key, value: value)
     }
     
-    func getOmittableKeyValue(_ string: String) -> (any CodableOmittableProtocol)? {
+    func getOmittableProtocol(_ string: String) -> (any CodableOmittableProtocol)? {
         guard let key:ValueKeys = ValueKeys(rawValue: string) else { return nil }
-        return getOmittableKeyValue(key)
+        return getOmittableProtocol(key)
     }
-    func getOmittableKeyValue(_ key: ValueKeys) -> (any CodableOmittableProtocol)? {
+    func getOmittableProtocol(_ key: ValueKeys) -> (any CodableOmittableProtocol)? {
         return getKeyValue(key: key) as? (any CodableOmittableProtocol)
     }
-    mutating func setOmittKeyValue(_ key: ValueKeys, value: Bool) {
-        guard var omittable:(any CodableOmittableProtocol) = getOmittableKeyValue(key) else { return }
+    func getOmittable<T>(_ key: ValueKeys) -> CodableOmittable<T>? {
+        return getKeyValue(key: key) as? CodableOmittable<T>
+    }
+    mutating func setOmittableValue(_ key: ValueKeys, value: Bool) {
+        guard var omittable:(any CodableOmittableProtocol) = getOmittableProtocol(key) else { return }
         omittable.omitted = value
         setKeyValue(key: key, value: omittable)
     }

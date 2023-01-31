@@ -16,11 +16,15 @@ public protocol CodableOmittableProtocol : Codable, Hashable {
 
 /// Used server-side to indicate that the variable can be removed, when encoded to JSON, when present in the client's `query`.
 @propertyWrapper
-public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtocol {
+public final class CodableOmittable<T : Codable & Hashable> : CodableOmittableProtocol {
+    public static func == (lhs: CodableOmittable<T>, rhs: CodableOmittable<T>) -> Bool {
+        return lhs.hashValue == rhs.hashValue
+    }
+    
     public var wrappedValue:T?
     public var omitted:Bool
     
-    public init(_ wrappedValue: T?) {
+    public convenience init(_ wrappedValue: T?) {
         self.init(wrappedValue, omitted: wrappedValue == nil)
     }
     public init(_ wrappedValue: T?, omitted: Bool) {
@@ -30,6 +34,11 @@ public struct CodableOmittable<T : Codable & Hashable> : CodableOmittableProtoco
     public init(from decoder: Decoder) throws {
         wrappedValue = try decoder.singleValueContainer().decode(T.self)
         omitted = false
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(wrappedValue)
+        hasher.combine(omitted)
     }
 }
 
