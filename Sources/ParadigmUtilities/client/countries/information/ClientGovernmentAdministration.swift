@@ -8,9 +8,9 @@
 import Foundation
 
 public struct ClientGovernmentAdministration : Jsonable {
-    public let current_version:Int, all_versions:[Int]
+    public let current_version:Int, all_versions:Set<Int>
     
-    public init(current_version: Int, all_versions: [Int]) {
+    public init(current_version: Int, all_versions: Set<Int>) {
         self.current_version = current_version
         self.all_versions = all_versions
     }

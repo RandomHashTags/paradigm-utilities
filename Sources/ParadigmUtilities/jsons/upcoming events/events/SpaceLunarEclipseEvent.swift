@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class SpaceLunarEclipseEvent : GenericUpcomingEvent {
     public let time_greatest:Int64, orbital_node:String, saros:String, gamma:String, magnitude_penumbra:String, magnitude_umbra:String, duration_partial:Int, duration_total:Int
     
-    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, time_greatest: Int64, orbital_node: String, saros: String, gamma: String, magnitude_penumbra: String, magnitude_umbra: String, duration_partial: Int, duration_total: Int) {
+    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, time_greatest: Int64, orbital_node: String, saros: String, gamma: String, magnitude_penumbra: String, magnitude_umbra: String, duration_partial: Int, duration_total: Int) {
         self.time_greatest = time_greatest
         self.orbital_node = orbital_node
         self.saros = saros

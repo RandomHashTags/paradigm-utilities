@@ -19,9 +19,9 @@ public protocol JsonableProtocol : Hashable, Codable {
     //func getFolderPath() -> FolderPath?
     
     func toData() -> Data?
-    func toData(language: Language, omittedKeys: [String]?) async -> Data?
+    func toData(language: Language, omittedKeys: Set<String>?) async -> Data?
     func toString() -> String?
-    func toString(language: Language, omittedKeys: [String]?) async -> String?
+    func toString(language: Language, omittedKeys: Set<String>?) async -> String?
     
     func getKeyValue(key: ValueKeys) -> Any?
     mutating func setKeyValue<T>(key: ValueKeys, value: T)
@@ -32,7 +32,7 @@ public protocol Jsonable : JsonableProtocol, AsyncResponseEncodable {
 }
 public extension Jsonable {
     func encodeResponse(for request: Request) async throws -> Response {
-        let language:Language = request.language, omittValues:[String]? = request.query.getOmittValues()
+        let language:Language = request.language, omittValues:Set<String>? = request.query.getOmittValues()
         let string:String = await self.toString(language: language, omittedKeys: omittValues) ?? "{}"
         var headers:HTTPHeaders = HTTPHeaders()
         headers.add(name: .contentType, value: "application/json")
@@ -52,8 +52,8 @@ public extension URLQueryContainer {
     func getOmitt() -> String? {
         return get(key: "omitt")
     }
-    func getOmittValues() -> [String]? {
-        return getOmitt()?.components(separatedBy: ",")
+    func getOmittValues() -> Set<String>? {
+        return getOmitt()?.components(separatedBy: ",").uniqueSet()
     }
 }
 #else
@@ -65,7 +65,7 @@ public extension JsonableProtocol {
         guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
         let value:Bool = !ValueKeys.allCases.map({
             guard let key_value:Any = getKeyValue(key: $0) else { return true }
-            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? [Any])?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
+            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? AnyCollection<Any>)?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
         }).contains(false)
         return value
     }
@@ -83,7 +83,7 @@ public extension JsonableProtocol {
     func toData() -> Data? {
         return try? JSONEncoder().encode(self)
     }
-    func toData(language: Language, omittedKeys: [String]?) async -> Data? {
+    func toData(language: Language, omittedKeys: Set<String>?) async -> Data? {
         return toData()
     }
     
@@ -91,7 +91,7 @@ public extension JsonableProtocol {
         guard let data:Data = toData() else { return nil }
         return String(data: data, encoding: .utf8)
     }
-    func toString(language: Language, omittedKeys: [String]?) async -> String? {
+    func toString(language: Language, omittedKeys: Set<String>?) async -> String? {
         guard let data:Data = await toData(language: language, omittedKeys: omittedKeys) else { return nil }
         return String(data: data, encoding: .utf8)
     }

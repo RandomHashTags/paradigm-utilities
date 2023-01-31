@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class ProfessionalWrestlingEvent : GenericUpcomingEvent {
     public let main_event:String, notes:String?
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, main_event: String, notes: String?) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, main_event: String, notes: String?) {
         self.main_event = main_event
         self.notes = notes
         super.init(type: UpcomingEventType.sport_professional_wrestling, event_date: event_date, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)

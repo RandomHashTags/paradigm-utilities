@@ -18,14 +18,14 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     @CodableOmittable public var exact_end:Int64?
     public var title:String, tag:String
     public var image_url:String?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public let countries:Set<Country>?, subdivisions:Set<SovereignStateSubdivisionWrapper>?
     public var custom_type_singular_name:String?
     public let client_emoji:Icon?
     
-    public let url:String?, production_companies:[String]?, popularity:Int?
+    public let url:String?, production_companies:Set<String>?, popularity:Int?
     public var team_away:ClientMLBTeam?, team_home:ClientMLBTeam?
     
-    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
+    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: Set<Country>? = nil, subdivisions: Set<SovereignStateSubdivisionWrapper>? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: Set<String>? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
         self._type = CodableOmittable(type, omitted: true)
         self.id = id
         self._event_date = CodableOmittable(event_date, omitted: true)

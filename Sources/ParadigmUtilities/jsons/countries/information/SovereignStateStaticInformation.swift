@@ -13,11 +13,11 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
     public let response_version:Int
     public var availabilities:SovereignStateAvailabilities?
     
-    public var agriculture:[SovereignStateAgricultureValue]?
-    public var info:[SovereignStateInfoKey]?
-    public var legalities:[SovereignStateInfoKey]?
-    public var rankings:[SovereignStateRankingInfoValue]?
-    public var single_values:[SovereignStateSingleValue]?
+    public var agriculture:Set<SovereignStateAgricultureValue>?
+    public var info:Set<SovereignStateInfoKey>?
+    public var legalities:Set<SovereignStateInfoKey>?
+    public var rankings:Set<SovereignStateRankingInfoValue>?
+    public var single_values:Set<SovereignStateSingleValue>?
     
     public var national_animals:NationalAnimals?
     public var national_anthem:NationalAnthem?
@@ -29,12 +29,12 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
     public var wikipedia:SovereignStateWikipedia?
     public var wikipedia_featured_pictures:WikipediaFeaturedPictures?
     
-    public var national_parks:[PreNationalPark]?
-    public var volcanoes:[PreVolcano]?
+    public var national_parks:Set<PreNationalPark>?
+    public var volcanoes:Set<PreVolcano>?
     
     public var sources:EventSources?
     
-    public init(response_version: Int, availabilities: SovereignStateAvailabilities?, agriculture: [SovereignStateAgricultureValue]?, info: [SovereignStateInfoKey]?, legalities: [SovereignStateInfoKey]?, rankings: [SovereignStateRankingInfoValue]?, single_values: [SovereignStateSingleValue]?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, national_parks: [PreNationalPark]?, volcanoes: [PreVolcano]?, sources: EventSources?) {
+    public init(response_version: Int, availabilities: SovereignStateAvailabilities?, agriculture: Set<SovereignStateAgricultureValue>?, info: Set<SovereignStateInfoKey>?, legalities: Set<SovereignStateInfoKey>?, rankings: Set<SovereignStateRankingInfoValue>?, single_values: Set<SovereignStateSingleValue>?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, national_parks: Set<PreNationalPark>?, volcanoes: Set<PreVolcano>?, sources: EventSources?) {
         self.response_version = response_version
         self.availabilities = availabilities
         self.agriculture = agriculture
@@ -83,19 +83,19 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
             availabilities = value as? SovereignStateAvailabilities
             break
         case .agriculture:
-            agriculture = value as? [SovereignStateAgricultureValue]
+            agriculture = value as? Set<SovereignStateAgricultureValue>
             break
         case .info:
-            info = value as? [SovereignStateInfoKey]
+            info = value as? Set<SovereignStateInfoKey>
             break
         case .legalities:
-            legalities = value as? [SovereignStateInfoKey]
+            legalities = value as? Set<SovereignStateInfoKey>
             break
         case .rankings:
-            rankings = value as? [SovereignStateRankingInfoValue]
+            rankings = value as? Set<SovereignStateRankingInfoValue>
             break
         case .single_values:
-            single_values = value as? [SovereignStateSingleValue]
+            single_values = value as? Set<SovereignStateSingleValue>
             break
         case .national_animals:
             national_animals = value as? NationalAnimals
@@ -122,10 +122,10 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
             wikipedia_featured_pictures = value as? WikipediaFeaturedPictures
             break
         case .national_parks:
-            national_parks = value as? [PreNationalPark]
+            national_parks = value as? Set<PreNationalPark>
             break
         case .volcanoes:
-            volcanoes = value as? [PreVolcano]
+            volcanoes = value as? Set<PreVolcano>
             break
         case .sources:
             sources = value as? EventSources

@@ -9,9 +9,9 @@ import Foundation
 import SwiftSovereignStates
 
 public final class WOTDEvent : GenericUpcomingEvent {
-    public let examples:[String]?, pronunciation_url:String?, syllables:String, grammar_type:String
+    public let examples:Set<String>?, pronunciation_url:String?, syllables:String, grammar_type:String
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, examples: [String]?, pronunciation_url: String?, syllables: String, grammar_type: String) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, examples: Set<String>?, pronunciation_url: String?, syllables: String, grammar_type: String) {
         self.examples = examples
         self.pronunciation_url = pronunciation_url
         self.syllables = syllables
@@ -21,7 +21,7 @@ public final class WOTDEvent : GenericUpcomingEvent {
     
     public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: WOTDEventValueKeys.self)
-        examples = try container.decode([String].self, forKey: .examples)
+        examples = try container.decode(Set<String>.self, forKey: .examples)
         pronunciation_url = try container.decodeIfPresent(String.self, forKey: .pronunciation_url)
         syllables = try container.decode(String.self, forKey: .syllables)
         grammar_type = try container.decode(String.self, forKey: .grammar_type)

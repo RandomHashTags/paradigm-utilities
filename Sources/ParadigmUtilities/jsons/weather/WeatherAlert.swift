@@ -12,20 +12,20 @@ public struct WeatherAlert : Jsonable {
     public typealias ValueKeys = WeatherAlertValueKeys
     
     public var event:String, certainty:String?, headline:String?, instruction:String?, description:String
-    public let zones:[WeatherZone]
-    public let subdivisions:[SovereignStateSubdivisionWrapper]?
+    public let zones:Set<WeatherZone>
+    public let subdivisions:Set<SovereignStateSubdivisionWrapper>?
     public let defcon:Int
     public let time:WeatherAlertTime
     public var source:EventSource
     
-    public init(event: String, certainty: String?, headline: String?, instruction: String?, description: String, zones: [WeatherZone], subdivisions: [any SovereignStateSubdivision]?, defcon: Int, time: WeatherAlertTime, source: EventSource) {
+    public init(event: String, certainty: String?, headline: String?, instruction: String?, description: String, zones: Set<WeatherZone>, subdivisions: [any SovereignStateSubdivision]?, defcon: Int, time: WeatherAlertTime, source: EventSource) {
         self.event = event
         self.certainty = certainty
         self.headline = headline
         self.instruction = instruction
         self.description = description
         self.zones = zones
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
+        self.subdivisions = subdivisions?.map({ $0.wrapped() }).uniqueSet()
         self.defcon = defcon
         self.time = time
         self.source = source

@@ -11,10 +11,10 @@ public struct UpcomingEventTypeEvents : Jsonable {
     public typealias ValueKeys = UpcomingEventTypeEventsValueKeys
     
     public let type:UpcomingEventType
-    @CodableOmittable public var date_events:[UpcomingEventTypeDateEvents]?
-    @CodableOmittable public var exact_time_events:[UpcomingEventTypeExactTimeEvents]?
+    @CodableOmittable public var date_events:Set<UpcomingEventTypeDateEvents>?
+    @CodableOmittable public var exact_time_events:Set<UpcomingEventTypeExactTimeEvents>?
     
-    public init(type: UpcomingEventType, date_events: [UpcomingEventTypeDateEvents]? = nil, exact_time_events: [UpcomingEventTypeExactTimeEvents]? = nil) {
+    public init(type: UpcomingEventType, date_events: Set<UpcomingEventTypeDateEvents>? = nil, exact_time_events: Set<UpcomingEventTypeExactTimeEvents>? = nil) {
         self.type = type
         self._date_events = CodableOmittable(date_events)
         self._exact_time_events = CodableOmittable(exact_time_events)
@@ -30,10 +30,10 @@ public struct UpcomingEventTypeEvents : Jsonable {
     public mutating func setKeyValue<T>(key: UpcomingEventTypeEventsValueKeys, value: T) {
         switch key {
         case .date_events:
-            _date_events = value as! CodableOmittable<[UpcomingEventTypeDateEvents]>
+            _date_events = value as! CodableOmittable<Set<UpcomingEventTypeDateEvents>>
             break
         case .exact_time_events:
-            _exact_time_events = value as! CodableOmittable<[UpcomingEventTypeExactTimeEvents]>
+            _exact_time_events = value as! CodableOmittable<Set<UpcomingEventTypeExactTimeEvents>>
             break
         default:
             break

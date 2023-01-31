@@ -11,11 +11,11 @@ import SwiftSovereignStates
 public struct HomeResponseWeather : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseWeatherValueKeys
     
-    public var alerts:[CountryWeatherEvents]?
-    public var earthquakes:[CountryEarthquakes]?
+    public var alerts:Set<CountryWeatherEvents>?
+    public var earthquakes:Set<CountryEarthquakes>?
     public var natural_events:NaturalWeatherEvents?
     
-    public init(alerts: [CountryWeatherEvents]?, earthquakes: [CountryEarthquakes]?, natural_events: NaturalWeatherEvents?) {
+    public init(alerts: Set<CountryWeatherEvents>?, earthquakes: Set<CountryEarthquakes>?, natural_events: NaturalWeatherEvents?) {
         self.alerts = alerts
         self.earthquakes = earthquakes
         self.natural_events = natural_events
@@ -31,10 +31,10 @@ public struct HomeResponseWeather : HomeResponseProtocol {
     public mutating func setKeyValue<T>(key: HomeResponseWeatherValueKeys, value: T) {
         switch key {
         case .alerts:
-            alerts = value as? [CountryWeatherEvents]
+            alerts = value as? Set<CountryWeatherEvents>
             break
         case .earthquakes:
-            earthquakes = value as? [CountryEarthquakes]
+            earthquakes = value as? Set<CountryEarthquakes>
             break
         case .natural_events:
             natural_events = value as? NaturalWeatherEvents

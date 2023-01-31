@@ -16,11 +16,11 @@ public struct NewsEvent : Jsonable {
     public let image_url:String?, video_url:String?
     public var sources:EventSources
     
-    public let related_countries:[Country]?
-    public let related_subdivisions:[SovereignStateSubdivisionWrapper]?
-    public let related_cities:[SovereignStateCityWrapper]?
+    public let related_countries:Set<Country>?
+    public let related_subdivisions:Set<SovereignStateSubdivisionWrapper>?
+    public let related_cities:Set<SovereignStateCityWrapper>?
     
-    public init(id: String, name: String?, description: String?, image_url: String?, video_url: String?, sources: EventSources, related_countries: [Country]?, related_subdivisions: [SovereignStateSubdivisionWrapper]?, related_cities: [SovereignStateCityWrapper]?) {
+    public init(id: String, name: String?, description: String?, image_url: String?, video_url: String?, sources: EventSources, related_countries: Set<Country>?, related_subdivisions: Set<SovereignStateSubdivisionWrapper>?, related_cities: Set<SovereignStateCityWrapper>?) {
         self.id = id
         self.name = name
         self.description = description

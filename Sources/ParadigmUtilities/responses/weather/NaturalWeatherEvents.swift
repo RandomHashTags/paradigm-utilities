@@ -11,9 +11,9 @@ import SwiftSovereignStates
 public struct NaturalWeatherEvents : Jsonable {
     public typealias ValueKeys = NaturalWeatherEventsResponseValueKeys
     
-    public var severe_storms:[CountryNaturalWeatherEvents]?, volcanoes:[CountryNaturalWeatherEvents]?, wildfires:[CountryNaturalWeatherEvents]?
+    public var severe_storms:Set<CountryNaturalWeatherEvents>?, volcanoes:Set<CountryNaturalWeatherEvents>?, wildfires:Set<CountryNaturalWeatherEvents>?
     
-    public init(severe_storms: [CountryNaturalWeatherEvents]?, volcanoes: [CountryNaturalWeatherEvents]?, wildfires: [CountryNaturalWeatherEvents]?) {
+    public init(severe_storms: Set<CountryNaturalWeatherEvents>?, volcanoes: Set<CountryNaturalWeatherEvents>?, wildfires: Set<CountryNaturalWeatherEvents>?) {
         self.severe_storms = severe_storms
         self.volcanoes = volcanoes
         self.wildfires = wildfires
@@ -29,13 +29,13 @@ public struct NaturalWeatherEvents : Jsonable {
     public mutating func setKeyValue<T>(key: NaturalWeatherEventsResponseValueKeys, value: T) {
         switch key {
         case .severe_storms:
-            severe_storms = value as? [CountryNaturalWeatherEvents]
+            severe_storms = value as? Set<CountryNaturalWeatherEvents>
             break
         case .volcanoes:
-            volcanoes = value as? [CountryNaturalWeatherEvents]
+            volcanoes = value as? Set<CountryNaturalWeatherEvents>
             break
         case .wildfires:
-            wildfires = value as? [CountryNaturalWeatherEvents]
+            wildfires = value as? Set<CountryNaturalWeatherEvents>
             break
         }
     }

@@ -9,9 +9,9 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WeatherPreAlert : Jsonable {
-    public let id:String, areas:[String], time:WeatherAlertTime, country:Country, subdivision:SovereignStateSubdivisionWrapper?
+    public let id:String, areas:Set<String>, time:WeatherAlertTime, country:Country, subdivision:SovereignStateSubdivisionWrapper?
     
-    public init(id: String, areas: [String], time: WeatherAlertTime, country: Country, subdivision: (any SovereignStateSubdivision)?) {
+    public init(id: String, areas: Set<String>, time: WeatherAlertTime, country: Country, subdivision: (any SovereignStateSubdivision)?) {
         self.id = id
         self.areas = areas
         self.time = time

@@ -11,11 +11,11 @@ public struct ClientHoliday : Jsonable {
     public typealias ValueKeys = ClientHolidayValueKeys
     
     public let response_version:Int, id:String, proclamation:EventDate?
-    public var name:String, description:String, aliases:[String]?
+    public var name:String, description:String, aliases:Set<String>?
     public let image_url:String?, type:String
     public var sources:EventSources?
     
-    public init(response_version: Int, id: String, began: EventDate?, name: String, description: String, aliases: [String]?, image_url: String?, type: String, sources: EventSources?) {
+    public init(response_version: Int, id: String, began: EventDate?, name: String, description: String, aliases: Set<String>?, image_url: String?, type: String, sources: EventSources?) {
         self.response_version = response_version
         self.id = id
         self.proclamation = began
@@ -49,7 +49,7 @@ public struct ClientHoliday : Jsonable {
             description = value as! String
             break
         case .aliases:
-            aliases = value as? [String]
+            aliases = value as? Set<String>
             break
         default:
             break

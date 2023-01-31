@@ -11,12 +11,12 @@ import SwiftSovereignStates
 public struct UpdateRelatedContent : Jsonable {
     public typealias ValueKeys = UpdateRelatedContentValueKeys
     
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public let countries:Set<Country>?, subdivisions:Set<SovereignStateSubdivisionWrapper>?
     public var sources:EventSources?
     
-    public init(countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil, sources: EventSources? = nil) {
+    public init(countries: Set<Country>? = nil, subdivisions: [any SovereignStateSubdivision]? = nil, sources: EventSources? = nil) {
         self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
+        self.subdivisions = subdivisions?.map({ $0.wrapped() }).uniqueSet()
         self.sources = sources
     }
     

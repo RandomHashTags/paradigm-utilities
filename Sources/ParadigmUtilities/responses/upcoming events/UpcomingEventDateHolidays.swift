@@ -11,9 +11,9 @@ public struct UpcomingEventDateHolidays : Jsonable {
     public typealias ValueKeys = UpcomingEventDateHolidaysValueKeys
     
     public let date:EventDate
-    public var holidays:[PreHoliday]
+    public var holidays:Set<PreHoliday>
     
-    public init(date: EventDate, holidays: [PreHoliday]) {
+    public init(date: EventDate, holidays: Set<PreHoliday>) {
         self.date = date
         self.holidays = holidays
     }
@@ -27,7 +27,7 @@ public struct UpcomingEventDateHolidays : Jsonable {
     public mutating func setKeyValue<T>(key: UpcomingEventDateHolidaysValueKeys, value: T) {
         switch key {
         case .holidays:
-            holidays = value as! [PreHoliday]
+            holidays = value as! Set<PreHoliday>
             break
         default:
             break

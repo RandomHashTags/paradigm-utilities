@@ -9,9 +9,9 @@ import Foundation
 import SwiftSovereignStates
 
 public final class MovieEvent : GenericUpcomingEvent {
-    public let release_info:String?, ratings:MovieRatings?, imdb_info:IMDbMovieDetails?, production_companies:[String]?
+    public let release_info:String?, ratings:MovieRatings?, imdb_info:IMDbMovieDetails?, production_companies:Set<String>?
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, release_info: String?, ratings: MovieRatings?, imdb_info: IMDbMovieDetails?, production_companies: [String]?) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: Set<String>?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, release_info: String?, ratings: MovieRatings?, imdb_info: IMDbMovieDetails?, production_companies: Set<String>?) {
         self.release_info = release_info
         self.ratings = ratings
         self.imdb_info = imdb_info
@@ -24,7 +24,7 @@ public final class MovieEvent : GenericUpcomingEvent {
         release_info = try container.decodeIfPresent(String.self, forKey: .release_info)
         ratings = try container.decodeIfPresent(MovieRatings.self, forKey: .ratings)
         imdb_info = try container.decodeIfPresent(IMDbMovieDetails.self, forKey: .imdb_info)
-        production_companies = try container.decodeIfPresent([String].self, forKey: .production_companies)
+        production_companies = try container.decodeIfPresent(Set<String>.self, forKey: .production_companies)
         try super.init(from: decoder)
     }
     

@@ -9,9 +9,9 @@ import Foundation
 import SwiftSovereignStates
 
 public final class VideoGameEvent : GenericUpcomingEvent {
-    public let platforms:[String], genres:[String]
+    public let platforms:Set<String>, genres:Set<String>
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, platforms: [String], genres: [String]) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: Set<String>?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, platforms: Set<String>, genres: Set<String>) {
         self.platforms = platforms
         self.genres = genres
         super.init(type: UpcomingEventType.video_game, event_date: event_date, title: title, description: description, location: location, image_url: image_url, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
@@ -19,8 +19,8 @@ public final class VideoGameEvent : GenericUpcomingEvent {
     
     public required init(from decoder: Decoder) throws {
         let container:KeyedDecodingContainer = try decoder.container(keyedBy: VideoGameEventValueKeys.self)
-        platforms = try container.decode([String].self, forKey: .platforms)
-        genres = try container.decode([String].self, forKey: .genres)
+        platforms = try container.decode(Set<String>.self, forKey: .platforms)
+        genres = try container.decode(Set<String>.self, forKey: .genres)
         try super.init(from: decoder)
     }
     

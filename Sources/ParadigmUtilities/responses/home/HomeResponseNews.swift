@@ -10,9 +10,9 @@ import Foundation
 public struct HomeResponseNews : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseNewsValueKeys
     
-    public var regional:[CountryNewsEvents]
+    public var regional:Set<CountryNewsEvents>
     
-    public init(regional: [CountryNewsEvents]) {
+    public init(regional: Set<CountryNewsEvents>) {
         self.regional = regional
     }
     
@@ -24,7 +24,7 @@ public struct HomeResponseNews : HomeResponseProtocol {
     public mutating func setKeyValue<T>(key: HomeResponseNewsValueKeys, value: T) {
         switch key {
         case .regional:
-            regional = value as! [CountryNewsEvents]
+            regional = value as! Set<CountryNewsEvents>
             break
         }
     }

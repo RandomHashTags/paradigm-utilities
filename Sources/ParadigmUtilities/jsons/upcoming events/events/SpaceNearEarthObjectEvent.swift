@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class SpaceNearEarthObjectEvent : GenericUpcomingEvent {
     public let close_approach_epoch:Int64, potentially_hazardous:Bool?, estimated_diameter_max:Float, estimated_diameter_min:Float, relative_velocity:String
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, close_approach_epoch: Int64, potentially_hazardous: Bool?, estimated_diameter_max: Float, estimated_diameter_min: Float, relative_velocity: String) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: Set<String>?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, close_approach_epoch: Int64, potentially_hazardous: Bool?, estimated_diameter_max: Float, estimated_diameter_min: Float, relative_velocity: String) {
         self.close_approach_epoch = close_approach_epoch
         self.potentially_hazardous = potentially_hazardous
         self.estimated_diameter_max = estimated_diameter_max

@@ -11,13 +11,13 @@ import SwiftSovereignStates
 public struct GovernmentPreAdministrationBill : Jsonable {
     public typealias ValueKeys = GovernmentPreAdministrationBillValueKeys
     
-    public let chamber:GovernmentChamberWrapper, statuses:[GovernmentBillStatusHistoryStatusWrapper], id:String
+    public let chamber:GovernmentChamberWrapper, statuses:Set<GovernmentBillStatusHistoryStatusWrapper>, id:String
     public var title:String, committees:String?, notes:String?
     public let date:EventDate
     
     public init(chamber: any GovernmentChamber, statuses: [any GovernmentBillStatusHistoryStatus], id: String, title: String, committees: String?, notes: String?, date: EventDate) {
         self.chamber = chamber.wrapped()
-        self.statuses = statuses.map({ $0.wrapped() })
+        self.statuses = statuses.map({ $0.wrapped() }).uniqueSet()
         self.id = id
         self.title = title
         self.committees = committees

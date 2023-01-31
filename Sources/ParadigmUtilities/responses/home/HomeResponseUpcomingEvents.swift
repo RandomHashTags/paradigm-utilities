@@ -10,11 +10,11 @@ import Foundation
 public struct HomeResponseUpcomingEvents : HomeResponseProtocol {
     public typealias ValueKeys = HomeResponseUpcomingEventsValueKeys
     
-    @CodableOmittable public var holidays_near:[UpcomingEventDateHolidays]?
-    public var events:[UpcomingEventTypeEvents]?
+    @CodableOmittable public var holidays_near:Set<UpcomingEventDateHolidays>?
+    public var events:Set<UpcomingEventTypeEvents>?
     @CodableOmittable public var movie_production_companies:MovieProductionCompaniesResponse?
         
-    public init(holidays_near: [UpcomingEventDateHolidays]?, events: [UpcomingEventTypeEvents]?, movie_production_companies: MovieProductionCompaniesResponse?) {
+    public init(holidays_near: Set<UpcomingEventDateHolidays>?, events: Set<UpcomingEventTypeEvents>?, movie_production_companies: MovieProductionCompaniesResponse?) {
         self._holidays_near = CodableOmittable(holidays_near)
         self.events = events
         self._movie_production_companies = CodableOmittable(movie_production_companies)
@@ -30,10 +30,10 @@ public struct HomeResponseUpcomingEvents : HomeResponseProtocol {
     public mutating func setKeyValue<T>(key: HomeResponseUpcomingEventsValueKeys, value: T) {
         switch key {
         case .holidays_near:
-            _holidays_near = value as! CodableOmittable<[UpcomingEventDateHolidays]>
+            _holidays_near = value as! CodableOmittable<Set<UpcomingEventDateHolidays>>
             break
         case .events:
-            events = value as? [UpcomingEventTypeEvents]
+            events = value as? Set<UpcomingEventTypeEvents>
             break
         case .movie_production_companies:
             _movie_production_companies = value as! CodableOmittable<MovieProductionCompaniesResponse>

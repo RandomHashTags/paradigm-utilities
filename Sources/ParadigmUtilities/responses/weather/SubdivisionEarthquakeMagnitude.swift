@@ -11,9 +11,9 @@ public struct SubdivisionEarthquakeMagnitude : Jsonable {
     public typealias ValueKeys = SovereignRegionEarthquakesValueKeys
     
     public let magnitude:String
-    public var quakes:[PreEarthquake]
+    public var quakes:Set<PreEarthquake>
     
-    public init(magnitude: String, quakes: [PreEarthquake]) {
+    public init(magnitude: String, quakes: Set<PreEarthquake>) {
         self.magnitude = magnitude
         self.quakes = quakes
     }
@@ -28,7 +28,7 @@ public struct SubdivisionEarthquakeMagnitude : Jsonable {
     public mutating func setKeyValue<T>(key: SovereignRegionEarthquakesValueKeys, value: T) {
         switch key {
         case .quakes:
-            quakes = value as! [PreEarthquake]
+            quakes = value as! Set<PreEarthquake>
             break
         default:
             break

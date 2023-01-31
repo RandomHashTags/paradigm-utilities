@@ -11,9 +11,9 @@ public struct SovereignStateAvailabilities : Jsonable {
     public typealias ValueKeys = SovereignStateAvailabilitiesValueKeys
     
     public let image_url_prefix:String
-    public var availabilities:[ClientSovereignStateAvailability]
+    public var availabilities:Set<ClientSovereignStateAvailability>
     
-    public init(image_url_prefix: String, availabilities: [ClientSovereignStateAvailability]) {
+    public init(image_url_prefix: String, availabilities: Set<ClientSovereignStateAvailability>) {
         self.image_url_prefix = image_url_prefix
         self.availabilities = availabilities
     }
@@ -27,7 +27,7 @@ public struct SovereignStateAvailabilities : Jsonable {
     public mutating func setKeyValue<T>(key: SovereignStateAvailabilitiesValueKeys, value: T) {
         switch key {
         case .availabilities:
-            availabilities = value as! [ClientSovereignStateAvailability]
+            availabilities = value as! Set<ClientSovereignStateAvailability>
             break
         default:
             break
