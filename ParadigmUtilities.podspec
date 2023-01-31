@@ -5,7 +5,6 @@ Pod::Spec.new do |s|
   s.homepage = 'https://github.com/RandomHashTags/paradigm-utilities'
   s.license = { :type => 'CC0 1.0 Universal', :file => 'LICENSE.txt' }
   s.authors = { 'Evan Anderson' => 'imrandomhashtags@gmail.com' }
-  s.social_media_url = 'https://twitter.com/irandomhashtags'
   s.ios.deployment_target = '13.0'
   s.osx.deployment_target = '10.15'
   s.source = { :git => 'https://github.com/RandomHashTags/paradigm-utilities.git', :tag => s.version.to_s }
