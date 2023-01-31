@@ -87,19 +87,21 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let news:HomeResponseNews = HomeResponseNews(regional: [])
         let stock_market:HomeResponseStockMarket? = nil
         
-        let upcoming_events_holidays_near:[UpcomingEventDateHolidays] = [
+        let upcoming_events_holidays_near:Set<UpcomingEventDateHolidays> = [
             UpcomingEventDateHolidays(date: EventDate(year: 2023, month: Month.january, day: 1), holidays: [
                 PreHoliday(type: "test", id: "test_holiday", name: "Test Holiday", emoji: nil)
             ])
         ]
         let upcoming_events:HomeResponseUpcomingEvents = HomeResponseUpcomingEvents(holidays_near: upcoming_events_holidays_near, events: nil, movie_production_companies: nil)
         
-        let weather_alerts:[CountryWeatherEvents] = [
-            CountryWeatherEvents(country: Country.united_states, events: [
-                WeatherEvent(id: "blizzardwarning", event: "Blizzard Warning", defcon: 3)
+        let weather_alerts:Set<CountryWeatherEvents> = [
+            CountryWeatherEvents(country: Country.united_states, subdivisions: [
+                SubdivisionWeatherEvents(subdivision: SubdivisionsUnitedStates.minnesota.wrapped(), events: [
+                    WeatherEvent(id: "blizzardwarning", event: "Blizzard Warning", defcon: 3)
+                ])
             ])
         ]
-        let weather_earthquakes:[CountryEarthquakes] = [
+        let weather_earthquakes:Set<CountryEarthquakes> = [
             CountryEarthquakes(country: Country.united_states, magnitudes: [
                 PreEarthquakeMagnitude(mag: "5.0", quakes: [
                     PreEarthquake(id: "mn3948u50294", place: "Rochester, Minnesota")
@@ -112,7 +114,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
         let target_response_string:String = """
-{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}],"earthquakes":[{"country":"united_states","magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"Rochester, Minnesota"}]}]}]}}
+{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states_minnesota","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"Rochester, Minnesota"}]}]}]}}
 """
         //print("response_string=" + response_string)
         XCTAssert(response_string.elementsEqual(target_response_string), "response_string=" + response_string)

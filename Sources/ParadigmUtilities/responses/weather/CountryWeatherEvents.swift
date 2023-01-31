@@ -12,24 +12,24 @@ public struct CountryWeatherEvents : Jsonable {
     public typealias ValueKeys = CountryWeatherEventAlertsValueKeys
     
     public let country:Country
-    public var events:Set<WeatherEvent>
+    public var subdivisions:Set<SubdivisionWeatherEvents>
     
-    public init(country: Country, events: Set<WeatherEvent>) {
+    public init(country: Country, subdivisions: Set<SubdivisionWeatherEvents>) {
         self.country = country
-        self.events = events
+        self.subdivisions = subdivisions
     }
     
     public func getKeyValue(key: CountryWeatherEventAlertsValueKeys) -> Any? {
         switch key {
         case .country: return country
-        case .events: return events
+        case .subdivisions: return subdivisions
         }
     }
     
     public mutating func setKeyValue<T>(key: CountryWeatherEventAlertsValueKeys, value: T) {
         switch key {
-        case .events:
-            self.events = value as! Set<WeatherEvent>
+        case .subdivisions:
+            subdivisions = value as! Set<SubdivisionWeatherEvents>
             break
         default:
             break
@@ -39,11 +39,11 @@ public struct CountryWeatherEvents : Jsonable {
 
 public enum CountryWeatherEventAlertsValueKeys : String, JsonableValueKeys {
     case country
-    case events
+    case subdivisions
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .events:
+        case .subdivisions:
             return true
         default:
             return false

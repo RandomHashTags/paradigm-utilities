@@ -65,7 +65,7 @@ public extension JsonableProtocol {
         guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
         let value:Bool = !ValueKeys.allCases.map({
             guard let key_value:Any = getKeyValue(key: $0) else { return true }
-            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? AnyCollection<Any>)?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
+            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? (any Collection))?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
         }).contains(false)
         return value
     }
