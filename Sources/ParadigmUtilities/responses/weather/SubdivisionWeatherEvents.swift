@@ -12,9 +12,9 @@ public struct SubdivisionWeatherEvents : Jsonable {
     public typealias ValueKeys = SubdivisionWeatherEventsValueKeys
     
     public let subdivision:SovereignStateSubdivisionWrapper?
-    public var events:Set<WeatherEvent>
+    public var events:[WeatherEvent]
     
-    public init(subdivision: SovereignStateSubdivisionWrapper?, events: Set<WeatherEvent>) {
+    public init(subdivision: SovereignStateSubdivisionWrapper?, events: [WeatherEvent]) {
         self.subdivision = subdivision
         self.events = events
     }
@@ -29,7 +29,7 @@ public struct SubdivisionWeatherEvents : Jsonable {
     public mutating func setKeyValue<T>(key: SubdivisionWeatherEventsValueKeys, value: T) {
         switch key {
         case .events:
-            events = value as! Set<WeatherEvent>
+            events = value as! [WeatherEvent]
             break
         default:
             break
