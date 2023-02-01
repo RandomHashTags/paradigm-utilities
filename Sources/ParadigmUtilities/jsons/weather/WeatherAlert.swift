@@ -25,7 +25,7 @@ public struct WeatherAlert : Jsonable {
         self.instruction = instruction
         self.description = description
         self.zones = zones
-        self.subdivisions = subdivisions?.map({ $0.wrapped() }).uniqueSet()
+        self.subdivisions = subdivisions?.map({ $0.wrapped() }).unique_set()
         self.defcon = defcon
         self.time = time
         self.source = source

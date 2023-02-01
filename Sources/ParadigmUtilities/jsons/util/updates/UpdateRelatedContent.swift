@@ -16,7 +16,7 @@ public struct UpdateRelatedContent : Jsonable {
     
     public init(countries: Set<Country>? = nil, subdivisions: [any SovereignStateSubdivision]? = nil, sources: EventSources? = nil) {
         self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() }).uniqueSet()
+        self.subdivisions = subdivisions?.map({ $0.wrapped() }).unique_set()
         self.sources = sources
     }
     

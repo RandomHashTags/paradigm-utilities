@@ -16,11 +16,11 @@ public extension Sequence where Element : Hashable {
         return counts.maximum
     }
     
-    func uniqueSet() -> Set<Element> {
+    func unique_set() -> Set<Element> {
         return Set<Element>(self)
     }
     func unique() -> [Element] {
-        let set:Set<Element> = uniqueSet()
+        let set:Set<Element> = unique_set()
         return set.map({ $0 })
     }
 }

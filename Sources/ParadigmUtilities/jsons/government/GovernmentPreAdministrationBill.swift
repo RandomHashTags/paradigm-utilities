@@ -17,7 +17,7 @@ public struct GovernmentPreAdministrationBill : Jsonable {
     
     public init(chamber: any GovernmentChamber, statuses: [any GovernmentBillStatusHistoryStatus], id: String, title: String, committees: String?, notes: String?, date: EventDate) {
         self.chamber = chamber.wrapped()
-        self.statuses = statuses.map({ $0.wrapped() }).uniqueSet()
+        self.statuses = statuses.map({ $0.wrapped() }).unique_set()
         self.id = id
         self.title = title
         self.committees = committees

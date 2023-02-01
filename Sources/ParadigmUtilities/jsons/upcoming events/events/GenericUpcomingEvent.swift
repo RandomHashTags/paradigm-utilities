@@ -42,7 +42,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         self.sources = sources
         self.hyperlinks = hyperlinks
         self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() }).uniqueSet()
+        self.subdivisions = subdivisions?.map({ $0.wrapped() }).unique_set()
     }
     
     public lazy var nonGenericEvent:GenericUpcomingEvent? = {

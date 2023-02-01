@@ -53,7 +53,7 @@ public extension URLQueryContainer {
         return get(key: "omitt")
     }
     func getOmittValues() -> Set<String>? {
-        return getOmitt()?.components(separatedBy: ",").uniqueSet()
+        return getOmitt()?.components(separatedBy: ",").unique_set()
     }
 }
 #else
