@@ -10,9 +10,9 @@ import Foundation
 public struct GovernmentAdministrationBill : Jsonable {
     public typealias ValueKeys = GovernmentAdministrationBillValueKeys
     
-    public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policy_area:String?, subjects:Set<String>?, cosponsors:Set<GovernmentPrePolitician>?, actions:Set<GovernmentBillAction>?, sources:EventSources
+    public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policy_area:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
-    public init(title: String, sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: Set<String>?, cosponsors: Set<GovernmentPrePolitician>?, actions: Set<GovernmentBillAction>?, sources: EventSources) {
+    public init(title: String, sponsor: GovernmentPrePolitician?, summary: String?, policyArea: (any GovernmentPolicyArea)?, subjects: [String]?, cosponsors: [GovernmentPrePolitician]?, actions: [GovernmentBillAction]?, sources: EventSources) {
         self.title = title
         self.sponsor = sponsor
         self.summary = summary
@@ -50,13 +50,13 @@ public struct GovernmentAdministrationBill : Jsonable {
             policy_area = value as? String
             break
         case .subjects:
-            subjects = value as? Set<String>
+            subjects = value as? [String]
             break
         case .cosponsors:
-            cosponsors = value as? Set<GovernmentPrePolitician>
+            cosponsors = value as? [GovernmentPrePolitician]
             break
         case .actions:
-            actions = value as? Set<GovernmentBillAction>
+            actions = value as? [GovernmentBillAction]
             break
         case .sources:
             sources = value as! EventSources

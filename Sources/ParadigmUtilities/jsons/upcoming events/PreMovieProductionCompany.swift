@@ -11,10 +11,10 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
     public typealias ValueKeys = PreMovieProductionCompanyValueKeys
     
     public let id:String
-    public var name:String, aliases:Set<String>?
+    public var name:String, aliases:[String]?
     public var image_url:String?
     
-    public init(id: String, name: String, aliases: Set<String>?, image_url: String?) {
+    public init(id: String, name: String, aliases: [String]?, image_url: String?) {
         self.id = id
         self.name = name
         self.aliases = aliases
@@ -35,7 +35,7 @@ public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {
             name = value as! String
             break
         case .aliases:
-            aliases = value as? Set<String>
+            aliases = value as? [String]
             break
         default:
             break

@@ -12,9 +12,9 @@ public struct CountryGovernmentRecentActivity : Jsonable {
     public typealias ValueKeys = CountryGovernmentRecentActivityValueKeys
     
     public let country:Country
-    public var activity:Set<CountryGovernmentRecentActivityChamber>
+    public var activity:[CountryGovernmentRecentActivityChamber]
     
-    public init(country: Country, activity: Set<CountryGovernmentRecentActivityChamber>) {
+    public init(country: Country, activity: [CountryGovernmentRecentActivityChamber]) {
         self.country = country
         self.activity = activity
     }
@@ -28,7 +28,7 @@ public struct CountryGovernmentRecentActivity : Jsonable {
     public mutating func setKeyValue<T>(key: CountryGovernmentRecentActivityValueKeys, value: T) {
         switch key {
         case .activity:
-            activity = value as! Set<CountryGovernmentRecentActivityChamber>
+            activity = value as! [CountryGovernmentRecentActivityChamber]
             break
         default:
             break

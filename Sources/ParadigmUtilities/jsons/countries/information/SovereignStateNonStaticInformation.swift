@@ -10,9 +10,9 @@ import Foundation
 public struct SovereignStateNonStaticInformation : SovereignStateInformationValue {
     public typealias ValueKeys = SovereignStateNonStaticInformationValueKeys
     
-    public var travel_advisories:Set<TravelAdvisory>?, sources:EventSources?
+    public var travel_advisories:[TravelAdvisory]?, sources:EventSources?
     
-    public init(travel_advisories: Set<TravelAdvisory>?, sources: EventSources?) {
+    public init(travel_advisories: [TravelAdvisory]?, sources: EventSources?) {
         self.travel_advisories = travel_advisories
         self.sources = sources
     }
@@ -26,7 +26,7 @@ public struct SovereignStateNonStaticInformation : SovereignStateInformationValu
     public mutating func setKeyValue<T>(key: SovereignStateNonStaticInformationValueKeys, value: T) {
         switch key {
         case .travel_advisories:
-            travel_advisories = value as? Set<TravelAdvisory>
+            travel_advisories = value as? [TravelAdvisory]
             break
         case .sources:
             sources = value as? EventSources

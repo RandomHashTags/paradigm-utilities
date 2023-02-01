@@ -14,12 +14,12 @@ public struct IMDbMovieDetails : Jsonable {
     public let rating:String?
     public var rating_reason:String?
     public let runtime_seconds:Int?
-    public var genres:Set<String>?
+    public var genres:[String]?
     public let imdb_rating:Float?
     public var image_url:String?
-    public let countries:Set<Country>?, source:String
+    public let countries:[Country]?, source:String
     
-    public init(rating: String?, rating_reason: String?, runtime_seconds: Int?, genres: Set<String>?, imdb_rating: Float?, image_url: String? = nil, countries: Set<Country>?, source: String) {
+    public init(rating: String?, rating_reason: String?, runtime_seconds: Int?, genres: [String]?, imdb_rating: Float?, image_url: String? = nil, countries: [Country]?, source: String) {
         self.rating = rating
         self.rating_reason = rating_reason
         self.runtime_seconds = runtime_seconds
@@ -48,7 +48,7 @@ public struct IMDbMovieDetails : Jsonable {
             rating_reason = value as? String
             break
         case .genres:
-            genres = value as? Set<String>
+            genres = value as? [String]
             break
         default:
             break

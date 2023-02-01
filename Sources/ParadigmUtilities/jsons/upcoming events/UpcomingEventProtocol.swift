@@ -19,8 +19,8 @@ public protocol UpcomingEventProtocol : Jsonable {
     
     var title:String { get }
     var image_url:String? { get }
-    var countries:Set<Country>? { get }
-    var subdivisions:Set<SovereignStateSubdivisionWrapper>? { get }
+    var countries:[Country]? { get }
+    var subdivisions:[SovereignStateSubdivisionWrapper]? { get }
     
     func getIdentifier() -> String
 }
@@ -44,7 +44,7 @@ public extension UpcomingEventProtocol {
 public protocol GenericUpcomingEventProtocol : UpcomingEventProtocol {
     var description:String? { get }
     var location:String? { get }
-    var youtube_video_ids:Set<String>? { get }
+    var youtube_video_ids:[String]? { get }
     var sources:EventSources { get }
     var hyperlinks:Hyperlinks? { get }
 }

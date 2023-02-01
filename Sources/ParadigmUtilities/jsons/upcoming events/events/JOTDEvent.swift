@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class JOTDEvent : GenericUpcomingEvent {
     public let copyright:String, question:String, answer:String
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, copyright: String, question: String, answer: String) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, copyright: String, question: String, answer: String) {
         self.copyright = copyright
         self.question = question
         self.answer = answer

@@ -21,12 +21,12 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     
     public var title:String, tag:String?, description:String?
     public let location:String?, image_url:String?
-    public var youtube_video_ids:Set<String>?
+    public var youtube_video_ids:[String]?
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
-    public let countries:Set<Country>?, subdivisions:Set<SovereignStateSubdivisionWrapper>?
+    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     
-    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, custom_type_singular_name: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, image_url: String?, youtube_video_ids: Set<String>? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: Set<Country>? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
+    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, custom_type_singular_name: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
         self.type = type
         self.id = id
         self.event_date = event_date
@@ -42,7 +42,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         self.sources = sources
         self.hyperlinks = hyperlinks
         self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() }).unique_set()
+        self.subdivisions = subdivisions?.map({ $0.wrapped() })
     }
     
     public lazy var nonGenericEvent:GenericUpcomingEvent? = {

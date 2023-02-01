@@ -13,17 +13,17 @@ public struct ClientNationalPark : Jsonable {
     
     public let id:String
     public var name:String, description:String?
-    public let image_url:String?, country:Country, countries:Set<Country>, subdivisions:Set<SovereignStateSubdivisionWrapper>
+    public let image_url:String?, country:Country, countries:[Country], subdivisions:[SovereignStateSubdivisionWrapper]
     public var sources:EventSources
     
-    public init(id: String, name: String, description: String?, image_url: String? = nil, country: Country, countries: Set<Country>, subdivisions: [any SovereignStateSubdivision], sources: EventSources) {
+    public init(id: String, name: String, description: String?, image_url: String? = nil, country: Country, countries: [Country], subdivisions: [any SovereignStateSubdivision], sources: EventSources) {
         self.id = id
         self.name = name
         self.description = description
         self.image_url = image_url
         self.country = country
         self.countries = countries
-        self.subdivisions = subdivisions.map({ $0.wrapped() }).unique_set()
+        self.subdivisions = subdivisions.map({ $0.wrapped() })
         self.sources = sources
     }
     

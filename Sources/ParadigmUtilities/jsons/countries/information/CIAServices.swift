@@ -11,10 +11,10 @@ public struct CIAServices : SovereignStateInformationValue {
     public typealias ValueKeys = CIAServicesValueKeys
     
     public let country_url:String?, summary_url:String?, travel_facts_url:String?
-    public var values:Set<CIAValue>
+    public var values:[CIAValue]
     public var sources:EventSources?
     
-    public init(country_url: String?, summary_url: String?, travel_facts_url: String?, values: Set<CIAValue>, sources: EventSources?) {
+    public init(country_url: String?, summary_url: String?, travel_facts_url: String?, values: [CIAValue], sources: EventSources?) {
         self.country_url = country_url
         self.summary_url = summary_url
         self.travel_facts_url = travel_facts_url
@@ -34,7 +34,7 @@ public struct CIAServices : SovereignStateInformationValue {
     public mutating func setKeyValue<T>(key: CIAServicesValueKeys, value: T) {
         switch key {
         case .values:
-            values = value as! Set<CIAValue>
+            values = value as! [CIAValue]
             break
         case .sources:
             sources = value as? EventSources

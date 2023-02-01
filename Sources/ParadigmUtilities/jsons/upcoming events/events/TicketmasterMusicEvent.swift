@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class TicketmasterMusicEvent : GenericUpcomingEvent {
     public let accessibility:String?, age_restriction:String?, health_check_summary:String?, health_check_description:String?, please_note:String?, seat_map_url:String?, ticket_limit:String?, price_range_currency:String?, price_range_max:Float?, price_range_min:Float?, price_range_string:String?, venues:[TicketmasterVenue]?
     
-    public init(exact_start: Int64, exact_end: Int64!, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, accessibility: String?, age_restriction: String?, health_check_summary: String?, health_check_description: String?, please_note: String?, seat_map_url: String?, ticket_limit: String?, price_range_currency: String?, price_range_max: Float?, price_range_min: Float?, price_range_string: String?, venues: [TicketmasterVenue]?) {
+    public init(exact_start: Int64, exact_end: Int64!, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, accessibility: String?, age_restriction: String?, health_check_summary: String?, health_check_description: String?, please_note: String?, seat_map_url: String?, ticket_limit: String?, price_range_currency: String?, price_range_max: Float?, price_range_min: Float?, price_range_string: String?, venues: [TicketmasterVenue]?) {
         self.accessibility = accessibility
         self.age_restriction = age_restriction
         self.health_check_summary = health_check_summary

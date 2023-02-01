@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class MusicAlbumEvent : GenericUpcomingEvent {
     public let artist:String, spotify_details:SpotifyDetails?, itunes_details:ITunesDetails?
     
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, artist: String, spotify_details: SpotifyDetails?, itunes_details: ITunesDetails?) {
+    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, artist: String, spotify_details: SpotifyDetails?, itunes_details: ITunesDetails?) {
         self.artist = artist
         self.spotify_details = spotify_details
         self.itunes_details = itunes_details

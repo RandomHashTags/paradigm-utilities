@@ -10,9 +10,9 @@ import Foundation
 public struct SubdivisionStatute : Jsonable {
     public typealias ValueKeys = SubdivisionStatuteValueKeys
     
-    public var title:String, description:String?, subdivisions:Set<SubdivisionStatuteSubdivision>?, sources:EventSources
+    public var title:String, description:String?, subdivisions:[SubdivisionStatuteSubdivision]?, sources:EventSources
     
-    public init(title: String, description: String?, subdivisions: Set<SubdivisionStatuteSubdivision>?, sources: EventSources) {
+    public init(title: String, description: String?, subdivisions: [SubdivisionStatuteSubdivision]?, sources: EventSources) {
         self.title = title
         self.description = description
         self.subdivisions = subdivisions
@@ -36,7 +36,7 @@ public struct SubdivisionStatute : Jsonable {
             description = value as? String
             break
         case .subdivisions:
-            subdivisions = value as? Set<SubdivisionStatuteSubdivision>
+            subdivisions = value as? [SubdivisionStatuteSubdivision]
             break
         case .sources:
             sources = value as! EventSources

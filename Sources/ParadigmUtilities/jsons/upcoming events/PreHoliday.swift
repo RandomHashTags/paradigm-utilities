@@ -14,9 +14,9 @@ public struct PreHoliday : Jsonable {
     public let type:String, id:String
     public var name:String
     public let emoji:String?
-    public var countries:Set<Country>?
+    public var countries:[Country]?
     
-    public init(type: String, id: String, name: String, emoji: String?, countries: Set<Country>? = nil) {
+    public init(type: String, id: String, name: String, emoji: String?, countries: [Country]? = nil) {
         self.type = type
         self.id = id
         self.name = name
@@ -26,9 +26,9 @@ public struct PreHoliday : Jsonable {
     
     public mutating func addCountry(country: Country) {
         if countries == nil {
-            countries = Set<Country>()
+            countries = [Country]()
         }
-        countries?.insert(country)
+        countries?.append(country)
     }
     
     public func getKeyValue(key: PreHolidayValueKeys) -> Any? {

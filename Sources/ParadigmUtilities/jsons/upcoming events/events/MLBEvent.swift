@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class MLBEvent : GenericUpcomingEvent {
     public let team_away:ClientMLBTeam, team_home:ClientMLBTeam
     
-    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, team_away: ClientMLBTeam, team_home: ClientMLBTeam) {
+    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, team_away: ClientMLBTeam, team_home: ClientMLBTeam) {
         self.team_away = team_away
         self.team_home = team_home
         super.init(type: UpcomingEventType.sport_mlb, event_date: nil, exact_start: exact_start, exact_end: exact_end, custom_type_singular_name: nil, title: title, description: description, location: location, image_url: image_url, youtube_video_ids: nil, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)

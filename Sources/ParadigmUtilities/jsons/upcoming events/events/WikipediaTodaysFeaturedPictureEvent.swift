@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
     public let video_url:String?
     
-    public init(event_date: EventDate!, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, video_url: String?) {
+    public init(event_date: EventDate!, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, video_url: String?) {
         self.video_url = video_url
         super.init(type: UpcomingEventType.wikipedia_todays_featured_picture, event_date: event_date, title: title, description: description, location: location, image_url: image_url, sources: sources, hyperlinks: hyperlinks, countries: countries, subdivisions: subdivisions)
     }

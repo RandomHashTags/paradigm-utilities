@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public final class SpaceRocketLaunchEvent : GenericUpcomingEvent {
     public let mission_name:String, mission_description:String, mission_type:String, window_start:Int64, window_end:Int64?, exact_day:Bool?, exact_time:Bool?, status:String, probability:String, video_url:String?
     
-    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: [any SovereignStateSubdivision]?, mission: SpaceRocketLaunchMission) {
+    public init(exact_start: Int64, exact_end: Int64, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, mission: SpaceRocketLaunchMission) {
         mission_name = mission.name
         mission_description = mission.description
         mission_type = mission.type

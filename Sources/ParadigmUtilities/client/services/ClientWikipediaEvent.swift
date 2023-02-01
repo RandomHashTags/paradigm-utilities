@@ -13,10 +13,10 @@ public struct ClientWikipediaEvent : Jsonable {
     
     public let images:[String]?
     public var description:String, hyperlinks:Hyperlinks?
-    public let countries:Set<Country>?, subdivisions:Set<SovereignStateSubdivisionWrapper>?
-    public var tags:Set<String>?, sources:EventSources?
+    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    public var tags:[String]?, sources:EventSources?
     
-    public init(images: [String]?, description: String, hyperlinks: Hyperlinks?, countries: Set<Country>?, subdivisions: Set<SovereignStateSubdivisionWrapper>?, tags: Set<String>?, sources: EventSources?) {
+    public init(images: [String]?, description: String, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [SovereignStateSubdivisionWrapper]?, tags: [String]?, sources: EventSources?) {
         self.images = images
         self.description = description
         self.hyperlinks = hyperlinks
@@ -46,7 +46,7 @@ public struct ClientWikipediaEvent : Jsonable {
             hyperlinks = value as? Hyperlinks
             break
         case .tags:
-            tags = value as? Set<String>
+            tags = value as? [String]
             break
         case .sources:
             sources = value as? EventSources
