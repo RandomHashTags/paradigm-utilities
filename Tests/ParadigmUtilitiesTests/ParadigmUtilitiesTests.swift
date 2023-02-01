@@ -16,6 +16,12 @@ final class ParadigmUtilitiesTests: XCTestCase {
         try testWeather(decoder)
         try test_home_responses(decoder)
         //await testTranslations(bro)
+        
+        if #available(macOS 13.0, *) {
+            try await test_benchmarks()
+        } else {
+            print("ParadigmUtilitiesTests;failed to execute benchmarks due to outdated macOS version (less than 13.0)")
+        }
     }
     
     private func testFoundation(_ bro: TestBro) throws {
@@ -130,6 +136,69 @@ final class ParadigmUtilitiesTests: XCTestCase {
             XCTAssert(valid, "translated text did not translate correctly! (" + translatedText + ")")
         }*/
     }
+    
+    @available(macOS 13.0, *)
+    private func test_benchmarks() async throws {
+        guard let data:Data = get_local_data(at: "/Users/randomhashtags/Downloads/api_tvmaze_schedule_full.json") else { return }
+        let zippy_decoder:ZippyJSONDecoder = ZippyJSONDecoder()
+        
+        try await benchmark(key: "zippy_json_decode_array_tvshowepisode", {
+            let bruh:[TVShowEpisode]? = try? zippy_decoder.decode([TVShowEpisode].self, from: data)
+        })
+        try await benchmark(key: "zippy_json_decode_set_tvshowepisode", {
+            let bruh:Set<TVShowEpisode>? = try? zippy_decoder.decode(Set<TVShowEpisode>.self, from: data)
+        })
+        try await benchmark(key: "zippy_json_decode_set_fixedtvshowepisode", {
+            let bruh:Set<FixedTVShowEpisode>? = try? zippy_decoder.decode(Set<FixedTVShowEpisode>.self, from: data)
+        })
+        
+        let apple_decoder:JSONDecoder = JSONDecoder()
+        try await benchmark(key: "apple_json_decode_array_tvshowepisode", {
+            let bruh:[TVShowEpisode]? = try? apple_decoder.decode([TVShowEpisode].self, from: data)
+        })
+        try await benchmark(key: "apple_json_decode_set_tvshowepisode", {
+            let bruh:Set<TVShowEpisode>? = try? apple_decoder.decode(Set<TVShowEpisode>.self, from: data)
+        })
+        try await benchmark(key: "apple_json_decode_set_fixedtvshowepisode", {
+            let bruh:Set<FixedTVShowEpisode>? = try? apple_decoder.decode(Set<FixedTVShowEpisode>.self, from: data)
+        })
+    }
+    private func get_local_data(at path: String) -> Data? {
+        let url:URL = URL(fileURLWithPath: path)
+        return try? Data.init(contentsOf: url)
+    }
+    
+    @available(macOS 13.0, *)
+    private func benchmark(key: String, _ code: @escaping () async throws -> Void) async throws {
+        let iteration_count:Int = 100
+        let clock:ContinuousClock = ContinuousClock()
+        let _:Duration = try await clock.measure(code)
+        var timings:[Int64] = [Int64]()
+        timings.reserveCapacity(iteration_count)
+        for _ in 1...iteration_count {
+            let result:Duration = try await clock.measure(code)
+            let attoseconds:Int64 = result.components.attoseconds
+            let nanoseconds:Int64 = attoseconds / 1_000_000_000
+            timings.append(nanoseconds)
+        }
+        timings = timings.sorted(by: { $0 < $1 })
+        let median:Int64 = timings[timings.count/2]
+        let sum:Int64 = timings.reduce(0, +)
+        let average:Double = Double(sum) / Double(timings.count)
+        let key:String = key + (1...(65-key.count)).map({ _ in " " }).joined()
+        
+        let formatter:NumberFormatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.maximumFractionDigits = 20
+        
+        let average_time_elapsed:String = formatter.string(for: average)! + "ns"
+        let minimum_time_elapsed:String = formatter.string(for: timings.first!)! + "ns"
+        let maximum_time_elapsed:String = formatter.string(for: timings.last!)! + "ns"
+        let median_time_elapsed:String = formatter.string(for: median)! + "ns"
+        let total_time_elapsed:String = formatter.string(for: sum)! + "ns"
+        
+        print("ParadigmUtilitiesTests;benchmark( " + key + "| min=" + minimum_time_elapsed + " | max=" + maximum_time_elapsed + " | median=" + median_time_elapsed + " | average=" + average_time_elapsed + " | total=" + total_time_elapsed)
+    }
 }
 
 private struct TestBro : Jsonable {
@@ -176,4 +245,52 @@ private enum TestBroValueKeys : String, JsonableValueKeys {
             return false
         }
     }
+}
+
+public struct FixedTVShowEpisode : Jsonable {
+    public let id:Int, name:String, season:Int, number:Int?, runtime:Int?, summary:String?, image:FixedTVShowImage?, airstamp:String, airdate:String, airtime:String
+    public let _embedded:FixedTVShowEpisodeEmbedded?
+}
+public struct FixedTVShowImage : Jsonable {
+    public let medium:String, original:String
+}
+public struct FixedTVShowEpisodeEmbedded : Jsonable {
+    public let show:FixedTVShowInfo?
+}
+public struct FixedTVShowInfo : Jsonable {
+    public let id:Int, name:String, type:String, language:String?, genres:Set<String>, image:FixedTVShowImage?, summary:String?, status:String, url:String
+    public let runtime:Int?, averageRuntime:Int?, weight:Int
+    public let premiered:String, ended:String?, schedule:FixedTVShowSchedule
+    public let _embedded:FixedTVShowInfoEmbedded?
+    public let officialSite:String?, webChannel:FixedTVShowWebChannel?, externals:FixedTVShowExternals?, network:FixedTVShowNetwork?
+    public let updated:Int64
+}
+public struct FixedTVShowNetwork : Jsonable {
+    public let id:Int, name:String, country:FixedTVShowCountry?, officialSite:String?
+}
+public struct FixedTVShowCountry : Jsonable {
+    public let name:String, code:String, timezone:String
+}
+public struct FixedTVShowExternals : Jsonable {
+    public let tvrage:Int?, thetvdb:Int?, imdb:String?
+}
+public struct FixedTVShowInfoEmbedded : Jsonable {
+    public let episodes:Set<FixedTVShowEpisode>?, cast:Set<FixedTVShowCast>?, akas:Set<FixedTVShowAlias>?
+}
+public struct FixedTVShowPerson : Jsonable {
+    public let name:String, birthday:String?, deathday:String?, imageURL:String?, country:FixedTVShowCountry?, image:FixedTVShowImage?, url:String
+}
+public struct FixedTVShowSchedule : Jsonable {
+    public let time:String, days:Set<String>
+}
+public struct FixedTVShowWebChannel : Jsonable {
+    public let id:Int, name:String, country:FixedTVShowCountry?, officialSite:String?
+}
+public struct FixedTVShowAlias : Jsonable {
+    public let name:String, country:FixedTVShowCountry?
+}
+public struct FixedTVShowCast : Jsonable {
+    public let person:FixedTVShowPerson?
+    public let character:FixedTVShowPerson?
+    public let `self`:Bool, voice:Bool
 }
