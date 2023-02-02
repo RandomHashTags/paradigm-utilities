@@ -108,9 +108,11 @@ final class ParadigmUtilitiesTests: XCTestCase {
             ])
         ]
         let weather_earthquakes:[CountryEarthquakes] = [
-            CountryEarthquakes(country: Country.united_states, magnitudes: [
-                PreEarthquakeMagnitude(mag: "5.0", quakes: [
-                    PreEarthquake(id: "mn3948u50294", place: "Rochester, Minnesota")
+            CountryEarthquakes(country: Country.united_states, subdivisions: [
+                SubdivisionEarthquakes(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
+                    PreEarthquakeMagnitude(mag: "5.0", quakes: [
+                        PreEarthquake(id: "mn3948u50294", place: "26km W of Rochester", city: CitiesUnitedStatesMinnesota.rochester)
+                    ])
                 ])
             ])
         ]
@@ -120,7 +122,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
         let target_response_string:String = """
-{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states_minnesota","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"Rochester, Minnesota"}]}]}]}}
+{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states_minnesota","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states_minnesota_rochester"}]}],"subdivision":"united_states_minnesota"}]}]}}
 """
         //print("response_string=" + response_string)
         XCTAssert(response_string.elementsEqual(target_response_string), "response_string=" + response_string)
@@ -139,29 +141,6 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     @available(macOS 13.0, *)
     private func test_benchmarks() async throws {
-        guard let data:Data = get_local_data(at: "/Users/randomhashtags/Downloads/api_tvmaze_schedule_full.json") else { return }
-        let zippy_decoder:ZippyJSONDecoder = ZippyJSONDecoder()
-        
-        try await benchmark(key: "zippy_json_decode_array_tvshowepisode", {
-            let bruh:[TVShowEpisode]? = try? zippy_decoder.decode([TVShowEpisode].self, from: data)
-        })
-        try await benchmark(key: "zippy_json_decode_set_tvshowepisode", {
-            let bruh:Set<TVShowEpisode>? = try? zippy_decoder.decode(Set<TVShowEpisode>.self, from: data)
-        })
-        try await benchmark(key: "zippy_json_decode_set_fixedtvshowepisode", {
-            let bruh:Set<FixedTVShowEpisode>? = try? zippy_decoder.decode(Set<FixedTVShowEpisode>.self, from: data)
-        })
-        
-        let apple_decoder:JSONDecoder = JSONDecoder()
-        try await benchmark(key: "apple_json_decode_array_tvshowepisode", {
-            let bruh:[TVShowEpisode]? = try? apple_decoder.decode([TVShowEpisode].self, from: data)
-        })
-        try await benchmark(key: "apple_json_decode_set_tvshowepisode", {
-            let bruh:Set<TVShowEpisode>? = try? apple_decoder.decode(Set<TVShowEpisode>.self, from: data)
-        })
-        try await benchmark(key: "apple_json_decode_set_fixedtvshowepisode", {
-            let bruh:Set<FixedTVShowEpisode>? = try? apple_decoder.decode(Set<FixedTVShowEpisode>.self, from: data)
-        })
     }
     private func get_local_data(at path: String) -> Data? {
         let url:URL = URL(fileURLWithPath: path)
@@ -245,52 +224,4 @@ private enum TestBroValueKeys : String, JsonableValueKeys {
             return false
         }
     }
-}
-
-public struct FixedTVShowEpisode : Jsonable {
-    public let id:Int, name:String, season:Int, number:Int?, runtime:Int?, summary:String?, image:FixedTVShowImage?, airstamp:String, airdate:String, airtime:String
-    public let _embedded:FixedTVShowEpisodeEmbedded?
-}
-public struct FixedTVShowImage : Jsonable {
-    public let medium:String, original:String
-}
-public struct FixedTVShowEpisodeEmbedded : Jsonable {
-    public let show:FixedTVShowInfo?
-}
-public struct FixedTVShowInfo : Jsonable {
-    public let id:Int, name:String, type:String, language:String?, genres:Set<String>, image:FixedTVShowImage?, summary:String?, status:String, url:String
-    public let runtime:Int?, averageRuntime:Int?, weight:Int
-    public let premiered:String, ended:String?, schedule:FixedTVShowSchedule
-    public let _embedded:FixedTVShowInfoEmbedded?
-    public let officialSite:String?, webChannel:FixedTVShowWebChannel?, externals:FixedTVShowExternals?, network:FixedTVShowNetwork?
-    public let updated:Int64
-}
-public struct FixedTVShowNetwork : Jsonable {
-    public let id:Int, name:String, country:FixedTVShowCountry?, officialSite:String?
-}
-public struct FixedTVShowCountry : Jsonable {
-    public let name:String, code:String, timezone:String
-}
-public struct FixedTVShowExternals : Jsonable {
-    public let tvrage:Int?, thetvdb:Int?, imdb:String?
-}
-public struct FixedTVShowInfoEmbedded : Jsonable {
-    public let episodes:Set<FixedTVShowEpisode>?, cast:Set<FixedTVShowCast>?, akas:Set<FixedTVShowAlias>?
-}
-public struct FixedTVShowPerson : Jsonable {
-    public let name:String, birthday:String?, deathday:String?, imageURL:String?, country:FixedTVShowCountry?, image:FixedTVShowImage?, url:String
-}
-public struct FixedTVShowSchedule : Jsonable {
-    public let time:String, days:Set<String>
-}
-public struct FixedTVShowWebChannel : Jsonable {
-    public let id:Int, name:String, country:FixedTVShowCountry?, officialSite:String?
-}
-public struct FixedTVShowAlias : Jsonable {
-    public let name:String, country:FixedTVShowCountry?
-}
-public struct FixedTVShowCast : Jsonable {
-    public let person:FixedTVShowPerson?
-    public let character:FixedTVShowPerson?
-    public let `self`:Bool, voice:Bool
 }

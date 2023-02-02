@@ -12,24 +12,24 @@ public struct CountryEarthquakes : Jsonable {
     public typealias ValueKeys = CountryEarthquakesValueKeys
     
     public let country:Country?
-    public var magnitudes:[PreEarthquakeMagnitude]
+    public var subdivisions:[SubdivisionEarthquakes]
     
-    public init(country: Country?, magnitudes: [PreEarthquakeMagnitude]) {
+    public init(country: Country?, subdivisions: [SubdivisionEarthquakes]) {
         self.country = country
-        self.magnitudes = magnitudes
+        self.subdivisions = subdivisions
     }
     
     public func getKeyValue(key: CountryEarthquakesValueKeys) -> Any? {
         switch key {
         case .country: return country
-        case .magnitudes: return magnitudes
+        case .subdivisions: return subdivisions
         }
     }
     
     public mutating func setKeyValue<T>(key: CountryEarthquakesValueKeys, value: T) {
         switch key {
-        case .magnitudes:
-            magnitudes = value as! [PreEarthquakeMagnitude]
+        case .subdivisions:
+            subdivisions = value as! [SubdivisionEarthquakes]
             break
         default:
             break
@@ -39,11 +39,11 @@ public struct CountryEarthquakes : Jsonable {
 
 public enum CountryEarthquakesValueKeys : String, JsonableValueKeys {
     case country
-    case magnitudes
+    case subdivisions
     
     public func isTranslatable() -> Bool {
         switch self {
-        case .magnitudes:
+        case .subdivisions:
             return true
         default:
             return false

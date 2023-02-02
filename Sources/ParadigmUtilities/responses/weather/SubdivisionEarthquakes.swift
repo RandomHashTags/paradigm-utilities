@@ -1,5 +1,5 @@
 //
-//  SubdivisionEarthquake.swift
+//  SubdivisionEarthquakes.swift
 //  
 //
 //  Created by Evan Anderson on 1/21/23.
@@ -8,13 +8,13 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SubdivisionEarthquake : Jsonable {
+public struct SubdivisionEarthquakes : Jsonable {
     public typealias ValueKeys = SubdivisionEarthquakesResponseValueKeys
     
     public let subdivision:SovereignStateSubdivisionWrapper?
-    public var magnitudes:[SubdivisionEarthquakeMagnitude]
+    public var magnitudes:[PreEarthquakeMagnitude]
     
-    public init(subdivision: (any SovereignStateSubdivision)?, magnitudes: [SubdivisionEarthquakeMagnitude]) {
+    public init(subdivision: (any SovereignStateSubdivision)?, magnitudes: [PreEarthquakeMagnitude]) {
         self.subdivision = subdivision?.wrapped()
         self.magnitudes = magnitudes
     }
@@ -29,7 +29,7 @@ public struct SubdivisionEarthquake : Jsonable {
     public mutating func setKeyValue<T>(key: SubdivisionEarthquakesResponseValueKeys, value: T) {
         switch key {
         case .magnitudes:
-            magnitudes = value as! [SubdivisionEarthquakeMagnitude]
+            magnitudes = value as! [PreEarthquakeMagnitude]
             break
         default:
             break
