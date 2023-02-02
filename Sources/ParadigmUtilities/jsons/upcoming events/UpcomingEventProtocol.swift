@@ -26,13 +26,13 @@ public protocol UpcomingEventProtocol : Jsonable {
 }
 public extension UpcomingEventProtocol {
     func getDateString() -> String {
-        return event_date?.getDateString() ?? "-1"
+        return event_date?.date_string ?? "-1"
     }
     
     func getIdentifier() -> String {
         let prefix:String = id?.appending("_") ?? ""
         if let eventDate:EventDate = event_date {
-            return prefix + ParadigmUtilities.getEventDateIdentifier(dateString: eventDate.getDateString(), title: title)
+            return prefix + ParadigmUtilities.getEventDateIdentifier(dateString: eventDate.date_string, title: title)
         } else if let exactStartMilliseconds:Int64 = exact_start {
             return prefix + ParadigmUtilities.getEventDateIdentifier(exactTimeMilliseconds: exactStartMilliseconds, title: title)
         } else {

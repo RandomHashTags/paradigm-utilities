@@ -128,7 +128,7 @@ public struct EventDate : Comparable, Jsonable {
     }
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        try container.encode(getDateString())
+        try container.encode(date_string)
     }
     
     public func toDate() -> Date {
@@ -145,10 +145,7 @@ public struct EventDate : Comparable, Jsonable {
         let newDate:Date = Calendar.current.date(byAdding: .second, value: seconds, to: toDate())!
         return EventDate(date: newDate)
     }
-    public func getDateString() -> String {
-        return toString()
-    }
-    public func toString() -> String {
+    public var date_string : String {
         return EventDate.getDateString(components: components)
     }
     
