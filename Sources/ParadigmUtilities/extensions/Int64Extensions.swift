@@ -8,7 +8,7 @@
 import Foundation
 
 public extension Int64 {
-    var date:Date {
+    var date : Date {
         return Date(milliseconds: self)
     }
 }

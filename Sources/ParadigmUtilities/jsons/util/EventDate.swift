@@ -28,14 +28,14 @@ public struct EventDate : Comparable, Jsonable {
     }
     
     public static func getTodayDateString() -> String {
-        return EventDate.getDateString(date: ParadigmUtilities.getNow())
+        return EventDate.getDateString(date: ParadigmUtilities.now)
     }
     public static func getToday() -> EventDate {
-        return EventDate.from(date: ParadigmUtilities.getNow())
+        return EventDate.from(date: ParadigmUtilities.now)
     }
     
     public static func getDateString(date: Date) -> String {
-        let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.month, .year, .day], from: date)
+        let components:DateComponents = Calendar.current.dateComponents([.month, .year, .day], from: date)
         return getDateString(components: components)
     }
     public static func getDateString(components: DateComponents) -> String {
@@ -45,13 +45,13 @@ public struct EventDate : Comparable, Jsonable {
         return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
     }
     public static func getISO8601(date: Date) -> String {
-        let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.year, .month, .day], from: date)
+        let components:DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
         let year:Int = components.year!, month:Int = components.month!, day:Int = components.day!
         return year.description + "-" + (month < 10 ? "0" : "") + month.description + "-" + (day < 10 ? "0" : "") + day.description + "T00:00:00Z"
     }
     
     public static func from(date: Date) -> EventDate {
-        let components:DateComponents = ParadigmUtilities.calendar().dateComponents([.month, .day, .year], from: date)
+        let components:DateComponents = Calendar.current.dateComponents([.month, .day, .year], from: date)
         let monthInt:Int = components.month!, year:Int = components.year!, day:Int = components.day!
         let month:Month = Month.valueOf(monthInt) ?? Month.december
         return EventDate(year: year, month: month, day: day)
@@ -82,7 +82,7 @@ public struct EventDate : Comparable, Jsonable {
     }
     
     private static func get(amount: Int, dayOfWeek: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
-        let calendar:Calendar = ParadigmUtilities.calendar()
+        let calendar:Calendar = Calendar.current
         var startingComponents:DateComponents = DateComponents()
         startingComponents.month = month.rawValue
         startingComponents.year = year
@@ -115,7 +115,7 @@ public struct EventDate : Comparable, Jsonable {
     }
     
     public init(date: Date) {
-        components = ParadigmUtilities.calendar().dateComponents([.month, .year, .day], from: date)
+        components = Calendar.current.dateComponents([.month, .year, .day], from: date)
     }
     public init(components: DateComponents) {
         self.components = components
@@ -132,17 +132,17 @@ public struct EventDate : Comparable, Jsonable {
     }
     
     public func toDate() -> Date {
-        return ParadigmUtilities.calendar().date(from: components)!
+        return Calendar.current.date(from: components)!
     }
     public mutating func adding(_ timeInterval: TimeInterval) {
-        let calendar:Calendar = ParadigmUtilities.calendar()
+        let calendar:Calendar = Calendar.current
         let seconds:Int = Int(timeInterval)
         let newDate:Date = calendar.date(byAdding: .second, value: seconds, to: toDate())!
         components = calendar.dateComponents([.month, .year, .day], from: newDate)
     }
     public func plus(_ timeInterval: TimeInterval) -> EventDate {
         let seconds:Int = Int(timeInterval)
-        let newDate:Date = ParadigmUtilities.calendar().date(byAdding: .second, value: seconds, to: toDate())!
+        let newDate:Date = Calendar.current.date(byAdding: .second, value: seconds, to: toDate())!
         return EventDate(date: newDate)
     }
     public func getDateString() -> String {
@@ -172,7 +172,7 @@ public struct EventDate : Comparable, Jsonable {
     }
     private func nextDate(direction: Calendar.SearchDirection) -> EventDate {
         var date:Date! = nil, selfDate:Date = toDate()
-        let calendar:Calendar = ParadigmUtilities.calendar(), components:DateComponents = EventDate.sameHourComponents
+        let calendar:Calendar = Calendar.current, components:DateComponents = EventDate.sameHourComponents
         while date == nil {
             date = calendar.nextDate(after: selfDate, matching: components, matchingPolicy: .nextTime, direction: direction)
         }
