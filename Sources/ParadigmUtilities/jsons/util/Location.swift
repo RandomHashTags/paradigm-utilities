@@ -27,7 +27,7 @@ public struct Location : Jsonable {
         latitude = values[1]
     }
     
-    public func coreLocation() -> CLLocationCoordinate2D {
+    public var core_location : CLLocationCoordinate2D {
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
 }
