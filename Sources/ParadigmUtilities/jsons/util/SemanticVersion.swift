@@ -39,7 +39,7 @@ public struct SemanticVersion : Jsonable, Comparable {
         self = SemanticVersion(string: string)
     }
     
-    public func toString() -> String {
+    public var description : String {
         return major.description + "." + minor.description + "." + patch.description
     }
 }
