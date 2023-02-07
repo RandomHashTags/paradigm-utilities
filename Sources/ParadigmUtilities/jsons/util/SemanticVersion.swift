@@ -31,7 +31,7 @@ public struct SemanticVersion : Jsonable, Comparable {
     
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        try container.encode(toString())
+        try container.encode(description)
     }
     public init(from decoder: Decoder) throws {
         let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
