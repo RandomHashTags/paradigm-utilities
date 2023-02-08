@@ -62,15 +62,21 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func testUpcomingEvents(_ decoder: ZippyJSONDecoder) throws {
-        let event:APODEvent = APODEvent(event_date: EventDate.getToday(), title: "test", description: nil, location: nil, image_url: nil, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
-        let data:Data = event.toData()!
-        let event_string:String = String(data: data, encoding: .utf8)!
-        XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == event, event_string)
+        let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
+        let today:EventDate = EventDate.getToday(), title:String = "test"
+        let apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
+        XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
+        let data:Data = apod_event.toData()!
+        XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == apod_event, String(data: data, encoding: .utf8)!)
+        apod_event.image_url = event_image_url
+        XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
+        let apod_pre_event:PreUpcomingEvent = apod_event.to_pre_upcoming_event(tag: "")
+        XCTAssert(apod_pre_event.image_url!.elementsEqual(event_image_url_suffix), "apod_pre_event.image_url=" + (apod_pre_event.image_url ?? "nil"))
         
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
-        let pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, id: "test_movie_title", event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
-        XCTAssert(pre_event.event_date != nil)
-        let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [pre_event])
+        let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, id: "test_movie_title", event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
+        XCTAssert(movie_pre_event.event_date != nil)
+        let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
         XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"id\":\"test_movie_title\",\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
@@ -116,13 +122,25 @@ final class ParadigmUtilitiesTests: XCTestCase {
                 ])
             ])
         ]
-        let weather:HomeResponseWeather = HomeResponseWeather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: nil)
+        let weather_natural_events:NaturalWeatherEvents = NaturalWeatherEvents(
+            severe_storms: [
+                CountryNaturalWeatherEvents(country: Country.united_states, events: [
+                    PreNaturalWeatherEvent(id: "az98345", place: "Alaska", tag: nil, country: Country.united_states, subdivision: SubdivisionsUnitedStates.alaska)
+                ])
+            ],
+            volcanoes: [
+                
+            ],
+            wildfires: [
+                
+            ])
+        let weather:HomeResponseWeather = HomeResponseWeather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: weather_natural_events)
         
         let response:HomeResponse = HomeResponse(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
         let target_response_string:String = """
-{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states_minnesota","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states_minnesota_rochester"}]}],"subdivision":"united_states_minnesota"}]}]}}
+{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"natural_events":{"severe_storms":[{"country":"united_states","events":[{"place":"Alaska","id":"az98345","country":"united_states","subdivision":"united_states_alaska"}]}],"volcanoes":[],"wildfires":[]},"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states_minnesota","events":[{"id":"blizzardwarning","event":"Blizzard Warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states_minnesota_rochester"}]}],"subdivision":"united_states_minnesota"}]}]}}
 """
         //print("response_string=" + response_string)
         XCTAssert(response_string.elementsEqual(target_response_string), "response_string=" + response_string)

@@ -20,7 +20,13 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public var custom_type_singular_name:String?
     
     public var title:String, tag:String?, description:String?
-    public let location:String?, image_url:String?
+    public let location:String?
+    public var image_url:String? {
+        didSet {
+            guard let imageURL:String = image_url, let prefix:String = type.getImageURLPrefix(), imageURL.starts(with: prefix) else { return }
+            image_url = imageURL.substring(from: prefix.count)
+        }
+    }
     public var youtube_video_ids:[String]?
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
@@ -37,7 +43,11 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         self.tag = tag
         self.description = description
         self.location = location
-        self.image_url = image_url
+        if let imageURL:String = image_url, let prefix:String = type.getImageURLPrefix(), imageURL.starts(with: prefix) {
+            self.image_url = imageURL.substring(from: prefix.count)
+        } else {
+            self.image_url = image_url
+        }
         self.youtube_video_ids = youtube_video_ids
         self.sources = sources
         self.hyperlinks = hyperlinks
@@ -152,6 +162,10 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         default:
             break
         }
+    }
+    
+    public func to_pre_upcoming_event(tag: String?, countries: [Country]? = nil) -> PreUpcomingEvent {
+        return PreUpcomingEvent(type: type, event_date: event_date, exact_start: exact_start, exact_end: exact_end, title: title, tag: tag ?? "", image_url: image_url, countries: countries, custom_type_singular_name: custom_type_singular_name)
     }
 }
 
