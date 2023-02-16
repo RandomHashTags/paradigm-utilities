@@ -53,7 +53,7 @@ public struct EventDate : Comparable, Jsonable {
     public static func from(date: Date) -> EventDate {
         let components:DateComponents = Calendar.current.dateComponents([.month, .day, .year], from: date)
         let monthInt:Int = components.month!, year:Int = components.year!, day:Int = components.day!
-        let month:Month = Month.valueOf(monthInt) ?? Month.december
+        let month:Month = Month.init(rawValue: monthInt) ?? Month.december
         return EventDate(year: year, month: month, day: day)
     }
     public static func from(dateString: String) -> EventDate {
@@ -151,7 +151,7 @@ public struct EventDate : Comparable, Jsonable {
     
     public func getFirstWeekdayAfter() -> EventDate {
         let date:Date = toDate()
-        switch date.dayOfWeek {
+        switch date.day_of_week {
         case .friday:
             return EventDate(date: date.addingTimeInterval(.days(3)))
         case .saturday:

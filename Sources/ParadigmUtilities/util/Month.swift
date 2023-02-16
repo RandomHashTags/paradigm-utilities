@@ -26,11 +26,8 @@ public enum Month : Int, CaseIterable {
         let key:Substring = string.lowercased().prefix(3)
         return Month.allCases.first(where: { "\($0)".starts(with: key) })
     }
-    public static func valueOf(_ monthValue: Int) -> Month? {
-        return Month(rawValue: monthValue)
-    }
     
-    public func name() -> String {
+    public var name : String {
         switch self {
         case .january: return "January"
         case .february: return "February"
@@ -46,14 +43,14 @@ public enum Month : Int, CaseIterable {
         case .december: return "December"
         }
     }
-    public func previous() -> Month {
-        return self == .january ? .december : Month.valueOf(rawValue-1)!
+    public var previous : Month {
+        return self == .january ? .december : Month.init(rawValue: rawValue-1)!
     }
-    public func next() -> Month {
-        return self == .december ? .january : Month.valueOf(rawValue+1)!
+    public var next : Month {
+        return self == .december ? .january : Month.init(rawValue: rawValue+1)!
     }
     
-    public func maxLength() -> Int {
+    public var max_length : Int {
         switch self {
         case .february:
             return 29
