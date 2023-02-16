@@ -32,7 +32,7 @@ public final class ScienceYearReviewEvent : GenericUpcomingEvent {
 public enum ScienceYearReviewEventValueKeys : String, UpcomingEventValueKeys {
     case years
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.science_year_review
     }
 }

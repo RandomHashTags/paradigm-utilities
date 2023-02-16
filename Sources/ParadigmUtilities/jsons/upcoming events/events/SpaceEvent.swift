@@ -37,7 +37,7 @@ public enum SpaceEventValueKeys : String, UpcomingEventValueKeys {
     case news_url
     case video_url
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.space_event
     }
 }

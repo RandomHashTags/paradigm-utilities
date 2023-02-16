@@ -45,7 +45,7 @@ public enum WOTDEventValueKeys : String, UpcomingEventValueKeys {
     case syllables
     case grammar_type
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         switch self {
         case .examples:
             return UpcomingEventValueCategory.word_of_the_day_post_details
@@ -54,7 +54,7 @@ public enum WOTDEventValueKeys : String, UpcomingEventValueKeys {
         }
     }
     
-    public func getValueCellType() -> UpcomingEventValueCellType {
+    public var value_cell_type : UpcomingEventValueCellType {
         switch self {
         case .pronunciation_url:
             return UpcomingEventValueCellType.audio
@@ -62,7 +62,7 @@ public enum WOTDEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueCellType.label
         }
     }
-    public func getValuePrefix() -> String? {
+    public var value_prefix : String? {
         switch self {
         case .examples: return "Examples:\n\n"
         case .syllables: return "Syllables: "

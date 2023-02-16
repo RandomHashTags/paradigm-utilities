@@ -33,7 +33,7 @@ public final class WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
 public enum WikipediaTodaysFeaturedPictureEventValueKeys : String, UpcomingEventValueKeys {
     case video_url
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.wikipedia_todays_featured_picture
     }
 }

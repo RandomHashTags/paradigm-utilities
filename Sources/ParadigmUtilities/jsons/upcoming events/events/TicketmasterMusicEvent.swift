@@ -77,7 +77,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
     case price_range_string
     case venues
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         switch self {
         case .accessibility:
             return UpcomingEventValueCategory.ticketmaster_music_event_accessibility
@@ -94,7 +94,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
         }
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .seat_map_url:
             return UpcomingEventValueType.image
@@ -108,7 +108,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
-    public func getValueCellType() -> UpcomingEventValueCellType {
+    public var value_cell_type : UpcomingEventValueCellType {
         switch self {
         case .venues:
             return UpcomingEventValueCellType.ticketmaster_venue
@@ -116,7 +116,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueCellType.label
         }
     }
-    public func getValuePrefix() -> String? {
+    public var value_prefix : String? {
         switch self {
         case .price_range_string:
             return "Price Range: "
@@ -124,7 +124,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
             return nil
         }
     }
-    public func getValueString() -> String? {
+    public var value_string : String? {
         switch self {
         case .price_range_string:
             return "$%price_range_min% - $%price_range_max% (%price_range_currency%)"

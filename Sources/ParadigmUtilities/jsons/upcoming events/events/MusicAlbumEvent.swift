@@ -41,11 +41,11 @@ public enum MusicAlbumEventValueKeys : String, UpcomingEventValueKeys {
     case spotify_details
     case itunes_details
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.music_album
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .spotify_details:
             return UpcomingEventValueType.details_spotify

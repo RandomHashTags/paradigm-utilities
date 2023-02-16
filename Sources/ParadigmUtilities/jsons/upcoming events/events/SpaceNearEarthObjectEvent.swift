@@ -49,10 +49,10 @@ public enum SpaceNearEarthObjectEventValueKeys : String, UpcomingEventValueKeys 
     case estimated_diameter_min
     case relative_velocity
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.near_earth_object
     }
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .close_approach_epoch:
             return UpcomingEventValueType.int64
@@ -64,7 +64,7 @@ public enum SpaceNearEarthObjectEventValueKeys : String, UpcomingEventValueKeys 
             return UpcomingEventValueType.defaultType()
         }
     }
-    public func getValueTypeUnit() -> UpcomingEventValueTypeUnit? {
+    public var value_type_unit : UpcomingEventValueTypeUnit? {
         switch self {
         case .estimated_diameter_max, .estimated_diameter_min:
             return UpcomingEventValueTypeUnit.meters
@@ -73,7 +73,7 @@ public enum SpaceNearEarthObjectEventValueKeys : String, UpcomingEventValueKeys 
         }
     }
     
-    public func getValuePrefix() -> String? {
+    public var value_prefix : String? {
         switch self {
         case .relative_velocity: return "Relative Velocity: "
         default: return nil

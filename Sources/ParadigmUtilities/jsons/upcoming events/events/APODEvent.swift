@@ -37,11 +37,11 @@ public enum APODEventValueKeys : String, UpcomingEventValueKeys {
     case copyright
     case video_url
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.astronomy_picture_of_the_day
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .copyright:
             return .image_copyright
@@ -50,7 +50,7 @@ public enum APODEventValueKeys : String, UpcomingEventValueKeys {
         }
     }
     
-    public func getValuePrefix() -> String? {
+    public var value_prefix : String? {
         switch self {
         case .copyright:
             return "Copyright: "

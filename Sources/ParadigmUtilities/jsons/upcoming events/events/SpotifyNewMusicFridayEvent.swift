@@ -33,14 +33,14 @@ public final class SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
 public enum SpotifyNewMusicFridayEventValueKeys : String, UpcomingEventValueKeys {
     case tracks
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.spotify_new_music_friday_tracks
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         return UpcomingEventValueType.spotify_tracks
     }
-    public func getValueCellType() -> UpcomingEventValueCellType {
+    public var value_cell_type : UpcomingEventValueCellType {
         switch self {
         case .tracks:
             return UpcomingEventValueCellType.spotify_tracks

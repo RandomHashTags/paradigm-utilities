@@ -37,10 +37,10 @@ public enum MLBEventCodingKeys : String, UpcomingEventValueKeys {
     case team_away
     case team_home
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.mlb
     }
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         return UpcomingEventValueType.mlb_team
     }
 }

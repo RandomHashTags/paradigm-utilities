@@ -45,7 +45,7 @@ public enum MovieEventValueKeys : String, UpcomingEventValueKeys {
     case imdb_info
     case production_companies
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         switch self {
         case .production_companies:
             return UpcomingEventValueCategory.movie_production_companies
@@ -54,7 +54,7 @@ public enum MovieEventValueKeys : String, UpcomingEventValueKeys {
         }
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .imdb_info:
             return UpcomingEventValueType.imdb_info
@@ -64,7 +64,7 @@ public enum MovieEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
-    public func getValueCellType() -> UpcomingEventValueCellType {
+    public var value_cell_type : UpcomingEventValueCellType {
         switch self {
         case .production_companies:
             return UpcomingEventValueCellType.production_companies

@@ -61,11 +61,11 @@ public enum SpaceLunarEclipseEventValueKeys : String, UpcomingEventValueKeys {
     case duration_partial
     case duration_total
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.space_lunar_eclipse
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .time_greatest:
             return UpcomingEventValueType.timestamp

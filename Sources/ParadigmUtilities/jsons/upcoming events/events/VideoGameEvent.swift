@@ -37,7 +37,7 @@ public enum VideoGameEventValueKeys : String, UpcomingEventValueKeys {
     case platforms
     case genres
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         switch self {
         case .platforms:
             return UpcomingEventValueCategory.video_game_details

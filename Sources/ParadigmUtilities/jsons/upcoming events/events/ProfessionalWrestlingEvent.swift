@@ -37,7 +37,7 @@ public enum ProfessionalWrestlingEventValueKeys : String, UpcomingEventValueKeys
     case main_event
     case notes
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.wrestling_details
     }
 }

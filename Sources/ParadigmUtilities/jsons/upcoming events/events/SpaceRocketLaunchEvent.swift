@@ -69,11 +69,11 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
     case probability
     case video_url
     
-    public func getCategory() -> UpcomingEventValueCategory {
+    public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.rocket_launch
     }
     
-    public func getValueType() -> UpcomingEventValueType {
+    public var value_type : UpcomingEventValueType {
         switch self {
         case .window_start, .window_end:
             return UpcomingEventValueType.timestamp
@@ -85,7 +85,7 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueType.defaultType()
         }
     }
-    public func getValueCellType() -> UpcomingEventValueCellType {
+    public var value_cell_type : UpcomingEventValueCellType {
         switch self {
         case .mission_name:
             return UpcomingEventValueCellType.label_header
@@ -93,7 +93,7 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
             return UpcomingEventValueCellType.label
         }
     }
-    public func getValuePrefix() -> String? {
+    public var value_prefix : String? {
         switch self {
         case .mission_type: return "Type: "
         case .window_start: return "Window Start: "
@@ -103,7 +103,7 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
         default: return nil
         }
     }
-    public func getValueString() -> String? {
+    public var value_string : String? {
         switch self {
         case .status:
             return "%status%%probability%"
