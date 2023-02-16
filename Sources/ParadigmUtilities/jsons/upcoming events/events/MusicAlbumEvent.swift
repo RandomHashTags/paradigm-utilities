@@ -52,7 +52,7 @@ public enum MusicAlbumEventValueKeys : String, UpcomingEventValueKeys {
         case .itunes_details:
             return UpcomingEventValueType.details_itunes
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
 }

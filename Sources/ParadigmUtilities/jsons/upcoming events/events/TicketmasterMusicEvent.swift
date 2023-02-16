@@ -105,7 +105,7 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
         case .venues:
             return UpcomingEventValueType.ticketmaster_venues
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
     public var value_cell_type : UpcomingEventValueCellType {

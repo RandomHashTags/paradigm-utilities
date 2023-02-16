@@ -32,7 +32,7 @@ public enum UpcomingEventValueType : String, CaseIterable, Jsonable {
     case video_url
     case wikipedia_events
     
-    public static func defaultType() -> UpcomingEventValueType {
+    public static var default_type : UpcomingEventValueType {
         return UpcomingEventValueType.string
     }
 }

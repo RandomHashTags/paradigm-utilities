@@ -59,7 +59,7 @@ public protocol UpcomingEventValueKeys : CaseIterable, CodingKey, RawRepresentab
 }
 public extension UpcomingEventValueKeys {
     var value_type : UpcomingEventValueType {
-        return UpcomingEventValueType.defaultType()
+        return UpcomingEventValueType.default_type
     }
     var value_cell_type : UpcomingEventValueCellType {
         return UpcomingEventValueCellType.label

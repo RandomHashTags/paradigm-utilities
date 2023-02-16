@@ -61,7 +61,7 @@ public enum MovieEventValueKeys : String, UpcomingEventValueKeys {
         case .production_companies:
             return UpcomingEventValueType.production_companies
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
     public var value_cell_type : UpcomingEventValueCellType {

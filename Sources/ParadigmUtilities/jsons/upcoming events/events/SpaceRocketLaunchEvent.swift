@@ -82,7 +82,7 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
         case .video_url:
             return UpcomingEventValueType.video_url
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
     public var value_cell_type : UpcomingEventValueCellType {

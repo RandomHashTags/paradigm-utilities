@@ -61,7 +61,7 @@ public enum SpaceNearEarthObjectEventValueKeys : String, UpcomingEventValueKeys 
         case .estimated_diameter_max, .estimated_diameter_min:
             return UpcomingEventValueType.float
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
     public var value_type_unit : UpcomingEventValueTypeUnit? {

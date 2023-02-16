@@ -72,7 +72,7 @@ public enum SpaceLunarEclipseEventValueKeys : String, UpcomingEventValueKeys {
         case .duration_partial, .duration_total:
             return UpcomingEventValueType.int
         default:
-            return UpcomingEventValueType.defaultType()
+            return UpcomingEventValueType.default_type
         }
     }
 }
