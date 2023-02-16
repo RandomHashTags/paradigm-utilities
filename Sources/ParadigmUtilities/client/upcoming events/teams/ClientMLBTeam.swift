@@ -45,7 +45,7 @@ public enum ClientMLBTeamValueKeys : String, JsonableValueKeys {
     case logo_url
     case wikipedia_url
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name:
             return true

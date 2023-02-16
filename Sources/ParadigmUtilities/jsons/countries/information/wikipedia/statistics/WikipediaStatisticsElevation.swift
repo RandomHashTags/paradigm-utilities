@@ -45,7 +45,7 @@ public enum WikipediaStatisticsElevationValueKeys : String, JsonableValueKeys {
     case highest
     case median
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .lowest, .highest, .median:
             return true

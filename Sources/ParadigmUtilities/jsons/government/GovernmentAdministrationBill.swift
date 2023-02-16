@@ -75,7 +75,7 @@ public enum GovernmentAdministrationBillValueKeys : String, JsonableValueKeys {
     case actions
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         return true
     }
 }

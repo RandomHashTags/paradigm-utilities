@@ -62,7 +62,7 @@ public enum GovernmentPreAdministrationBillValueKeys : String, JsonableValueKeys
     case notes
     case date
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .title, .committees, .notes:
             return true

@@ -226,7 +226,7 @@ private enum TestBroValueKeys : String, JsonableValueKeys {
     case big_boy
     case small_boy
     
-    func isTranslatable() -> Bool {
+    var is_translatable : Bool {
         switch self {
         case .big_boy:
             return true

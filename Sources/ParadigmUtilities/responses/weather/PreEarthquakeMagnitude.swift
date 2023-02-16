@@ -39,7 +39,7 @@ public enum PreEarthquakeMagnitudeValueKeys : String, JsonableValueKeys {
     case mag
     case quakes
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .quakes:
             return true

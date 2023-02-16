@@ -156,7 +156,7 @@ public enum SovereignStateStaticInformationValueKeys : String, JsonableValueKeys
     case volcanoes
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         return self != .response_version
     }
 }

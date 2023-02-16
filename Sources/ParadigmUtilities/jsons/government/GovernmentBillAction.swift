@@ -43,7 +43,7 @@ public enum GovernmentBillActionValueKeys : String, JsonableValueKeys {
     case title
     case time
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .title:
             return true

@@ -49,7 +49,7 @@ public enum ServerUpdateValueKeys : String, JsonableValueKeys {
     case related
     case requires_premium
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .summary, .related:
             return true

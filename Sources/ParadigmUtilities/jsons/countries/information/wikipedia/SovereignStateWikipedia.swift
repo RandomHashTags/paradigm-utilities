@@ -53,7 +53,7 @@ public enum SovereignStateWikipediaValueKeys : String, JsonableValueKeys {
     case statistics
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .paragraph, .statistics, .sources:
             return true

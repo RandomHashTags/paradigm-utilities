@@ -47,7 +47,7 @@ public enum HomeResponseUpcomingEventsValueKeys : String, JsonableValueKeys {
     case events
     case movie_production_companies
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .holidays_near, .events, .movie_production_companies:
             return true

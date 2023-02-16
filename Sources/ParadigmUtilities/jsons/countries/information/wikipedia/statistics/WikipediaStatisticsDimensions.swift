@@ -39,7 +39,7 @@ public enum WikipediaStatisticsDimensionsValueKeys : String, JsonableValueKeys {
     case length
     case width
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .length, .width:
             return true

@@ -75,7 +75,7 @@ public enum NewsEventValueKeys : String, JsonableValueKeys {
     case related_subdivisions
     case related_cities
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name, .description, .sources:
             return true

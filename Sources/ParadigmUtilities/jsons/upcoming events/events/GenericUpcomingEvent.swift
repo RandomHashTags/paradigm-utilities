@@ -187,7 +187,7 @@ public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
     case countries
     case subdivisions
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .custom_type_singular_name, .title, .tag, .description, .sources, .hyperlinks:
             return true

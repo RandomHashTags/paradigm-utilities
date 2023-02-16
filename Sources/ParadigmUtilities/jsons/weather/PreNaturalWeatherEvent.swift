@@ -54,7 +54,7 @@ public enum PreNaturalWeatherEventValueKeys : String, JsonableValueKeys {
     case country
     case subdivision
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .place, .tag:
             return true

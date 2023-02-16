@@ -77,7 +77,7 @@ public enum SpaceRocketLaunchMissionValueKeys : String, JsonableValueKeys {
     case probability
     case video_url
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name, .description, .type, .status, .probability:
             return true

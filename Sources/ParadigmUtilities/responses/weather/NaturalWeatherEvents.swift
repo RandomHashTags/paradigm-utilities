@@ -46,7 +46,7 @@ public enum NaturalWeatherEventsResponseValueKeys : String, JsonableValueKeys {
     case volcanoes
     case wildfires
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         return true
     }
 }

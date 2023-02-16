@@ -62,7 +62,7 @@ public enum SovereignStateSingleValueValueKeys : String, JsonableValueKeys {
     case year_of_data
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .notes, .value, .value_description, .sources:
             return true

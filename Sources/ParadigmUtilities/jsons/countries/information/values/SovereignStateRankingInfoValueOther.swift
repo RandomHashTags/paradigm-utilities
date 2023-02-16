@@ -54,7 +54,7 @@ public enum SovereignStateRankingInfoValueOtherValueKeys : String, JsonableValue
     case description
     case suffix
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .description, .suffix:
             return true

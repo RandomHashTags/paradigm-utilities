@@ -39,7 +39,7 @@ public enum SovereignStateAvailabilitiesValueKeys : String, JsonableValueKeys {
     case image_url_prefix
     case availabilities
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .availabilities:
             return true

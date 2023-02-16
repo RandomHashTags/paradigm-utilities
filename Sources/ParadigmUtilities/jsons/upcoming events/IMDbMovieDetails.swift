@@ -66,7 +66,7 @@ public enum IMDbMovieDetailsValueKeys : String, JsonableValueKeys {
     case countries
     case source
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .rating_reason, .genres:
             return true

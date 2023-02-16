@@ -108,7 +108,7 @@ public enum PreUpcomingEventValueKeys : String, JsonableValueKeys {
     case team_away
     case team_home
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .title, .tag, .custom_type_singular_name, .team_away, .team_home:
             return true

@@ -83,7 +83,7 @@ public enum WeatherAlertValueKeys : String, JsonableValueKeys {
     case time
     case source
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .event, .certainty, .headline, .instruction, .description, .source:
             return true

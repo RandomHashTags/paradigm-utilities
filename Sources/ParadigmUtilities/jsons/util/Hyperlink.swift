@@ -39,7 +39,7 @@ public enum HyperlinkValueKeys : String, JsonableValueKeys {
     case text
     case url
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .text:
             return true

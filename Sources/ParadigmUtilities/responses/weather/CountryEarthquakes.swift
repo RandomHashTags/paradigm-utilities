@@ -41,7 +41,7 @@ public enum CountryEarthquakesValueKeys : String, JsonableValueKeys {
     case country
     case subdivisions
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .subdivisions:
             return true

@@ -58,7 +58,7 @@ public enum PreHolidayValueKeys : String, JsonableValueKeys {
     case emoji
     case countries
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name:
             return true

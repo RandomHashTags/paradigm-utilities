@@ -70,7 +70,7 @@ public enum HomeResponseValueKeys : String, JsonableValueKeys {
     case upcoming_events
     case weather
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         return true
     }
     public func isOmittable() -> Bool {

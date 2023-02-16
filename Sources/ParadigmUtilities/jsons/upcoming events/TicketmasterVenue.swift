@@ -74,7 +74,7 @@ public enum TicketmasterVenueValueKeys : String, JsonableValueKeys {
     case parking_detail
     case accessible_seating_info
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .general_rule, .child_rule, .parking_detail, .accessible_seating_info:
             return true

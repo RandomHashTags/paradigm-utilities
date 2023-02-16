@@ -43,7 +43,7 @@ public enum WeatherEventValueKeys : String, JsonableValueKeys {
     case event
     case defcon
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .event:
             return true

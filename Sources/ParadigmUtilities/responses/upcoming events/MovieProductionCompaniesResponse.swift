@@ -42,7 +42,7 @@ public enum MovieProductionCompaniesResponseValueKeys : String, JsonableValueKey
     case image_url_prefix
     case companies
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .companies:
             return true

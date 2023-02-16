@@ -59,7 +59,7 @@ public enum PreHistoricalEventValueKeys : String, JsonableValueKeys {
     case summary
     case image_url
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name, .summary:
             return true

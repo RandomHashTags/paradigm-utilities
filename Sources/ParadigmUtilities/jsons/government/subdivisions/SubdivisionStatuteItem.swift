@@ -53,7 +53,7 @@ public enum SubdivisionStatuteItemValueKeys : String, JsonableValueKeys {
     case is_repeated
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .title, .sources:
             return true

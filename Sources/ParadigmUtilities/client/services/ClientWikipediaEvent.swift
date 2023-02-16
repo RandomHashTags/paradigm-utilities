@@ -66,7 +66,7 @@ public enum ClientWikipediaEventValueKeys : String, JsonableValueKeys {
     case tags
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .description, .hyperlinks, .tags, .sources:
             return true

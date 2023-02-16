@@ -82,7 +82,7 @@ public enum SovereignStateRankingInfoValueValueKeys : String, JsonableValueKeys 
     case values
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .suffix, .values, .sources:
             return true

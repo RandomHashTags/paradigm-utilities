@@ -45,7 +45,7 @@ public enum SovereignStateInformationValueValueKeys : String, JsonableValueKeys 
     case description
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .description, .sources:
             return true

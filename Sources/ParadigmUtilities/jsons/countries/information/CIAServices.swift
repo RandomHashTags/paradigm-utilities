@@ -52,7 +52,7 @@ public enum CIAServicesValueKeys : String, JsonableValueKeys {
     case values
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .values, .sources:
             return true

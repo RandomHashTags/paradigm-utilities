@@ -34,7 +34,7 @@ public struct HomeResponseGovernment : HomeResponseProtocol {
 public enum HomeResponseGovernmentValueKeys : String, JsonableValueKeys {
     case recent_activity
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .recent_activity:
             return true

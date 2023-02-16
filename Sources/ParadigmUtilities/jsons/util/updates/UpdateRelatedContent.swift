@@ -43,7 +43,7 @@ public enum UpdateRelatedContentValueKeys : String, JsonableValueKeys {
     case subdivisions
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .sources:
             return true

@@ -39,7 +39,7 @@ public enum CountryGovernmentRecentActivityChamberValueKeys : String, JsonableVa
     case chamber
     case dates
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .dates:
             return true

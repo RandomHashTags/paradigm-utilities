@@ -46,7 +46,7 @@ public enum PreEnactedBillValueKeys : String, JsonableValueKeys {
     case chamber
     case status
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .title:
             return true

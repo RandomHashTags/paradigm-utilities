@@ -68,7 +68,7 @@ public enum ClientHolidayValueKeys : String, JsonableValueKeys {
     case type
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name, .description, .aliases, .sources:
             return true

@@ -37,7 +37,7 @@ public enum GovernmentPrePoliticianValueKeys : String, JsonableValueKeys {
     case party
     case image_url
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         return false
     }
 }

@@ -51,7 +51,7 @@ public enum PreVolcanoValueKeys : String, JsonableValueKeys {
     case country
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name:
             return true

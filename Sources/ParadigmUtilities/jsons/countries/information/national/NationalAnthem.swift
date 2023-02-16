@@ -39,7 +39,7 @@ public enum NationalAnthemValueKeys : String, JsonableValueKeys {
     case mp3_url
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .sources:
             return true

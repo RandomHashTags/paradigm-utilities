@@ -45,7 +45,7 @@ public enum WikipediaStatisticsPopulationValueKeys : String, JsonableValueKeys {
     case density
     case median_household_income
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .total, .density, .median_household_income:
             return true

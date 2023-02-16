@@ -67,7 +67,7 @@ public enum SovereignStateAgricultureValueValueKeys : String, JsonableValueKeys 
     case is_estimate
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .suffix, .sources:
             return true

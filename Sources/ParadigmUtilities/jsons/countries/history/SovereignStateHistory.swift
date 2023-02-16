@@ -39,7 +39,7 @@ public enum SovereignStateHistoryValueKeys : String, JsonableValueKeys {
     case events
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .events, .sources:
             return true

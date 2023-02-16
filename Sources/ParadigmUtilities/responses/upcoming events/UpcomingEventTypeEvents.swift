@@ -46,7 +46,7 @@ public enum UpcomingEventTypeEventsValueKeys : String, JsonableValueKeys {
     case date_events
     case exact_time_events
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .date_events, .exact_time_events:
             return true
@@ -95,7 +95,7 @@ public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableValueKeys {
     case date
     case events
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .events:
             return true
@@ -136,7 +136,7 @@ public enum UpcomingEventTypeExactTimeEventsValueKeys : String, JsonableValueKey
     case time
     case events
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .events:
             return true

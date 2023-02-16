@@ -41,7 +41,7 @@ public enum SubdivisionEarthquakesResponseValueKeys : String, JsonableValueKeys 
     case subdivision
     case magnitudes
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .magnitudes:
             return true

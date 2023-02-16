@@ -47,7 +47,7 @@ public enum PreElectionValueKeys : String, JsonableValueKeys {
     case date
     case country
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .name:
             return true

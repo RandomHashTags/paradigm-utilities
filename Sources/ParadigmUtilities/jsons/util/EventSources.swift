@@ -91,7 +91,7 @@ public final class EventSources : Jsonable {
 public enum EventSourcesValueKeys : String, JsonableValueKeys {
     case sources
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .sources:
             return true

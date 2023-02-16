@@ -33,7 +33,7 @@ public struct HomeResponseNews : HomeResponseProtocol {
 public enum HomeResponseNewsValueKeys : String, JsonableValueKeys {
     case regional
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .regional:
             return true

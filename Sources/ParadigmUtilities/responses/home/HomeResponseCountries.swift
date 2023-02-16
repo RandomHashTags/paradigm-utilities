@@ -33,7 +33,7 @@ public struct HomeResponseCountries : HomeResponseProtocol {
 public enum HomeResponseCountriesValueKeys : String, JsonableValueKeys {
     case filters
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .filters:
             return true

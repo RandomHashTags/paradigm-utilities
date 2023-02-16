@@ -72,7 +72,7 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
 public enum HyperlinksValueKeys : String, JsonableValueKeys {
     case hyperlinks
     
-    public func isTranslatable() -> Bool {
+    public var is_translatable : Bool {
         switch self {
         case .hyperlinks:
             return true
