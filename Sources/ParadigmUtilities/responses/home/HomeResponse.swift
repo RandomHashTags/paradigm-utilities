@@ -73,7 +73,7 @@ public enum HomeResponseValueKeys : String, JsonableValueKeys {
     public var is_translatable : Bool {
         return true
     }
-    public func isOmittable() -> Bool {
+    public var is_omittable : Bool {
         switch self {
         case .countries, .government, .news, .stock_market, .weather:
             return true

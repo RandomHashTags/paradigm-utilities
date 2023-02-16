@@ -56,7 +56,7 @@ public enum SovereignStateInformationValueKeys : String, JsonableValueKeys {
             return false
         }
     }
-    public func isOmittable() -> Bool {
+    public var is_omittable : Bool {
         switch self {
         case .administration, ._static:
             return true

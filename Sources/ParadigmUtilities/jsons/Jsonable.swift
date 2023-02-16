@@ -125,10 +125,10 @@ public extension JsonableProtocol {
 public protocol JsonableValueKeys : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
     /// Whether or not this ValueKey should be translated to other languages when encoded to JSON.
     var is_translatable : Bool { get }
-    func isOmittable() -> Bool
+    var is_omittable : Bool { get }
 }
 public extension JsonableValueKeys {
-    func isOmittable() -> Bool {
+    var is_omittable : Bool {
         return false
     }
 }
@@ -146,7 +146,7 @@ public enum NoJsonableValueKeys : String, JsonableValueKeys {
     public var is_translatable : Bool {
         return false
     }
-    public func isOmittable() -> Bool {
+    public var is_omittable : Bool {
         return false
     }
 }

@@ -54,7 +54,7 @@ public enum UpcomingEventTypeEventsValueKeys : String, JsonableValueKeys {
             return false
         }
     }
-    public func isOmittable() -> Bool {
+    public var is_omittable : Bool {
         switch self {
         case .date_events, .exact_time_events:
             return true
