@@ -29,7 +29,7 @@ public enum Presentation : String, CaseIterable, Jsonable {
     case twitchcon
     case web_summit
     
-    public func getURL() -> String {
+    public var url : String {
         switch self {
         case .apple_event: return "https://www.apple.com/apple-events/"
         case .apple_event_wwdc: return "https://en.wikipedia.org/wiki/Apple_Worldwide_Developers_Conference"
@@ -53,16 +53,16 @@ public enum Presentation : String, CaseIterable, Jsonable {
         case .web_summit: return "https://en.wikipedia.org/wiki/Web_Summit"
         }
     }
-    public func getURLSiteName() -> String {
+    public var url_site_name : String {
         switch self {
         case .apple_event: return "Apple: Apple Events"
         default:
-            let components:[String] = getURL().components(separatedBy: "/")
+            let components:[String] = url.components(separatedBy: "/")
             return "Wikipedia: " + components.last!.replacingOccurrences(of: "_", with: " ")
         }
     }
     
-    public func getType() -> PresentationType {
+    public var type : PresentationType {
         switch self {
         case .apple_event: return .presentation
         case .apple_event_wwdc: return .conference_developer
@@ -87,7 +87,7 @@ public enum Presentation : String, CaseIterable, Jsonable {
         }
     }
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .apple_event: return "Apple Event"
         case .apple_event_wwdc: return "WWDC"
@@ -111,7 +111,7 @@ public enum Presentation : String, CaseIterable, Jsonable {
         case .web_summit: return "Web Summit"
         }
     }
-    public func getAliases() -> [String]? {
+    public var aliases : [String]? {
         switch self {
         case .apple_event_wwdc:
             return ["Worldwide Developers Conference"]
@@ -132,7 +132,7 @@ public enum Presentation : String, CaseIterable, Jsonable {
         }
     }
     
-    public func getDefaultImageURL() -> String? {
+    public var default_image_url : String? {
         switch self {
         case .apple_event:
             return "https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Apple_logo_black.svg/%quality%px-Apple_logo_black.svg.png"
