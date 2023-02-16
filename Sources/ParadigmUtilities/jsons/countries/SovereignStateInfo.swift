@@ -184,7 +184,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case value_traffic_side
     case value_voting_age
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .agriculture_food_apple_production: return "Apple Production"
         case .agriculture_food_apricot_production: return "Apricot Production"

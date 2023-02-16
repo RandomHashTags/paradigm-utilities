@@ -28,7 +28,7 @@ public extension Country {
     }
 }
 
-public protocol GovernmentChamber : Jsonable, RawRepresentable where RawValue == String {
+public protocol GovernmentChamber : Jsonable, CaseIterable, RawRepresentable where RawValue == String {
     var country : Country { get }
     var cache_id : String { get }
     var name : String { get }
@@ -51,6 +51,8 @@ public extension GovernmentChamber where Self : CaseIterable {
 }
 
 public struct GovernmentChamberWrapper : GovernmentChamber {
+    public static var allCases: [GovernmentChamberWrapper] = []
+    
     public var rawValue: String
     
     public let chamber:any GovernmentChamber

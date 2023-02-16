@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum GovernmentChamberUnitedStates : String, CaseIterable, GovernmentChamber {
+public enum GovernmentChamberUnitedStates : String, GovernmentChamber {
     case house
     case senate
     
