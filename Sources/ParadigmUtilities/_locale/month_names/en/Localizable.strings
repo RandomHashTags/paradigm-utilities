@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Evan Anderson on 2/16/23.
+  
+*/
+
+"january" = "January";
+"february" = "February";
+"march" = "March";
+"april" = "April";
+"may" = "May";
+"june" = "June";
+"july" = "July";
+"august" = "August";
+"september" = "September";
+"october" = "October";
+"november" = "November";
+"december" = "December";
