@@ -21,7 +21,7 @@ public struct WikipediaPicture : Jsonable {
         self.image_url = image_url
     }
     
-    public func getTag() -> String {
+    public var tag : String {
         return title ?? name
     }
     
