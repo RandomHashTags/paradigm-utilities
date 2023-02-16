@@ -34,7 +34,7 @@ public final class WeatherZone : Jsonable {
     }
     
     #if canImport(MapKit)
-    public lazy var geometryOverlay:MKPolygon? = {
+    public lazy var geometry_overlay:MKPolygon? = {
         let points:[CLLocationCoordinate2D] = getPoints(geometry)
         guard !points.isEmpty else { return nil }
         var polygon = MKPolygon(coordinates: points, count: points.count)
