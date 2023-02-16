@@ -23,7 +23,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public let location:String?
     public var image_url:String? {
         didSet {
-            guard let imageURL:String = image_url, let prefix:String = type.getImageURLPrefix(), imageURL.starts(with: prefix) else { return }
+            guard let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) else { return }
             image_url = imageURL.substring(from: prefix.count)
         }
     }
@@ -43,7 +43,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         self.tag = tag
         self.description = description
         self.location = location
-        if let imageURL:String = image_url, let prefix:String = type.getImageURLPrefix(), imageURL.starts(with: prefix) {
+        if let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) {
             self.image_url = imageURL.substring(from: prefix.count)
         } else {
             self.image_url = image_url
@@ -112,7 +112,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     }
     
     public func getValue(_ key: String) -> Any? {
-        guard let keys:[any UpcomingEventValueKeys] = type.getCodingKeys(), let codingKey:any UpcomingEventValueKeys = keys.first(where: { $0.rawValue.elementsEqual(key) }) else { return nil }
+        guard let keys:[any UpcomingEventValueKeys] = type.value_keys, let codingKey:any UpcomingEventValueKeys = keys.first(where: { $0.rawValue.elementsEqual(key) }) else { return nil }
         return getValue(codingKey)
     }
     public func getValue(_ key: any UpcomingEventValueKeys) -> Any? {

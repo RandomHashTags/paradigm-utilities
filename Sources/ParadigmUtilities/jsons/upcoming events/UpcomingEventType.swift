@@ -93,7 +93,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         }
     }
     
-    public func getImageURLPrefix() -> String? {
+    public var image_url_prefix : String? {
         switch self {
         case .astronomy_picture_of_the_day:
             return "https://apod.nasa.gov/apod/image/"
@@ -246,7 +246,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
         }
     }
     
-    public func getCodingKeys() -> [any UpcomingEventValueKeys]? {
+    public var value_keys : [any UpcomingEventValueKeys]? {
         switch self {
         case .astronomy_picture_of_the_day: return APODEventValueKeys.allCases
         case .joke_of_the_day: return JOTDEventValueKeys.allCases
