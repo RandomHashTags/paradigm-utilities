@@ -14,7 +14,7 @@ public enum GovernmentPoliticianPosition : String, CaseIterable, Jsonable {
     case representative
     case senator
     
-    public func getAbbreviation() -> String {
+    public var abbreviation : String {
         switch self {
         case .president: return "prez"
         case .vice_president: return "viceprez"
@@ -24,6 +24,6 @@ public enum GovernmentPoliticianPosition : String, CaseIterable, Jsonable {
     }
     
     public static func valueOf(_ string: String) -> GovernmentPoliticianPosition? {
-        return GovernmentPoliticianPosition.allCases.first(where: { $0.getAbbreviation().elementsEqual(string) })
+        return GovernmentPoliticianPosition.allCases.first(where: { $0.abbreviation.elementsEqual(string) })
     }
 }
