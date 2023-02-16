@@ -8,45 +8,38 @@
 import Foundation
 import SwiftSovereignStates
 
-public protocol GovernmentBillStatus : Jsonable {
-    func getCountry() -> Country
-    func getCacheID() -> String
-    func getIdentifier() -> String
+public protocol GovernmentBillStatus : Jsonable, CaseIterable, RawRepresentable where RawValue == String {
+    var country : Country { get }
+    var cache_id : String { get }
     func getName() -> String
     func getControllerTitle() -> String
 }
 public extension GovernmentBillStatus {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.getCountry() == rhs.getCountry() && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
+        return lhs.country == rhs.country && lhs.rawValue.elementsEqual(rhs.rawValue)
     }
     
-    func getCacheID() -> String {
-        return getCountry().getCacheID() + "," + getIdentifier()
+    var cache_id : String {
+        return country.cache_id + "," + rawValue
     }
     func wrapped() -> GovernmentBillStatusWrapper {
         return GovernmentBillStatusWrapper(self)
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(getCountry())
-        hasher.combine(getIdentifier())
+        hasher.combine(cache_id)
     }
 }
 public extension GovernmentBillStatus where Self : CaseIterable {
     static func valueOf(_ string: String?) -> Self? {
         guard let string:String = string else { return nil }
-        return Self.allCases.first(where: { string.elementsEqual($0.getIdentifier()) })
-    }
-}
-public extension GovernmentBillStatus where Self : RawRepresentable, RawValue == String {
-    func getIdentifier() -> String {
-        return String(describing: self)
+        return Self.allCases.first(where: { string.elementsEqual($0.rawValue) })
     }
 }
 
 public extension Country {
     func valueOfGovernmentBillStatus(_ string: String) -> (any GovernmentBillStatus)? {
-        return getGovernmentBillStatuses()?.first(where: { $0.getIdentifier().elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
+        return getGovernmentBillStatuses()?.first(where: { $0.rawValue.elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
     }
     func getGovernmentBillStatuses() -> [any GovernmentBillStatus]? {
         switch self {
@@ -58,10 +51,19 @@ public extension Country {
 
 
 public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
+    public static var allCases: [GovernmentBillStatusWrapper] = []
+    
+    public init?(rawValue: String) {
+        return nil // TODO: fix
+    }
+    
+    public var rawValue: String
+    
     public let status:any GovernmentBillStatus
     
     public init(_ status: any GovernmentBillStatus) {
         self.status = status
+        rawValue = status.rawValue
     }
     public init(from decoder: Decoder) throws {
         let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
@@ -71,7 +73,7 @@ public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid decoded string \"" + string + "\"")
         }
         let countryCacheID:String = components[0]
-        guard let country:Country = Country.valueOfCacheID(countryCacheID) else {
+        guard let country:Country = Country.init(rawValue: countryCacheID) else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "couldn't find Country with cacheID \"" + countryCacheID + "\"")
         }
         let statusID:String = components[1]
@@ -79,19 +81,17 @@ public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "couldn't find GovernmentBillStatus in Country \"" + countryCacheID + "\" with statusID \"" + statusID + "\"")
         }
         self.status = status
+        rawValue = statusID
     }
     
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        let string:String = getCountry().getCacheID() + "1" + getIdentifier()
+        let string:String = country.cache_id + "1" + rawValue
         try container.encode(string)
     }
     
-    public func getCountry() -> SwiftSovereignStates.Country {
-        return status.getCountry()
-    }
-    public func getIdentifier() -> String {
-        return status.getIdentifier()
+    public var country : Country {
+        return status.country
     }
     public func getName() -> String {
         return status.getName()

@@ -14,23 +14,17 @@ public enum GovernmentBillStatusHistoryStatuses {
     }
 }
 
-public protocol GovernmentBillStatusHistoryStatus : Jsonable {
-    func getCountry() -> Country
-    func getIdentifier() -> String
-    func getCacheID() -> String
+public protocol GovernmentBillStatusHistoryStatus : Jsonable, RawRepresentable where RawValue == String {
+    var country : Country { get }
+    var cache_id : String { get }
     func getName() -> String
 }
 public extension GovernmentBillStatusHistoryStatus {
-    func getCacheID() -> String {
-        return getCountry().getCacheID() + "_" + getIdentifier()
+    var cache_id : String {
+        return country.cache_id + "_" + rawValue
     }
     func wrapped() -> GovernmentBillStatusHistoryStatusWrapper {
         return GovernmentBillStatusHistoryStatusWrapper(self)
-    }
-}
-public extension GovernmentBillStatusHistoryStatus where Self : RawRepresentable, RawValue == String {
-    func getIdentifier() -> String {
-        return rawValue
     }
 }
 public extension GovernmentBillStatusHistoryStatus where Self : CaseIterable {
@@ -41,14 +35,21 @@ public extension GovernmentBillStatusHistoryStatus where Self : CaseIterable {
 }
 
 public struct GovernmentBillStatusHistoryStatusWrapper : GovernmentBillStatusHistoryStatus {
+    public init?(rawValue: String) {
+        return nil // TODO: fix
+    }
+    
+    public var rawValue: String
+    
     public static func == (lhs: GovernmentBillStatusHistoryStatusWrapper, rhs: GovernmentBillStatusHistoryStatusWrapper) -> Bool {
-        return lhs.status.getCacheID().elementsEqual(rhs.getCacheID())
+        return lhs.status.cache_id.elementsEqual(rhs.cache_id)
     }
     
     public let status:any GovernmentBillStatusHistoryStatus
     
     public init(_ status: any GovernmentBillStatusHistoryStatus) {
         self.status = status
+        rawValue = status.rawValue
     }
     
     public init(from decoder: Decoder) throws {
@@ -58,22 +59,20 @@ public struct GovernmentBillStatusHistoryStatusWrapper : GovernmentBillStatusHis
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid cacheID for GovernmentBillStatusHistoryStatus \"" + string + "\"")
         }
         self.status = status
+        rawValue = string.components(separatedBy: "_")[1] // TODO: fix
     }
     
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        try container.encode(getCacheID())
+        try container.encode(cache_id)
     }
     
     public func hash(into hasher: inout Hasher) {
-        hasher.combine(getCacheID())
+        hasher.combine(cache_id)
     }
     
-    public func getCountry() -> Country {
-        return status.getCountry()
-    }
-    public func getIdentifier() -> String {
-        return status.getIdentifier()
+    public var country : Country {
+        return status.country
     }
     public func getName() -> String {
         return status.getName()

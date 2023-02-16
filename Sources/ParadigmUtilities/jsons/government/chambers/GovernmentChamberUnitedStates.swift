@@ -12,7 +12,7 @@ public enum GovernmentChamberUnitedStates : String, CaseIterable, GovernmentCham
     case house
     case senate
     
-    public func getCountry() -> Country {
+    public var country : Country {
         return Country.united_states
     }
     

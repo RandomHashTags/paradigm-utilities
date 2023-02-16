@@ -10,12 +10,12 @@ import Foundation
 public struct GovernmentBillAction : Jsonable {
     public typealias ValueKeys = GovernmentBillActionValueKeys
     
-    public let chamber:String?
+    public let chamber:GovernmentChamberWrapper?
     public var title:String
     public let time:TimeInterval
     
     public init(chamber: (any GovernmentChamber)?, title: String, time: TimeInterval) {
-        self.chamber = chamber?.getIdentifier()
+        self.chamber = chamber?.wrapped()
         self.title = title
         self.time = time
     }

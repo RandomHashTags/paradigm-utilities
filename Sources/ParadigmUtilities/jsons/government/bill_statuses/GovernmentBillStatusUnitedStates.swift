@@ -8,7 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public enum GovernmentBillStatusUnitedStates : String, CaseIterable, GovernmentBillStatus {
+public enum GovernmentBillStatusUnitedStates : String, GovernmentBillStatus {
     case introduced
     case committee_consideration
     //case floor_consideration
@@ -20,7 +20,7 @@ public enum GovernmentBillStatusUnitedStates : String, CaseIterable, GovernmentB
     case became_law
     case vetoed
     
-    public func getCountry() -> Country {
+    public var country : Country {
         return Country.united_states
     }
     
