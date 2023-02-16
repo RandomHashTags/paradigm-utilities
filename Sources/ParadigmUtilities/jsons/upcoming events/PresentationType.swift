@@ -21,7 +21,7 @@ public enum PresentationType : String, CaseIterable, Jsonable {
     case summit
     case tournament_gaming
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .award_ceremony: return "Award Ceremony"
         case .conference: return "Conference"
