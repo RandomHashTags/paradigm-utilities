@@ -16,7 +16,7 @@ public enum GovernmentChamberUnitedStates : String, CaseIterable, GovernmentCham
         return Country.united_states
     }
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .house: return "House"
         case .senate: return "Senate"

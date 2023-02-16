@@ -18,7 +18,7 @@ public enum GovernmentChambers {
 }
 public extension Country {
     func valueOfGovernmentChamber(_ string: String) -> (any GovernmentChamber)? {
-        return getGovernmentChambers()?.first(where: { $0.rawValue.elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
+        return getGovernmentChambers()?.first(where: { $0.rawValue.elementsEqual(string) || $0.name.compare(string) == .orderedSame })
     }
     func valueOfGovernmentChamberCacheID(_ cacheID: String) -> (any GovernmentChamber)? {
         return getGovernmentChambers()?.first(where: { $0.cache_id.elementsEqual(cacheID) })
@@ -31,7 +31,7 @@ public extension Country {
 public protocol GovernmentChamber : Jsonable, RawRepresentable where RawValue == String {
     var country : Country { get }
     var cache_id : String { get }
-    func getName() -> String
+    var name : String { get }
 }
 public extension GovernmentChamber {
     static func == (lhs: Self, rhs: Self) -> Bool {
@@ -46,7 +46,7 @@ public extension GovernmentChamber {
 }
 public extension GovernmentChamber where Self : CaseIterable {
     static func valueOf(_ string: String) -> Self? {
-        return Self.allCases.first(where: { string.elementsEqual($0.rawValue) || string.compare($0.getName()) == .orderedSame })
+        return Self.allCases.first(where: { string.elementsEqual($0.rawValue) || string.compare($0.name) == .orderedSame })
     }
 }
 
@@ -94,7 +94,7 @@ public struct GovernmentChamberWrapper : GovernmentChamber {
     public var country : Country {
         return chamber.country
     }
-    public func getName() -> String {
-        return chamber.getName()
+    public var name : String {
+        return chamber.name
     }
 }
