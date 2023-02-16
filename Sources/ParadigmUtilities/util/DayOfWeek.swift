@@ -15,8 +15,4 @@ public enum DayOfWeek : Int, CaseIterable {
     case thursday = 5
     case friday = 6
     case saturday = 7
-    
-    public static func valueOf(_ value: Int) -> DayOfWeek? {
-        return DayOfWeek(rawValue: value)
-    }
 }

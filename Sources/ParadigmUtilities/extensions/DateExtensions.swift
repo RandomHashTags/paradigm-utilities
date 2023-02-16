@@ -18,7 +18,7 @@ public extension Date {
     
     var day_of_week : DayOfWeek? {
         let component:Int = Calendar.current.component(.weekday, from: self)
-        return DayOfWeek.valueOf(component)
+        return DayOfWeek.init(rawValue: component)
     }
     
     var month : Month? {
