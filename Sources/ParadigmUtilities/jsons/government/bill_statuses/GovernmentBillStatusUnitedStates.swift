@@ -24,7 +24,7 @@ public enum GovernmentBillStatusUnitedStates : String, GovernmentBillStatus {
         return Country.united_states
     }
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .introduced: return "Introduced"
         case .committee_consideration: return "Committee Consideration"
@@ -38,7 +38,7 @@ public enum GovernmentBillStatusUnitedStates : String, GovernmentBillStatus {
         }
     }
     
-    public func getControllerTitle() -> String {
+    public var controller_title : String {
         let prefix:String = "Legislature: "
         switch self {
         case .introduced: return prefix + "Introduced"
@@ -54,7 +54,7 @@ public enum GovernmentBillStatusUnitedStates : String, GovernmentBillStatus {
         }
     }
     
-    public func getSearchID() -> String {
+    public var search_id : String {
         switch self {
         case .introduced: return "introduced"
         case .committee_consideration: return "comittee"

@@ -11,12 +11,12 @@ import SwiftSovereignStates
 public protocol GovernmentBillStatus : Jsonable, CaseIterable, RawRepresentable where RawValue == String {
     var country : Country { get }
     var cache_id : String { get }
-    func getName() -> String
-    func getControllerTitle() -> String
+    var name : String { get }
+    var controller_title : String { get }
 }
 public extension GovernmentBillStatus {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.country == rhs.country && lhs.rawValue.elementsEqual(rhs.rawValue)
+        return lhs.cache_id.elementsEqual(rhs.cache_id)
     }
     
     var cache_id : String {
@@ -39,7 +39,7 @@ public extension GovernmentBillStatus where Self : CaseIterable {
 
 public extension Country {
     func valueOfGovernmentBillStatus(_ string: String) -> (any GovernmentBillStatus)? {
-        return getGovernmentBillStatuses()?.first(where: { $0.rawValue.elementsEqual(string) || $0.getName().compare(string) == .orderedSame })
+        return getGovernmentBillStatuses()?.first(where: { $0.rawValue.elementsEqual(string) || $0.name.compare(string) == .orderedSame })
     }
     func getGovernmentBillStatuses() -> [any GovernmentBillStatus]? {
         switch self {
@@ -93,10 +93,10 @@ public struct GovernmentBillStatusWrapper : GovernmentBillStatus {
     public var country : Country {
         return status.country
     }
-    public func getName() -> String {
-        return status.getName()
+    public var name : String {
+        return status.name
     }
-    public func getControllerTitle() -> String {
-        return status.getControllerTitle()
+    public var controller_title : String {
+        return status.controller_title
     }
 }
