@@ -22,7 +22,7 @@ public enum SovereignStateAvailabilityCategory : String, CaseIterable, Jsonable 
     case vehicle_service
     case virtual_assistant
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .communication_service: return "Communication Service"
         case .digital_payment_method: return "Digital Payment Method"
