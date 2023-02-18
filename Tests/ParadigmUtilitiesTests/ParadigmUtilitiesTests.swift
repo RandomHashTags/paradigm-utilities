@@ -63,7 +63,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     private func testUpcomingEvents(_ decoder: ZippyJSONDecoder) throws {
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
-        let today:EventDate = EventDate.getToday(), title:String = "test"
+        let today:EventDate = EventDate.today, title:String = "test"
         let apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
         XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
         let data:Data = apod_event.toData()!
