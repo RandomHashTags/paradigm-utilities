@@ -8,7 +8,7 @@
 import Foundation
 
 public struct EventDate : Comparable, Jsonable {
-    private static var sameHourComponents:DateComponents = {
+    private static var same_hour_components:DateComponents = {
         var components:DateComponents = DateComponents()
         components.hour = 0
         components.minute = 0
@@ -27,11 +27,11 @@ public struct EventDate : Comparable, Jsonable {
         return leftYear < rightYear || leftYear == rightYear && (leftMonth < rightMonth || leftMonth == rightMonth && leftDay < rightDay)
     }
     
-    public static func getTodayDateString() -> String {
-        return EventDate.getDateString(date: ParadigmUtilities.now)
+    public static var today : EventDate {
+        return EventDate(ParadigmUtilities.now)
     }
-    public static func getToday() -> EventDate {
-        return EventDate.from(date: ParadigmUtilities.now)
+    public static var today_date_string : String {
+        return EventDate.getDateString(date: ParadigmUtilities.now)
     }
     
     public static func getDateString(date: Date) -> String {
@@ -50,38 +50,32 @@ public struct EventDate : Comparable, Jsonable {
         return year.description + "-" + (month < 10 ? "0" : "") + month.description + "-" + (day < 10 ? "0" : "") + day.description + "T00:00:00Z"
     }
     
-    public static func from(date: Date) -> EventDate {
-        let components:DateComponents = Calendar.current.dateComponents([.month, .day, .year], from: date)
-        let monthInt:Int = components.month!, year:Int = components.year!, day:Int = components.day!
-        let month:Month = Month.init(rawValue: monthInt) ?? Month.december
-        return EventDate(year: year, month: month, day: day)
-    }
     public static func from(dateString: String) -> EventDate {
-        let values:[String] = dateString.components(separatedBy: "-")
-        let month:Int = Int(values[0])!, year:Int = Int(values[1])!, day:Int = Int(values[2])!
+        let values:[Substring] = dateString.split(separator: "-")
+        let month:Int = values[0].parse_int ?? 1, year:Int = values[1].parse_int ?? 0, day:Int = values[2].parse_int ?? 0
         return EventDate(year: year, month: month, day: day)
     }
     
-    public static func getFirst(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
-        return get(amount: 1, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
+    public static func get_first(day_of_week: DayOfWeek, month: Month, year: Int) -> EventDate? {
+        return get(amount: 1, day_of_week: day_of_week, year: year, month: month, day: 1)
     }
-    public static func getSecond(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
-        return get(amount: 2, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
+    public static func get_second(day_of_week: DayOfWeek, month: Month, year: Int) -> EventDate? {
+        return get(amount: 2, day_of_week: day_of_week, year: year, month: month, day: 1)
     }
-    public static func getThird(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
-        return get(amount: 3, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
+    public static func get_third(day_of_week: DayOfWeek, month: Month, year: Int) -> EventDate? {
+        return get(amount: 3, day_of_week: day_of_week, year: year, month: month, day: 1)
     }
-    public static func getFourth(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
-        return get(amount: 4, dayOfWeek: dayOfWeek, year: year, month: month, day: 1)
+    public static func get_fourth(day_of_week: DayOfWeek, month: Month, year: Int) -> EventDate? {
+        return get(amount: 4, day_of_week: day_of_week, year: year, month: month, day: 1)
     }
-    public static func getLast(dayOfWeek: DayOfWeek, month: Month, year: Int) -> EventDate? {
-        return get(amount: 5, dayOfWeek: dayOfWeek, year: year, month: month, day: 1) ?? getFourth(dayOfWeek: dayOfWeek, month: month, year: year)
+    public static func get_last(day_of_week: DayOfWeek, month: Month, year: Int) -> EventDate? {
+        return get(amount: 5, day_of_week: day_of_week, year: year, month: month, day: 1) ?? get_fourth(day_of_week: day_of_week, month: month, year: year)
     }
-    public static func getFirstAfter(dayOfWeek: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
-        return get(amount: 1, dayOfWeek: dayOfWeek, year: year, month: month, day: day)
+    public static func get_first_after(day_of_week: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
+        return get(amount: 1, day_of_week: day_of_week, year: year, month: month, day: day)
     }
     
-    private static func get(amount: Int, dayOfWeek: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
+    private static func get(amount: Int, day_of_week: DayOfWeek, year: Int, month: Month, day: Int) -> EventDate? {
         let calendar:Calendar = Calendar.current
         var startingComponents:DateComponents = DateComponents()
         startingComponents.month = month.rawValue
@@ -89,13 +83,13 @@ public struct EventDate : Comparable, Jsonable {
         startingComponents.day = day
         guard let date:Date = calendar.date(from: startingComponents) else { return nil }
         
-        let dayOfWeekValue:Int = dayOfWeek.rawValue, monthValue:Int = month.rawValue
+        let dayOfWeekValue:Int = day_of_week.rawValue, monthValue:Int = month.rawValue
         let startingDay:Int = amount == 1 ? 1 : (amount - 1) * 7, endingDay:Int = startingDay + 7
         for i in startingDay..<endingDay {
             let targetDate:Date = date.addingTimeInterval(.days(i))
             let components:DateComponents = calendar.dateComponents([.weekday, .month], from: targetDate)
             if dayOfWeekValue == components.weekday && monthValue == components.month {
-                return EventDate(date: targetDate)
+                return EventDate(targetDate)
             }
         }
         return nil
@@ -114,10 +108,10 @@ public struct EventDate : Comparable, Jsonable {
         self.components = components
     }
     
-    public init(date: Date) {
+    public init(_ date: Date) {
         components = Calendar.current.dateComponents([.month, .year, .day], from: date)
     }
-    public init(components: DateComponents) {
+    public init(_ components: DateComponents) {
         self.components = components
     }
     
@@ -131,48 +125,48 @@ public struct EventDate : Comparable, Jsonable {
         try container.encode(date_string)
     }
     
-    public func toDate() -> Date {
+    public var date : Date {
         return Calendar.current.date(from: components)!
     }
     public mutating func adding(_ timeInterval: TimeInterval) {
         let calendar:Calendar = Calendar.current
         let seconds:Int = Int(timeInterval)
-        let newDate:Date = calendar.date(byAdding: .second, value: seconds, to: toDate())!
+        let newDate:Date = calendar.date(byAdding: .second, value: seconds, to: date)!
         components = calendar.dateComponents([.month, .year, .day], from: newDate)
     }
     public func plus(_ timeInterval: TimeInterval) -> EventDate {
         let seconds:Int = Int(timeInterval)
-        let newDate:Date = Calendar.current.date(byAdding: .second, value: seconds, to: toDate())!
-        return EventDate(date: newDate)
+        let newDate:Date = Calendar.current.date(byAdding: .second, value: seconds, to: date)!
+        return EventDate(newDate)
     }
     public var date_string : String {
         return EventDate.getDateString(components: components)
     }
     
     public func getFirstWeekdayAfter() -> EventDate {
-        let date:Date = toDate()
+        let date:Date = date
         switch date.day_of_week {
         case .friday:
-            return EventDate(date: date.addingTimeInterval(.days(3)))
+            return EventDate(date.addingTimeInterval(.days(3)))
         case .saturday:
-            return EventDate(date: date.addingTimeInterval(.days(2)))
+            return EventDate(date.addingTimeInterval(.days(2)))
         default:
-            return EventDate(date: date.addingTimeInterval(.days(1)))
+            return EventDate(date.addingTimeInterval(.days(1)))
         }
     }
     
-    public func previousDay() -> EventDate {
+    public var previous_date : EventDate {
         return nextDate(direction: .backward)
     }
-    public func nextDay() -> EventDate {
+    public var next_date : EventDate {
         return nextDate(direction: .forward)
     }
     private func nextDate(direction: Calendar.SearchDirection) -> EventDate {
-        var date:Date! = nil, selfDate:Date = toDate()
-        let calendar:Calendar = Calendar.current, components:DateComponents = EventDate.sameHourComponents
+        var date:Date! = nil, selfDate:Date = date
+        let calendar:Calendar = Calendar.current, components:DateComponents = EventDate.same_hour_components
         while date == nil {
             date = calendar.nextDate(after: selfDate, matching: components, matchingPolicy: .nextTime, direction: direction)
         }
-        return EventDate(date: date)
+        return EventDate(date)
     }
 }

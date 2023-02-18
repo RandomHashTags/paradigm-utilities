@@ -17,6 +17,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
     case brisk_wind_advisory
     case dense_fog_advisory
     case fire_weather_watch
+    case flash_flood_warning
     case flood_advisory
     case flood_warning
     case freeze_warning
@@ -56,6 +57,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
             :
             return 1
         case .fire_weather_watch,
+                .flash_flood_warning,
                 .flood_warning,
                 .freeze_watch,
                 .hard_freeze_warning,

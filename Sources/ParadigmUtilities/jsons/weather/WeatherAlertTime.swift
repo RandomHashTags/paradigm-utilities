@@ -17,10 +17,10 @@ public struct WeatherAlertTime : Jsonable {
         self.ends = ends
     }
     
-    public func isExpired() -> Bool {
+    public var is_expired : Bool {
         return Int64(Date().timeIntervalSince1970 * 1_000) >= expires
     }
-    public func isEnded() -> Bool {
+    public var is_ended : Bool {
         guard let ends:Int64 = ends else { return true }
         return Int64(Date().timeIntervalSince1970 * 1_000) >= ends
     }

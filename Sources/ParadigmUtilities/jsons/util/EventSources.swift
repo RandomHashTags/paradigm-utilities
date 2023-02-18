@@ -70,7 +70,7 @@ public final class EventSources : Jsonable {
         self.sources = sources
     }
     
-    public func getWikipediaSource() -> EventSource? {
+    public var wikipedia_source : EventSource? {
         return sources.first(where: { $0.name.lowercased().starts(with: "wikipedia: ") })
     }
     

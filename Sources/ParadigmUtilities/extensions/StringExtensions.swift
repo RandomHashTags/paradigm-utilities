@@ -25,3 +25,15 @@ public extension String {
         return String(self[startIndex..<endIndex])
     }
 }
+
+public extension StringProtocol {
+    var parse_int : Int? {
+        return Int(self)
+    }
+    var parse_float : Float? {
+        return Float(self)
+    }
+    var parse_double : Double? {
+        return Double(self)
+    }
+}
