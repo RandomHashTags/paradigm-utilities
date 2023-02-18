@@ -23,10 +23,10 @@ public struct SemanticVersion : Jsonable, Comparable {
         self.patch = patch
     }
     public init(string: String) {
-        let values:[String] = string.components(separatedBy: ".")
-        major = Int(values[0])!
-        minor = Int(values[1])!
-        patch = Int(values[2])!
+        let values:[Substring] = string.split(separator: ".")
+        major = values[0].parse_int ?? 0
+        minor = values[1].parse_int ?? 0
+        patch = values[2].parse_int ?? 0
     }
     
     public func encode(to encoder: Encoder) throws {

@@ -54,3 +54,9 @@ private struct SequenceCounter<T: Hashable> {
         return value
     }
 }
+
+extension Array {
+    func get(_ index: Int) -> Element? {
+        return index < count ? self[index] : nil
+    }
+}

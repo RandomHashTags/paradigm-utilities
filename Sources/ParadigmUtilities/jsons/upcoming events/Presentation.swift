@@ -57,8 +57,7 @@ public enum Presentation : String, CaseIterable, Jsonable {
         switch self {
         case .apple_event: return "Apple: Apple Events"
         default:
-            let components:[String] = url.components(separatedBy: "/")
-            return "Wikipedia: " + components.last!.replacingOccurrences(of: "_", with: " ")
+            return "Wikipedia: " + url.split(separator: "/").last!.replacingOccurrences(of: "_", with: " ")
         }
     }
     

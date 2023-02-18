@@ -30,6 +30,17 @@ public extension StringProtocol {
     var parse_int : Int? {
         return Int(self)
     }
+    var parse_int64 : Int64? {
+        return Int64(self)
+    }
+    
+    var parse_uint : UInt? {
+        return UInt(self)
+    }
+    var parse_uint64 : UInt64? {
+        return UInt64(self)
+    }
+    
     var parse_float : Float? {
         return Float(self)
     }

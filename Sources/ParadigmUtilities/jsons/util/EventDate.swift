@@ -8,14 +8,6 @@
 import Foundation
 
 public struct EventDate : Comparable, Jsonable {
-    private static var same_hour_components:DateComponents = {
-        var components:DateComponents = DateComponents()
-        components.hour = 0
-        components.minute = 0
-        components.second = 0
-        components.nanosecond = 0
-        return components
-    }()
     public static func < (lhs: EventDate, rhs: EventDate) -> Bool {
         let left:DateComponents = lhs.components, right:DateComponents = rhs.components
         guard let leftYear:Int = left.year, let rightYear:Int = right.year,
@@ -31,17 +23,17 @@ public struct EventDate : Comparable, Jsonable {
         return EventDate(ParadigmUtilities.now)
     }
     public static var today_date_string : String {
-        return EventDate.getDateString(date: ParadigmUtilities.now)
+        return EventDate.get_date_string(ParadigmUtilities.now)
     }
     
-    public static func getDateString(date: Date) -> String {
+    public static func get_date_string(_ date: Date) -> String {
         let components:DateComponents = Calendar.current.dateComponents([.month, .year, .day], from: date)
-        return getDateString(components: components)
+        return get_date_string(components)
     }
-    public static func getDateString(components: DateComponents) -> String {
-        return getDateString(year: components.year!, month: components.month!, day: components.day!)
+    public static func get_date_string(_ components: DateComponents) -> String {
+        return get_date_string(year: components.year ?? 0, month: components.month ?? 1, day: components.day ?? 0)
     }
-    public static func getDateString(year: Int, month: Int, day: Int) -> String {
+    public static func get_date_string(year: Int, month: Int, day: Int) -> String {
         return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
     }
     public static func getISO8601(date: Date) -> String {
@@ -140,10 +132,10 @@ public struct EventDate : Comparable, Jsonable {
         return EventDate(newDate)
     }
     public var date_string : String {
-        return EventDate.getDateString(components: components)
+        return EventDate.get_date_string(components)
     }
     
-    public func getFirstWeekdayAfter() -> EventDate {
+    public var first_weekday_after : EventDate {
         let date:Date = date
         switch date.day_of_week {
         case .friday:
@@ -156,14 +148,19 @@ public struct EventDate : Comparable, Jsonable {
     }
     
     public var previous_date : EventDate {
-        return nextDate(direction: .backward)
+        return next_date(direction: .backward)
     }
     public var next_date : EventDate {
-        return nextDate(direction: .forward)
+        return next_date(direction: .forward)
     }
-    private func nextDate(direction: Calendar.SearchDirection) -> EventDate {
+    private func next_date(direction: Calendar.SearchDirection) -> EventDate {
         var date:Date! = nil, selfDate:Date = date
-        let calendar:Calendar = Calendar.current, components:DateComponents = EventDate.same_hour_components
+        let calendar:Calendar = Calendar.current
+        var components:DateComponents = DateComponents()
+        components.hour = 0
+        components.minute = 0
+        components.second = 0
+        components.nanosecond = 0
         while date == nil {
             date = calendar.nextDate(after: selfDate, matching: components, matchingPolicy: .nextTime, direction: direction)
         }
