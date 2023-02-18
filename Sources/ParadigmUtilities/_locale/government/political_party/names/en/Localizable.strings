@@ -1,0 +1,19 @@
+/* 
+  Localizable.strings
+  
+
+  Created by Evan Anderson on 2/18/23.
+  
+*/
+
+"democrat" = "Democrat";
+"independent" = "Independent";
+"libertarian" = "Libertarian";
+"republican" = "Republican";
+
+"democratic_republican" = "Democratic-Republican"
+"federalist" = "Federalist";
+"whig" = "Whig";
+
+"no_party" = "No Party";
+"unknown" = "Unknown";
