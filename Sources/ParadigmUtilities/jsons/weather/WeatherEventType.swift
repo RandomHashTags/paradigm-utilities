@@ -26,6 +26,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
     case gale_warning
     case gale_watch
     case hard_freeze_warning
+    case hazardous_seas_warning
     case heavy_freezing_spray_warning
     case high_surf_advisory
     case high_wind_warning
@@ -40,6 +41,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
     case special_weather_advisory
     case special_weather_statement
     case storm_warning
+    case storm_watch
     case tornado_warning
     case tornado_watch
     case wind_advisory
@@ -66,6 +68,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
                 .high_wind_watch,
                 .red_flag_warning,
                 .storm_warning,
+                .storm_watch,
                 .wind_chill_warning,
                 .winter_storm_warning,
                 .winter_storm_watch
@@ -75,6 +78,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
                 .freeze_warning,
                 .gale_warning,
                 .gale_watch,
+                .hazardous_seas_warning,
                 .rip_current_statement,
                 .special_weather_advisory,
                 .special_weather_statement,
