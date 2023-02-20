@@ -10,10 +10,10 @@ import Foundation
 public struct PreEarthquakeMagnitude : Jsonable {
     public typealias ValueKeys = PreEarthquakeMagnitudeValueKeys
     
-    public let mag:String
+    public let mag:Float
     public var quakes:[PreEarthquake]
     
-    public init(mag: String, quakes: [PreEarthquake]) {
+    public init(mag: Float, quakes: [PreEarthquake]) {
         self.mag = mag
         self.quakes = quakes
     }
