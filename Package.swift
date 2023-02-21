@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "paradigm-utilities",
+    defaultLocalization: "en",
     platforms: [
         .macOS(.v12)
     ],
