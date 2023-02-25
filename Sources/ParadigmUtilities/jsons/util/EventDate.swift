@@ -39,7 +39,7 @@ public struct EventDate : Comparable, Jsonable {
     public static func get_date_string(year: Int, month: Int, day: Int) -> String {
         return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
     }
-    /// _year-month-day_ format. (example: __2023-02-25__)
+    /// _year-month-dayThour:minute:secondZ_ format. (example: __2023-02-25T00:00:00Z__)
     public static func getISO8601(date: Date) -> String {
         let components:DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
         let year:Int = components.year!, month:Int = components.month!, day:Int = components.day!
