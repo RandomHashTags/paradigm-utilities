@@ -26,16 +26,20 @@ public struct EventDate : Comparable, Jsonable {
         return EventDate.get_date_string(ParadigmUtilities.now)
     }
     
+    /// _month-year-day_ format. (example: __2-2023-25__)
     public static func get_date_string(_ date: Date) -> String {
         let components:DateComponents = Calendar.current.dateComponents([.month, .year, .day], from: date)
         return get_date_string(components)
     }
+    /// _month-year-day_ format. (example: __2-2023-25__)
     public static func get_date_string(_ components: DateComponents) -> String {
         return get_date_string(year: components.year ?? 0, month: components.month ?? 1, day: components.day ?? 0)
     }
+    /// _month-year-day_ format. (example: __2-2023-25__)
     public static func get_date_string(year: Int, month: Int, day: Int) -> String {
         return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
     }
+    /// _year-month-day_ format. (example: __2023-02-25__)
     public static func getISO8601(date: Date) -> String {
         let components:DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
         let year:Int = components.year!, month:Int = components.month!, day:Int = components.day!
@@ -131,6 +135,7 @@ public struct EventDate : Comparable, Jsonable {
         let newDate:Date = Calendar.current.date(byAdding: .second, value: seconds, to: date)!
         return EventDate(newDate)
     }
+    /// _month-year-day_ format. (example: __2-2023-25__)
     public var date_string : String {
         return EventDate.get_date_string(components)
     }
