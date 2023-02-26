@@ -21,7 +21,7 @@ let package = Package(
         .package(url: "https://github.com/randomhashtags/swift-sovereign-states.git", from: "1.2.1"),
         .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "9.0.0"),
         .package(url: "https://github.com/michaeleisel/ZippyJSON.git", from: "1.2.10"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.68.0"),
+        .package(url: "https://github.com/vapor/vapor.git", from: "4.70.0"),
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
@@ -33,7 +33,9 @@ let package = Package(
                 .product(name: "GEOSwift", package: "GEOSwift"),
                 .product(name: "ZippyJSON", package: "ZippyJSON"),
                 .product(name: "Vapor", package: "vapor")
-            ]),
+            ],
+            resources: [.process("Resources")]
+        ),
         .testTarget(
             name: "ParadigmUtilitiesTests",
             dependencies: ["ParadigmUtilities"]),
