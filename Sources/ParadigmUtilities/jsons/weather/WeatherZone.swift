@@ -14,27 +14,25 @@ import MapKit
 
 public final class WeatherZone : Jsonable {
     public static func == (lhs: WeatherZone, rhs: WeatherZone) -> Bool {
-        return lhs.name.elementsEqual(rhs.name) && lhs.name_suffix == rhs.name_suffix && lhs.subdivision == rhs.subdivision && lhs.geometry == rhs.geometry
+        return lhs.name.elementsEqual(rhs.name) && lhs.subdivision == rhs.subdivision && lhs.geometry == rhs.geometry
     }
     
-    public let name:String, name_suffix:String?, subdivision:SovereignStateSubdivisionWrapper?, geometry:Geometry
+    public let name:String, subdivision:SovereignStateSubdivisionWrapper?, geometry:Geometry
     
-    public init(name: String, name_suffix: String?, subdivision: (any SovereignStateSubdivision)?, geometry: Geometry) {
+    public init(name: String, subdivision: (any SovereignStateSubdivision)?, geometry: Geometry) {
         self.name = name
-        self.name_suffix = name_suffix
         self.subdivision = subdivision?.wrapped()
         self.geometry = geometry
     }
     
     public func hash(into hasher: inout Hasher) {
         hasher.combine(name)
-        hasher.combine(name_suffix)
         hasher.combine(subdivision)
         hasher.combine(geometry)
     }
     
     #if canImport(MapKit)
-    public lazy var geometry_overlay:MKPolygon? = {
+    public lazy var geometry_overlay : MKPolygon? = {
         let points:[CLLocationCoordinate2D] = getPoints(geometry)
         guard !points.isEmpty else { return nil }
         var polygon = MKPolygon(coordinates: points, count: points.count)
