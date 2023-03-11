@@ -178,6 +178,7 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
             return 3
         case .brisk_wind_advisory,
                 .coastal_flood_advisory,
+                .coastal_flood_statement,
                 .flood_advisory,
                 .frost_advisory,
                 .high_surf_advisory,
