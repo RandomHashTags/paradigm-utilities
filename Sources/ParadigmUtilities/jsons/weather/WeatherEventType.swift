@@ -138,69 +138,14 @@ public enum WeatherEventType : String, CaseIterable, Jsonable {
     case winter_storm_watch
     case winter_weather_advisory
     
-    var defcon : UInt8 {
+    public var name : String {
         switch self {
-        case .blizzard_warning,
-                .tornado_warning,
-                .tornado_watch
-            :
-            return 1
-        case .fire_weather_watch,
-                .flash_flood_warning,
-                .flood_warning,
-                .flood_watch,
-                .freeze_watch,
-                .hard_freeze_warning,
-                .heavy_freezing_spray_warning,
-                .high_wind_warning,
-                .high_wind_watch,
-                .red_flag_warning,
-                .storm_warning,
-                .storm_watch,
-                .wind_chill_warning,
-                .winter_storm_warning,
-                .winter_storm_watch
-            :
-            return 2
-        case .beach_hazards_statement,
-                .dense_fog_advisory,
-                .freeze_warning,
-                .gale_warning,
-                .gale_watch,
-                .hazardous_seas_warning,
-                .high_surf_warning,
-                .rip_current_statement,
-                .special_weather_statement,
-                .wind_advisory,
-                .wind_chill_advisory,
-                .winter_weather_advisory
-            :
-            return 3
-        case .brisk_wind_advisory,
-                .coastal_flood_advisory,
-                .coastal_flood_statement,
-                .flood_advisory,
-                .frost_advisory,
-                .high_surf_advisory,
-                .lakeshore_flood_advisory,
-                .low_water_advisory,
-                .marine_weather_statement,
-                .small_craft_advisory
-            :
-            return 4
-        case .air_quality_alert,
-                .avalanche_warning,
-                .avalanche_watch,
-                .child_abduction_emergency,
-                .hydrologic_outlook
-            :
-            return 5
+        case ._911_telephone_outage_emergency:
+            return "911 Telephone Outage Emergency"
+        case .evacuation___immediate:
+            return "Evacuation - Immediate"
         default:
-            return UInt8.max
+            return ParadigmUtilities.to_correct_capitalization(input: rawValue, excluded_words: ["and", "in", "for"])
         }
-    }
-    
-    var name : String {
-        return "WeatherEventName"
     }
 }

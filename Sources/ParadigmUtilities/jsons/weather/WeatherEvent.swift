@@ -10,45 +10,29 @@ import Foundation
 public struct WeatherEvent : Jsonable {
     public typealias ValueKeys = WeatherEventValueKeys
     
-    public let id:String
-    public var event:String
+    public let type:WeatherEventType
     public let defcon:Int
     
-    public init(id: String, event: String, defcon: Int) {
-        self.id = id
-        self.event = event
+    public init(type: WeatherEventType, defcon: Int) {
+        self.type = type
         self.defcon = defcon
     }
     
     public func getKeyValue(key: WeatherEventValueKeys) -> Any? {
         switch key {
-        case .id: return id
-        case .event: return event
+        case .type: return type
         case .defcon: return defcon
         }
     }
     public mutating func setKeyValue<T>(key: WeatherEventValueKeys, value: T) {
-        switch key {
-        case .event:
-            event = value as! String
-            break
-        default:
-            break
-        }
     }
 }
 
 public enum WeatherEventValueKeys : String, JsonableValueKeys {
-    case id
-    case event
+    case type
     case defcon
     
     public var is_translatable : Bool {
-        switch self {
-        case .event:
-            return true
-        default:
-            return false
-        }
+        return false
     }
 }

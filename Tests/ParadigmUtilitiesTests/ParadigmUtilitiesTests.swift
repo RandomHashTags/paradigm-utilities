@@ -109,7 +109,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let weather_alerts:[CountryWeatherEvents] = [
             CountryWeatherEvents(country: Country.united_states, subdivisions: [
                 SubdivisionWeatherEvents(subdivision: SubdivisionsUnitedStates.minnesota.wrapped(), events: [
-                    WeatherEvent(id: "blizzardwarning", event: "Blizzard Warning", defcon: 3)
+                    WeatherEvent(type: .blizzard_warning, defcon: 3)
                 ])
             ])
         ]

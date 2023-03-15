@@ -19,4 +19,15 @@ public enum ParadigmUtilities {
         let id:String = title.replacingOccurrences(of: "[^a-zA-Z0-9]+", with: "_", options: .regularExpression)
         return key + "." + id
     }
+    
+    public static func to_correct_capitalization(input: String, excluded_words: Set<Substring> = []) -> String {
+        var values:[Substring] = input.split(separator: "_")
+        return values.map({ value in
+            guard !excluded_words.contains(value) else { return input.starts(with: value) ? capitalize(value) : value }
+            return capitalize(value)
+        }).joined(separator: " ")
+    }
+    private static func capitalize(_ string: Substring) -> Substring {
+        return string.first!.uppercased() + string.suffix(string.count - 1)
+    }
 }
