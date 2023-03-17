@@ -20,8 +20,7 @@ public extension Sequence where Element : Hashable {
         return Set<Element>(self)
     }
     func unique() -> [Element] {
-        let set:Set<Element> = unique_set()
-        return set.map({ $0 })
+        return unique_set().map({ $0 })
     }
 }
 
@@ -42,7 +41,7 @@ private struct SequenceCounter<T: Hashable> {
         }
     }
     
-    var maximum:T! {
+    var maximum : T! {
         var value:T! = nil
         var maximumCount:Int = 0
         for (element, count) in counts {
@@ -58,5 +57,12 @@ private struct SequenceCounter<T: Hashable> {
 public extension Array {
     func get(_ index: Int) -> Element? {
         return index < count ? self[index] : nil
+    }
+    
+    var first_nonoptional : Element {
+        return self[0]
+    }
+    var last_nonoptional : Element {
+        return self[count-1]
     }
 }
