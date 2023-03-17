@@ -54,6 +54,11 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     public mutating func append(contentsOf newElements: [Hyperlink]) {
         hyperlinks.append(contentsOf: newElements)
     }
+    public mutating func remove(_ hyperlink: Hyperlink) {
+        guard let index:Int = hyperlinks.firstIndex(of: hyperlink) else { return }
+        hyperlinks.remove(at: index)
+        hyperlink_count -= 1
+    }
     
     public func getKeyValue(key: HyperlinksValueKeys) -> Any? {
         switch key {
