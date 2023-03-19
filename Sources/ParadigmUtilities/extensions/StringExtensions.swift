@@ -47,4 +47,14 @@ public extension StringProtocol {
     var parse_double : Double? {
         return Double(self)
     }
+    
+    func matches(regex: String) -> Bool {
+        return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
+    }
+}
+
+public extension Substring {
+    var as_string : String {
+        return String(self)
+    }
 }
