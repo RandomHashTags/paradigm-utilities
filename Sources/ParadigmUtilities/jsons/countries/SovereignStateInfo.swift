@@ -135,6 +135,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case neighbors
     
     case ranking_adult_hiv_prevalence
+    case ranking_alcohol_consumption
     case ranking_cannabis_use
     case ranking_civilian_firearms
     case ranking_climate_change_performance_index
@@ -147,6 +148,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case ranking_electricity_consumption
     case ranking_employment_rate
     case ranking_exports
+    case ranking_external_debt
     case ranking_fragile_state_index
     case ranking_freedom_rankings
     case ranking_global_peace_index
@@ -163,6 +165,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case ranking_legatum_prosperity_index
     case ranking_life_expectancy
     case ranking_maternal_mortality_rate
+    case ranking_military_expenditures
     case ranking_natural_disaster_risk
     case ranking_number_of_billionaires
     case ranking_number_of_millionaires
@@ -175,6 +178,9 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case ranking_suicide_rate
     case ranking_tariff_rate
     case ranking_unemployment_rate
+    case ranking_wealth_per_adult
+    case ranking_workforce
+    case ranking_workforce_productivity
     case ranking_world_giving_index
     case ranking_world_happiness_report
     
@@ -320,6 +326,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .national_trees: return "National Trees"
         
         case .ranking_adult_hiv_prevalence: return "Adult HIV Prevalence"
+        case .ranking_alcohol_consumption: return "Alcohol Consumption"
         case .ranking_cannabis_use: return "Cannabis Use"
         case .ranking_civilian_firearms: return "Civilian Firearms"
         case .ranking_climate_change_performance_index: return "Climate Change Performance"
@@ -332,6 +339,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .ranking_electricity_consumption: return "Electricity Consumption"
         case .ranking_employment_rate: return "Employment Rate"
         case .ranking_exports: return "Exports"
+        case .ranking_external_debt: return "External Debt"
         case .ranking_fragile_state_index: return "Fragile State"
         case .ranking_freedom_rankings: return "Freedom"
         case .ranking_global_peace_index: return "Global Peace"
@@ -348,6 +356,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .ranking_legatum_prosperity_index: return "Prosperity"
         case .ranking_life_expectancy: return "Life Expectancy"
         case .ranking_maternal_mortality_rate: return "Maternal Mortality Rate"
+        case .ranking_military_expenditures: return "Military Expenditures"
         case .ranking_natural_disaster_risk: return "Natural Disaster Risk"
         case .ranking_number_of_billionaires: return "Number of Billionaires"
         case .ranking_number_of_millionaires: return "Number of Millionaires"
@@ -360,6 +369,9 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .ranking_suicide_rate: return "Suicide Rate"
         case .ranking_tariff_rate: return "Tariff Rate"
         case .ranking_unemployment_rate: return "Unemployment Rate"
+        case .ranking_wealth_per_adult: return "Wealth per Adult"
+        case .ranking_workforce: return "Workforce"
+        case .ranking_workforce_productivity: return "Workforce Productivity"
         case .ranking_world_giving_index: return "Generosity"
         case .ranking_world_happiness_report: return "World Happiness"
         
