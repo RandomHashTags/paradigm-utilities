@@ -59,9 +59,11 @@ public extension Array {
         return index < count ? self[index] : nil
     }
     
+    /// Alternative to `first!` for ~100ns performance improvement.
     var first_nonoptional : Element {
         return self[0]
     }
+    /// Alternative to `last!` for ~100ns performance improvement.
     var last_nonoptional : Element {
         return self[count-1]
     }
