@@ -145,19 +145,27 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case ranking_economic_freedom_index
     case ranking_education_index
     case ranking_electricity_consumption
+    case ranking_employment_rate
+    case ranking_exports
     case ranking_fragile_state_index
     case ranking_freedom_rankings
     case ranking_global_peace_index
     case ranking_global_terrorism_index
+    case ranking_health_care_cost
+    case ranking_home_ownership_rate
     case ranking_homicide_rate
     case ranking_human_development_index
+    case ranking_imports
     case ranking_incarceration_rate
     case ranking_infant_mortality_rate
     case ranking_inflation_rate
+    case ranking_internet_connection_speeds
     case ranking_legatum_prosperity_index
     case ranking_life_expectancy
     case ranking_maternal_mortality_rate
     case ranking_natural_disaster_risk
+    case ranking_number_of_billionaires
+    case ranking_number_of_millionaires
     case ranking_obesity_rate
     case ranking_population
     case ranking_press_freedom_index
@@ -165,6 +173,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case ranking_quality_of_nationality
     case ranking_social_progress_index
     case ranking_suicide_rate
+    case ranking_tariff_rate
     case ranking_unemployment_rate
     case ranking_world_giving_index
     case ranking_world_happiness_report
@@ -321,19 +330,27 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .ranking_economic_freedom_index: return "Economic Freedom"
         case .ranking_education_index: return "Education"
         case .ranking_electricity_consumption: return "Electricity Consumption"
+        case .ranking_employment_rate: return "Employment Rate"
+        case .ranking_exports: return "Exports"
         case .ranking_fragile_state_index: return "Fragile State"
         case .ranking_freedom_rankings: return "Freedom"
         case .ranking_global_peace_index: return "Global Peace"
         case .ranking_global_terrorism_index: return "Global Terrorism"
+        case .ranking_health_care_cost: return "Health Care Cost"
+        case .ranking_home_ownership_rate: return "Home Ownership Rate"
         case .ranking_homicide_rate: return "Homicide Rate"
         case .ranking_human_development_index: return "Human Development"
+        case .ranking_imports: return "Imports"
         case .ranking_incarceration_rate: return "Incarceration Rate"
         case .ranking_infant_mortality_rate: return "Infant Mortality Rate"
         case .ranking_inflation_rate: return "Inflation Rate"
+        case .ranking_internet_connection_speeds: return "Internet Connection Speeds"
         case .ranking_legatum_prosperity_index: return "Prosperity"
         case .ranking_life_expectancy: return "Life Expectancy"
         case .ranking_maternal_mortality_rate: return "Maternal Mortality Rate"
         case .ranking_natural_disaster_risk: return "Natural Disaster Risk"
+        case .ranking_number_of_billionaires: return "Number of Billionaires"
+        case .ranking_number_of_millionaires: return "Number of Millionaires"
         case .ranking_obesity_rate: return "Obesity Rate"
         case .ranking_population: return "Population"
         case .ranking_press_freedom_index: return "Press Freedom"
@@ -341,6 +358,7 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .ranking_quality_of_nationality: return "Quality of Nationality"
         case .ranking_social_progress_index: return "Social Progress"
         case .ranking_suicide_rate: return "Suicide Rate"
+        case .ranking_tariff_rate: return "Tariff Rate"
         case .ranking_unemployment_rate: return "Unemployment Rate"
         case .ranking_world_giving_index: return "Generosity"
         case .ranking_world_happiness_report: return "World Happiness"
