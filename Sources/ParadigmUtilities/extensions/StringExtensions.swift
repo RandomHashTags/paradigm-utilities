@@ -48,6 +48,10 @@ public extension StringProtocol {
         return Double(self)
     }
     
+    var parse_month : Month? {
+        return Month.valueOf(self)
+    }
+    
     func matches(regex: String) -> Bool {
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }

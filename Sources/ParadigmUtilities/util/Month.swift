@@ -21,7 +21,7 @@ public enum Month : Int, CaseIterable {
     case november = 11
     case december = 12
     
-    public static func valueOf(_ string: String) -> Month? {
+    public static func valueOf(_ string: any StringProtocol) -> Month? {
         guard string.count >= 3 else { return nil }
         let key:Substring = string.lowercased().prefix(3)
         return Month.allCases.first(where: { "\($0)".starts(with: key) })
