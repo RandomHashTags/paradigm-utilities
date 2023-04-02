@@ -12,25 +12,24 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
     
     public let info:SovereignStateInfo, defcon:Int
     public var world_rank:Int, world_rank_max:Int
-    public let year_of_data:Int, value:Double, value_type:NumberType
+    public let year_of_data:Int, value:Float
     public var suffix:String?
     public let is_estimate:Bool
     public var values:[SovereignStateRankingInfoValueOther]?, sources:EventSources?
     
     public init(info: SovereignStateInfo, defcon: Int, world_rank: Int, world_rank_max: Int, year_of_data: Int, value: Int, suffix: String?, is_estimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
-        self.init(info: info, defcon: defcon, world_rank: world_rank, world_rank_max: world_rank_max, year_of_data: year_of_data, value: Double(value), value_type: .integer, suffix: suffix, is_estimate: is_estimate, values: values, sources: sources)
+        self.init(info: info, defcon: defcon, world_rank: world_rank, world_rank_max: world_rank_max, year_of_data: year_of_data, value: Float(value), suffix: suffix, is_estimate: is_estimate, values: values, sources: sources)
     }
     public init(info: SovereignStateInfo, defcon: Int, world_rank: Int, world_rank_max: Int, year_of_data: Int, value: Int64, suffix: String?, is_estimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
-        self.init(info: info, defcon: defcon, world_rank: world_rank, world_rank_max: world_rank_max, year_of_data: year_of_data, value: Double(value), value_type: .long, suffix: suffix, is_estimate: is_estimate, values: values, sources: sources)
+        self.init(info: info, defcon: defcon, world_rank: world_rank, world_rank_max: world_rank_max, year_of_data: year_of_data, value: Float(value), suffix: suffix, is_estimate: is_estimate, values: values, sources: sources)
     }
-    public init(info: SovereignStateInfo, defcon: Int, world_rank: Int, world_rank_max: Int, year_of_data: Int, value: Double, value_type: NumberType, suffix: String?, is_estimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
+    public init(info: SovereignStateInfo, defcon: Int, world_rank: Int, world_rank_max: Int, year_of_data: Int, value: Float, suffix: String?, is_estimate: Bool, values: [SovereignStateRankingInfoValueOther]?, sources: EventSources?) {
         self.info = info
         self.defcon = defcon
         self.world_rank = world_rank
         self.world_rank_max = world_rank_max
         self.year_of_data = year_of_data
         self.value = value
-        self.value_type = value_type
         self.suffix = suffix
         self.is_estimate = is_estimate
         self.values = values
@@ -45,7 +44,6 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         case .max_world_rank: return world_rank_max
         case .year_of_data: return year_of_data
         case .value: return value
-        case .value_type: return value_type
         case .suffix: return suffix
         case .is_estimate: return is_estimate
         case .values: return values
@@ -76,7 +74,6 @@ public enum SovereignStateRankingInfoValueValueKeys : String, JsonableValueKeys 
     case max_world_rank
     case year_of_data
     case value
-    case value_type
     case suffix
     case is_estimate
     case values

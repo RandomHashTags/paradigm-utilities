@@ -12,7 +12,7 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
     
     public let info:SovereignStateInfo, world_rank:Int
     public var world_rank_max:Int
-    public let year_of_data:Int, value:Double, value_type:NumberType
+    public let year_of_data:Int, value:Float
     public var suffix:String?
     public let is_estimate:Bool
     public var sources:EventSources?
@@ -22,8 +22,7 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
         self.world_rank = world_rank
         self.world_rank_max = world_rank_max
         self.year_of_data = year_of_data
-        self.value = Double(value)
-        self.value_type = NumberType.integer
+        self.value = Float(value)
         self.suffix = suffix
         self.is_estimate = is_estimate
         self.sources = sources
@@ -36,7 +35,6 @@ public struct SovereignStateAgricultureValue : SovereignStateRankedValue {
         case .world_rank_max: return world_rank_max
         case .year_of_data: return year_of_data
         case .value: return value
-        case .value_type: return value_type
         case .suffix: return suffix
         case .is_estimate: return is_estimate
         case .sources: return sources
@@ -62,7 +60,6 @@ public enum SovereignStateAgricultureValueValueKeys : String, JsonableValueKeys 
     case world_rank_max
     case year_of_data
     case value
-    case value_type
     case suffix
     case is_estimate
     case sources
