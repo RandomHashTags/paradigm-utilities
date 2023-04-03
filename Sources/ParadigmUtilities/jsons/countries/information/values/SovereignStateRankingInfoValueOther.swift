@@ -10,18 +10,14 @@ import Foundation
 public struct SovereignStateRankingInfoValueOther : Jsonable {
     public typealias ValueKeys = SovereignStateRankingInfoValueOtherValueKeys
     
-    public let value:Double?, value_type:NumberType
+    public let value:Float?
     public var description:String, suffix:String?
     
     public init(value: Int?, description: String, suffix: String?) {
-        self.init(value: value != nil ? Double(value!) : nil, value_type: .integer, description: description, suffix: suffix)
+        self.init(value: value != nil ? Float(value!) : nil, description: description, suffix: suffix)
     }
     public init(value: Float?, description: String, suffix: String?) {
-        self.init(value: value != nil ? Double(value!) : nil, value_type: .float, description: description, suffix: suffix)
-    }
-    public init(value: Double?, value_type: NumberType = .double, description: String, suffix: String?) {
         self.value = value
-        self.value_type = value_type
         self.description = description
         self.suffix = suffix
     }
@@ -29,7 +25,6 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
     public func getKeyValue(key: SovereignStateRankingInfoValueOtherValueKeys) -> Any? {
         switch key {
         case .value: return value
-        case .value_type: return value_type
         case .description: return description
         case .suffix: return suffix
         }
@@ -50,7 +45,6 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
 
 public enum SovereignStateRankingInfoValueOtherValueKeys : String, JsonableValueKeys {
     case value
-    case value_type
     case description
     case suffix
     
