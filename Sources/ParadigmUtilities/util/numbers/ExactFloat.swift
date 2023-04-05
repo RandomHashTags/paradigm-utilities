@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
+public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Comparable {
     public typealias IntegerLiteralType = Int
     public typealias FloatLiteralType = Float
     
@@ -42,6 +42,10 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
         try container.encode(String(describing: value))
+    }
+    
+    public static func < (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
+        return lhs.value < rhs.value
     }
     
     public static func * (left: ExactFloat, right: ExactFloat) -> ExactFloat {
