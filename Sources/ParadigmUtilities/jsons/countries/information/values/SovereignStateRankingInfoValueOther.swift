@@ -10,13 +10,13 @@ import Foundation
 public struct SovereignStateRankingInfoValueOther : Jsonable {
     public typealias ValueKeys = SovereignStateRankingInfoValueOtherValueKeys
     
-    public let value:Float?
+    public let value:ExactFloat?
     public var description:String, suffix:String?
     
     public init(value: Int?, description: String, suffix: String?) {
-        self.init(value: value != nil ? Float(value!) : nil, description: description, suffix: suffix)
+        self.init(value: value != nil ? ExactFloat(value!) : nil, description: description, suffix: suffix)
     }
-    public init(value: Float?, description: String, suffix: String?) {
+    public init(value: ExactFloat?, description: String, suffix: String?) {
         self.value = value
         self.description = description
         self.suffix = suffix

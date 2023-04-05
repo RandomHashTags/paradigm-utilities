@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct ExactFloat : Codable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
+public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral {
     public typealias IntegerLiteralType = Int
     public typealias FloatLiteralType = Float
     
@@ -19,6 +19,10 @@ public struct ExactFloat : Codable, ExpressibleByFloatLiteral, ExpressibleByInte
     public init(_ value: Int) {
         self.value = Float(value)
     }
+    public init(_ value: Int64) {
+        self.value = Float(value)
+    }
+    
     public init(floatLiteral value: Float) {
         self.value = value
     }

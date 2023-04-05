@@ -10,7 +10,7 @@ import Foundation
 public protocol SovereignStateRankedValue : SovereignStateIdentifiableValue {
     var world_rank:Int { get }
     var world_rank_max:Int { get }
-    var value:Float { get }
+    var value:ExactFloat { get }
     var suffix:String? { get }
     var is_estimate:Bool { get }
 }
