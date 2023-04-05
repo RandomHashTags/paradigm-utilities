@@ -16,10 +16,7 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     public init(_ value: Float) {
         self.value = value
     }
-    public init(_ value: Int) {
-        self.value = Float(value)
-    }
-    public init(_ value: Int64) {
+    public init(_ value: any BinaryInteger) {
         self.value = Float(value)
     }
     
@@ -47,12 +44,21 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     public static func < (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
         return lhs.value < rhs.value
     }
+    public static func < (lhs: ExactFloat, rhs: Float) -> Bool {
+        return lhs.value < rhs
+    }
+    public static func < (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
+        return lhs.value < Float(rhs)
+    }
     
     public static func * (left: ExactFloat, right: ExactFloat) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value * right.value)
     }
     public static func * (left: ExactFloat, right: Float) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value * right)
+    }
+    public static func * (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
+        return ExactFloat(floatLiteral: left.value * Float(right))
     }
     
     public static func / (left: ExactFloat, right: ExactFloat) -> ExactFloat {
@@ -61,12 +67,18 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     public static func / (left: ExactFloat, right: Float) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value / right)
     }
+    public static func / (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
+        return ExactFloat(floatLiteral: left.value / Float(right))
+    }
     
     public static func + (left: ExactFloat, right: ExactFloat) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value + right.value)
     }
     public static func + (left: ExactFloat, right: Float) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value + right)
+    }
+    public static func + (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
+        return ExactFloat(floatLiteral: left.value + Float(right))
     }
     
     public static func - (left: ExactFloat, right: ExactFloat) -> ExactFloat {
@@ -75,8 +87,28 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     public static func - (left: ExactFloat, right: Float) -> ExactFloat {
         return ExactFloat(floatLiteral: left.value - right)
     }
+    public static func - (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
+        return ExactFloat(floatLiteral: left.value - Float(right))
+    }
 }
 public extension Float {
+    static func == (lhs: Float, rhs: ExactFloat) -> Bool {
+        return lhs == rhs.value
+    }
+    static func <= (lhs: Float, rhs: ExactFloat) -> Bool {
+        return lhs <= rhs.value
+    }
+    static func >= (lhs: Float, rhs: ExactFloat) -> Bool {
+        return lhs >= rhs.value
+    }
+    
+    static func < (lhs: Float, rhs: ExactFloat) -> Bool {
+        return lhs < rhs.value
+    }
+    static func > (lhs: Float, rhs: ExactFloat) -> Bool {
+        return lhs > rhs.value
+    }
+    
     static func * (left: Float, right: ExactFloat) -> Float {
         return left * right.value
     }
@@ -91,5 +123,41 @@ public extension Float {
     
     static func - (left: Float, right: ExactFloat) -> Float {
         return left - right.value
+    }
+}
+public extension Int {
+    static func == (lhs: Int, rhs: ExactFloat) -> Bool {
+        return Float(lhs) == rhs.value
+    }
+    static func <= (lhs: Int, rhs: ExactFloat) -> Bool {
+        return Float(lhs) <= rhs.value
+    }
+    static func >= (lhs: Int, rhs: ExactFloat) -> Bool {
+        return Float(lhs) >= rhs.value
+    }
+    
+    static func < (lhs: Int, rhs: ExactFloat) -> Bool {
+        return Float(lhs) < rhs.value
+    }
+    static func > (lhs: Int, rhs: ExactFloat) -> Bool {
+        return Float(lhs) > rhs.value
+    }
+}
+public extension Int64 {
+    static func == (lhs: Int64, rhs: ExactFloat) -> Bool {
+        return Float(lhs) == rhs.value
+    }
+    static func <= (lhs: Int64, rhs: ExactFloat) -> Bool {
+        return Float(lhs) <= rhs.value
+    }
+    static func >= (lhs: Int64, rhs: ExactFloat) -> Bool {
+        return Float(lhs) >= rhs.value
+    }
+    
+    static func < (lhs: Int64, rhs: ExactFloat) -> Bool {
+        return Float(lhs) < rhs.value
+    }
+    static func > (lhs: Int64, rhs: ExactFloat) -> Bool {
+        return Float(lhs) > rhs.value
     }
 }

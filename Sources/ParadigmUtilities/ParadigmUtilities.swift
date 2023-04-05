@@ -21,7 +21,7 @@ public enum ParadigmUtilities {
     }
     
     public static func to_correct_capitalization(input: String, excluded_words: Set<Substring> = []) -> String {
-        var values:[Substring] = input.split(separator: "_")
+        let values:[Substring] = input.split(separator: "_")
         return values.map({ value in
             guard !excluded_words.contains(value) else { return input.starts(with: value) ? capitalize(value) : value }
             return capitalize(value)
