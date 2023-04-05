@@ -41,6 +41,36 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
         try container.encode(String(describing: value))
     }
     
+    public static func == (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
+        return lhs.value == rhs.value
+    }
+    public static func == (lhs: ExactFloat, rhs: Float) -> Bool {
+        return lhs.value == rhs
+    }
+    public static func == (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
+        return lhs.value == Float(rhs)
+    }
+    
+    public static func <= (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
+        return lhs.value <= rhs.value
+    }
+    public static func <= (lhs: ExactFloat, rhs: Float) -> Bool {
+        return lhs.value <= rhs
+    }
+    public static func <= (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
+        return lhs.value <= Float(rhs)
+    }
+    
+    public static func >= (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
+        return lhs.value >= rhs.value
+    }
+    public static func >= (lhs: ExactFloat, rhs: Float) -> Bool {
+        return lhs.value >= rhs
+    }
+    public static func >= (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
+        return lhs.value >= Float(rhs)
+    }
+    
     public static func < (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
         return lhs.value < rhs.value
     }
@@ -49,6 +79,16 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     }
     public static func < (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
         return lhs.value < Float(rhs)
+    }
+    
+    public static func > (lhs: ExactFloat, rhs: ExactFloat) -> Bool {
+        return lhs.value > rhs.value
+    }
+    public static func > (lhs: ExactFloat, rhs: Float) -> Bool {
+        return lhs.value > rhs
+    }
+    public static func > (lhs: ExactFloat, rhs: any BinaryInteger) -> Bool {
+        return lhs.value > Float(rhs)
     }
     
     public static func * (left: ExactFloat, right: ExactFloat) -> ExactFloat {
