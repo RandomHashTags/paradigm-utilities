@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name = 'ParadigmUtilities'
-  s.version = '1.3.6'
+  s.version = '1.3.7'
   s.summary = 'Shared library between the Server and Client.'
   s.homepage = 'https://github.com/RandomHashTags/paradigm-utilities'
   s.license = { :type => 'CC0 1.0 Universal', :file => 'LICENSE.txt' }

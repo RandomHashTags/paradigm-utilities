@@ -7,23 +7,13 @@
 
 import Foundation
 
-public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, ExpressibleByIntegerLiteral, Comparable {
-    public typealias IntegerLiteralType = Int
-    public typealias FloatLiteralType = Float
-    
+public struct ExactFloat : Hashable, Codable, Comparable {
     public var value:Float
     
     public init(_ value: Float) {
         self.value = value
     }
     public init(_ value: any BinaryInteger) {
-        self.value = Float(value)
-    }
-    
-    public init(floatLiteral value: Float) {
-        self.value = value
-    }
-    public init(integerLiteral value: Int) {
         self.value = Float(value)
     }
     
@@ -92,43 +82,53 @@ public struct ExactFloat : Hashable, Codable, ExpressibleByFloatLiteral, Express
     }
     
     public static func * (left: ExactFloat, right: ExactFloat) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value * right.value)
+        return ExactFloat(left.value * right.value)
     }
     public static func * (left: ExactFloat, right: Float) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value * right)
+        return ExactFloat(left.value * right)
     }
     public static func * (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value * Float(right))
+        return ExactFloat(left.value * Float(right))
+    }
+    
+    public static func *= (left: inout ExactFloat, right: ExactFloat) {
+        left.value *= right.value
+    }
+    public static func *= (left: inout ExactFloat, right: Float) {
+        left.value *= right
+    }
+    public static func *= (left: inout ExactFloat, right: any BinaryInteger) {
+        left.value *= Float(right)
     }
     
     public static func / (left: ExactFloat, right: ExactFloat) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value / right.value)
+        return ExactFloat(left.value / right.value)
     }
     public static func / (left: ExactFloat, right: Float) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value / right)
+        return ExactFloat(left.value / right)
     }
     public static func / (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value / Float(right))
+        return ExactFloat(left.value / Float(right))
     }
     
     public static func + (left: ExactFloat, right: ExactFloat) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value + right.value)
+        return ExactFloat(left.value + right.value)
     }
     public static func + (left: ExactFloat, right: Float) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value + right)
+        return ExactFloat(left.value + right)
     }
     public static func + (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value + Float(right))
+        return ExactFloat(left.value + Float(right))
     }
     
     public static func - (left: ExactFloat, right: ExactFloat) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value - right.value)
+        return ExactFloat(left.value - right.value)
     }
     public static func - (left: ExactFloat, right: Float) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value - right)
+        return ExactFloat(left.value - right)
     }
     public static func - (left: ExactFloat, right: any BinaryInteger) -> ExactFloat {
-        return ExactFloat(floatLiteral: left.value - Float(right))
+        return ExactFloat(left.value - Float(right))
     }
 }
 public extension Float {
