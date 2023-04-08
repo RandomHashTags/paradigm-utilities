@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import ZippyJSON
 
 public struct SovereignStateInformation : Jsonable {
     public typealias ValueKeys = SovereignStateInformationValueKeys

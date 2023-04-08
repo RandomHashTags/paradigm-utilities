@@ -1,11 +1,10 @@
 import XCTest
 import ParadigmUtilities
-import ZippyJSON
 import SwiftSovereignStates
 
 final class ParadigmUtilitiesTests: XCTestCase {
     func testExample() async throws {
-        let decoder:ZippyJSONDecoder = ZippyJSONDecoder()
+        let decoder:JSONDecoder = JSONDecoder()
         let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
         let big_boy:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
         let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy)
@@ -30,7 +29,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let string:String = String(data: data, encoding: .utf8)!
         XCTAssert(string.elementsEqual("{\"big_boy\":\"" + big_boy + "\",\"number\":1}"), "invalid string; string=" + string)
         
-        var decoded:TestBro = try ZippyJSONDecoder().decode(TestBro.self, from: data)
+        var decoded:TestBro = try JSONDecoder().decode(TestBro.self, from: data)
         XCTAssert(decoded.toString()!.elementsEqual(string))
         decoded.setOmittableValue(.small_boy, value: false)
         let decodedString:String = decoded.toString()!
@@ -44,7 +43,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(bro.small_boy == nil)
     }
     
-    private func testSovereignStateInformation(_ decoder: ZippyJSONDecoder) throws {
+    private func testSovereignStateInformation(_ decoder: JSONDecoder) throws {
         let response_version:Int = 1
         let anthem:NationalAnthem = NationalAnthem(mp3_url: "", sources: EventSources(sources: [EventSource(name: "Wikipedia: United States", url: "https://en.wikipedia.org/wiki/United_States")]))
         let capital:NationalCapital = NationalCapital(place: "Somewhere", notes: nil, sources: EventSources(sources: [EventSource(name: "Paradigm", url: "https://paradigm-app.com")]))
@@ -61,7 +60,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(bro._static?.national_capital == capital)
     }
     
-    private func testUpcomingEvents(_ decoder: ZippyJSONDecoder) throws {
+    private func testUpcomingEvents(_ decoder: JSONDecoder) throws {
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
         let apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
@@ -87,10 +86,10 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
-    private func testWeather(_ decoder: ZippyJSONDecoder) throws {
+    private func testWeather(_ decoder: JSONDecoder) throws {
     }
     
-    private func test_home_responses(_ decoder: ZippyJSONDecoder) throws {
+    private func test_home_responses(_ decoder: JSONDecoder) throws {
         let encoder:JSONEncoder = JSONEncoder()
         
         let countries:HomeResponseCountries = HomeResponseCountries(filters: nil)

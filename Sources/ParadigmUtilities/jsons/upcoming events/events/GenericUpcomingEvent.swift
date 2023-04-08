@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftSovereignStates
-import ZippyJSON
 
 public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     public typealias ValueKeys = GenericUpcomingEventValueKeys
@@ -57,7 +56,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
     
     public lazy var nonGenericEvent:GenericUpcomingEvent? = {
         guard let data:Data = toData() else { return nil }
-        return GenericUpcomingEvent.parse(decoder: ZippyJSONDecoder(), data: data)
+        return GenericUpcomingEvent.parse(decoder: JSONDecoder(), data: data)
     }()
     
     public func hash(into hasher: inout Hasher) {
@@ -65,7 +64,7 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         hasher.combine(getIdentifier())
     }
     
-    public static func parse(decoder: ZippyJSONDecoder, data: Data) -> GenericUpcomingEvent? {
+    public static func parse(decoder: JSONDecoder, data: Data) -> GenericUpcomingEvent? {
         do {
             let generic:GenericUpcomingEvent = try decoder.decode(GenericUpcomingEvent.self, from: data)
             switch generic.type {

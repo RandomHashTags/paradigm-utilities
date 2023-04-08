@@ -7,7 +7,6 @@
 
 import Foundation
 import SwiftSovereignStates
-import ZippyJSON
 #if canImport(Vapor)
 import Vapor
 #endif
