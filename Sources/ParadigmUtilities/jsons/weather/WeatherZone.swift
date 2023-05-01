@@ -36,7 +36,7 @@ public final class WeatherZone : Jsonable {
         let points:[CLLocationCoordinate2D] = getPoints(geometry)
         guard !points.isEmpty else { return nil }
         var polygon = MKPolygon(coordinates: points, count: points.count)
-        polygon.title = subdivision?.short_name
+        polygon.title = subdivision?.name
         return polygon
     }()
     private func getPoints(_ geometry: Geometry) -> [CLLocationCoordinate2D] {
