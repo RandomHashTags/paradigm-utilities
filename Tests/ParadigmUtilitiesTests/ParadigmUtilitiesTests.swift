@@ -10,6 +10,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy)
         
         try testFoundation(bro)
+        validate_cache()
         try testSovereignStateInformation(decoder)
         try testUpcomingEvents(decoder)
         try testWeather(decoder)
@@ -41,6 +42,24 @@ final class ParadigmUtilitiesTests: XCTestCase {
         um?.wrappedValue = nil
         XCTAssert(um?.wrappedValue == nil)
         XCTAssert(bro.small_boy == nil)
+    }
+    
+    private func validate_cache() {
+        let api_version:APIVersion = APIVersion.v1
+        let string_1:String = ParadigmCache.get_or_load(api_version: api_version, type: ParadigmCacheType.shared_instances, identifier: "test_1") {
+            return "TEST_BRO_1"
+        }
+        let string_2:String = ParadigmCache.get_or_load(api_version: api_version, type: ParadigmCacheType.shared_instances, identifier: "test_1") {
+            return "TEST_BRO_2"
+        }
+        XCTAssertEqual(string_1, string_2)
+        let test_cache:ParadigmNSCache<String, String> = ParadigmCache.get_or_load_cache(api_version: api_version, type: ParadigmCacheType.shared_instances)
+        XCTAssert(test_cache["test_1"] == "TEST_BRO_1")
+        test_cache["test_1"] = string_2
+        test_cache["test_2"] = string_1
+        XCTAssert(test_cache.count == 2, "test_cache.count=\(test_cache.count)")
+        test_cache.remove_all()
+        XCTAssert(test_cache.count == 0)
     }
     
     private func testSovereignStateInformation(_ decoder: JSONDecoder) throws {
