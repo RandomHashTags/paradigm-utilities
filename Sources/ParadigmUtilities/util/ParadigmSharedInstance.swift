@@ -16,7 +16,7 @@ public extension ParadigmSharedInstance {
         return get(identifier: String(describing: Self.self))
     }
     static func get<T : ParadigmSharedInstance>(identifier: String) -> T {
-        return ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances).get_or_insert(identifier as NSString) {
+        return ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances).get_or_insert(identifier) {
             return T.init()
         }
     }
