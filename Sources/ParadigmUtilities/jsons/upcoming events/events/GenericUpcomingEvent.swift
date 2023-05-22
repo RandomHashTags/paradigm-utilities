@@ -8,65 +8,17 @@
 import Foundation
 import SwiftSovereignStates
 
-public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
-    public typealias ValueKeys = GenericUpcomingEventValueKeys
-    
-    public static func == (lhs: GenericUpcomingEvent, rhs: GenericUpcomingEvent) -> Bool {
-        return lhs.type == rhs.type && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
+public enum GenericUpcomingEvents {
+    public static func parse<T: GenericUpcomingEvent>(data: Data) -> T? {
+        return parse_any(data: data) as? T
     }
-    
-    public var type:UpcomingEventType!, id:String?, event_date:EventDate?, exact_start:Int64?, exact_end:Int64?
-    public var custom_type_singular_name:String?
-    
-    public var title:String, tag:String?, description:String?
-    public let location:String?
-    public var image_url:String? {
-        didSet {
-            guard let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) else { return }
-            image_url = imageURL.substring(from: prefix.count)
-        }
+    public static func parse_any<T: GenericUpcomingEvent>(data: Data) -> T? {
+        return try? JSONDecoder().decode(T.self, from: data)
     }
-    public var youtube_video_ids:[String]?
-    public var sources:EventSources
-    public var hyperlinks:Hyperlinks?
-    public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    
-    public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, custom_type_singular_name: String? = nil, title: String, tag: String? = nil, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]? = nil, sources: EventSources, hyperlinks: Hyperlinks? = nil, countries: [Country]? = nil, subdivisions: [any SovereignStateSubdivision]? = nil) {
-        self.type = type
-        self.id = id
-        self.event_date = event_date
-        self.exact_start = exact_start
-        self.exact_end = exact_end
-        self.custom_type_singular_name = custom_type_singular_name
-        self.title = title
-        self.tag = tag
-        self.description = description
-        self.location = location
-        if let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) {
-            self.image_url = imageURL.substring(from: prefix.count)
-        } else {
-            self.image_url = image_url
-        }
-        self.youtube_video_ids = youtube_video_ids
-        self.sources = sources
-        self.hyperlinks = hyperlinks
-        self.countries = countries
-        self.subdivisions = subdivisions?.map({ $0.wrapped() })
-    }
-    
-    public lazy var nonGenericEvent:GenericUpcomingEvent? = {
-        guard let data:Data = toData() else { return nil }
-        return GenericUpcomingEvent.parse(decoder: JSONDecoder(), data: data)
-    }()
-    
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(type)
-        hasher.combine(getIdentifier())
-    }
-    
-    public static func parse(decoder: JSONDecoder, data: Data) -> GenericUpcomingEvent? {
+    private static func parse_any(data: Data) -> (any GenericUpcomingEvent)? {
         do {
-            let generic:GenericUpcomingEvent = try decoder.decode(GenericUpcomingEvent.self, from: data)
+            let decoder:JSONDecoder = JSONDecoder()
+            let generic:GenericUpcomingEventType = try decoder.decode(GenericUpcomingEventType.self, from: data)
             switch generic.type {
             case .astronomy_picture_of_the_day:
                 return try decoder.decode(APODEvent.self, from: data)
@@ -103,31 +55,48 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
             case .word_of_the_day:
                 return try decoder.decode(WOTDEvent.self, from: data)
             default:
-                return generic
+                return nil
             }
         } catch {
             return nil
         }
     }
-    
-    public func getValue(_ key: String) -> Any? {
-        guard let keys:[any UpcomingEventValueKeys] = type.value_keys, let codingKey:any UpcomingEventValueKeys = keys.first(where: { $0.rawValue.elementsEqual(key) }) else { return nil }
-        return getValue(codingKey)
+}
+
+public struct GenericUpcomingEventType : Codable {
+    public let type:UpcomingEventType
+}
+
+public protocol GenericUpcomingEvent : UpcomingEventProtocol where ValueKeys : UpcomingEventValueKeys {
+    var description : String? { get set }
+    var location : String? { get set }
+    var youtube_video_ids : [String]? { get }
+    var sources : EventSources { get set }
+    var hyperlinks : Hyperlinks? { get set }
+}
+public extension GenericUpcomingEvent {
+    static func == (lhs: Self, rhs: Self) -> Bool {
+        return lhs.type == rhs.type && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
     }
-    public func getValue(_ key: any UpcomingEventValueKeys) -> Any? {
-        return nil
+    
+    func getValue<T>(_ key: String) -> T? {
+        if let codingKey:ValueKeys = ValueKeys.init(rawValue: key) {
+            return getKeyValue(key: codingKey) as? T
+        } else if let key:GenericUpcomingEventValueKeys = GenericUpcomingEventValueKeys.init(rawValue: key) {
+            return getKeyValue(key: key) as? T
+        } else {
+            return nil
+        }
     }
     
-    public func getKeyValue(key: GenericUpcomingEventValueKeys) -> Any? {
+    func getKeyValue(key: GenericUpcomingEventValueKeys) -> Any? {
         switch key {
         case .type: return type
-        case .id: return id
         case .event_date: return event_date
         case .exact_start: return exact_start
         case .exact_end: return exact_end
         case .custom_type_singular_name: return custom_type_singular_name
         case .title: return title
-        case .tag: return tag
         case .description: return description
         case .location: return location
         case .image_url: return image_url
@@ -138,16 +107,13 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         case .subdivisions: return subdivisions
         }
     }
-    public func setKeyValue<T>(key: GenericUpcomingEventValueKeys, value: T) {
+    mutating func setKeyValue<T>(key: GenericUpcomingEventValueKeys, value: T) {
         switch key {
         case .custom_type_singular_name:
             custom_type_singular_name = value as? String
             break
         case .title:
             title = value as! String
-            break
-        case .tag:
-            tag = value as? String
             break
         case .description:
             description = value as? String
@@ -163,20 +129,18 @@ public class GenericUpcomingEvent : GenericUpcomingEventProtocol {
         }
     }
     
-    public func to_pre_upcoming_event(tag: String?, countries: [Country]? = nil) -> PreUpcomingEvent {
+    func to_pre_upcoming_event(tag: String?, countries: [Country]? = nil) -> PreUpcomingEvent {
         return PreUpcomingEvent(type: type, event_date: event_date, exact_start: exact_start, exact_end: exact_end, title: title, tag: tag ?? "", image_url: image_url, countries: countries, custom_type_singular_name: custom_type_singular_name)
     }
 }
 
 public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
     case type
-    case id
     case event_date
     case exact_start
     case exact_end
     case custom_type_singular_name
     case title
-    case tag
     case description
     case location
     case image_url
@@ -188,7 +152,7 @@ public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
     
     public var is_translatable : Bool {
         switch self {
-        case .custom_type_singular_name, .title, .tag, .description, .sources, .hyperlinks:
+        case .custom_type_singular_name, .title, .description, .sources, .hyperlinks:
             return true
         default:
             return false

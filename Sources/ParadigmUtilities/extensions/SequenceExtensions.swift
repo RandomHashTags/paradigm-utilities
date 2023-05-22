@@ -7,6 +7,17 @@
 
 import Foundation
 
+public extension Sequence {
+    func map_set<T: Hashable>(maximum_set_count: Int, _ transform: (Element) -> T) -> Set<T> {
+        var set:Set<T> = Set<T>()
+        set.reserveCapacity(maximum_set_count)
+        for element in self {
+            set.insert(transform(element))
+        }
+        return set
+    }
+}
+
 public extension Sequence where Element : Hashable {
     var majority : Element! {
         var counts:SequenceCounter = SequenceCounter<Element>()

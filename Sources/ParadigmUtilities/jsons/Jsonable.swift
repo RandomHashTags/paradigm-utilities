@@ -62,11 +62,21 @@ public protocol Jsonable : JsonableProtocol {
 public extension JsonableProtocol {
     func all_values_are_nil() -> Bool {
         guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
-        let value:Bool = !ValueKeys.allCases.map({
-            guard let key_value:Any = getKeyValue(key: $0) else { return true }
-            return (key_value as? (any CodableOmittableProtocol))?.omitted ?? false || (key_value as? (any Collection))?.isEmpty ?? false || (key_value as? (any JsonableProtocol))?.all_values_are_nil() ?? false
-        }).contains(false)
-        return value
+        return ValueKeys.allCases.first(where: {
+            guard let key_value:Any = getKeyValue(key: $0) else { return false }
+            switch key_value {
+            case is any CodableAlwaysOmittableProtocol:
+                return false
+            case is any CodableOmittableProtocol:
+                return !(key_value as! (any CodableOmittableProtocol)).omitted
+            case is any Collection:
+                return !(key_value as! (any Collection)).isEmpty
+            case is any JsonableProtocol:
+                return !(key_value as! (any JsonableProtocol)).all_values_are_nil()
+            default:
+                return false
+            }
+        }) == nil
     }
     
     func getValueKeys() -> ValueKeys.AllCases {
@@ -143,9 +153,6 @@ public enum NoJsonableValueKeys : String, JsonableValueKeys {
     case bruh
     
     public var is_translatable : Bool {
-        return false
-    }
-    public var is_omittable : Bool {
         return false
     }
 }

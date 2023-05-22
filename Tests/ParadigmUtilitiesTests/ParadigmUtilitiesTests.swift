@@ -82,11 +82,15 @@ final class ParadigmUtilitiesTests: XCTestCase {
     private func testUpcomingEvents(_ decoder: JSONDecoder) throws {
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
-        let apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: nil, video_url: nil)
+        var apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
         XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
         let data:Data = apod_event.toData()!
-        XCTAssert(GenericUpcomingEvent.parse(decoder: decoder, data: data) == apod_event, String(data: data, encoding: .utf8)!)
+        let generic_parsed:APODEvent? = GenericUpcomingEvents.parse_any(data: data)
+        XCTAssert(generic_parsed == apod_event, "generic_parsed=\(generic_parsed);apod_event=\(apod_event)")
         apod_event.image_url = event_image_url
+        let string:String? = generic_parsed?.getValue("copyright")
+        XCTAssertEqual(string, "Evan Anderson")
+        
         XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
         let apod_pre_event:PreUpcomingEvent = apod_event.to_pre_upcoming_event(tag: "")
         XCTAssert(apod_pre_event.image_url!.elementsEqual(event_image_url_suffix), "apod_pre_event.image_url=" + (apod_pre_event.image_url ?? "nil"))
@@ -177,6 +181,15 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     @available(macOS 13.0, *)
     private func test_benchmarks() async throws {
+        /*let test:PreUpcomingEvent = PreUpcomingEvent(type: UpcomingEventType.astronomy_picture_of_the_day, event_date: EventDate(year: 2023, month: Month.may, day: 21), title: "test", tag: "bro", image_url: nil)
+        try await benchmark(key: "all_values_are_nil", {
+            let value:Bool = test.all_values_are_nil()
+            XCTAssert(!value)
+        })
+        try await benchmark(key: "all_values_are_nil_2", {
+            let value:Bool = test.all_values_are_nil_2()
+            XCTAssert(!value)
+        })*/
     }
     private func get_local_data(at path: String) -> Data? {
         let url:URL = URL(fileURLWithPath: path)
@@ -185,7 +198,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     @available(macOS 13.0, *)
     private func benchmark(key: String, _ code: @escaping () async throws -> Void) async throws {
-        let iteration_count:Int = 100
+        let iteration_count:Int = 1_000
         let clock:ContinuousClock = ContinuousClock()
         let _:Duration = try await clock.measure(code)
         var timings:[Int64] = [Int64]()

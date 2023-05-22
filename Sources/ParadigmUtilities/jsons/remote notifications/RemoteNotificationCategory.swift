@@ -13,12 +13,10 @@ public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     //case video_game
     case weather
     
-    public static func valueOf(subcategory: String) -> (any RemoteNotificationSubcategory)? {
+    public static func value_of(subcategory: String) -> (any RemoteNotificationSubcategory)? {
         for category in RemoteNotificationCategory.allCases {
-            for sub in category.getSubcategories() {
-                if subcategory.elementsEqual("\(sub)") {
-                    return sub
-                }
+            if let subcategory:any RemoteNotificationSubcategory = category.value_of_subcategory(subcategory) {
+                return subcategory
             }
         }
         return nil
@@ -38,8 +36,14 @@ public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
         }
     }
     
-    public func valueOfSubcategory(_ string: String) -> (any RemoteNotificationSubcategory)? {
-        return getSubcategories().first(where: { string.elementsEqual($0.getIdentifier()) })
+    public func value_of_subcategory(_ string: String) -> (any RemoteNotificationSubcategory)? {
+        return get_subcategory_type().init(rawValue: string)
+    }
+    public func get_subcategory_type() -> (any RemoteNotificationSubcategory.Type) {
+        switch self {
+        case .apple:   return RemoteNotificationSubcategoryApple.self
+        case .weather: return RemoteNotificationSubcategoryWeather.self
+        }
     }
     public func getSubcategories() -> [any RemoteNotificationSubcategory] {
         switch self {

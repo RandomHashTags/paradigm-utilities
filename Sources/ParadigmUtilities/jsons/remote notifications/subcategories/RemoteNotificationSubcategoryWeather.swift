@@ -10,17 +10,17 @@ import Foundation
 public enum RemoteNotificationSubcategoryWeather : String, CaseIterable, RemoteNotificationSubcategory {
     case local_alert
     
-    public func getCategory() -> RemoteNotificationCategory {
+    public var category : RemoteNotificationCategory {
         return RemoteNotificationCategory.weather
     }
     
-    public func getName() -> String {
+    public var name : String {
         switch self {
         case .local_alert: return "Local Alert"
         }
     }
     
-    public func isConditional() -> Bool {
+    public var is_conditional : Bool {
         switch self {
         case .local_alert: return true
         }

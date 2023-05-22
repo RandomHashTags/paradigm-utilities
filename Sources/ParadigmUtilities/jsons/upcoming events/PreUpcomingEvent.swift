@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public struct PreUpcomingEvent : UpcomingEventProtocol {
     public typealias ValueKeys = PreUpcomingEventValueKeys
     
-    @CodableOmittable public var type:UpcomingEventType!
+    @CodableAlwaysOmittable public var type:UpcomingEventType
     public let id:String?
     @CodableOmittable public var event_date:EventDate?
     @CodableOmittable public var exact_start:Int64?
@@ -26,7 +26,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     public var team_away:ClientMLBTeam?, team_home:ClientMLBTeam?
     
     public init(type: UpcomingEventType, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
-        self._type = CodableOmittable(type, omitted: true)
+        self._type = CodableAlwaysOmittable(type)
         self.id = id
         self._event_date = CodableOmittable(event_date, omitted: true)
         self._exact_start = CodableOmittable(exact_start, omitted: true)
@@ -45,7 +45,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         self.team_home = team_home
     }
     
-    public func getKeyValue(key: PreUpcomingEventValueKeys) -> Any? {
+    public func getKeyValue(key: ValueKeys) -> Any? {
         switch key {
         case .type: return type
         case .id: return id
@@ -66,7 +66,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         case .team_home: return team_home
         }
     }
-    public mutating func setKeyValue<T>(key: PreUpcomingEventValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
         switch key {
         case .title:
             title = value as! String

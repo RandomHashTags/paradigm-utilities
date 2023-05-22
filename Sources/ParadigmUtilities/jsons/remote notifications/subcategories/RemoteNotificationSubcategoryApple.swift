@@ -17,7 +17,7 @@ public enum RemoteNotificationSubcategoryApple : String, CaseIterable, RemoteNot
     case safari_update
     case xcode_update
     
-    public func getCategory() -> RemoteNotificationCategory {
+    public var category : RemoteNotificationCategory {
         return RemoteNotificationCategory.apple
     }
     
@@ -34,12 +34,12 @@ public enum RemoteNotificationSubcategoryApple : String, CaseIterable, RemoteNot
         }
     }
     
-    public func getName() -> String {
+    public var name : String {
         let suffix:String = " Update"
         return getType() + suffix
     }
     
-    public func isConditional() -> Bool {
+    public var is_conditional : Bool {
         return false
     }
 }

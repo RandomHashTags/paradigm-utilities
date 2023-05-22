@@ -8,6 +8,6 @@
 import Foundation
 
 public protocol Person : Jsonable {
-    var name:HumanName { get }
-    var image_url:String? { get }
+    var name : HumanName { get }
+    var image_url : String? { get }
 }

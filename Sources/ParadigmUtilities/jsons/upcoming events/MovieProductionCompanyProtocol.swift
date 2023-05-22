@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol MovieProductionCompanyProtocol : Jsonable {
-    var id:String { get }
-    var name:String { get }
-    var image_url:String? { get }
+    var id : String { get }
+    var name : String { get }
+    var image_url : String? { get }
 }

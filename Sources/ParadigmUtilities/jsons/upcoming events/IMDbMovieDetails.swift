@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct IMDbMovieDetails : Jsonable {
-    public typealias ValueKeys = IMDbMovieDetailsValueKeys
-    
+public struct IMDbMovieDetails : Jsonable {    
     public let rating:String?
     public var rating_reason:String?
     public let runtime_seconds:Int?
@@ -49,6 +47,9 @@ public struct IMDbMovieDetails : Jsonable {
             break
         case .genres:
             genres = value as? [String]
+            break
+        case .image_url:
+            image_url = value as? String
             break
         default:
             break

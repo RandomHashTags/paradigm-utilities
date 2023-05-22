@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public enum RemoteNotificationSubcategories {
     public static func valueOf(_ identifier: String) -> (any RemoteNotificationSubcategory)? {
         for category in RemoteNotificationCategory.allCases {
-            if let subcategory:any RemoteNotificationSubcategory = category.getSubcategories().first(where: { $0.getIdentifier().elementsEqual(identifier) }) {
+            if let subcategory:any RemoteNotificationSubcategory = category.get_subcategory_type().init(rawValue: identifier) {
                 return subcategory
             }
         }
@@ -19,27 +19,23 @@ public enum RemoteNotificationSubcategories {
     }
 }
 
-public protocol RemoteNotificationSubcategory : Jsonable {
-    func getCategory() -> RemoteNotificationCategory
-    func getIdentifier() -> String
-    func getName() -> String
-    func isConditional() -> Bool
+public protocol RemoteNotificationSubcategory : Jsonable, RawRepresentable where RawValue == String {
+    var category : RemoteNotificationCategory { get }
+    var name : String { get }
+    var is_conditional : Bool { get }
     func getAllValues() -> [Country:[String]]?
 }
 
 public extension RemoteNotificationSubcategory {
     static func == (lhs: Self, rhs: Self) -> Bool {
-        return lhs.getCategory() == rhs.getCategory() && lhs.getIdentifier().elementsEqual(rhs.getIdentifier())
+        return lhs.category == rhs.category && lhs.rawValue.elementsEqual(rhs.rawValue)
     }
     
     func hash(into hasher: inout Hasher) {
-        hasher.combine(getCategory())
-        hasher.combine(getIdentifier())
+        hasher.combine(category)
+        hasher.combine(rawValue)
     }
     
-    func getIdentifier() -> String {
-        return String(describing: self)
-    }
     func getAllValues() -> [Country:[String]]? {
         return nil
     }
@@ -70,9 +66,11 @@ public extension RemoteNotificationSubcategory {
 }
 
 public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcategory {
+    public var rawValue:String
     public let subcategory:any RemoteNotificationSubcategory
     
     public init(_ subcategory: any RemoteNotificationSubcategory) {
+        self.rawValue = subcategory.rawValue
         self.subcategory = subcategory
     }
     public init(from decoder: Decoder) throws {
@@ -81,25 +79,28 @@ public struct RemoteNotificationSubcategoryWrapper : RemoteNotificationSubcatego
         guard let subcategory:any RemoteNotificationSubcategory = RemoteNotificationSubcategories.valueOf(identifier) else {
             throw DecodingError.dataCorruptedError(in: container, debugDescription: "invalid RemoteNotificationSubcategory identifier \"" + identifier + "\"")
         }
+        self.rawValue = identifier
+        self.subcategory = subcategory
+    }
+    public init?(rawValue: String) {
+        guard let subcategory:any RemoteNotificationSubcategory = RemoteNotificationSubcategories.valueOf(rawValue) else { return nil }
+        self.rawValue = rawValue
         self.subcategory = subcategory
     }
     
     public func encode(to encoder: Encoder) throws {
         var container:SingleValueEncodingContainer = encoder.singleValueContainer()
-        try container.encode(getIdentifier())
+        try container.encode(rawValue)
     }
     
-    public func getCategory() -> RemoteNotificationCategory {
-        return subcategory.getCategory()
+    public var category : RemoteNotificationCategory {
+        return subcategory.category
     }
-    public func getIdentifier() -> String {
-        return subcategory.getIdentifier()
+    public var name : String {
+        return subcategory.name
     }
-    public func getName() -> String {
-        return subcategory.getName()
-    }
-    public func isConditional() -> Bool {
-        return subcategory.isConditional()
+    public var is_conditional : Bool {
+        return subcategory.is_conditional
     }
     public func getAllValues() -> [Country:[String]]? {
         return subcategory.getAllValues()

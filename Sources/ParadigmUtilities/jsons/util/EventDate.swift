@@ -37,13 +37,13 @@ public struct EventDate : Comparable, Jsonable {
     }
     /// _month-year-day_ format. (example: __2-2023-25__)
     public static func get_date_string(year: Int, month: Int, day: Int) -> String {
-        return month.description + "-" + year.description + "-" + (day < 10 ? "0" : "") + day.description
+        return "\(month)-\(year)-" + (day < 10 ? "0" : "") + "\(day)"
     }
     /// _year-month-dayThour:minute:secondZ_ format. (example: __2023-02-25T00:00:00Z__)
     public static func getISO8601(date: Date) -> String {
         let components:DateComponents = Calendar.current.dateComponents([.year, .month, .day], from: date)
         let year:Int = components.year!, month:Int = components.month!, day:Int = components.day!
-        return year.description + "-" + (month < 10 ? "0" : "") + month.description + "-" + (day < 10 ? "0" : "") + day.description + "T00:00:00Z"
+        return "\(year)-" + (month < 10 ? "0" : "") + "\(month)-" + (day < 10 ? "0" : "") + "\(day)T00:00:00Z"
     }
     
     public static func from(dateString: String) -> EventDate {
