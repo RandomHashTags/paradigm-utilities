@@ -22,6 +22,8 @@ public enum GenericUpcomingEvents {
             switch generic.type {
             case .astronomy_picture_of_the_day:
                 return try decoder.decode(APODEvent.self, from: data)
+            case .earth_observatory_image_of_the_day:
+                return try decoder.decode(EarthObservatoryImageOfTheDayEvent.self, from: data)
             case .joke_of_the_day:
                 return try decoder.decode(JOTDEvent.self, from: data)
                 
@@ -29,12 +31,18 @@ public enum GenericUpcomingEvents {
                 return try decoder.decode(MovieEvent.self, from: data)
             case .music_album:
                 return try decoder.decode(MusicAlbumEvent.self, from: data)
+            case .presentations:
+                return try decoder.decode(PresentationEvent.self, from: data)
             case .science_year_review:
                 return try decoder.decode(ScienceYearReviewEvent.self, from: data)
+            case .sport_championships:
+                return try decoder.decode(SportChampionshipEvent.self, from: data)
             case .sport_mlb:
                 return try decoder.decode(MLBEvent.self, from: data)
             case .sport_professional_wrestling:
                 return try decoder.decode(ProfessionalWrestlingEvent.self, from: data)
+            case .sport_ufc:
+                return try decoder.decode(UFCEvent.self, from: data)
                 
             case .space_event:
                 return try decoder.decode(SpaceEvent.self, from: data)
@@ -44,16 +52,20 @@ public enum GenericUpcomingEvents {
                 return try decoder.decode(SpaceNearEarthObjectEvent.self, from: data)
             case .space_rocket_launch:
                 return try decoder.decode(SpaceRocketLaunchEvent.self, from: data)
+            
             case .spotify_new_music_friday:
                 return try decoder.decode(SpotifyNewMusicFridayEvent.self, from: data)
             case .ticketmaster_music_event:
                 return try decoder.decode(TicketmasterMusicEvent.self, from: data)
             case .video_game:
                 return try decoder.decode(VideoGameEvent.self, from: data)
+            case .video_game_events:
+                return try decoder.decode(VideoGameEventsEvent.self, from: data)
             case .wikipedia_todays_featured_picture:
                 return try decoder.decode(WikipediaTodaysFeaturedPictureEvent.self, from: data)
             case .word_of_the_day:
                 return try decoder.decode(WOTDEvent.self, from: data)
+                
             default:
                 return nil
             }
@@ -70,7 +82,7 @@ public struct GenericUpcomingEventType : Codable {
 public protocol GenericUpcomingEvent : UpcomingEventProtocol where ValueKeys : UpcomingEventValueKeys {
     var description : String? { get set }
     var location : String? { get set }
-    var youtube_video_ids : [String]? { get }
+    var youtube_video_ids : [String]? { get set }
     var sources : EventSources { get set }
     var hyperlinks : Hyperlinks? { get set }
 }

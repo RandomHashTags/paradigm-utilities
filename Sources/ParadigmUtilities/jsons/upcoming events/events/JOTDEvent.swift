@@ -25,7 +25,7 @@ public struct JOTDEvent : GenericUpcomingEvent {
             image_url = imageURL.substring(from: prefix.count)
         }
     }
-    public let youtube_video_ids:[String]?
+    public var youtube_video_ids:[String]?
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?

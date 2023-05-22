@@ -1,18 +1,18 @@
 //
-//  VideoGameEvent.swift
+//  VideoGameEventsEvent.swift
 //  
 //
-//  Created by Evan Anderson on 10/14/22.
+//  Created by Evan Anderson on 5/22/23.
 //
 
 import Foundation
 import SwiftSovereignStates
 
-public struct VideoGameEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = VideoGameEventValueKeys
+public struct VideoGameEventsEvent : GenericUpcomingEvent {
+    public typealias ValueKeys = NoUpcomingEventValueKeys
     
     public var type : UpcomingEventType {
-        return UpcomingEventType.video_game
+        return UpcomingEventType.video_game_events
     }
     public let event_date:EventDate?, exact_start:Int64?, exact_end:Int64?
     public var custom_type_singular_name:String?
@@ -29,22 +29,16 @@ public struct VideoGameEvent : GenericUpcomingEvent {
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
-    
-    public let platforms:[String]
-    public var genres:[String]
-    
-    public init(event_date: EventDate, title: String, description: String?, location: String?, image_url: String?, youtube_video_ids: [String]?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, platforms: [String], genres: [String]) {
-        self.platforms = platforms
-        self.genres = genres
         
+    public init(event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?) {
         self.event_date = event_date
-        self.exact_start = nil
-        self.exact_end = nil
+        self.exact_start = exact_start
+        self.exact_end = exact_start
         self.custom_type_singular_name = nil
         self.title = title
         self.description = description
         self.location = location
-        if let imageURL:String = image_url, let prefix:String = UpcomingEventType.video_game.image_url_prefix, imageURL.starts(with: prefix) {
+        if let imageURL:String = image_url, let prefix:String = UpcomingEventType.video_game_events.image_url_prefix, imageURL.starts(with: prefix) {
             self.image_url = imageURL.substring(from: prefix.count)
         } else {
             self.image_url = image_url
@@ -57,10 +51,6 @@ public struct VideoGameEvent : GenericUpcomingEvent {
     }
     
     public init(from decoder: Decoder) throws {
-        let container:KeyedDecodingContainer = try decoder.container(keyedBy: VideoGameEventValueKeys.self)
-        platforms = try container.decode([String].self, forKey: .platforms)
-        genres = try container.decode([String].self, forKey: .genres)
-        
         let generic_container:KeyedDecodingContainer = try decoder.container(keyedBy: GenericUpcomingEventValueKeys.self)
         event_date = try generic_container.decodeIfPresent(EventDate.self, forKey: .event_date)
         exact_start = try generic_container.decodeIfPresent(Int64.self, forKey: .exact_start)
@@ -77,41 +67,8 @@ public struct VideoGameEvent : GenericUpcomingEvent {
     }
     
     public func getKeyValue(key: ValueKeys) -> Any? {
-        switch key {
-        case .platforms: return platforms
-        case .genres: return genres
-        }
+        return nil
     }
     public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
-        switch key {
-        case .genres:
-            genres = value as! [String]
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum VideoGameEventValueKeys : String, UpcomingEventValueKeys {
-    case platforms
-    case genres
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .genres:
-            return true
-        default:
-            return false
-        }
-    }
-    
-    public var category : UpcomingEventValueCategory {
-        switch self {
-        case .platforms:
-            return UpcomingEventValueCategory.video_game_details
-        case .genres:
-            return UpcomingEventValueCategory.video_game_genres
-        }
     }
 }
