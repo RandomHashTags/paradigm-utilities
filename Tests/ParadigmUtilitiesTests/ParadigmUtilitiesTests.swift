@@ -7,7 +7,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         let decoder:JSONDecoder = JSONDecoder()
         let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
         let big_boy:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
-        let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy)
+        let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy, ez: CodableAlwaysOmittable<String>.init("BOOBA"))
         
         try testFoundation(bro)
         validate_cache()
@@ -86,7 +86,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
         let data:Data = apod_event.toData()!
         let generic_parsed:APODEvent? = GenericUpcomingEvents.parse_any(data: data)
-        XCTAssert(generic_parsed == apod_event, "generic_parsed=\(generic_parsed);apod_event=\(apod_event)")
+        XCTAssert(generic_parsed == apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
         apod_event.image_url = event_image_url
         let string:String? = generic_parsed?.getValue("copyright")
         XCTAssertEqual(string, "Evan Anderson")
@@ -96,12 +96,12 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(apod_pre_event.image_url!.elementsEqual(event_image_url_suffix), "apod_pre_event.image_url=" + (apod_pre_event.image_url ?? "nil"))
         
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
-        let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, id: "test_movie_title", event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
+        let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
         XCTAssert(movie_pre_event.event_date != nil)
         let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
-        XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"id\":\"test_movie_title\",\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
+        XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
         
         let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: nil)
         let holidays_near:[UpcomingEventDateHolidays] = [UpcomingEventDateHolidays(date: event_date, holidays: [pre_holiday])]
@@ -235,6 +235,7 @@ private struct TestBro : Jsonable {
     var big_boy:String
     let number:Int
     @CodableOmittable var small_boy:String?
+    @CodableAlwaysOmittable var ez:String?
     
     func getKeyValue(key: TestBroValueKeys) -> Any? {
         switch key {

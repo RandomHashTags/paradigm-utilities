@@ -37,8 +37,6 @@ public enum HomeResponseNewsValueKeys : String, JsonableValueKeys {
         switch self {
         case .regional:
             return true
-        default:
-            return false
         }
     }
 }

@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public struct ProfessionalWrestlingEvent : GenericUpcomingEvent {
     public typealias ValueKeys = ProfessionalWrestlingEventValueKeys
     
-    public var type : UpcomingEventType {
+    public var type : UpcomingEventType? {
         return UpcomingEventType.sport_professional_wrestling
     }
     public let event_date:EventDate?, exact_start:Int64?, exact_end:Int64?
@@ -21,7 +21,7 @@ public struct ProfessionalWrestlingEvent : GenericUpcomingEvent {
     public var location:String?
     public var image_url:String? {
         didSet {
-            guard let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) else { return }
+            guard let imageURL:String = image_url, let prefix:String = type?.image_url_prefix, imageURL.starts(with: prefix) else { return }
             image_url = imageURL.substring(from: prefix.count)
         }
     }

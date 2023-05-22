@@ -11,7 +11,7 @@ import SwiftSovereignStates
 public struct EarthObservatoryImageOfTheDayEvent : GenericUpcomingEvent {
     public typealias ValueKeys = NoUpcomingEventValueKeys
     
-    public var type : UpcomingEventType {
+    public var type : UpcomingEventType? {
         return UpcomingEventType.earth_observatory_image_of_the_day
     }
     public let event_date:EventDate?, exact_start:Int64?, exact_end:Int64?
@@ -21,7 +21,7 @@ public struct EarthObservatoryImageOfTheDayEvent : GenericUpcomingEvent {
     public var location:String?
     public var image_url:String? {
         didSet {
-            guard let imageURL:String = image_url, let prefix:String = type.image_url_prefix, imageURL.starts(with: prefix) else { return }
+            guard let imageURL:String = image_url, let prefix:String = type?.image_url_prefix, imageURL.starts(with: prefix) else { return }
             image_url = imageURL.substring(from: prefix.count)
         }
     }

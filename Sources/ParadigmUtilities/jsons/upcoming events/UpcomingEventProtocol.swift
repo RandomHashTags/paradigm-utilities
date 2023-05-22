@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public protocol UpcomingEventProtocol : Jsonable {
-    var type : UpcomingEventType { get }
+    var type : UpcomingEventType? { get }
     var event_date : EventDate? { get }
     var exact_start : Int64? { get }
     var exact_end : Int64? { get }

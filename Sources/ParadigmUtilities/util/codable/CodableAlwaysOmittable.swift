@@ -10,7 +10,7 @@ import Foundation
 public protocol CodableAlwaysOmittableProtocol : Codable, Hashable {
     associatedtype T : Codable & Hashable
     
-    var wrappedValue:T { get set }
+    var wrappedValue:T? { get set }
 }
 
 /// Used server-side to indicate that the variable can will always be removed when encoded to JSON.
@@ -20,13 +20,13 @@ public final class CodableAlwaysOmittable<T : Codable & Hashable> : CodableAlway
         return lhs.hashValue == rhs.hashValue
     }
     
-    public var wrappedValue:T
+    public var wrappedValue:T?
     
-    public init(_ wrappedValue: T) {
+    public init(_ wrappedValue: T?) {
         self.wrappedValue = wrappedValue
     }
     public init(from decoder: Decoder) throws {
-        throw CodableAlwaysOmittableError.tried_decoding
+        wrappedValue = nil
     }
     
     public func hash(into hasher: inout Hasher) {
@@ -34,23 +34,12 @@ public final class CodableAlwaysOmittable<T : Codable & Hashable> : CodableAlway
     }
 }
 
-public enum CodableAlwaysOmittableError : Error {
-    case tried_decoding
-    
-    var description : String {
-        switch self {
-        case .tried_decoding: return "tried to decode a `CodableAlwaysOmittable` variable, which is illegal!"
-        }
-    }
-}
-
 extension KeyedEncodingContainer {
     public mutating func encode<T>(_ value: CodableAlwaysOmittable<T>, forKey key: KeyedEncodingContainer<K>.Key) throws {
-        return
     }
 }
 extension KeyedDecodingContainer {
     public func decode<T>(_ value: CodableAlwaysOmittable<T>.Type, forKey key: KeyedDecodingContainer<K>.Key) throws -> CodableAlwaysOmittable<T> {
-        throw CodableAlwaysOmittableError.tried_decoding
+        return CodableAlwaysOmittable<T>(nil)
     }
 }
