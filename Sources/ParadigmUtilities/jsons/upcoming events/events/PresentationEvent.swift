@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PresentationEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = NoUpcomingEventValueKeys
+    public typealias ValueKeys = PresentationEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.presentations
@@ -29,8 +29,12 @@ public struct PresentationEvent : GenericUpcomingEvent {
     public var sources:EventSources
     public var hyperlinks:Hyperlinks?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
+    
+    public var tag:String
         
-    public init(event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?) {
+    public init(event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, description: String?, location: String?, image_url: String?, sources: EventSources, hyperlinks: Hyperlinks?, countries: [Country]?, subdivisions: [any SovereignStateSubdivision]?, tag: String) {
+        self.tag = tag
+        
         self.event_date = event_date
         self.exact_start = exact_start
         self.exact_end = exact_end
@@ -51,6 +55,9 @@ public struct PresentationEvent : GenericUpcomingEvent {
     }
     
     public init(from decoder: Decoder) throws {
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: PresentationEventValueKeys.self)
+        tag = try container.decode(String.self, forKey: .tag)
+        
         let generic_container:KeyedDecodingContainer = try decoder.container(keyedBy: GenericUpcomingEventValueKeys.self)
         event_date = try generic_container.decodeIfPresent(EventDate.self, forKey: .event_date)
         exact_start = try generic_container.decodeIfPresent(Int64.self, forKey: .exact_start)
@@ -67,8 +74,27 @@ public struct PresentationEvent : GenericUpcomingEvent {
     }
     
     public func getKeyValue(key: ValueKeys) -> Any? {
-        return nil
+        switch key {
+        case .tag: return tag
+        }
     }
     public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+        switch key {
+        case .tag:
+            tag = value as! String
+            break
+        }
+    }
+}
+
+public enum PresentationEventValueKeys : String, UpcomingEventValueKeys {
+    case tag
+    
+    public var is_translatable : Bool {
+        return true
+    }
+    
+    public var category : UpcomingEventValueCategory {
+        return UpcomingEventValueCategory.astronomy_picture_of_the_day
     }
 }

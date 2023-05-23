@@ -8,6 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
+// TODO: make protocol?
 public struct PreUpcomingEvent : UpcomingEventProtocol {
     public typealias ValueKeys = PreUpcomingEventValueKeys
     
@@ -15,6 +16,11 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     @CodableOmittable public var event_date:EventDate?
     @CodableOmittable public var exact_start:Int64?
     @CodableOmittable public var exact_end:Int64?
+    
+    /// A custom assigned identifier by the server which is only interacted with if the client needs to use the functionality in some way. Default is `nil`.
+    ///
+    /// An example would be the identifier of a TV Show event, so the client can view it using their service API (TVMaze), as the server doesn't handle those requests.
+    public let id:String?
     public var title:String, tag:String
     public var image_url:String?
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
@@ -24,8 +30,9 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     public let url:String?, production_companies:[String]?, popularity:Int?
     public var team_away:ClientMLBTeam?, team_home:ClientMLBTeam?
     
-    public init(type: UpcomingEventType?, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
+    public init(type: UpcomingEventType?, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
         self._type = CodableAlwaysOmittable(type)
+        self.id = id
         self._event_date = CodableOmittable(event_date, omitted: true)
         self._exact_start = CodableOmittable(exact_start, omitted: true)
         self._exact_end = CodableOmittable(exact_end, omitted: true)
@@ -46,6 +53,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     public func getKeyValue(key: ValueKeys) -> Any? {
         switch key {
         case .type: return type
+        case .id: return id
         case .event_date: return event_date
         case .exact_start: return exact_start
         case .exact_end: return exact_end
@@ -88,6 +96,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
 
 public enum PreUpcomingEventValueKeys : String, JsonableValueKeys {
     case type
+    case id
     case event_date
     case exact_start
     case exact_end
