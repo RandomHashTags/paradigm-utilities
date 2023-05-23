@@ -20,4 +20,8 @@ public extension ParadigmSharedInstance {
             return T.init()
         }
     }
+    
+    func remove() {
+        ParadigmCache.remove(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances, identifier: String(describing: Self.self))
+    }
 }
