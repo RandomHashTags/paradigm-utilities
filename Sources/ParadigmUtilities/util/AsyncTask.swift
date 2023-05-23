@@ -32,6 +32,6 @@ public actor AsyncTask : ParadigmSharedInstance {
     }
     
     public static func get_result<T>(identifier: String, _ handler: @escaping () async throws -> T?) async throws -> T? {
-        return try await AsyncTask.shared_instance.get_result(identifier: identifier, handler)
+        return try await AsyncTask.shared.get_result(identifier: identifier, handler)
     }
 }
