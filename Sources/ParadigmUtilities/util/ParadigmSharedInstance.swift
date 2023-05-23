@@ -12,7 +12,7 @@ public protocol ParadigmSharedInstance {
 }
 
 public extension ParadigmSharedInstance {
-    static var shared_instance : Self {
+    static var shared : Self {
         return get(identifier: String(describing: Self.self))
     }
     static func get<T : ParadigmSharedInstance>(identifier: String) -> T {
