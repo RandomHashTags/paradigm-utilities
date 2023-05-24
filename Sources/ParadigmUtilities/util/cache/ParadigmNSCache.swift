@@ -41,7 +41,7 @@ public final class ParadigmNSCache<Key: Hashable, Value> : NSObject, NSCacheDele
         insert(value, forKey: key)
         return value
     }
-    public func get_or_insert_async_throwable(identifier: String, _ key: Key, _ handler: @escaping () async throws -> Value) async throws -> Value {
+    public func get_or_insert_async_throwable(identifier: AnyHashable, _ key: Key, _ handler: @escaping () async throws -> Value) async throws -> Value {
         if let value:Value = value(forKey: key) {
             return value
         }
@@ -60,7 +60,7 @@ public final class ParadigmNSCache<Key: Hashable, Value> : NSObject, NSCacheDele
         insert(value, forKey: key)
         return value
     }
-    public func get_or_insert_optional_async_throwable(identifier: String, _ key: Key, _ handler: @escaping () async throws -> Value?) async throws -> Value? {
+    public func get_or_insert_optional_async_throwable(identifier: AnyHashable, _ key: Key, _ handler: @escaping () async throws -> Value?) async throws -> Value? {
         if let value:Value = value(forKey: key) {
             return value
         }

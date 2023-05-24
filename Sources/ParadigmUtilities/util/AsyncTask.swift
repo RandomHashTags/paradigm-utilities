@@ -8,7 +8,7 @@
 import Foundation
 
 public actor AsyncTask : ParadigmSharedInstance {
-    private var ids:[String:Task<Any?, Error>] = [String:Task<Any?, Error>]()
+    private var ids:[AnyHashable:Task<Any?, Error>] = [AnyHashable:Task<Any?, Error>]()
     
     public init() {
     }
@@ -17,7 +17,7 @@ public actor AsyncTask : ParadigmSharedInstance {
         return ids.count
     }
     
-    private func get_result<T>(identifier: String, _ handler: @escaping () async throws -> T?) async throws -> T? {
+    private func get_result<T>(identifier: AnyHashable, _ handler: @escaping () async throws -> T?) async throws -> T? {
         if let task:Task = ids[identifier] {
             return try await task.value as? T
         }
@@ -31,7 +31,7 @@ public actor AsyncTask : ParadigmSharedInstance {
         return try await task.value as? T
     }
     
-    public static func get_result<T>(identifier: String, _ handler: @escaping () async throws -> T?) async throws -> T? {
+    public static func get_result<T>(identifier: AnyHashable, _ handler: @escaping () async throws -> T?) async throws -> T? {
         return try await AsyncTask.shared.get_result(identifier: identifier, handler)
     }
 }

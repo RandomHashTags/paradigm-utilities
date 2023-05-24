@@ -7,7 +7,7 @@
 
 import Foundation
 
-public final class EventSources : Jsonable {
+public struct EventSources : Jsonable {
     public static func == (lhs: EventSources, rhs: EventSources) -> Bool {
         return lhs.sources.elementsEqual(rhs.sources)
     }
@@ -46,27 +46,27 @@ public final class EventSources : Jsonable {
         return sources.first
     }
     
-    public func append(_ source: EventSource) {
+    public mutating func append(_ source: EventSource) {
         sources.append(source)
     }
-    public func append(_ sources: EventSources?) {
+    public mutating func append(_ sources: EventSources?) {
         guard let sources:[EventSource] = sources?.sources else { return }
         self.sources.append(contentsOf: sources)
     }
-    public func append(_ sources: EventSources) {
+    public mutating func append(_ sources: EventSources) {
         self.sources.append(contentsOf: sources.sources)
     }
-    public func append(contentsOf: [EventSource]) {
+    public mutating func append(contentsOf: [EventSource]) {
         sources.append(contentsOf: contentsOf)
     }
     
-    public func sorted(by: (EventSource, EventSource) -> Bool) {
+    public mutating func sorted(by: (EventSource, EventSource) -> Bool) {
         sources = sources.sorted(by: by)
     }
-    public func setSources(_ sources: EventSources) {
+    public mutating func setSources(_ sources: EventSources) {
         self.sources = sources.sources
     }
-    public func setSources(_ sources: [EventSource]) {
+    public mutating func setSources(_ sources: [EventSource]) {
         self.sources = sources
     }
     
@@ -79,7 +79,7 @@ public final class EventSources : Jsonable {
         case .sources: return sources
         }
     }
-    public func setKeyValue<T>(key: EventSourcesValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: EventSourcesValueKeys, value: T) {
         switch key {
         case .sources:
             sources = value as! [EventSource]
