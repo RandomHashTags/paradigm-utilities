@@ -46,18 +46,20 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     private func validate_cache() {
         let api_version:APIVersion = APIVersion.v1
-        let string_1:String = ParadigmCache.get_or_load(api_version: api_version, type: ParadigmCacheType.shared_instances, identifier: "test_1") {
+        let test_cache:ParadigmNSCache<String, String> = ParadigmCache.get_or_load_cache(api_version: api_version, type: ParadigmCacheType.shared_instances)
+        let string_1:String = test_cache.get_or_insert("test_1") {
             return "TEST_BRO_1"
         }
-        let string_2:String = ParadigmCache.get_or_load(api_version: api_version, type: ParadigmCacheType.shared_instances, identifier: "test_1") {
+        let string_2:String = test_cache.get_or_insert("test_1") {
             return "TEST_BRO_2"
         }
         XCTAssertEqual(string_1, string_2)
-        let test_cache:ParadigmNSCache<String, String> = ParadigmCache.get_or_load_cache(api_version: api_version, type: ParadigmCacheType.shared_instances)
         XCTAssert(test_cache["test_1"] == "TEST_BRO_1")
         test_cache["test_1"] = string_2
         test_cache["test_2"] = string_1
         XCTAssert(test_cache.count == 2, "test_cache.count=\(test_cache.count)")
+        test_cache.remove_value(for_key: "test_2")
+        XCTAssert(test_cache.count == 1, "test_cache.count=\(test_cache.count)")
         test_cache.remove_all()
         XCTAssert(test_cache.count == 0)
     }
