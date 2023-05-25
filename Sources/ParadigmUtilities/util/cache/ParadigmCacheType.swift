@@ -35,7 +35,10 @@ public enum ParadigmCacheType : Hashable {
     // Government
     case server_government_recent_activity
     case server_government_administration
-    case server_government_administration_cache
+    case server_government_administration_bill
+    case server_government_administration_bills_by_status
+    case server_government_administration_enacted_bills
+    case server_government_administration_politician
     case server_government_administration_recent_activity
     case server_government_subdivision_statute_indexes
     case server_government_subdivision_statute_chapters
