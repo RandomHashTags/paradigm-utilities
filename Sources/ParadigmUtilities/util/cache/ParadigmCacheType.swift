@@ -45,7 +45,7 @@ public enum ParadigmCacheType : Hashable {
     case server_government_subdivision_statute_sections
     case server_government_subdivision_statute
     // Services
-    case server_service_spotify_access_token
+    case server_service_access_token
     // Upcoming Events
     case server_upcoming_event_server_holiday
     case server_upcoming_event_client_holiday
