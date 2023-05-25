@@ -14,7 +14,7 @@ public enum ParadigmCacheType : Hashable {
     case shared_instances
     case misc
     
-    #if canImport(Vapor)
+    #if canImport(ParadigmServerUtilities)
     /*
      Server-side
      */
@@ -73,7 +73,8 @@ public enum ParadigmCacheType : Hashable {
     case server_weather_zone
     case server_weather_nasa_eonet
     case server_weather_nasa_eonet_volcano_description
-    #endif
+    
+    #else
     
     /*
      Client-side
@@ -103,4 +104,5 @@ public enum ParadigmCacheType : Hashable {
     case client_weather_events
     case client_weather_natural_events
     case client_weather_pre_earthquakes
+    #endif
 }
