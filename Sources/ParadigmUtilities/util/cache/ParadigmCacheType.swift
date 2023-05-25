@@ -32,6 +32,7 @@ public enum ParadigmCacheType : Hashable {
     case server_countries_national_park
     case server_countries_volcano
     // Government
+    case server_government_recent_activity
     case server_government_administration
     case server_government_administration_cache
     case server_government_administration_recent_activity
