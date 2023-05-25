@@ -14,7 +14,7 @@ public enum ParadigmCacheType : Hashable {
     case shared_instances
     case misc
     
-    #if canImport(APNS)
+    #if canImport(Vapor)
     /*
      Server-side
      */
