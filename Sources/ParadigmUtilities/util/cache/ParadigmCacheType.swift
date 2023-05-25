@@ -12,6 +12,7 @@ public enum ParadigmCacheType : Hashable {
      Shared
      */
     case shared_instances
+    case misc
     
     #if canImport(APNS)
     /*
@@ -24,6 +25,9 @@ public enum ParadigmCacheType : Hashable {
     // Responses
     case server_responses_home
     case server_responses_home_combined
+    case server_responses_upcoming_event_movie_production_companies
+    case server_responses_weather_alerts
+    case server_responses_weather_event_pre_alerts
     // Countries
     case server_countries_currency_exchange
     case server_countries_country_availabilities_country_value
@@ -52,6 +56,7 @@ public enum ParadigmCacheType : Hashable {
     case server_upcoming_event_near_holidays
     case server_upcoming_event_region_holidays
     case server_upcoming_event_weekly_events
+    case server_upcoming_event_movie_production_company
     /// returned value should be ---> ParadigmCache<String, GenericUpcomingEvent>
     case server_upcoming_events_by_type
     /// returned value should be ---> ParadigmCache<String, PreUpcomingEvent>
