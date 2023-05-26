@@ -31,7 +31,7 @@ public extension Sequence where Element : Hashable {
         return Set<Element>(self)
     }
     func unique() -> [Element] {
-        return unique_set().map({ $0 })
+        return [Element](unique_set())
     }
 }
 
