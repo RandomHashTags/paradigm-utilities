@@ -52,7 +52,7 @@ public extension StringProtocol {
         return Month.valueOf(self)
     }
     
-    func matches(regex: String) -> Bool {
+    func matches(regex: any StringProtocol) -> Bool {
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
 }
