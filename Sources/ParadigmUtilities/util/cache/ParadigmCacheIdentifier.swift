@@ -7,10 +7,10 @@
 
 import Foundation
 
-public struct ParadigmCacheIdentifier<T: Hashable> : Hashable {
-    public let values:[T]
+public struct ParadigmCacheIdentifier : Hashable {
+    public let values:[AnyHashable]
     
-    public init(values: T...) {
+    public init(values: AnyHashable...) {
         self.values = values
     }
 }
