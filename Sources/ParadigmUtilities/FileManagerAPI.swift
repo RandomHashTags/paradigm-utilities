@@ -37,32 +37,40 @@ public enum FileManagerAPI {
         return get().fileExists(atPath: at_path, isDirectory: is_directory)
     }
     
-    public static func write_jsonable(file_name: String, json: any Jsonable) -> Task<Void, Error>? {
-        guard let data:Data = json.toData() else { return nil }
-        return write_data(file_name: file_name, file_extension: "json", data: data)
+    public static func write_jsonable_throwable(file_name: String, json: any Jsonable, on_error: @escaping (Error) -> Void) {
+        guard let data:Data = json.toData() else { return }
+        write_data_throwable(file_name: file_name, file_extension: "json", data: data, on_error: on_error)
     }
     /// Tries to write `Encodable` into a json file with name `file_name` to disk.
-    public static func write_encodable_throwable<T: Encodable>(file_name: String, encodable: T) throws -> Task<Void, Error> {
-        let data:Data = try ParadigmUtilities.json_encoder.encode(encodable)
-        return write_data(file_name: file_name, file_extension: "json", data: data)
+    public static func write_encodable_throwable<T: Encodable>(file_name: String, encodable: T, on_error: @escaping (Error) -> Void) {
+        do {
+            let data:Data = try ParadigmUtilities.json_encoder.encode(encodable)
+            write_data_throwable(file_name: file_name, file_extension: "json", data: data, on_error: on_error)
+        } catch {
+            on_error(error)
+        }
     }
-    public static func write_string(file_name: String, file_extension: String, value: String) -> Task<Void, Error> {
-        return write_data(file_name: file_name, file_extension: file_extension, data: value.data(using: .utf8)!)
+    public static func write_string_throwable(file_name: String, file_extension: String, value: String, on_error: @escaping (Error) -> Void) {
+        write_data_throwable(file_name: file_name, file_extension: file_extension, data: value.data(using: .utf8)!, on_error: on_error)
     }
-    public static func write_data(file_name: String, file_extension: String, data: Data) -> Task<Void, Error> {
+    public static func write_data_throwable(file_name: String, file_extension: String, data: Data, on_error: @escaping (Error) -> Void) {
         let name:String = file_name + "." + file_extension
         let path:String = get_file_container_url().appendingPathComponent(name).path
-        return write_data(at_path: path, data: data)
+        write_data_throwable(at_path: path, data: data, on_error: on_error)
     }
     private static func create_directories_for_file_if_needed_throwable(at_path: String) throws {
         let url:URL = URL(fileURLWithPath: at_path)
         try get().createDirectory(at: url.deletingLastPathComponent(), withIntermediateDirectories: true)
     }
-    public static func write_data(at_path: String, data: Data) -> Task<Void, Error> {
-        return Task {
-            try create_directories_for_file_if_needed_throwable(at_path: at_path)
-            let url:URL = URL(fileURLWithPath: at_path)
-            try data.write(to: url)
+    public static func write_data_throwable(at_path: String, data: Data, on_error: @escaping (Error) -> Void) {
+        Task {
+            do {
+                try create_directories_for_file_if_needed_throwable(at_path: at_path)
+                let url:URL = URL(fileURLWithPath: at_path)
+                try data.write(to: url)
+            } catch {
+                on_error(error)
+            }
         }
     }
     
