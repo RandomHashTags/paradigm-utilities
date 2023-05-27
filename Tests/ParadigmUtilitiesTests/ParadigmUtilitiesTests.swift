@@ -4,7 +4,7 @@ import SwiftSovereignStates
 
 final class ParadigmUtilitiesTests: XCTestCase {
     func testExample() async throws {
-        let decoder:JSONDecoder = JSONDecoder()
+        let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
         let big_boy:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
         let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy, ez: CodableAlwaysOmittable<String>.init("BOOBA"))
@@ -26,11 +26,11 @@ final class ParadigmUtilitiesTests: XCTestCase {
     
     private func testFoundation(_ bro: TestBro) throws {
         let big_boy:String = bro.big_boy
-        let data:Data = try JSONEncoder().encode(bro)
+        let data:Data = try ParadigmUtilities.json_encoder.encode(bro)
         let string:String = String(data: data, encoding: .utf8)!
         XCTAssert(string.elementsEqual("{\"big_boy\":\"" + big_boy + "\",\"number\":1}"), "invalid string; string=" + string)
         
-        var decoded:TestBro = try JSONDecoder().decode(TestBro.self, from: data)
+        var decoded:TestBro = try ParadigmUtilities.json_decoder.decode(TestBro.self, from: data)
         XCTAssert(decoded.toString()!.elementsEqual(string))
         decoded.setOmittableValue(.small_boy, value: false)
         let decodedString:String = decoded.toString()!
@@ -82,6 +82,8 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func testUpcomingEvents(_ decoder: JSONDecoder) throws {
+        let encoder:JSONEncoder = ParadigmUtilities.json_encoder
+        
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
         var apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
@@ -102,12 +104,12 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(movie_pre_event.event_date != nil)
         let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
-        let upcoming_events_json:String = String(data: try JSONEncoder().encode(test), encoding: .utf8)!
+        let upcoming_events_json:String = String(data: try encoder.encode(test), encoding: .utf8)!
         XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
         
         let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: nil)
         let holidays_near:[UpcomingEventDateHolidays] = [UpcomingEventDateHolidays(date: event_date, holidays: [pre_holiday])]
-        let holidays_near_json:String = String(data: try JSONEncoder().encode(holidays_near), encoding: .utf8)!
+        let holidays_near_json:String = String(data: try encoder.encode(holidays_near), encoding: .utf8)!
         XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
@@ -115,7 +117,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
     }
     
     private func test_home_responses(_ decoder: JSONDecoder) throws {
-        let encoder:JSONEncoder = JSONEncoder()
+        let encoder:JSONEncoder = ParadigmUtilities.json_encoder
         
         let countries:HomeResponseCountries = HomeResponseCountries(filters: nil)
         

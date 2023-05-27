@@ -90,7 +90,7 @@ public extension JsonableProtocol {
     //}
     
     func toData() -> Data? {
-        return try? JSONEncoder().encode(self)
+        return try? ParadigmUtilities.json_encoder.encode(self)
     }
     func toData(language: Language, omittedKeys: [String]?) async -> Data? {
         return toData()

@@ -13,11 +13,11 @@ public enum GenericUpcomingEvents {
         return parse_any(data: data) as? T
     }
     public static func parse_any<T: GenericUpcomingEvent>(data: Data) -> T? {
-        return try? JSONDecoder().decode(T.self, from: data)
+        return try? ParadigmUtilities.json_decoder.decode(T.self, from: data)
     }
     private static func parse_any(data: Data) -> (any GenericUpcomingEvent)? {
         do {
-            let decoder:JSONDecoder = JSONDecoder()
+            let decoder:JSONDecoder = ParadigmUtilities.json_decoder
             let generic:GenericUpcomingEventType = try decoder.decode(GenericUpcomingEventType.self, from: data)
             switch generic.type {
             case .astronomy_picture_of_the_day:

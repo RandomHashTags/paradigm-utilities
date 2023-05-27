@@ -1,6 +1,11 @@
 import Foundation
 
 public enum ParadigmUtilities {
+    public static var file_container_url:URL! = nil
+    
+    public static var json_encoder:JSONEncoder = JSONEncoder()
+    public static var json_decoder:JSONDecoder = JSONDecoder()
+    
     public static var now : Date {
         var date:Date = Date()
         while date.year < 2023 {
