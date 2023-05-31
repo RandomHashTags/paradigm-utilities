@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftSovereignStates
 
 public protocol ParadigmSharedInstance {
     static var shared_identifier : ParadigmSharedInstanceIdentifier { get }
@@ -33,4 +34,30 @@ public extension ParadigmSharedInstance {
 public enum ParadigmSharedInstanceIdentifier : Hashable {
     case async_task
     case custom(AnyHashable)
+    
+    #if canImport(Vapor)
+    /*
+     Server-side
+     */
+    case timings
+    case server(TargetServer)
+    
+    case country_availabilities
+    case country_service(SovereignStateInfo)
+    
+    case government_administration_country(Country)
+    case government_administration_subdivision(SovereignStateSubdivisionWrapper)
+    case government_politicians_country(Country)
+    case government_politicians_subdivision(SovereignStateSubdivisionWrapper)
+    
+    case service_rotten_tomatoes
+    case service_spotify
+    
+    case upcoming_events_movie_production_companies
+    
+    case weather_alerts
+    case weather_controller(Country)
+    case weather_earthquakes
+    case weather_nasa_eonet
+    #endif
 }
