@@ -62,6 +62,14 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(test_cache.count == 1, "test_cache.count=\(test_cache.count)")
         test_cache.remove_all()
         XCTAssert(test_cache.count == 0)
+        
+        let shared_instances_cache:ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance> = ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances)
+        XCTAssert(shared_instances_cache.count == 0)
+        let _:AsyncTask = AsyncTask.shared
+        XCTAssert(shared_instances_cache.count == 1)
+        let _:AsyncTask = AsyncTask.shared
+        let _:AsyncTask = AsyncTask.get(identifier: ParadigmSharedInstanceIdentifier.async_task)
+        XCTAssert(shared_instances_cache.count == 1)
     }
     
     private func testSovereignStateInformation(_ decoder: JSONDecoder) throws {

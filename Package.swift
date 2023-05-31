@@ -16,7 +16,7 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/RandomHashTags/swift-sovereign-states.git", from: "1.3.1"),
+        .package(url: "https://github.com/RandomHashTags/swift-sovereign-states.git", from: "1.3.2"),
         .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "9.0.0"),
         .package(url: "https://github.com/vapor/vapor.git", from: "4.76.0"),
     ],

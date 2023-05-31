@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ParadigmCache {
-    private static var cache:ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>> = ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>>()
+    public static var cache:ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>> = ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>>()
     
     public static func get_or_load_cache<T, V>(api_version: APIVersion, type: ParadigmCacheType) -> ParadigmNSCache<T, V> {
         if let value:ParadigmNSCache<T, V> = ParadigmCache.cache[api_version]?[type] as? ParadigmNSCache<T, V> {
@@ -60,5 +60,11 @@ public struct ParadigmCache {
     public static func get_or_load_optional_async_throwable<V>(api_version: APIVersion, type: ParadigmCacheType, identifier: AnyHashable, load: @escaping () async throws -> V?) async throws -> V? {
         let cache:ParadigmNSCache<AnyHashable, V> = get_or_load_cache(api_version: api_version, type: type)
         return try await cache.get_or_insert_optional_async_throwable(identifier: identifier, identifier, load)
+    }
+}
+
+public extension ParadigmCache {
+    static func get_shared_instances_cache() -> ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance> {
+        return ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances)
     }
 }
