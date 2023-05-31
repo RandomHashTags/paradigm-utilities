@@ -24,10 +24,10 @@ public extension ParadigmSharedInstance {
     }
     
     static func remove(identifier: ParadigmSharedInstanceIdentifier) {
-        ParadigmCache.remove(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances, identifier: identifier)
+        ParadigmCache.get_shared_instances_cache().remove_value(for_key: identifier)
     }
     func remove() {
-        ParadigmCache.remove(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances, identifier: Self.shared_identifier)
+        ParadigmCache.get_shared_instances_cache().remove_value(for_key: Self.shared_identifier)
     }
 }
 
