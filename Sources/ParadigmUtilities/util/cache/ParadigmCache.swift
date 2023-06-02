@@ -14,11 +14,7 @@ public struct ParadigmCache {
         if let value:ParadigmNSCache<T, V> = ParadigmCache.cache[api_version]?[type] as? ParadigmNSCache<T, V> {
             return value
         } else {
-            if ParadigmCache.cache[api_version] == nil {
-                ParadigmCache.cache[api_version] = ParadigmNSCache<AnyHashable, Any>()
-            }
-            ParadigmCache.cache[api_version]![type] = ParadigmNSCache<T, V>()
-            return ParadigmCache.cache[api_version]![type] as! ParadigmNSCache<T, V>
+            return ParadigmCache.cache.get_or_insert(api_version, { ParadigmNSCache<AnyHashable, Any>() }).get_or_insert(type, { ParadigmNSCache<T, V>() }) as! ParadigmNSCache<T, V>
         }
     }
     

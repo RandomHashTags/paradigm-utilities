@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum TargetServer : String, CaseIterable {
+public enum TargetServer : String, CaseIterable, LosslessStringConvertible {
     case countries
     case environment
     case feedback
@@ -25,6 +25,15 @@ public enum TargetServer : String, CaseIterable {
     #if canImport(Vapor)
     case paradigm
     #endif
+    
+    public init?(_ description: String) {
+        guard let server:TargetServer = TargetServer.init(rawValue: description) else { return nil }
+        self = server
+    }
+    
+    public var description : String {
+        return rawValue
+    }
     
     public var name : String {
         switch self {

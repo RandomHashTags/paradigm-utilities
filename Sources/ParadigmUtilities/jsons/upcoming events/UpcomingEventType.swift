@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum UpcomingEventType : String, CaseIterable, Jsonable {
+public enum UpcomingEventType : String, CaseIterable, Jsonable, LosslessStringConvertible {
     case astronomy_picture_of_the_day
     case earth_observatory_image_of_the_day
     case joke_of_the_day
@@ -35,6 +35,15 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable {
     case video_game_events
     case wikipedia_todays_featured_picture
     case word_of_the_day
+    
+    public init?(_ description: String) {
+        guard let type:UpcomingEventType = UpcomingEventType.init(rawValue: description) else { return nil }
+        self = type
+    }
+    
+    public var description : String {
+        return rawValue
+    }
     
     public func getPriority(widget: Bool) -> Int {
         if widget {

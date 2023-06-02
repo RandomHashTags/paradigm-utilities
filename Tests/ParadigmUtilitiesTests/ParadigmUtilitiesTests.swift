@@ -63,7 +63,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
         test_cache.remove_all()
         XCTAssert(test_cache.count == 0)
         
-        let shared_instances_cache:ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance> = ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances)
+        let shared_instances_cache:ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance> = ParadigmCache.get_shared_instances_cache()
         XCTAssert(shared_instances_cache.count == 0)
         let _:AsyncTask = AsyncTask.shared
         XCTAssert(shared_instances_cache.count == 1)

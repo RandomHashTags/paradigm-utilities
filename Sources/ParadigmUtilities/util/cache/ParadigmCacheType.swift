@@ -25,12 +25,13 @@ public enum ParadigmCacheType : Hashable {
     // Responses
     case server_responses_home
     case server_responses_home_combined
+    case server_responses_government_recent_activity
     case server_responses_upcoming_event_movie_production_companies
     case server_responses_weather_alerts
     case server_responses_weather_event_pre_alerts
     // Countries
     case server_countries_currency_exchange
-    case server_countries_country_availabilities_country_value
+    case server_countries_country_service_value
     case server_countries_sovereign_state_information_static
     case server_countries_sovereign_state_information_nonstatic
     case server_countries_sovereign_state_information_combined
@@ -57,9 +58,9 @@ public enum ParadigmCacheType : Hashable {
     case server_upcoming_event_region_holidays
     case server_upcoming_event_weekly_events
     case server_upcoming_event_movie_production_company
-    /// returned value should be ---> ParadigmCache<String, GenericUpcomingEvent>
+    /// returned value should be ---> ParadigmNSCache<String, GenericUpcomingEvent>
     case server_upcoming_events_by_type
-    /// returned value should be ---> ParadigmCache<String, PreUpcomingEvent>
+    /// returned value should be ---> ParadigmNSCache<String, PreUpcomingEvent>
     case server_pre_upcoming_events_by_type
     // Weather
     case server_weather_sovereign_state_pre_earthquakes
@@ -67,11 +68,14 @@ public enum ParadigmCacheType : Hashable {
     case server_weather_earthquake
     case server_weather_pre_alert
     case server_weather_alert
-    case server_weather_all_alerts
+    /// returned value should be ---> ParadigmNSCache<Country, ParadigmNSCache<String, [String:[WeatherPreAlert]]>>
     case server_weather_event_pre_alerts
+    /// returned value should be ---> ParadigmNSCache<Country, ParadigmNSCache<String, [WeatherEvent]>>
     case server_weather_subdivision_events
+    /// returned value should be ---> ParadigmNSCache<Country, ParadigmNSCache<String, ParadigmNSCache<WeatherEventType, [WeatherPreAlert]>>>
     case server_weather_subdivision_pre_alerts
     case server_weather_zone
+    /// returned value should be ---> NaturalWeatherEvents
     case server_weather_nasa_eonet
     case server_weather_nasa_eonet_volcano_description
     
