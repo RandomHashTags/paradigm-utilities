@@ -9,13 +9,13 @@ import Foundation
 import SwiftSovereignStates
 
 public protocol ParadigmSharedInstance {
-    static var shared_identifier : ParadigmSharedInstanceIdentifier { get }
+    static func shared_identifier() -> ParadigmSharedInstanceIdentifier
     init()
 }
 
 public extension ParadigmSharedInstance {
     static var shared : Self {
-        return get(identifier: shared_identifier)
+        return get(identifier: shared_identifier())
     }
     static func get<T : ParadigmSharedInstance>(identifier: ParadigmSharedInstanceIdentifier) -> T {
         return ParadigmCache.get_shared_instances_cache().get_or_insert(identifier) {
@@ -27,7 +27,7 @@ public extension ParadigmSharedInstance {
         ParadigmCache.get_shared_instances_cache().remove_value(for_key: identifier)
     }
     func remove() {
-        ParadigmCache.get_shared_instances_cache().remove_value(for_key: Self.shared_identifier)
+        ParadigmCache.get_shared_instances_cache().remove_value(for_key: Self.shared_identifier())
     }
 }
 
