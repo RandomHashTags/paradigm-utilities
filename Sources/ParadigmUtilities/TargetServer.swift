@@ -22,6 +22,9 @@ public enum TargetServer : String, CaseIterable {
     case stock_market
     case upcoming_events
     case weather
+    #if canImport(Vapor)
+    case paradigm
+    #endif
     
     public var name : String {
         switch self {
@@ -39,6 +42,9 @@ public enum TargetServer : String, CaseIterable {
         case .stock_market:         return "Stock Market"
         case .upcoming_events:      return "Upcoming Events"
         case .weather:              return "Weather"
+        #if canImport(Vapor)
+        case .paradigm:             return "Paradigm"
+        #endif
         }
     }
 }

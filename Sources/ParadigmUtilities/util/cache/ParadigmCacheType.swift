@@ -67,6 +67,7 @@ public enum ParadigmCacheType : Hashable {
     case server_weather_earthquake
     case server_weather_pre_alert
     case server_weather_alert
+    case server_weather_all_alerts
     case server_weather_event_pre_alerts
     case server_weather_subdivision_events
     case server_weather_subdivision_pre_alerts
