@@ -14,6 +14,7 @@ public enum TargetServer : String, CaseIterable {
     case government
     case health
     case history
+    case machine_translation
     case news
     case premium
     case remote_notifications
@@ -30,6 +31,7 @@ public enum TargetServer : String, CaseIterable {
         case .government:           return "Government"
         case .health:               return "Health"
         case .history:              return "History"
+        case .machine_translation:  return "Machine Translation"
         case .news:                 return "News"
         case .premium:              return "Premium"
         case .remote_notifications: return "Remote Notifications"
