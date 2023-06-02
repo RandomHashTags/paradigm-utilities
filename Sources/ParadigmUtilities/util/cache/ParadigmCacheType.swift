@@ -20,7 +20,10 @@ public enum ParadigmCacheType : Hashable {
      */
     // Misc
     case server_http_headers
-    case server_settings_json
+    case server_settings
+    case server_settings_server_values
+    case server_settings_data_values
+    case server_settings_private_values
     case server_ping
     // Responses
     case server_responses_home
