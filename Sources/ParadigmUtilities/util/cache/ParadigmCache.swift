@@ -10,11 +10,11 @@ import Foundation
 public struct ParadigmCache {
     public static var cache:ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>> = ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>>()
     
-    public static func get_or_load_cache<T, V>(api_version: APIVersion, type: ParadigmCacheType) -> ParadigmNSCache<T, V> {
-        if let value:ParadigmNSCache<T, V> = ParadigmCache.cache[api_version]?[type] as? ParadigmNSCache<T, V> {
+    public static func get_or_load_cache<V>(api_version: APIVersion, type: ParadigmCacheType) -> ParadigmNSCache<AnyHashable, V> {
+        if let value:ParadigmNSCache<AnyHashable, V> = ParadigmCache.cache[api_version]?[type] as? ParadigmNSCache<AnyHashable, V> {
             return value
         } else {
-            return ParadigmCache.cache.get_or_insert(api_version, { ParadigmNSCache<AnyHashable, Any>() }).get_or_insert(type, { ParadigmNSCache<T, V>() }) as! ParadigmNSCache<T, V>
+            return ParadigmCache.cache.get_or_insert(api_version, { ParadigmNSCache<AnyHashable, Any>() }).get_or_insert(type, { ParadigmNSCache<AnyHashable, V>() }) as! ParadigmNSCache<AnyHashable, V>
         }
     }
     
@@ -60,7 +60,8 @@ public struct ParadigmCache {
 }
 
 public extension ParadigmCache {
-    static func get_shared_instances_cache() -> ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance> {
+    /// should return ---> _ParadigmNSCache<ParadigmSharedInstanceIdentifier, any ParadigmSharedInstance>_
+    static func get_shared_instances_cache() -> ParadigmNSCache<AnyHashable, any ParadigmSharedInstance> {
         return ParadigmCache.get_or_load_cache(api_version: APIVersion.latest, type: ParadigmCacheType.shared_instances)
     }
 }
