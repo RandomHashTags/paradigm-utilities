@@ -254,7 +254,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable, LosslessStringCo
         }
     }
     
-    public var value_keys_type : (any UpcomingEventValueKeys.Type)? {
+    public var value_keys_type : any UpcomingEventValueKeys.Type {
         switch self {
         case .astronomy_picture_of_the_day:      return APODEventValueKeys.self
         case .joke_of_the_day:                   return JOTDEventValueKeys.self
@@ -272,7 +272,7 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable, LosslessStringCo
         case .video_game:                        return VideoGameEventValueKeys.self
         case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEventValueKeys.self
         case .word_of_the_day:                   return WOTDEventValueKeys.self
-        default: return nil
+        default:                                 return NoUpcomingEventValueKeys.self
         }
     }
     public var value_keys : [any UpcomingEventValueKeys]? {
