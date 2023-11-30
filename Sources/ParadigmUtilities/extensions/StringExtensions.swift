@@ -55,6 +55,10 @@ public extension StringProtocol {
     func matches(regex: any StringProtocol) -> Bool {
         return range(of: regex, options: .regularExpression, range: nil, locale: nil) != nil
     }
+    
+    func is_date_string() -> Bool {
+        return matches(regex: "[0-9]+-[0-9]+-[0-9]+")
+    }
 }
 
 public extension Substring {
