@@ -7,15 +7,9 @@
 
 import Foundation
 import SwiftSovereignStates
-#if canImport(Vapor)
-import Vapor
-#endif
 
 public protocol JsonableProtocol : Hashable, Codable {
     associatedtype ValueKeys : JsonableValueKeys = NoJsonableValueKeys
-    
-    func getTranslations() -> [Language:String]?
-    //func getFolderPath() -> FolderPath?
     
     func toData() -> Data?
     func toData(language: Language, omittedKeys: [String]?) async -> Data?
@@ -26,7 +20,9 @@ public protocol JsonableProtocol : Hashable, Codable {
     mutating func setKeyValue<T>(key: ValueKeys, value: T)
 }
 
-#if canImport(Vapor)
+public protocol Jsonable : JsonableProtocol {
+}
+/*
 public protocol Jsonable : JsonableProtocol, AsyncResponseEncodable {
 }
 public extension Jsonable {
@@ -54,11 +50,7 @@ public extension URLQueryContainer {
     func getOmittValues() -> [String]? {
         return getOmitt()?.components(separatedBy: ",")
     }
-}
-#else
-public protocol Jsonable : JsonableProtocol {
-}
-#endif
+}*/
 public extension JsonableProtocol {
     func all_values_are_nil() -> Bool {
         guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
@@ -82,12 +74,6 @@ public extension JsonableProtocol {
     func getValueKeys() -> ValueKeys.AllCases {
         return ValueKeys.allCases
     }
-    func getTranslations() -> [Language:String]? {
-        return nil
-    }
-    //func getFolderPath() -> FolderPath? {
-    //    return nil
-    //}
     
     func toData() -> Data? {
         return try? ParadigmUtilities.json_encoder.encode(self)

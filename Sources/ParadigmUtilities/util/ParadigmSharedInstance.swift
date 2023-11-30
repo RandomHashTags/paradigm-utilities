@@ -35,7 +35,7 @@ public enum ParadigmSharedInstanceIdentifier : Hashable {
     case async_task
     case custom(AnyHashable)
     
-    #if canImport(Vapor)
+    #if os(macOS) || os(Linux) || os(Windows)
     /*
      Server-side
      */

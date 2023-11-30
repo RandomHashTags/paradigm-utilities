@@ -18,16 +18,14 @@ let package = Package(
     ],
     dependencies: [
         .package(url: "https://github.com/RandomHashTags/swift-sovereign-states.git", from: "1.3.2"),
-        .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "9.0.0"),
-        .package(url: "https://github.com/vapor/vapor.git", from: "4.76.0"),
+        .package(url: "https://github.com/GEOSwift/GEOSwift.git", from: "10.1.0")
     ],
     targets: [
         .target(
             name: "ParadigmUtilities",
             dependencies: [
                 .product(name: "SwiftSovereignStates", package: "swift-sovereign-states"),
-                .product(name: "GEOSwift", package: "GEOSwift"),
-                .product(name: "Vapor", package: "vapor")
+                .product(name: "GEOSwift", package: "GEOSwift")
             ],
             resources: [.process("Resources")]
         ),

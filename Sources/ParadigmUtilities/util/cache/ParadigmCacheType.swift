@@ -14,7 +14,7 @@ public enum ParadigmCacheType : Hashable {
     case shared_instances
     case misc
     
-    #if canImport(Vapor)
+    #if os(macOS) || os(Linux) || os(Windows)
     /*
      Server-side
      */

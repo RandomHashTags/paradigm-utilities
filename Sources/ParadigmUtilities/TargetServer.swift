@@ -22,7 +22,8 @@ public enum TargetServer : String, CaseIterable, LosslessStringConvertible {
     case stock_market
     case upcoming_events
     case weather
-    #if canImport(Vapor)
+    
+    #if os(macOS) || os(Linux) || os(Windows)
     case paradigm
     #endif
     
@@ -51,7 +52,7 @@ public enum TargetServer : String, CaseIterable, LosslessStringConvertible {
         case .stock_market:         return "Stock Market"
         case .upcoming_events:      return "Upcoming Events"
         case .weather:              return "Weather"
-        #if canImport(Vapor)
+        #if os(macOS) || os(Linux) || os(Windows)
         case .paradigm:             return "Paradigm"
         #endif
         }
