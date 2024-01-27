@@ -8,7 +8,7 @@
 import Foundation
 
 public struct MovieProductionCompaniesResponse : Jsonable {
-    public typealias ValueKeys = MovieProductionCompaniesResponseValueKeys
+    public typealias JSONKeys = MovieProductionCompaniesResponseValueKeys
     
     public let response_version:Int, image_url_prefix:String
     public var companies:[PreMovieProductionCompany]
@@ -37,7 +37,7 @@ public struct MovieProductionCompaniesResponse : Jsonable {
     }
 }
 
-public enum MovieProductionCompaniesResponseValueKeys : String, JsonableValueKeys {
+public enum MovieProductionCompaniesResponseValueKeys : String, JsonableKeys {
     case response_version
     case image_url_prefix
     case companies

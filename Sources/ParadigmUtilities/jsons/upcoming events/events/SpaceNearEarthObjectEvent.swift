@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SpaceNearEarthObjectEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = SpaceNearEarthObjectEventValueKeys
+    public typealias JSONKeys = SpaceNearEarthObjectEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.space_near_earth_object
@@ -81,7 +81,7 @@ public struct SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .close_approach_epoch: return close_approach_epoch
         case .potentially_hazardous: return potentially_hazardous
@@ -90,7 +90,7 @@ public struct SpaceNearEarthObjectEvent : GenericUpcomingEvent {
         case .relative_velocity: return relative_velocity
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
 

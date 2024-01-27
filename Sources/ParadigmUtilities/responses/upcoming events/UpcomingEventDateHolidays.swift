@@ -8,7 +8,7 @@
 import Foundation
 
 public struct UpcomingEventDateHolidays : Jsonable {
-    public typealias ValueKeys = UpcomingEventDateHolidaysValueKeys
+    public typealias JSONKeys = UpcomingEventDateHolidaysValueKeys
     
     public let date:EventDate
     public var holidays:[PreHoliday]
@@ -35,7 +35,7 @@ public struct UpcomingEventDateHolidays : Jsonable {
     }
 }
 
-public enum UpcomingEventDateHolidaysValueKeys : String, JsonableValueKeys {
+public enum UpcomingEventDateHolidaysValueKeys : String, JsonableKeys {
     case date
     case holidays
     

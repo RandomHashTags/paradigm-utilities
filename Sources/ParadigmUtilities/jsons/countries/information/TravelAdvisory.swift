@@ -8,7 +8,7 @@
 import Foundation
 
 public struct TravelAdvisory : SovereignStateInformationValue {
-    public typealias ValueKeys = SovereignStateInformationValueValueKeys
+    public typealias JSONKeys = SovereignStateInformationValueValueKeys
     
     public let id:String
     public var description:String, sources:EventSources?
@@ -40,7 +40,7 @@ public struct TravelAdvisory : SovereignStateInformationValue {
     }
 }
 
-public enum SovereignStateInformationValueValueKeys : String, JsonableValueKeys {
+public enum SovereignStateInformationValueValueKeys : String, JsonableKeys {
     case id
     case description
     case sources

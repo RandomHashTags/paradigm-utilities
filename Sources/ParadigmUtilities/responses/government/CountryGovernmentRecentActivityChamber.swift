@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CountryGovernmentRecentActivityChamber : Jsonable {
-    public typealias ValueKeys = CountryGovernmentRecentActivityChamberValueKeys
+    public typealias JSONKeys = CountryGovernmentRecentActivityChamberValueKeys
     
     public let chamber:GovernmentChamberWrapper
     public var dates:[CountryGovernmentRecentActivityDate]
@@ -35,7 +35,7 @@ public struct CountryGovernmentRecentActivityChamber : Jsonable {
     }
 }
 
-public enum CountryGovernmentRecentActivityChamberValueKeys : String, JsonableValueKeys {
+public enum CountryGovernmentRecentActivityChamberValueKeys : String, JsonableKeys {
     case chamber
     case dates
     

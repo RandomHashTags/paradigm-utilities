@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NationalCapital : SovereignStateInformationValue {
-    public typealias ValueKeys = NationalCapitalValueKeys
+    public typealias JSONKeys = NationalCapitalValueKeys
     
     public let place:String
     public var notes:String?, sources:EventSources?
@@ -40,7 +40,7 @@ public struct NationalCapital : SovereignStateInformationValue {
     }
 }
 
-public enum NationalCapitalValueKeys : String, JsonableValueKeys {
+public enum NationalCapitalValueKeys : String, JsonableKeys {
     case place
     case notes
     case sources

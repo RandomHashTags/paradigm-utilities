@@ -9,15 +9,15 @@ import Foundation
 import SwiftSovereignStates
 
 public protocol JsonableProtocol : Hashable, Codable {
-    associatedtype ValueKeys : JsonableValueKeys = NoJsonableValueKeys
+    associatedtype JSONKeys : JsonableKeys = NoJsonableKeys
     
     func toData() -> Data?
     func toData(language: Language, omittedKeys: [String]?) async -> Data?
     func toString() -> String?
     func toString(language: Language, omittedKeys: [String]?) async -> String?
     
-    func getKeyValue(key: ValueKeys) -> Any?
-    mutating func setKeyValue<T>(key: ValueKeys, value: T)
+    func getKeyValue(key: JSONKeys) -> Any?
+    mutating func setKeyValue<T>(key: JSONKeys, value: T)
 }
 
 public protocol Jsonable : JsonableProtocol {
@@ -53,8 +53,8 @@ public extension URLQueryContainer {
 }*/
 public extension JsonableProtocol {
     func all_values_are_nil() -> Bool {
-        guard ValueKeys.self != NoJsonableValueKeys.self else { return false }
-        return ValueKeys.allCases.first(where: {
+        guard JSONKeys.self != NoJsonableKeys.self else { return false }
+        return JSONKeys.allCases.first(where: {
             guard let key_value:Any = getKeyValue(key: $0) else { return false }
             switch key_value {
             case is any CodableAlwaysOmittableProtocol:
@@ -71,8 +71,8 @@ public extension JsonableProtocol {
         }) == nil
     }
     
-    func getValueKeys() -> ValueKeys.AllCases {
-        return ValueKeys.allCases
+    func getValueKeys() -> JSONKeys.AllCases {
+        return JSONKeys.allCases
     }
     
     func toData() -> Data? {
@@ -92,50 +92,50 @@ public extension JsonableProtocol {
     }
     
     func getKeyValue(_ key: String) -> Any? {
-        guard let key:ValueKeys = ValueKeys(rawValue: key) else { return nil }
+        guard let key:JSONKeys = JSONKeys(rawValue: key) else { return nil }
         return getKeyValue(key: key)
     }
     mutating func setKeyValue<T>(_ key: String, value: T) {
-        guard let key:ValueKeys = ValueKeys(rawValue: key) else { return }
+        guard let key:JSONKeys = JSONKeys(rawValue: key) else { return }
         setKeyValue(key: key, value: value)
     }
     
     func getOmittableProtocol(_ string: String) -> (any CodableOmittableProtocol)? {
-        guard let key:ValueKeys = ValueKeys(rawValue: string) else { return nil }
+        guard let key:JSONKeys = JSONKeys(rawValue: string) else { return nil }
         return getOmittableProtocol(key)
     }
-    func getOmittableProtocol(_ key: ValueKeys) -> (any CodableOmittableProtocol)? {
+    func getOmittableProtocol(_ key: JSONKeys) -> (any CodableOmittableProtocol)? {
         return getKeyValue(key: key) as? (any CodableOmittableProtocol)
     }
-    func getOmittable<T>(_ key: ValueKeys) -> CodableOmittable<T>? {
+    func getOmittable<T>(_ key: JSONKeys) -> CodableOmittable<T>? {
         return getKeyValue(key: key) as? CodableOmittable<T>
     }
-    mutating func setOmittableValue(_ key: ValueKeys, value: Bool) {
+    mutating func setOmittableValue(_ key: JSONKeys, value: Bool) {
         guard var omittable:(any CodableOmittableProtocol) = getOmittableProtocol(key) else { return }
         omittable.omitted = value
         setKeyValue(key: key, value: omittable)
     }
 }
 
-public protocol JsonableValueKeys : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
+public protocol JsonableKeys : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
     /// Whether or not this ValueKey should be translated to other languages when encoded to JSON.
     var is_translatable : Bool { get }
     var is_omittable : Bool { get }
 }
-public extension JsonableValueKeys {
+public extension JsonableKeys {
     var is_omittable : Bool {
         return false
     }
 }
 
-public extension Jsonable where ValueKeys == NoJsonableValueKeys {
-    func getKeyValue(key: ValueKeys) -> Any? {
+public extension Jsonable where JSONKeys == NoJsonableKeys {
+    func getKeyValue(key: JSONKeys) -> Any? {
         return nil
     }
-    func setKeyValue<T>(key: ValueKeys, value: T) {
+    func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
-public enum NoJsonableValueKeys : String, JsonableValueKeys {
+public enum NoJsonableKeys : String, JsonableKeys {
     case bruh
     
     public var is_translatable : Bool {

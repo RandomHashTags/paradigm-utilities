@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreEarthquake : Jsonable {
-    public typealias ValueKeys = PreEarthquakeValueKeys
+    public typealias JSONKeys = PreEarthquakeValueKeys
     
     public let id:String
     public var place:String
@@ -39,7 +39,7 @@ public struct PreEarthquake : Jsonable {
     }
 }
 
-public enum PreEarthquakeValueKeys : String, JsonableValueKeys {
+public enum PreEarthquakeValueKeys : String, JsonableKeys {
     case id
     case place
     case city

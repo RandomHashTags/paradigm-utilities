@@ -57,7 +57,7 @@ public struct IMDbMovieDetails : Jsonable {
     }
 }
 
-public enum IMDbMovieDetailsValueKeys : String, JsonableValueKeys {
+public enum IMDbMovieDetailsValueKeys : String, JsonableKeys {
     case rating
     case rating_reason
     case runtime_seconds

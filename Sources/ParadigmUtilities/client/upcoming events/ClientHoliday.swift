@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientHoliday : Jsonable {
-    public typealias ValueKeys = ClientHolidayValueKeys
+    public typealias JSONKeys = ClientHolidayValueKeys
     
     public let response_version:Int, id:String, proclamation:EventDate?
     public var name:String, description:String, aliases:[String]?
@@ -57,7 +57,7 @@ public struct ClientHoliday : Jsonable {
     }
 }
 
-public enum ClientHolidayValueKeys : String, JsonableValueKeys {
+public enum ClientHolidayValueKeys : String, JsonableKeys {
     case response_version
     case id
     case proclamation

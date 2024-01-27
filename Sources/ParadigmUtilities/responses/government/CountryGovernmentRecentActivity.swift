@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct CountryGovernmentRecentActivity : Jsonable {
-    public typealias ValueKeys = CountryGovernmentRecentActivityValueKeys
+    public typealias JSONKeys = CountryGovernmentRecentActivityValueKeys
     
     public let country:Country
     public var activity:[CountryGovernmentRecentActivityChamber]
@@ -36,7 +36,7 @@ public struct CountryGovernmentRecentActivity : Jsonable {
     }
 }
 
-public enum CountryGovernmentRecentActivityValueKeys : String, JsonableValueKeys {
+public enum CountryGovernmentRecentActivityValueKeys : String, JsonableKeys {
     case country
     case activity
     

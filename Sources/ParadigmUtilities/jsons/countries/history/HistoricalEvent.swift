@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct HistoricalEvent : Jsonable {
-    public typealias ValueKeys = HistoricalEventValueKeys
+    public typealias JSONKeys = HistoricalEventValueKeys
     
     public let id:String, date:EventDate
     public let exact_time_start:Int64?, exact_time_end:Int64?
@@ -66,7 +66,7 @@ public struct HistoricalEvent : Jsonable {
     }
 }
 
-public enum HistoricalEventValueKeys : String, JsonableValueKeys {
+public enum HistoricalEventValueKeys : String, JsonableKeys {
     case id
     case date
     case exact_time_start

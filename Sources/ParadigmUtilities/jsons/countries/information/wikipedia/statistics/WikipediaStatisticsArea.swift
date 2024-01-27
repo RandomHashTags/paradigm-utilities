@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsArea : Jsonable {
-    public typealias ValueKeys = WikipediaStatisticsAreaValueKeys
+    public typealias JSONKeys = WikipediaStatisticsAreaValueKeys
     
     public var total:String?, water:String?, land:String?
     
@@ -40,7 +40,7 @@ public struct WikipediaStatisticsArea : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsAreaValueKeys : String, JsonableValueKeys {
+public enum WikipediaStatisticsAreaValueKeys : String, JsonableKeys {
     case total
     case water
     case land

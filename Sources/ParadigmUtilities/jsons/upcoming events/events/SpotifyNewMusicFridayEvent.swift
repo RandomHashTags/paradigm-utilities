@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = SpotifyNewMusicFridayEventValueKeys
+    public typealias JSONKeys = SpotifyNewMusicFridayEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.spotify_new_music_friday
@@ -73,12 +73,12 @@ public struct SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .tracks: return tracks
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .tracks:
             tracks = value as! [SpotifyTrack]

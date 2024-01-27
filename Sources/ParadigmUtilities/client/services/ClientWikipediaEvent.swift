@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ClientWikipediaEvent : Jsonable {
-    public typealias ValueKeys = ClientWikipediaEventValueKeys
+    public typealias JSONKeys = ClientWikipediaEventValueKeys
     
     public let images:[String]?
     public var description:String, hyperlinks:Hyperlinks?
@@ -57,7 +57,7 @@ public struct ClientWikipediaEvent : Jsonable {
     }
 }
 
-public enum ClientWikipediaEventValueKeys : String, JsonableValueKeys {
+public enum ClientWikipediaEventValueKeys : String, JsonableKeys {
     case images
     case description
     case hyperlinks

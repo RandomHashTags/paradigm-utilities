@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NationalAnimals : SovereignStateNationalValue {
-    public typealias ValueKeys = NationalAnimalsValueKeys
+    public typealias JSONKeys = NationalAnimalsValueKeys
     
     public var pictures:[WikipediaPicture], sources:EventSources?
     
@@ -35,7 +35,7 @@ public struct NationalAnimals : SovereignStateNationalValue {
     }
 }
 
-public enum NationalAnimalsValueKeys : String, JsonableValueKeys {
+public enum NationalAnimalsValueKeys : String, JsonableKeys {
     case pictures
     case sources
     

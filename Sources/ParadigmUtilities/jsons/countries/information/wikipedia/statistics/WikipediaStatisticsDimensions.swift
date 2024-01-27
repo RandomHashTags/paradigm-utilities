@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsDimensions : Jsonable {
-    public typealias ValueKeys = WikipediaStatisticsDimensionsValueKeys
+    public typealias JSONKeys = WikipediaStatisticsDimensionsValueKeys
     
     public var length:String?, width:String?
     
@@ -35,7 +35,7 @@ public struct WikipediaStatisticsDimensions : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsDimensionsValueKeys : String, JsonableValueKeys {
+public enum WikipediaStatisticsDimensionsValueKeys : String, JsonableKeys {
     case length
     case width
     

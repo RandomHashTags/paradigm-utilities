@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateHistory : SovereignStateInformationValue {
-    public typealias ValueKeys = SovereignStateHistoryValueKeys
+    public typealias JSONKeys = SovereignStateHistoryValueKeys
     
     public var events:[PreHistoricalEvent], sources:EventSources?
     
@@ -35,7 +35,7 @@ public struct SovereignStateHistory : SovereignStateInformationValue {
     }
 }
 
-public enum SovereignStateHistoryValueKeys : String, JsonableValueKeys {
+public enum SovereignStateHistoryValueKeys : String, JsonableKeys {
     case events
     case sources
     

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct PreElection : Jsonable {
-    public typealias ValueKeys = PreElectionValueKeys
+    public typealias JSONKeys = PreElectionValueKeys
     
     public let id:String
     public var name:String
@@ -41,7 +41,7 @@ public struct PreElection : Jsonable {
     }
 }
 
-public enum PreElectionValueKeys : String, JsonableValueKeys {
+public enum PreElectionValueKeys : String, JsonableKeys {
     case id
     case name
     case date

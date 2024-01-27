@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CIAValue : SovereignStateInformationValue {
-    public typealias ValueKeys = CIAValueValueKeys
+    public typealias JSONKeys = CIAValueValueKeys
     
     public let id:String
     public var title:String, value:String, sources:EventSources?
@@ -46,7 +46,7 @@ public struct CIAValue : SovereignStateInformationValue {
     }
 }
 
-public enum CIAValueValueKeys : String, JsonableValueKeys {
+public enum CIAValueValueKeys : String, JsonableKeys {
     case id
     case title
     case value

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateWikipedia : SovereignStateInformationValue {
-    public typealias ValueKeys = SovereignStateWikipediaValueKeys
+    public typealias JSONKeys = SovereignStateWikipediaValueKeys
     
     public var paragraph:String
     public let url:String
@@ -47,7 +47,7 @@ public struct SovereignStateWikipedia : SovereignStateInformationValue {
     }
 }
 
-public enum SovereignStateWikipediaValueKeys : String, JsonableValueKeys {
+public enum SovereignStateWikipediaValueKeys : String, JsonableKeys {
     case paragraph
     case url
     case statistics

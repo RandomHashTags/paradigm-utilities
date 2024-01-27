@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct HomeResponseWeather : HomeResponseProtocol {
-    public typealias ValueKeys = HomeResponseWeatherValueKeys
+    public typealias JSONKeys = HomeResponseWeatherValueKeys
     
     public var alerts:[CountryWeatherEvents]?
     public var earthquakes:[CountryEarthquakes]?
@@ -43,7 +43,7 @@ public struct HomeResponseWeather : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseWeatherValueKeys : String, JsonableValueKeys {
+public enum HomeResponseWeatherValueKeys : String, JsonableKeys {
     case alerts
     case earthquakes
     case natural_events

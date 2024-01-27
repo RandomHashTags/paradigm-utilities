@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateInformation : Jsonable {
-    public typealias ValueKeys = SovereignStateInformationValueKeys
+    public typealias JSONKeys = SovereignStateInformationValueKeys
     
     @CodableOmittable public var administration:ClientGovernmentAdministration?
     @CodableOmittable public var _static:SovereignStateStaticInformation?
@@ -42,7 +42,7 @@ public struct SovereignStateInformation : Jsonable {
     }
 }
 
-public enum SovereignStateInformationValueKeys : String, JsonableValueKeys {
+public enum SovereignStateInformationValueKeys : String, JsonableKeys {
     case administration
     case _static
     case nonstatic

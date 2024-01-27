@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GovernmentPrePolitician : Person {
-    public typealias ValueKeys = GovernmentPrePoliticianValueKeys
+    public typealias JSONKeys = GovernmentPrePoliticianValueKeys
     
     public let id:String, name:HumanName, party:PoliticalParty, image_url:String?
     
@@ -31,7 +31,7 @@ public struct GovernmentPrePolitician : Person {
     }
 }
 
-public enum GovernmentPrePoliticianValueKeys : String, JsonableValueKeys {
+public enum GovernmentPrePoliticianValueKeys : String, JsonableKeys {
     case id
     case name
     case party

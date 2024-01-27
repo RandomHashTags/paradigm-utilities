@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SpaceLunarEclipseEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = SpaceLunarEclipseEventValueKeys
+    public typealias JSONKeys = SpaceLunarEclipseEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.space_lunar_eclipse
@@ -87,7 +87,7 @@ public struct SpaceLunarEclipseEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .time_greatest: return time_greatest
         case .orbital_node: return orbital_node
@@ -99,7 +99,7 @@ public struct SpaceLunarEclipseEvent : GenericUpcomingEvent {
         case .duration_total: return duration_total
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
 

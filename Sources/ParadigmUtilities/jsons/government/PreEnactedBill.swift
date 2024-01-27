@@ -8,7 +8,7 @@
 import Foundation
 
 public struct PreEnactedBill : Jsonable {
-    public typealias ValueKeys = PreEnactedBillValueKeys
+    public typealias JSONKeys = PreEnactedBillValueKeys
     
     public let id:String
     public var title:String
@@ -40,7 +40,7 @@ public struct PreEnactedBill : Jsonable {
     }
 }
 
-public enum PreEnactedBillValueKeys : String, JsonableValueKeys {
+public enum PreEnactedBillValueKeys : String, JsonableKeys {
     case id
     case title
     case chamber

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct APODEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = APODEventValueKeys
+    public typealias JSONKeys = APODEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.astronomy_picture_of_the_day
@@ -56,7 +56,7 @@ public struct APODEvent : GenericUpcomingEvent {
     }
     
     public init(from decoder: Decoder) throws {
-        let container:KeyedDecodingContainer = try decoder.container(keyedBy: ValueKeys.self)
+        let container:KeyedDecodingContainer = try decoder.container(keyedBy: JSONKeys.self)
         copyright = try container.decodeIfPresent(String.self, forKey: .copyright)
         video_url = try container.decodeIfPresent(String.self, forKey: .video_url)
         
@@ -75,13 +75,13 @@ public struct APODEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .copyright: return copyright
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
 

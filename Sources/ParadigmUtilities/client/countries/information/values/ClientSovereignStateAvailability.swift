@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientSovereignStateAvailability : Jsonable {
-    public typealias ValueKeys = ClientSovereignStateAvailabilityValueKeys
+    public typealias JSONKeys = ClientSovereignStateAvailabilityValueKeys
     
     public let info:SovereignStateInfo, primary_category:SovereignStateAvailabilityCategory, image_url:String?, value:Bool
     public var sources:EventSources?
@@ -41,7 +41,7 @@ public struct ClientSovereignStateAvailability : Jsonable {
     }
 }
 
-public enum ClientSovereignStateAvailabilityValueKeys : String, JsonableValueKeys {
+public enum ClientSovereignStateAvailabilityValueKeys : String, JsonableKeys {
     case info
     case primary_category
     case image_url

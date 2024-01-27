@@ -200,7 +200,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
 }
 
 private struct TestBro : Jsonable {
-    typealias ValueKeys = TestBroValueKeys
+    typealias JSONKeys = TestBroValueKeys
     
     var big_boy:String
     let number:Int
@@ -224,7 +224,7 @@ private struct TestBro : Jsonable {
         }
     }
 }
-private enum TestBroValueKeys : String, JsonableValueKeys {
+private enum TestBroValueKeys : String, JsonableKeys {
     case big_boy
     case small_boy
     

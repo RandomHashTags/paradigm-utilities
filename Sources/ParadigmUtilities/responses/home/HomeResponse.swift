@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HomeResponse : Jsonable {
-    public typealias ValueKeys = HomeResponseValueKeys
+    public typealias JSONKeys = HomeResponseValueKeys
     
     public static var LATEST:HomeResponse! = nil
     
@@ -62,7 +62,7 @@ public struct HomeResponse : Jsonable {
     }
 }
 
-public enum HomeResponseValueKeys : String, JsonableValueKeys {
+public enum HomeResponseValueKeys : String, JsonableKeys {
     case countries
     case government
     case news

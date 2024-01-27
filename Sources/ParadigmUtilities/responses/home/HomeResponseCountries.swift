@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HomeResponseCountries : HomeResponseProtocol {
-    public typealias ValueKeys = HomeResponseCountriesValueKeys
+    public typealias JSONKeys = HomeResponseCountriesValueKeys
     
     @CodableOmittable public var filters:CountryFiltersResponse?
     
@@ -30,7 +30,7 @@ public struct HomeResponseCountries : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseCountriesValueKeys : String, JsonableValueKeys {
+public enum HomeResponseCountriesValueKeys : String, JsonableKeys {
     case filters
     
     public var is_translatable : Bool {

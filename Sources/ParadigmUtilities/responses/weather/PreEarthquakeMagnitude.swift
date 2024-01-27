@@ -8,7 +8,7 @@
 import Foundation
 
 public struct PreEarthquakeMagnitude : Jsonable {
-    public typealias ValueKeys = PreEarthquakeMagnitudeValueKeys
+    public typealias JSONKeys = PreEarthquakeMagnitudeValueKeys
     
     public let mag:String
     public var quakes:[PreEarthquake]
@@ -35,7 +35,7 @@ public struct PreEarthquakeMagnitude : Jsonable {
     }
 }
 
-public enum PreEarthquakeMagnitudeValueKeys : String, JsonableValueKeys {
+public enum PreEarthquakeMagnitudeValueKeys : String, JsonableKeys {
     case mag
     case quakes
     

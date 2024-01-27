@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CountryGovernmentRecentActivityBillStatus : Jsonable {
-    public typealias ValueKeys = CountryGovernmentRecentActivityBillStatusValueKeys
+    public typealias JSONKeys = CountryGovernmentRecentActivityBillStatusValueKeys
     
     public let status:GovernmentBillStatusWrapper
     public var dates:[CountryGovernmentRecentActivityDate]
@@ -36,7 +36,7 @@ public struct CountryGovernmentRecentActivityBillStatus : Jsonable {
     }
 }
 
-public enum CountryGovernmentRecentActivityBillStatusValueKeys : String, JsonableValueKeys {
+public enum CountryGovernmentRecentActivityBillStatusValueKeys : String, JsonableKeys {
     case status
     case dates
     

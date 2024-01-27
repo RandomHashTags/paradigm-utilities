@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ServerUpdate : Jsonable {
-    public typealias ValueKeys = ServerUpdateValueKeys
+    public typealias JSONKeys = ServerUpdateValueKeys
     
     public let type:UpdateType
     public var summary:String, related:UpdateRelatedContent?
@@ -43,7 +43,7 @@ public struct ServerUpdate : Jsonable {
     }
 }
 
-public enum ServerUpdateValueKeys : String, JsonableValueKeys {
+public enum ServerUpdateValueKeys : String, JsonableKeys {
     case type
     case summary
     case related

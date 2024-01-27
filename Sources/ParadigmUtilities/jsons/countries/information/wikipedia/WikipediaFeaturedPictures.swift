@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
-    public typealias ValueKeys = WikipediaFeaturedPicturesValueKeys
+    public typealias JSONKeys = WikipediaFeaturedPicturesValueKeys
     
     public let image_url_prefix:String
     public var pictures:[WikipediaPicture], sources:EventSources?
@@ -40,7 +40,7 @@ public struct WikipediaFeaturedPictures : SovereignStateInformationValue {
     }
 }
 
-public enum WikipediaFeaturedPicturesValueKeys : String, JsonableValueKeys {
+public enum WikipediaFeaturedPicturesValueKeys : String, JsonableKeys {
     case image_url_prefix
     case pictures
     case sources

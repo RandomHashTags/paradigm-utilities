@@ -8,7 +8,7 @@
 import Foundation
 
 public struct PreHistoricalEvent : Jsonable {
-    public typealias ValueKeys = PreHistoricalEventValueKeys
+    public typealias JSONKeys = PreHistoricalEventValueKeys
     
     public let id:String, date:EventDate
     public let exact_time_start:Int64?, exact_time_end:Int64?
@@ -50,7 +50,7 @@ public struct PreHistoricalEvent : Jsonable {
     }
 }
 
-public enum PreHistoricalEventValueKeys : String, JsonableValueKeys {
+public enum PreHistoricalEventValueKeys : String, JsonableKeys {
     case id
     case date
     case exact_time_start

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct CountryFiltersResponse : Jsonable {
-    public typealias ValueKeys = CountryFiltersResponseValueKeys
+    public typealias JSONKeys = CountryFiltersResponseValueKeys
     
     public let response_version:Int
     public var filters:[CountryFilter]!
@@ -35,7 +35,7 @@ public struct CountryFiltersResponse : Jsonable {
     }
 }
 
-public enum CountryFiltersResponseValueKeys : String, JsonableValueKeys {
+public enum CountryFiltersResponseValueKeys : String, JsonableKeys {
     case response_version
     case filters
     

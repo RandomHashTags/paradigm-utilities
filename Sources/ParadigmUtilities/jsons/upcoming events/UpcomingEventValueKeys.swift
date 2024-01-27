@@ -7,7 +7,7 @@
 
 import Foundation
 
-public protocol UpcomingEventValueKeys : JsonableValueKeys {
+public protocol UpcomingEventValueKeys : JsonableKeys {
     var category : UpcomingEventValueCategory { get }
     var value_type : UpcomingEventValueType { get }
     var value_cell_type : UpcomingEventValueCellType { get }

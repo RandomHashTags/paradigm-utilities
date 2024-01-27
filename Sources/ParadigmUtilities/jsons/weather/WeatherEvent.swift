@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WeatherEvent : Jsonable {
-    public typealias ValueKeys = WeatherEventValueKeys
+    public typealias JSONKeys = WeatherEventValueKeys
     
     public let type:WeatherEventType
     public let defcon:Int
@@ -28,7 +28,7 @@ public struct WeatherEvent : Jsonable {
     }
 }
 
-public enum WeatherEventValueKeys : String, JsonableValueKeys {
+public enum WeatherEventValueKeys : String, JsonableKeys {
     case type
     case defcon
     

@@ -12,7 +12,7 @@ private enum CodingKeys: CodingKey {
     case hyperlinks
 }
 public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
-    public typealias ValueKeys = HyperlinksValueKeys
+    public typealias JSONKeys = HyperlinksValueKeys
     
     public let image_url_prefix:String
     
@@ -74,7 +74,7 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     }
 }
 
-public enum HyperlinksValueKeys : String, JsonableValueKeys {
+public enum HyperlinksValueKeys : String, JsonableKeys {
     case hyperlinks
     
     public var is_translatable : Bool {

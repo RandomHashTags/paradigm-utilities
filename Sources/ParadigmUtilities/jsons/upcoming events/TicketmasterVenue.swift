@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct TicketmasterVenue : Jsonable {
-    public typealias ValueKeys = TicketmasterVenueValueKeys
+    public typealias JSONKeys = TicketmasterVenueValueKeys
     
     public let name:String, image_url:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?
     public var general_rule:String?, child_rule:String?, parking_detail:String?, accessible_seating_info:String?, url:String
@@ -62,7 +62,7 @@ public struct TicketmasterVenue : Jsonable {
     }
 }
 
-public enum TicketmasterVenueValueKeys : String, JsonableValueKeys {
+public enum TicketmasterVenueValueKeys : String, JsonableKeys {
     case name
     case image_url
     case country

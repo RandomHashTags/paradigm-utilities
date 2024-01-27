@@ -10,7 +10,7 @@ import SwiftSovereignStates
 
 // TODO: make protocol?
 public struct PreUpcomingEvent : UpcomingEventProtocol {
-    public typealias ValueKeys = PreUpcomingEventValueKeys
+    public typealias JSONKeys = PreUpcomingEventValueKeys
     
     @CodableAlwaysOmittable public var type:UpcomingEventType?
     @CodableOmittable public var event_date:EventDate?
@@ -50,7 +50,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         self.team_home = team_home
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .type: return type
         case .id: return id
@@ -71,7 +71,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         case .team_home: return team_home
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .title:
             title = value as! String
@@ -94,7 +94,7 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     }
 }
 
-public enum PreUpcomingEventValueKeys : String, JsonableValueKeys {
+public enum PreUpcomingEventValueKeys : String, JsonableKeys {
     case type
     case id
     case event_date

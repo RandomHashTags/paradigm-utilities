@@ -8,7 +8,7 @@
 import Foundation
 
 public struct MovieProductionCompany : MovieProductionCompanyProtocol {
-    public typealias ValueKeys = MovieProductionCompanyValueKeys
+    public typealias JSONKeys = MovieProductionCompanyValueKeys
     
     public let response_version:Int, id:String
     public var name:String, aliases:[String]?, description:String
@@ -60,7 +60,7 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
     }
 }
 
-public enum MovieProductionCompanyValueKeys : String, JsonableValueKeys {
+public enum MovieProductionCompanyValueKeys : String, JsonableKeys {
     case response_version
     case id
     case name

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HomeResponseUpcomingEvents : HomeResponseProtocol {
-    public typealias ValueKeys = HomeResponseUpcomingEventsValueKeys
+    public typealias JSONKeys = HomeResponseUpcomingEventsValueKeys
     
     @CodableOmittable public var holidays_near:[UpcomingEventDateHolidays]?
     public var events:[UpcomingEventTypeEvents]?
@@ -42,7 +42,7 @@ public struct HomeResponseUpcomingEvents : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseUpcomingEventsValueKeys : String, JsonableValueKeys {
+public enum HomeResponseUpcomingEventsValueKeys : String, JsonableKeys {
     case holidays_near
     case events
     case movie_production_companies

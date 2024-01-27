@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaStatisticsElevation : Jsonable {
-    public typealias ValueKeys = WikipediaStatisticsElevationValueKeys
+    public typealias JSONKeys = WikipediaStatisticsElevationValueKeys
     
     public var lowest:String?, highest:String?, median:String?
     
@@ -40,7 +40,7 @@ public struct WikipediaStatisticsElevation : Jsonable {
     }
 }
 
-public enum WikipediaStatisticsElevationValueKeys : String, JsonableValueKeys {
+public enum WikipediaStatisticsElevationValueKeys : String, JsonableKeys {
     case lowest
     case highest
     case median

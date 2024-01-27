@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct TicketmasterMusicEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = TicketmasterMusicEventValueKeys
+    public typealias JSONKeys = TicketmasterMusicEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.ticketmaster_music_event
@@ -99,7 +99,7 @@ public struct TicketmasterMusicEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .accessibility: return accessibility
         case .age_restriction: return age_restriction
@@ -115,7 +115,7 @@ public struct TicketmasterMusicEvent : GenericUpcomingEvent {
         case .venues: return venues
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .accessibility:
             accessibility = value as? String

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GovernmentBillAction : Jsonable {
-    public typealias ValueKeys = GovernmentBillActionValueKeys
+    public typealias JSONKeys = GovernmentBillActionValueKeys
     
     public let chamber:GovernmentChamberWrapper?
     public var title:String
@@ -38,7 +38,7 @@ public struct GovernmentBillAction : Jsonable {
     }
 }
 
-public enum GovernmentBillActionValueKeys : String, JsonableValueKeys {
+public enum GovernmentBillActionValueKeys : String, JsonableKeys {
     case chamber
     case title
     case time

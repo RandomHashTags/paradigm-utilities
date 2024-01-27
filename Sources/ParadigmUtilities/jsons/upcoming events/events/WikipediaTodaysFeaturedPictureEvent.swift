@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = WikipediaTodaysFeaturedPictureEventValueKeys
+    public typealias JSONKeys = WikipediaTodaysFeaturedPictureEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.wikipedia_todays_featured_picture
@@ -73,12 +73,12 @@ public struct WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
 

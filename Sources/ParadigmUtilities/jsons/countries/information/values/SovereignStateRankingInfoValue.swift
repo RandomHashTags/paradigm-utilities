@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
-    public typealias ValueKeys = SovereignStateRankingInfoValueValueKeys
+    public typealias JSONKeys = SovereignStateRankingInfoValueValueKeys
     
     public let info:SovereignStateInfo, defcon:Int
     public var world_rank:Int, world_rank_max:Int
@@ -67,7 +67,7 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
     }
 }
 
-public enum SovereignStateRankingInfoValueValueKeys : String, JsonableValueKeys {
+public enum SovereignStateRankingInfoValueValueKeys : String, JsonableKeys {
     case info
     case defcon
     case world_rank

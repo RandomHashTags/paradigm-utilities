@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SubdivisionEarthquakes : Jsonable {
-    public typealias ValueKeys = SubdivisionEarthquakesResponseValueKeys
+    public typealias JSONKeys = SubdivisionEarthquakesResponseValueKeys
     
     public let subdivision:SovereignStateSubdivisionWrapper?
     public var magnitudes:[PreEarthquakeMagnitude]
@@ -37,7 +37,7 @@ public struct SubdivisionEarthquakes : Jsonable {
     }
 }
 
-public enum SubdivisionEarthquakesResponseValueKeys : String, JsonableValueKeys {
+public enum SubdivisionEarthquakesResponseValueKeys : String, JsonableKeys {
     case subdivision
     case magnitudes
     

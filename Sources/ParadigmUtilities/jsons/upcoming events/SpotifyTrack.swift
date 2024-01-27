@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SpotifyTrack : Jsonable {
-    public typealias ValueKeys = SpotifyTrackValueKeys
+    public typealias JSONKeys = SpotifyTrackValueKeys
     
     public let name:String, duration:Int64, artists:[SpotifyArtist]?, image_url:String?, explicit:Bool, preview_url:String?
     public var sources:EventSources?
@@ -45,7 +45,7 @@ public struct SpotifyTrack : Jsonable {
     }
 }
 
-public enum SpotifyTrackValueKeys : String, JsonableValueKeys {
+public enum SpotifyTrackValueKeys : String, JsonableKeys {
     case name
     case duration
     case artists

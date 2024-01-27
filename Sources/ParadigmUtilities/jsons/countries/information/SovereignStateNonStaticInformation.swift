@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateNonStaticInformation : SovereignStateInformationValue {
-    public typealias ValueKeys = SovereignStateNonStaticInformationValueKeys
+    public typealias JSONKeys = SovereignStateNonStaticInformationValueKeys
     
     public var travel_advisories:[TravelAdvisory]?, sources:EventSources?
     
@@ -35,7 +35,7 @@ public struct SovereignStateNonStaticInformation : SovereignStateInformationValu
     }
 }
 
-public enum SovereignStateNonStaticInformationValueKeys : String, JsonableValueKeys {
+public enum SovereignStateNonStaticInformationValueKeys : String, JsonableKeys {
     case travel_advisories
     case sources
     

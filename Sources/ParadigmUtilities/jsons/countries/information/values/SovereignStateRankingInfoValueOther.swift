@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateRankingInfoValueOther : Jsonable {
-    public typealias ValueKeys = SovereignStateRankingInfoValueOtherValueKeys
+    public typealias JSONKeys = SovereignStateRankingInfoValueOtherValueKeys
     
     public let value:RoundedFloat?
     public var description:String, suffix:String?
@@ -43,7 +43,7 @@ public struct SovereignStateRankingInfoValueOther : Jsonable {
     }
 }
 
-public enum SovereignStateRankingInfoValueOtherValueKeys : String, JsonableValueKeys {
+public enum SovereignStateRankingInfoValueOtherValueKeys : String, JsonableKeys {
     case value
     case description
     case suffix

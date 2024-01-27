@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateAvailabilities : Jsonable {
-    public typealias ValueKeys = SovereignStateAvailabilitiesValueKeys
+    public typealias JSONKeys = SovereignStateAvailabilitiesValueKeys
     
     public let image_url_prefix:String
     public var availabilities:[ClientSovereignStateAvailability]
@@ -35,7 +35,7 @@ public struct SovereignStateAvailabilities : Jsonable {
     }
 }
 
-public enum SovereignStateAvailabilitiesValueKeys : String, JsonableValueKeys {
+public enum SovereignStateAvailabilitiesValueKeys : String, JsonableKeys {
     case image_url_prefix
     case availabilities
     

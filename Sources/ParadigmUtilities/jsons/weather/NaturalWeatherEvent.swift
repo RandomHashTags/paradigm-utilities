@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct NaturalWeatherEvent : Jsonable {
-    public typealias ValueKeys = NaturalWeatherEventValueKeys
+    public typealias JSONKeys = NaturalWeatherEventValueKeys
     
     public let id:String, place:String, country:Country?, subdivision:SovereignStateSubdivisionWrapper?, location:Location?
     public var description:String?, sources:EventSources
@@ -49,7 +49,7 @@ public struct NaturalWeatherEvent : Jsonable {
     }
 }
 
-public enum NaturalWeatherEventValueKeys : String, JsonableValueKeys {
+public enum NaturalWeatherEventValueKeys : String, JsonableKeys {
     case id
     case place
     case country

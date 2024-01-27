@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateInfoValue : Jsonable {
-    public typealias ValueKeys = SovereignStateInfoValueValueKeys
+    public typealias JSONKeys = SovereignStateInfoValueValueKeys
     
     public var title:String, value:String, description:String?
     
@@ -40,7 +40,7 @@ public struct SovereignStateInfoValue : Jsonable {
     }
 }
 
-public enum SovereignStateInfoValueValueKeys : String, JsonableValueKeys {
+public enum SovereignStateInfoValueValueKeys : String, JsonableKeys {
     case title
     case value
     case description

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct HomeResponseGovernment : HomeResponseProtocol {
-    public typealias ValueKeys = HomeResponseGovernmentValueKeys
+    public typealias JSONKeys = HomeResponseGovernmentValueKeys
     
     public var recent_activity:[CountryGovernmentRecentActivity]
     
@@ -31,7 +31,7 @@ public struct HomeResponseGovernment : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseGovernmentValueKeys : String, JsonableValueKeys {
+public enum HomeResponseGovernmentValueKeys : String, JsonableKeys {
     case recent_activity
     
     public var is_translatable : Bool {

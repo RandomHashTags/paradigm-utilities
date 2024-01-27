@@ -8,7 +8,7 @@
 import Foundation
 
 public struct Hyperlink : Jsonable {
-    public typealias ValueKeys = HyperlinkValueKeys
+    public typealias JSONKeys = HyperlinkValueKeys
     
     public var text:String
     public var url:String
@@ -35,7 +35,7 @@ public struct Hyperlink : Jsonable {
     }
 }
 
-public enum HyperlinkValueKeys : String, JsonableValueKeys {
+public enum HyperlinkValueKeys : String, JsonableKeys {
     case text
     case url
     

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct WikipediaPicture : Jsonable {
-    public typealias ValueKeys = WikipediaPictureValueKeys
+    public typealias JSONKeys = WikipediaPictureValueKeys
     
     public let key:String
     public var name:String, title:String?
@@ -47,7 +47,7 @@ public struct WikipediaPicture : Jsonable {
     }
 }
 
-public enum WikipediaPictureValueKeys : String, JsonableValueKeys {
+public enum WikipediaPictureValueKeys : String, JsonableKeys {
     case key
     case name
     case title

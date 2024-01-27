@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct GovernmentPreAdministrationBill : Jsonable {
-    public typealias ValueKeys = GovernmentPreAdministrationBillValueKeys
+    public typealias JSONKeys = GovernmentPreAdministrationBillValueKeys
     
     public let chamber:GovernmentChamberWrapper, statuses:[GovernmentBillStatusHistoryStatusWrapper], id:String
     public var title:String, committees:String?, notes:String?
@@ -53,7 +53,7 @@ public struct GovernmentPreAdministrationBill : Jsonable {
     }
 }
 
-public enum GovernmentPreAdministrationBillValueKeys : String, JsonableValueKeys {
+public enum GovernmentPreAdministrationBillValueKeys : String, JsonableKeys {
     case chamber
     case statuses
     case id

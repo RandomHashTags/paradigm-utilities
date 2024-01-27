@@ -8,7 +8,7 @@
 import Foundation
 
 public struct HomeResponseNews : HomeResponseProtocol {
-    public typealias ValueKeys = HomeResponseNewsValueKeys
+    public typealias JSONKeys = HomeResponseNewsValueKeys
     
     public var regional:[CountryNewsEvents]
     
@@ -30,7 +30,7 @@ public struct HomeResponseNews : HomeResponseProtocol {
     }
 }
 
-public enum HomeResponseNewsValueKeys : String, JsonableValueKeys {
+public enum HomeResponseNewsValueKeys : String, JsonableKeys {
     case regional
     
     public var is_translatable : Bool {

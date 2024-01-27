@@ -12,7 +12,7 @@ public struct EventSources : Jsonable {
         return lhs.sources.elementsEqual(rhs.sources)
     }
     
-    public typealias ValueKeys = EventSourcesValueKeys
+    public typealias JSONKeys = EventSourcesValueKeys
     
     private var sources:[EventSource]
     
@@ -88,7 +88,7 @@ public struct EventSources : Jsonable {
     }
 }
 
-public enum EventSourcesValueKeys : String, JsonableValueKeys {
+public enum EventSourcesValueKeys : String, JsonableKeys {
     case sources
     
     public var is_translatable : Bool {

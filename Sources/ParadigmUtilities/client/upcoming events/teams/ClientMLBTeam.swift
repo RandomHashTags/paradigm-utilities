@@ -8,7 +8,7 @@
 import Foundation
 
 public struct ClientMLBTeam : Jsonable {
-    public typealias ValueKeys = ClientMLBTeamValueKeys
+    public typealias JSONKeys = ClientMLBTeamValueKeys
     
     public var name:String
     public let schedule_url:String, logo_url:String, wikipedia_url:String
@@ -39,7 +39,7 @@ public struct ClientMLBTeam : Jsonable {
     }
 }
 
-public enum ClientMLBTeamValueKeys : String, JsonableValueKeys {
+public enum ClientMLBTeamValueKeys : String, JsonableKeys {
     case name
     case schedule_url
     case logo_url

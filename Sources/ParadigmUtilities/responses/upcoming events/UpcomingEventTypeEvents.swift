@@ -8,7 +8,7 @@
 import Foundation
 
 public struct UpcomingEventTypeEvents : Jsonable {
-    public typealias ValueKeys = UpcomingEventTypeEventsValueKeys
+    public typealias JSONKeys = UpcomingEventTypeEventsValueKeys
     
     public let type:UpcomingEventType
     @CodableOmittable public var date_events:[UpcomingEventTypeDateEvents]?
@@ -41,7 +41,7 @@ public struct UpcomingEventTypeEvents : Jsonable {
     }
 }
 
-public enum UpcomingEventTypeEventsValueKeys : String, JsonableValueKeys {
+public enum UpcomingEventTypeEventsValueKeys : String, JsonableKeys {
     case type
     case date_events
     case exact_time_events
@@ -65,7 +65,7 @@ public enum UpcomingEventTypeEventsValueKeys : String, JsonableValueKeys {
 }
 
 public struct UpcomingEventTypeDateEvents : Jsonable {
-    public typealias ValueKeys = UpcomingEventTypeDateEventsValueKeys
+    public typealias JSONKeys = UpcomingEventTypeDateEventsValueKeys
     
     public let date:EventDate
     public var events:[PreUpcomingEvent]
@@ -91,7 +91,7 @@ public struct UpcomingEventTypeDateEvents : Jsonable {
         }
     }
 }
-public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableValueKeys {
+public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableKeys {
     case date
     case events
     
@@ -106,7 +106,7 @@ public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableValueKeys {
 }
 
 public struct UpcomingEventTypeExactTimeEvents : Jsonable {
-    public typealias ValueKeys = UpcomingEventTypeExactTimeEventsValueKeys
+    public typealias JSONKeys = UpcomingEventTypeExactTimeEventsValueKeys
     
     public let time:Int64
     public var events:[PreUpcomingEvent]
@@ -132,7 +132,7 @@ public struct UpcomingEventTypeExactTimeEvents : Jsonable {
         }
     }
 }
-public enum UpcomingEventTypeExactTimeEventsValueKeys : String, JsonableValueKeys {
+public enum UpcomingEventTypeExactTimeEventsValueKeys : String, JsonableKeys {
     case time
     case events
     

@@ -79,7 +79,7 @@ public struct GenericUpcomingEventType : Codable {
     public let type:UpcomingEventType
 }
 
-public protocol GenericUpcomingEvent : UpcomingEventProtocol where ValueKeys : UpcomingEventValueKeys {
+public protocol GenericUpcomingEvent : UpcomingEventProtocol where JSONKeys : UpcomingEventValueKeys {
     var description : String? { get set }
     var location : String? { get set }
     var youtube_video_ids : [String]? { get set }
@@ -92,7 +92,7 @@ public extension GenericUpcomingEvent {
     }
     
     func getValue<T>(_ key: String) -> T? {
-        if let codingKey:ValueKeys = ValueKeys.init(rawValue: key) {
+        if let codingKey:JSONKeys = JSONKeys.init(rawValue: key) {
             return getKeyValue(key: codingKey) as? T
         } else if let key:GenericUpcomingEventValueKeys = GenericUpcomingEventValueKeys.init(rawValue: key) {
             return getKeyValue(key: key) as? T
@@ -146,7 +146,7 @@ public extension GenericUpcomingEvent {
     }
 }
 
-public enum GenericUpcomingEventValueKeys : String, JsonableValueKeys {
+public enum GenericUpcomingEventValueKeys : String, JsonableKeys {
     case type
     case event_date
     case exact_start

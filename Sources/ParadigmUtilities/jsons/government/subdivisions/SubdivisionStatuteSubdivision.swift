@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SubdivisionStatuteSubdivision : Jsonable {
-    public typealias ValueKeys = SubdivisionStatuteSubdivisionValueKeys
+    public typealias JSONKeys = SubdivisionStatuteSubdivisionValueKeys
     
     public var title:String, description:String, subdivisions:[SubdivisionStatuteSubdivision]?
     
@@ -40,7 +40,7 @@ public struct SubdivisionStatuteSubdivision : Jsonable {
     }
 }
 
-public enum SubdivisionStatuteSubdivisionValueKeys : String, JsonableValueKeys {
+public enum SubdivisionStatuteSubdivisionValueKeys : String, JsonableKeys {
     case title
     case description
     case subdivisions

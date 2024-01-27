@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct SpaceRocketLaunchEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = SpaceRocketLaunchEventValueKeys
+    public typealias JSONKeys = SpaceRocketLaunchEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.space_rocket_launch
@@ -95,7 +95,7 @@ public struct SpaceRocketLaunchEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .mission_name: return mission_name
         case .mission_description: return mission_description
@@ -109,7 +109,7 @@ public struct SpaceRocketLaunchEvent : GenericUpcomingEvent {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .mission_description:
             mission_description = value as! String

@@ -8,7 +8,7 @@
 import Foundation
 
 public struct EventSource : Jsonable {
-    public typealias ValueKeys = EventSourceValueKeys
+    public typealias JSONKeys = EventSourceValueKeys
     
     public var name:String
     public let url:String
@@ -35,7 +35,7 @@ public struct EventSource : Jsonable {
     }
 }
 
-public enum EventSourceValueKeys : String, JsonableValueKeys {
+public enum EventSourceValueKeys : String, JsonableKeys {
     case name
     case url
     

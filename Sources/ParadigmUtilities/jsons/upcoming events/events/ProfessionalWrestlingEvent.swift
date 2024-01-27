@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ProfessionalWrestlingEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = ProfessionalWrestlingEventValueKeys
+    public typealias JSONKeys = ProfessionalWrestlingEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.sport_professional_wrestling
@@ -75,13 +75,13 @@ public struct ProfessionalWrestlingEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .main_event: return main_event
         case .notes: return notes
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .main_event:
             main_event = value as! String

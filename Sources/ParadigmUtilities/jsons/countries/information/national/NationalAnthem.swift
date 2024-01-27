@@ -8,7 +8,7 @@
 import Foundation
 
 public struct NationalAnthem : SovereignStateInformationValue {
-    public typealias ValueKeys = NationalAnthemValueKeys
+    public typealias JSONKeys = NationalAnthemValueKeys
     
     public let mp3_url:String
     public var sources:EventSources?
@@ -35,7 +35,7 @@ public struct NationalAnthem : SovereignStateInformationValue {
     }
 }
 
-public enum NationalAnthemValueKeys : String, JsonableValueKeys {
+public enum NationalAnthemValueKeys : String, JsonableKeys {
     case mp3_url
     case sources
     

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct ScienceYearReviewEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = ScienceYearReviewEventValueKeys
+    public typealias JSONKeys = ScienceYearReviewEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.science_year_review
@@ -73,12 +73,12 @@ public struct ScienceYearReviewEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .years: return years
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .years:
             years = value as! [Int:[ClientWikipediaEvent]]

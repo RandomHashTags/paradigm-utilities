@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
-    public typealias ValueKeys = SovereignStateSingleValueValueKeys
+    public typealias JSONKeys = SovereignStateSingleValueValueKeys
     
     public let info:SovereignStateInfo
     public var notes:String?, value:String, value_description:String?
@@ -54,7 +54,7 @@ public struct SovereignStateSingleValue : SovereignStateIdentifiableValue {
     }
 }
 
-public enum SovereignStateSingleValueValueKeys : String, JsonableValueKeys {
+public enum SovereignStateSingleValueValueKeys : String, JsonableKeys {
     case info
     case notes
     case value

@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct MovieEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = MovieEventValueKeys
+    public typealias JSONKeys = MovieEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.movie
@@ -81,7 +81,7 @@ public struct MovieEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .release_info: return release_info
         case .ratings: return ratings
@@ -89,7 +89,7 @@ public struct MovieEvent : GenericUpcomingEvent {
         case .production_companies: return production_companies
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .imdb_info:
             imdb_info = value as? IMDbMovieDetails

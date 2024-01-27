@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SpaceRocketLaunchMission : Jsonable {
-    public typealias ValueKeys = SpaceRocketLaunchMissionValueKeys
+    public typealias JSONKeys = SpaceRocketLaunchMissionValueKeys
     
     public var name:String, description:String, type:String
     public let window_start:Int64, window_end:Int64?, exact_day:Bool?, exact_time:Bool?
@@ -28,7 +28,7 @@ public struct SpaceRocketLaunchMission : Jsonable {
         self.video_url = video_url
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .name: return name
         case .description: return description
@@ -42,7 +42,7 @@ public struct SpaceRocketLaunchMission : Jsonable {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .name:
             name = value as! String
@@ -65,7 +65,7 @@ public struct SpaceRocketLaunchMission : Jsonable {
     }
 }
 
-public enum SpaceRocketLaunchMissionValueKeys : String, JsonableValueKeys {
+public enum SpaceRocketLaunchMissionValueKeys : String, JsonableKeys {
     case name
     case description
     case type

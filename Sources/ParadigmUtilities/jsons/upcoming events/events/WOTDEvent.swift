@@ -9,7 +9,7 @@ import Foundation
 import SwiftSovereignStates
 
 public struct WOTDEvent : GenericUpcomingEvent {
-    public typealias ValueKeys = WOTDEventValueKeys
+    public typealias JSONKeys = WOTDEventValueKeys
     
     public var type : UpcomingEventType? {
         return UpcomingEventType.word_of_the_day
@@ -80,7 +80,7 @@ public struct WOTDEvent : GenericUpcomingEvent {
         subdivisions = try generic_container.decodeIfPresent([String].self, forKey: .subdivisions)?.compactMap({ SovereignStateSubdivisions.valueOfCacheID($0)?.wrapped() })
     }
     
-    public func getKeyValue(key: ValueKeys) -> Any? {
+    public func getKeyValue(key: JSONKeys) -> Any? {
         switch key {
         case .examples: return examples
         case .pronunciation_url: return pronunciation_url
@@ -88,7 +88,7 @@ public struct WOTDEvent : GenericUpcomingEvent {
         case .grammar_type: return grammar_type
         }
     }
-    public mutating func setKeyValue<T>(key: ValueKeys, value: T) {
+    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
         switch key {
         case .examples:
             examples = value as? [String]

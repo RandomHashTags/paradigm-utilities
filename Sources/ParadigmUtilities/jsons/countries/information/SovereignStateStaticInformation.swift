@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SovereignStateStaticInformation : SovereignStateInformationValue {
-    public typealias ValueKeys = SovereignStateStaticInformationValueKeys
+    public typealias JSONKeys = SovereignStateStaticInformationValueKeys
     
     public let response_version:Int
     public var availabilities:SovereignStateAvailabilities?
@@ -123,7 +123,7 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
     }
 }
 
-public enum SovereignStateStaticInformationValueKeys : String, JsonableValueKeys {
+public enum SovereignStateStaticInformationValueKeys : String, JsonableKeys {
     case response_version
     case availabilities
     case agriculture

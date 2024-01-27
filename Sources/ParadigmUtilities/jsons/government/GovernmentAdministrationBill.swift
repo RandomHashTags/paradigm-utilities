@@ -8,7 +8,7 @@
 import Foundation
 
 public struct GovernmentAdministrationBill : Jsonable {
-    public typealias ValueKeys = GovernmentAdministrationBillValueKeys
+    public typealias JSONKeys = GovernmentAdministrationBillValueKeys
     
     public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policy_area:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     
@@ -65,7 +65,7 @@ public struct GovernmentAdministrationBill : Jsonable {
     }
 }
 
-public enum GovernmentAdministrationBillValueKeys : String, JsonableValueKeys {
+public enum GovernmentAdministrationBillValueKeys : String, JsonableKeys {
     case title
     case sponsor
     case summary

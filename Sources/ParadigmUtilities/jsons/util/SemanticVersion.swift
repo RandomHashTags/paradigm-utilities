@@ -40,6 +40,6 @@ public struct SemanticVersion : Jsonable, Comparable {
     }
     
     public var description : String {
-        return major.description + "." + minor.description + "." + patch.description
+        return "\(major).\(minor).\(patch)"
     }
 }
