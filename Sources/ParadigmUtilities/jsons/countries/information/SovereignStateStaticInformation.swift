@@ -29,12 +29,9 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
     public var wikipedia:SovereignStateWikipedia?
     public var wikipedia_featured_pictures:WikipediaFeaturedPictures?
     
-    public var national_parks:[PreNationalPark]?
-    public var volcanoes:[PreVolcano]?
-    
     public var sources:EventSources?
     
-    public init(response_version: Int, availabilities: SovereignStateAvailabilities?, agriculture: [SovereignStateAgricultureValue]?, info: [SovereignStateInfoKey]?, legalities: [SovereignStateInfoKey]?, rankings: [SovereignStateRankingInfoValue]?, single_values: [SovereignStateSingleValue]?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, national_parks: [PreNationalPark]?, volcanoes: [PreVolcano]?, sources: EventSources?) {
+    public init(response_version: Int, availabilities: SovereignStateAvailabilities?, agriculture: [SovereignStateAgricultureValue]?, info: [SovereignStateInfoKey]?, legalities: [SovereignStateInfoKey]?, rankings: [SovereignStateRankingInfoValue]?, single_values: [SovereignStateSingleValue]?, national_animals: NationalAnimals?, national_anthem: NationalAnthem?, national_capital: NationalCapital?, national_trees: NationalTrees?, cia_services: CIAServices?, history: SovereignStateHistory?, wikipedia: SovereignStateWikipedia?, wikipedia_featured_pictures: WikipediaFeaturedPictures?, sources: EventSources?) {
         self.response_version = response_version
         self.availabilities = availabilities
         self.agriculture = agriculture
@@ -50,8 +47,6 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         self.history = history
         self.wikipedia = wikipedia
         self.wikipedia_featured_pictures = wikipedia_featured_pictures
-        self.national_parks = national_parks
-        self.volcanoes = volcanoes
         self.sources = sources
     }
     
@@ -72,8 +67,6 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         case .history: return history
         case .wikipedia: return wikipedia
         case .wikipedia_featured_pictures: return wikipedia_featured_pictures
-        case .national_parks: return national_parks
-        case .volcanoes: return volcanoes
         case .sources: return sources
         }
     }
@@ -121,12 +114,6 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         case .wikipedia_featured_pictures:
             wikipedia_featured_pictures = value as? WikipediaFeaturedPictures
             break
-        case .national_parks:
-            national_parks = value as? [PreNationalPark]
-            break
-        case .volcanoes:
-            volcanoes = value as? [PreVolcano]
-            break
         case .sources:
             sources = value as? EventSources
             break
@@ -152,8 +139,6 @@ public enum SovereignStateStaticInformationValueKeys : String, JsonableValueKeys
     case history
     case wikipedia
     case wikipedia_featured_pictures
-    case national_parks
-    case volcanoes
     case sources
     
     public var is_translatable : Bool {

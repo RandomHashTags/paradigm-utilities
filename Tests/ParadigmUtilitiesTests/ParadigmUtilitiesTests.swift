@@ -2,49 +2,37 @@ import XCTest
 import ParadigmUtilities
 import SwiftSovereignStates
 
-final class ParadigmUtilitiesTests: XCTestCase {
+final class ParadigmUtilitiesTests : XCTestCase {
     func testExample() async throws {
-        let decoder:JSONDecoder = ParadigmUtilities.json_decoder
-        let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
-        let big_boy:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
-        let bro:TestBro = TestBro(big_boy: big_boy, number: 1, small_boy: smallBoy, ez: CodableAlwaysOmittable<String>.init("BOOBA"))
-        
-        try testFoundation(bro)
-        validate_cache()
-        try testSovereignStateInformation(decoder)
-        try testUpcomingEvents(decoder)
-        try testWeather(decoder)
-        try test_home_responses(decoder)
         //await testTranslations(bro)
         
-        if #available(macOS 13.0, *) {
-            try await test_benchmarks()
-        } else {
-            print("ParadigmUtilitiesTests;failed to execute benchmarks due to outdated macOS version (less than 13.0)")
-        }
+        try await test_benchmarks()
     }
     
-    private func testFoundation(_ bro: TestBro) throws {
+    func test_foundation() throws {
+        let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
+        let bruh:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
+        let bro:TestBro = TestBro(big_boy: bruh, number: 1, small_boy: smallBoy, ez: CodableAlwaysOmittable<String>.init("BOOBA"))
+        
         let big_boy:String = bro.big_boy
         let data:Data = try ParadigmUtilities.json_encoder.encode(bro)
         let string:String = String(data: data, encoding: .utf8)!
-        XCTAssert(string.elementsEqual("{\"big_boy\":\"" + big_boy + "\",\"number\":1}"), "invalid string; string=" + string)
+        XCTAssertEqual(string, "{\"big_boy\":\"" + big_boy + "\",\"number\":1}")
         
         var decoded:TestBro = try ParadigmUtilities.json_decoder.decode(TestBro.self, from: data)
-        XCTAssert(decoded.toString()!.elementsEqual(string))
+        XCTAssertEqual(decoded.toString(), string)
         decoded.setOmittableValue(.small_boy, value: false)
-        let decodedString:String = decoded.toString()!
-        XCTAssert(!decodedString.elementsEqual(string), decodedString)
+        XCTAssertNotEqual(decoded.toString(), string)
         
         let um:CodableOmittable<String>? = bro.getOmittable(.small_boy)
-        XCTAssert(um != nil, "testFoundation; um == nil")
-        XCTAssert(um?.wrappedValue?.elementsEqual("smol") ?? false)
+        XCTAssertNotNil(um)
+        XCTAssertEqual(um?.wrappedValue, "smol")
         um?.wrappedValue = nil
-        XCTAssert(um?.wrappedValue == nil)
-        XCTAssert(bro.small_boy == nil)
+        XCTAssertNil(um?.wrappedValue)
+        XCTAssertNil(bro.small_boy)
     }
     
-    private func validate_cache() {
+    func test_cache() {
         let api_version:APIVersion = APIVersion.v1
         let test_cache:ParadigmNSCache<AnyHashable, String> = ParadigmCache.get_or_load_cache(api_version: api_version, type: ParadigmCacheType.shared_instances)
         let string_1:String = test_cache.get_or_insert("test_1") {
@@ -54,65 +42,67 @@ final class ParadigmUtilitiesTests: XCTestCase {
             return "TEST_BRO_2"
         }
         XCTAssertEqual(string_1, string_2)
-        XCTAssert(test_cache["test_1"] == "TEST_BRO_1")
+        XCTAssertEqual(test_cache["test_1"], "TEST_BRO_1")
         test_cache["test_1"] = string_2
         test_cache["test_2"] = string_1
-        XCTAssert(test_cache.count == 2, "test_cache.count=\(test_cache.count)")
+        XCTAssertEqual(test_cache.count, 2)
         test_cache.remove_value(for_key: "test_2")
-        XCTAssert(test_cache.count == 1, "test_cache.count=\(test_cache.count)")
+        XCTAssertEqual(test_cache.count, 1)
         test_cache.remove_all()
-        XCTAssert(test_cache.count == 0)
+        XCTAssertEqual(test_cache.count, 0)
         ParadigmCache.remove_all(api_version: api_version, type: ParadigmCacheType.shared_instances)
         
         let shared_instances_cache:ParadigmNSCache<AnyHashable, any ParadigmSharedInstance> = ParadigmCache.get_shared_instances_cache()
-        XCTAssert(shared_instances_cache.count == 0)
+        XCTAssertEqual(shared_instances_cache.count, 0)
         let _:AsyncTask = AsyncTask.shared
-        XCTAssert(shared_instances_cache.count == 1)
+        XCTAssertEqual(shared_instances_cache.count, 1)
         let _:AsyncTask = AsyncTask.shared
         let _:AsyncTask = AsyncTask.get(identifier: ParadigmSharedInstanceIdentifier.async_task)
-        XCTAssert(shared_instances_cache.count == 1)
+        XCTAssertEqual(shared_instances_cache.count, 1)
         AsyncTask.shared.remove()
-        XCTAssert(shared_instances_cache.count == 0)
+        XCTAssertEqual(shared_instances_cache.count, 0)
     }
     
-    private func testSovereignStateInformation(_ decoder: JSONDecoder) throws {
+    func test_sovereign_state_information() throws {
+        let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         let response_version:Int = 1
         let anthem:NationalAnthem = NationalAnthem(mp3_url: "", sources: EventSources(sources: [EventSource(name: "Wikipedia: United States", url: "https://en.wikipedia.org/wiki/United_States")]))
         let capital:NationalCapital = NationalCapital(place: "Somewhere", notes: nil, sources: EventSources(sources: [EventSource(name: "Paradigm", url: "https://paradigm-app.com")]))
         let information:SovereignStateInformation = SovereignStateInformation(administration: ClientGovernmentAdministration(current_version: 1, all_versions: [1,2,3]),
-                                                                              _static: SovereignStateStaticInformation(response_version: response_version, availabilities: nil, agriculture: nil, info: nil, legalities: nil, rankings: nil, single_values: nil, national_animals: nil, national_anthem: anthem, national_capital: capital, national_trees: nil, cia_services: nil, history: nil, wikipedia: nil, wikipedia_featured_pictures: nil, national_parks: nil, volcanoes: nil, sources: nil),
+                                                                              _static: SovereignStateStaticInformation(response_version: response_version, availabilities: nil, agriculture: nil, info: nil, legalities: nil, rankings: nil, single_values: nil, national_animals: nil, national_anthem: anthem, national_capital: capital, national_trees: nil, cia_services: nil, history: nil, wikipedia: nil, wikipedia_featured_pictures: nil, sources: nil),
                                                                               nonstatic: nil)
         
-        XCTAssert(information._static?.national_capital != nil)
+        XCTAssertNotNil(information._static?.national_capital)
         
         let data:Data = information.toString()!.data(using: .utf8)!
         let bro:SovereignStateInformation = try decoder.decode(SovereignStateInformation.self, from: data)
-        XCTAssert(bro._static?.response_version == response_version)
-        XCTAssert(bro._static?.national_anthem == anthem)
-        XCTAssert(bro._static?.national_capital == capital)
+        XCTAssertEqual(bro._static?.response_version, response_version)
+        XCTAssertEqual(bro._static?.national_anthem, anthem)
+        XCTAssertEqual(bro._static?.national_capital, capital)
     }
     
-    private func testUpcomingEvents(_ decoder: JSONDecoder) throws {
+    func test_upcoming_events() throws {
         let encoder:JSONEncoder = ParadigmUtilities.json_encoder
+        let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
         var apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
-        XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
+        XCTAssertEqual(apod_event.image_url, event_image_url_suffix)
         let data:Data = apod_event.toData()!
         let generic_parsed:APODEvent? = GenericUpcomingEvents.parse_any(data: data)
-        XCTAssert(generic_parsed == apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
+        XCTAssertEqual(generic_parsed, apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
         apod_event.image_url = event_image_url
         let string:String? = generic_parsed?.getValue("copyright")
         XCTAssertEqual(string, "Evan Anderson")
         
-        XCTAssert(apod_event.image_url!.elementsEqual(event_image_url_suffix), "apod_event.image_url=" + (apod_event.image_url ?? "nil"))
+        XCTAssertEqual(apod_event.image_url, event_image_url_suffix)
         let apod_pre_event:PreUpcomingEvent = apod_event.to_pre_upcoming_event(tag: "")
-        XCTAssert(apod_pre_event.image_url!.elementsEqual(event_image_url_suffix), "apod_pre_event.image_url=" + (apod_pre_event.image_url ?? "nil"))
+        XCTAssertEqual(apod_pre_event.image_url, event_image_url_suffix)
         
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
         let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
-        XCTAssert(movie_pre_event.event_date != nil)
+        XCTAssertNotNil(movie_pre_event.event_date)
         let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try encoder.encode(test), encoding: .utf8)!
@@ -124,11 +114,9 @@ final class ParadigmUtilitiesTests: XCTestCase {
         XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
-    private func testWeather(_ decoder: JSONDecoder) throws {
-    }
-    
-    private func test_home_responses(_ decoder: JSONDecoder) throws {
+    func test_home_responses() throws {
         let encoder:JSONEncoder = ParadigmUtilities.json_encoder
+        let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         
         let countries:HomeResponseCountries = HomeResponseCountries(filters: nil)
         
@@ -180,7 +168,7 @@ final class ParadigmUtilitiesTests: XCTestCase {
 {"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"natural_events":{"severe_storms":[{"country":"united_states","events":[{"place":"Alaska","id":"az98345","country":"united_states","subdivision":"united_states-alaska"}]}],"volcanoes":[],"wildfires":[]},"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states-minnesota","events":[{"type":"blizzard_warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states-minnesota-rochester"}]}],"subdivision":"united_states-minnesota"}]}]}}
 """
         //print("response_string=" + response_string)
-        XCTAssert(response_string.elementsEqual(target_response_string), "response_string=" + response_string)
+        XCTAssertEqual(response_string, target_response_string)
     }
     
     private func testTranslations(_ bro: TestBro) async {
@@ -194,7 +182,6 @@ final class ParadigmUtilitiesTests: XCTestCase {
         }*/
     }
     
-    @available(macOS 13.0, *)
     private func test_benchmarks() async throws {
         /*let test:PreUpcomingEvent = PreUpcomingEvent(type: UpcomingEventType.astronomy_picture_of_the_day, event_date: EventDate(year: 2023, month: Month.may, day: 21), title: "test", tag: "bro", image_url: nil)
         try await benchmark(key: "all_values_are_nil", {
@@ -209,38 +196,6 @@ final class ParadigmUtilitiesTests: XCTestCase {
     private func get_local_data(at path: String) -> Data? {
         let url:URL = URL(fileURLWithPath: path)
         return try? Data.init(contentsOf: url)
-    }
-    
-    @available(macOS 13.0, *)
-    private func benchmark(key: String, _ code: @escaping () async throws -> Void) async throws {
-        let iteration_count:Int = 1_000
-        let clock:ContinuousClock = ContinuousClock()
-        let _:Duration = try await clock.measure(code)
-        var timings:[Int64] = [Int64]()
-        timings.reserveCapacity(iteration_count)
-        for _ in 1...iteration_count {
-            let result:Duration = try await clock.measure(code)
-            let attoseconds:Int64 = result.components.attoseconds
-            let nanoseconds:Int64 = attoseconds / 1_000_000_000
-            timings.append(nanoseconds)
-        }
-        timings = timings.sorted(by: { $0 < $1 })
-        let median:Int64 = timings[timings.count/2]
-        let sum:Int64 = timings.reduce(0, +)
-        let average:Double = Double(sum) / Double(timings.count)
-        let key:String = key + (1...(65-key.count)).map({ _ in " " }).joined()
-        
-        let formatter:NumberFormatter = NumberFormatter()
-        formatter.numberStyle = .decimal
-        formatter.maximumFractionDigits = 20
-        
-        let average_time_elapsed:String = formatter.string(for: average)! + "ns"
-        let minimum_time_elapsed:String = formatter.string(for: timings.first!)! + "ns"
-        let maximum_time_elapsed:String = formatter.string(for: timings.last!)! + "ns"
-        let median_time_elapsed:String = formatter.string(for: median)! + "ns"
-        let total_time_elapsed:String = formatter.string(for: sum)! + "ns"
-        
-        print("ParadigmUtilitiesTests;benchmark( " + key + "| min=" + minimum_time_elapsed + " | max=" + maximum_time_elapsed + " | median=" + median_time_elapsed + " | average=" + average_time_elapsed + " | total=" + total_time_elapsed)
     }
 }
 

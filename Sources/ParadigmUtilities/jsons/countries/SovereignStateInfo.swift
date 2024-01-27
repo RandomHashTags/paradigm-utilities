@@ -129,7 +129,6 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case national_anthem
     case national_birds
     case national_capital
-    case national_parks
     case national_trees
     
     case neighbors
@@ -322,7 +321,6 @@ public enum SovereignStateInfo : String, CaseIterable, Jsonable {
         case .national_anthem: return "National Anthem"
         case .national_birds: return "National Birds"
         case .national_capital: return "National Capital"
-        case .national_parks: return "National Parks"
         case .national_trees: return "National Trees"
         
         case .ranking_adult_hiv_prevalence: return "Adult HIV Prevalence"

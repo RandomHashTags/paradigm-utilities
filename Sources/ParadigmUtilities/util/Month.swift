@@ -7,60 +7,44 @@
 
 import Foundation
 
-public enum Month : Int, CaseIterable {
-    case january = 1
-    case february = 2
-    case march = 3
-    case april = 4
-    case may = 5
-    case june = 6
-    case july = 7
-    case august = 8
-    case september = 9
-    case october = 10
-    case november = 11
-    case december = 12
+public struct Month {
+    public private(set) static var allCases:[Month] = (0..<Calendar.current.monthSymbols.count).map({ Month(rawValue: $0) })
+    
+    public static let january:Month = Month(rawValue: 0)
+    public static let february:Month = Month(rawValue: 1)
+    public static let march:Month = Month(rawValue: 2)
+    public static let april:Month = Month(rawValue: 3)
+    public static let may:Month = Month(rawValue: 4)
+    public static let june:Month = Month(rawValue: 5)
+    public static let july:Month = Month(rawValue: 6)
+    public static let august:Month = Month(rawValue: 7)
+    public static let september:Month = Month(rawValue: 8)
+    public static let october:Month = Month(rawValue: 9)
+    public static let november:Month = Month(rawValue: 10)
+    public static let december:Month = Month(rawValue: 11)
+    
+    public let rawValue:Int
     
     public static func valueOf(_ string: any StringProtocol) -> Month? {
         guard string.count >= 3 else { return nil }
         let key:Substring = string.lowercased().prefix(3)
-        return Month.allCases.first(where: { "\($0)".starts(with: key) })
+        return Month.allCases.first(where: { $0.name.lowercased().starts(with: key) })
     }
     
     public var name : String {
-        switch self {
-        case .january: return "January"
-        case .february: return "February"
-        case .march: return "March"
-        case .april: return "April"
-        case .may: return "May"
-        case .june: return "June"
-        case .july: return "July"
-        case .august: return "August"
-        case .september: return "September"
-        case .october: return "October"
-        case .november: return "November"
-        case .december: return "December"
-        }
+        return Calendar.current.monthSymbols[rawValue-1]
     }
     public var previous : Month {
-        return self == .january ? .december : Month.init(rawValue: rawValue-1)!
+        return Month(rawValue: (rawValue - 1 < 0 ? Calendar.current.monthSymbols.count : rawValue) - 1)
     }
     public var next : Month {
-        return self == .december ? .january : Month.init(rawValue: rawValue+1)!
+        return Month(rawValue: rawValue + 1 == Calendar.current.monthSymbols.count ? 0 : rawValue + 1)
     }
     
-    public var max_length : Int {
-        switch self {
-        case .february:
-            return 29
-        case .april,
-                .june,
-                .september,
-                .november:
-            return 30
-        default:
-            return 31
-        }
+    public func days(year: Int) -> Int {
+        let components:DateComponents = DateComponents(year: year, month: rawValue)
+        let calendar:Calendar = Calendar.current
+        guard let date:Date = calendar.date(from: components), let range:Range<Int> = calendar.range(of: Calendar.Component.day, in: Calendar.Component.month, for: date) else { return -1 }
+        return range.count
     }
 }
