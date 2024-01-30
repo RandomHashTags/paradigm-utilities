@@ -8,9 +8,9 @@
 import Foundation
 
 public struct WeatherAlertTime : Jsonable {
-    public let sent:Int64, effective:Int64, expires:Int64, ends:Int64?
+    public let sent:Date, effective:Date, expires:Date, ends:Date?
     
-    public init(sent: Int64, effective: Int64, expires: Int64, ends: Int64?) {
+    public init(sent: Date, effective: Date, expires: Date, ends: Date?) {
         self.sent = sent
         self.effective = effective
         self.expires = expires
@@ -18,10 +18,10 @@ public struct WeatherAlertTime : Jsonable {
     }
     
     public var is_expired : Bool {
-        return Int64(Date().timeIntervalSince1970 * 1_000) >= expires
+        return ParadigmUtilities.now >= expires
     }
     public var is_ended : Bool {
-        guard let ends:Int64 = ends else { return true }
-        return Int64(Date().timeIntervalSince1970 * 1_000) >= ends
+        guard let ends:Date = ends else { return true }
+        return ParadigmUtilities.now >= ends
     }
 }
