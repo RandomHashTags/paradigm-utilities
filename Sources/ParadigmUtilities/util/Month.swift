@@ -10,20 +10,24 @@ import Foundation
 public struct Month {
     public private(set) static var allCases:[Month] = (0..<Calendar.current.monthSymbols.count).map({ Month(rawValue: $0) })
     
-    public static let january:Month = Month(rawValue: 0)
-    public static let february:Month = Month(rawValue: 1)
-    public static let march:Month = Month(rawValue: 2)
-    public static let april:Month = Month(rawValue: 3)
-    public static let may:Month = Month(rawValue: 4)
-    public static let june:Month = Month(rawValue: 5)
-    public static let july:Month = Month(rawValue: 6)
-    public static let august:Month = Month(rawValue: 7)
-    public static let september:Month = Month(rawValue: 8)
-    public static let october:Month = Month(rawValue: 9)
-    public static let november:Month = Month(rawValue: 10)
-    public static let december:Month = Month(rawValue: 11)
+    public static let january:Month = Month(rawValue: 1)
+    public static let february:Month = Month(rawValue: 2)
+    public static let march:Month = Month(rawValue: 3)
+    public static let april:Month = Month(rawValue: 4)
+    public static let may:Month = Month(rawValue: 5)
+    public static let june:Month = Month(rawValue: 6)
+    public static let july:Month = Month(rawValue: 7)
+    public static let august:Month = Month(rawValue: 8)
+    public static let september:Month = Month(rawValue: 9)
+    public static let october:Month = Month(rawValue: 10)
+    public static let november:Month = Month(rawValue: 11)
+    public static let december:Month = Month(rawValue: 12)
     
     public let rawValue:Int
+    
+    public init(rawValue: Int) {
+        self.rawValue = rawValue
+    }
     
     public static func valueOf(_ string: any StringProtocol) -> Month? {
         guard string.count >= 3 else { return nil }
