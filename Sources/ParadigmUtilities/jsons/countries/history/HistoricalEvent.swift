@@ -79,13 +79,4 @@ public enum HistoricalEventValueKeys : String, JsonableKeys {
     case subdivision
     case city
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .description, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

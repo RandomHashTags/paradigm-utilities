@@ -8,9 +8,7 @@
 import Foundation
 
 public actor AsyncTask : ParadigmSharedInstance {
-    public static func shared_identifier() -> ParadigmSharedInstanceIdentifier {
-        return ParadigmSharedInstanceIdentifier.async_task
-    }
+    public static var shared_identifier : ParadigmSharedInstanceIdentifier { ParadigmSharedInstanceIdentifier.async_task }
     
     private var ids:[AnyHashable:Task<Any?, Error>] = [AnyHashable:Task<Any?, Error>]()
     

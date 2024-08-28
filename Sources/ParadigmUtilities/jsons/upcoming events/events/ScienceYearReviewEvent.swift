@@ -90,10 +90,6 @@ public struct ScienceYearReviewEvent : GenericUpcomingEvent {
 public enum ScienceYearReviewEventValueKeys : String, UpcomingEventValueKeys {
     case years
     
-    public var is_translatable : Bool {
-        return true
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.science_year_review
     }

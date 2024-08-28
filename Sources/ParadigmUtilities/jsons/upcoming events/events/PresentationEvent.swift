@@ -90,10 +90,6 @@ public struct PresentationEvent : GenericUpcomingEvent {
 public enum PresentationEventValueKeys : String, UpcomingEventValueKeys {
     case tag
     
-    public var is_translatable : Bool {
-        return true
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.astronomy_picture_of_the_day
     }

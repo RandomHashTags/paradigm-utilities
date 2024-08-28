@@ -85,10 +85,6 @@ public struct WikipediaTodaysFeaturedPictureEvent : GenericUpcomingEvent {
 public enum WikipediaTodaysFeaturedPictureEventValueKeys : String, UpcomingEventValueKeys {
     case video_url
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.wikipedia_todays_featured_picture
     }

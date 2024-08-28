@@ -52,13 +52,4 @@ public enum SubdivisionStatuteItemValueKeys : String, JsonableKeys {
     case title
     case is_repeated
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

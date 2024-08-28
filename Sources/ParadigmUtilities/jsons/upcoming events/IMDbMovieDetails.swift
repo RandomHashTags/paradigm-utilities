@@ -66,13 +66,4 @@ public enum IMDbMovieDetailsValueKeys : String, JsonableKeys {
     case image_url
     case countries
     case source
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .rating_reason, .genres:
-            return true
-        default:
-            return false
-        }
-    }
 }

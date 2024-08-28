@@ -76,13 +76,4 @@ public enum SpaceRocketLaunchMissionValueKeys : String, JsonableKeys {
     case status
     case probability
     case video_url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .description, .type, .status, .probability:
-            return true
-        default:
-            return false
-        }
-    }
 }

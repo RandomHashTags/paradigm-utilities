@@ -38,13 +38,4 @@ public struct NationalAnthem : SovereignStateInformationValue {
 public enum NationalAnthemValueKeys : String, JsonableKeys {
     case mp3_url
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -36,8 +36,4 @@ public enum GovernmentPrePoliticianValueKeys : String, JsonableKeys {
     case name
     case party
     case image_url
-    
-    public var is_translatable : Bool {
-        return false
-    }
 }

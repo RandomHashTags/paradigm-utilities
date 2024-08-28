@@ -36,10 +36,6 @@ public extension UpcomingEventValueKeys {
 public enum NoUpcomingEventValueKeys : String, UpcomingEventValueKeys {
     case abcdefghijklmnopqrstuvqxyz
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.astronomy_picture_of_the_day
     }

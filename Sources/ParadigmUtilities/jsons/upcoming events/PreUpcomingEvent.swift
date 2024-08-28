@@ -12,10 +12,10 @@ import SwiftSovereignStates
 public struct PreUpcomingEvent : UpcomingEventProtocol {
     public typealias JSONKeys = PreUpcomingEventValueKeys
     
-    @CodableAlwaysOmittable public var type:UpcomingEventType?
-    @CodableOmittable public var event_date:EventDate?
-    @CodableOmittable public var exact_start:Int64?
-    @CodableOmittable public var exact_end:Int64?
+    public var type:UpcomingEventType?
+    public var event_date:EventDate?
+    public var exact_start:Int64?
+    public var exact_end:Int64?
     
     /// A custom assigned identifier by the server which is only interacted with if the client needs to use the functionality in some way. Default is `nil`.
     ///
@@ -31,11 +31,11 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     public var team_away:ClientMLBTeam?, team_home:ClientMLBTeam?
     
     public init(type: UpcomingEventType?, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
-        self._type = CodableAlwaysOmittable(type)
+        self.type = type
         self.id = id
-        self._event_date = CodableOmittable(event_date, omitted: true)
-        self._exact_start = CodableOmittable(exact_start, omitted: true)
-        self._exact_end = CodableOmittable(exact_end, omitted: true)
+        self.event_date = event_date
+        self.exact_start = exact_start
+        self.exact_end = exact_end
         self.title = title
         self.tag = tag
         self.image_url = image_url
@@ -112,21 +112,4 @@ public enum PreUpcomingEventValueKeys : String, JsonableKeys {
     case popularity
     case team_away
     case team_home
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title, .tag, .custom_type_singular_name, .team_away, .team_home:
-            return true
-        default:
-            return false
-        }
-    }
-    public var is_omittable : Bool {
-        switch self {
-        case .type, .event_date, .exact_start, .exact_end:
-            return true
-        default:
-            return false
-        }
-    }
 }

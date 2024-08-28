@@ -63,13 +63,4 @@ public enum SovereignStateAgricultureValueValueKeys : String, JsonableKeys {
     case suffix
     case is_estimate
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .suffix, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

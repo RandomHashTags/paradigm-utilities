@@ -161,13 +161,4 @@ public enum GenericUpcomingEventValueKeys : String, JsonableKeys {
     case hyperlinks
     case countries
     case subdivisions
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .custom_type_singular_name, .title, .description, .sources, .hyperlinks:
-            return true
-        default:
-            return false
-        }
-    }
 }

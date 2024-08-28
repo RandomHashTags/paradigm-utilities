@@ -97,15 +97,6 @@ public enum VideoGameEventValueKeys : String, UpcomingEventValueKeys {
     case platforms
     case genres
     
-    public var is_translatable : Bool {
-        switch self {
-        case .genres:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         switch self {
         case .platforms:

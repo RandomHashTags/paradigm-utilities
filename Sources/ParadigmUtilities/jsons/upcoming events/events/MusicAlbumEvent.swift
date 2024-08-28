@@ -93,10 +93,6 @@ public enum MusicAlbumEventValueKeys : String, UpcomingEventValueKeys {
     case spotify_details
     case itunes_details
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.music_album
     }

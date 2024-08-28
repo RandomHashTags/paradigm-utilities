@@ -38,11 +38,4 @@ public struct WikipediaStatisticsDimensions : Jsonable {
 public enum WikipediaStatisticsDimensionsValueKeys : String, JsonableKeys {
     case length
     case width
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .length, .width:
-            return true
-        }
-    }
 }

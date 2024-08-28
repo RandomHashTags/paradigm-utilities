@@ -44,13 +44,4 @@ public enum ClientMLBTeamValueKeys : String, JsonableKeys {
     case schedule_url
     case logo_url
     case wikipedia_url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -71,13 +71,4 @@ public enum EarthquakeValueKeys : String, JsonableKeys {
     case depth_km
     case location
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .cause, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

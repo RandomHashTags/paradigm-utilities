@@ -10,9 +10,8 @@ final class ParadigmUtilitiesTests : XCTestCase {
     }
     
     func test_foundation() throws {
-        let smallBoy:CodableOmittable<String> = CodableOmittable<String>.init("smol", omitted: true)
         let bruh:String = "They're going to call me Mr. Worldwide after this pops off! Aren't they?"
-        let bro:TestBro = TestBro(big_boy: bruh, number: 1, small_boy: smallBoy, ez: CodableAlwaysOmittable<String>.init("BOOBA"))
+        let bro:TestBro = TestBro(big_boy: bruh, number: 1)
         
         let big_boy:String = bro.big_boy
         let data:Data = try ParadigmUtilities.json_encoder.encode(bro)
@@ -21,15 +20,6 @@ final class ParadigmUtilitiesTests : XCTestCase {
         
         var decoded:TestBro = try ParadigmUtilities.json_decoder.decode(TestBro.self, from: data)
         XCTAssertEqual(decoded.toString(), string)
-        decoded.setOmittableValue(.small_boy, value: false)
-        XCTAssertNotEqual(decoded.toString(), string)
-        
-        let um:CodableOmittable<String>? = bro.getOmittable(.small_boy)
-        XCTAssertNotNil(um)
-        XCTAssertEqual(um?.wrappedValue, "smol")
-        um?.wrappedValue = nil
-        XCTAssertNil(um?.wrappedValue)
-        XCTAssertNil(bro.small_boy)
     }
     
     func test_cache() {
@@ -204,13 +194,10 @@ private struct TestBro : Jsonable {
     
     var big_boy:String
     let number:Int
-    @CodableOmittable var small_boy:String?
-    @CodableAlwaysOmittable var ez:String?
     
     func getKeyValue(key: TestBroValueKeys) -> Any? {
         switch key {
         case .big_boy: return big_boy
-        case .small_boy: return _small_boy
         }
     }
     mutating func setKeyValue<T>(key: TestBroValueKeys, value: T) {
@@ -218,30 +205,9 @@ private struct TestBro : Jsonable {
         case .big_boy:
             big_boy = value as! String
             break
-        case .small_boy:
-            _small_boy = value as! CodableOmittable<String>
-            break
         }
     }
 }
 private enum TestBroValueKeys : String, JsonableKeys {
     case big_boy
-    case small_boy
-    
-    var is_translatable : Bool {
-        switch self {
-        case .big_boy:
-            return true
-        default:
-            return false
-        }
-    }
-    var is_omittable : Bool {
-        switch self {
-        case .small_boy:
-            return true
-        default:
-            return false
-        }
-    }
 }

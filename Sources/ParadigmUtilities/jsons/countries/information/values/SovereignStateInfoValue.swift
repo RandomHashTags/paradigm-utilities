@@ -44,11 +44,4 @@ public enum SovereignStateInfoValueValueKeys : String, JsonableKeys {
     case title
     case value
     case description
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title, .value, .description:
-            return true
-        }
-    }
 }

@@ -45,8 +45,4 @@ public enum NaturalWeatherEventsResponseValueKeys : String, JsonableKeys {
     case severe_storms
     case volcanoes
     case wildfires
-    
-    public var is_translatable : Bool {
-        return true
-    }
 }

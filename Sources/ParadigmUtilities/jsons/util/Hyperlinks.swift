@@ -76,11 +76,4 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
 
 public enum HyperlinksValueKeys : String, JsonableKeys {
     case hyperlinks
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .hyperlinks:
-            return true
-        }
-    }
 }

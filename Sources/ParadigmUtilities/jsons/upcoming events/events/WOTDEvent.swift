@@ -105,15 +105,6 @@ public enum WOTDEventValueKeys : String, UpcomingEventValueKeys {
     case syllables
     case grammar_type
     
-    public var is_translatable : Bool {
-        switch self {
-        case .examples:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         switch self {
         case .examples:

@@ -38,11 +38,4 @@ public struct NationalAnimals : SovereignStateNationalValue {
 public enum NationalAnimalsValueKeys : String, JsonableKeys {
     case pictures
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .pictures, .sources:
-            return true
-        }
-    }
 }

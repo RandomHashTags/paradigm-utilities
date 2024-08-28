@@ -135,15 +135,6 @@ public enum SpaceRocketLaunchEventValueKeys : String, UpcomingEventValueKeys {
     case probability
     case video_url
     
-    public var is_translatable: Bool {
-        switch self {
-        case .mission_description, .mission_type, .status:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.rocket_launch
     }

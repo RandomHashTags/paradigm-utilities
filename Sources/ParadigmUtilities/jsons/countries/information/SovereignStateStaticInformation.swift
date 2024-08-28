@@ -140,8 +140,4 @@ public enum SovereignStateStaticInformationValueKeys : String, JsonableKeys {
     case wikipedia
     case wikipedia_featured_pictures
     case sources
-    
-    public var is_translatable : Bool {
-        return self != .response_version
-    }
 }

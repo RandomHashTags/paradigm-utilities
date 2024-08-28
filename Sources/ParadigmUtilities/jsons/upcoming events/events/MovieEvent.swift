@@ -106,15 +106,6 @@ public enum MovieEventValueKeys : String, UpcomingEventValueKeys {
     case imdb_info
     case production_companies
     
-    public var is_translatable : Bool {
-        switch self {
-        case .imdb_info:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         switch self {
         case .production_companies:

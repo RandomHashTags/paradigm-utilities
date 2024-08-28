@@ -40,13 +40,4 @@ public struct CountryWeatherEvents : Jsonable {
 public enum CountryWeatherEventAlertsValueKeys : String, JsonableKeys {
     case country
     case subdivisions
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .subdivisions:
-            return true
-        default:
-            return false
-        }
-    }
 }

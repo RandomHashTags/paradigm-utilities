@@ -51,13 +51,4 @@ public enum CIAValueValueKeys : String, JsonableKeys {
     case title
     case value
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title, .value, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -74,13 +74,4 @@ public enum NewsEventValueKeys : String, JsonableKeys {
     case related_countries
     case related_subdivisions
     case related_cities
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .description, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

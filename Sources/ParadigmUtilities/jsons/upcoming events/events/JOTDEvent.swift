@@ -104,15 +104,6 @@ public enum JOTDEventValueKeys : String, UpcomingEventValueKeys {
     case question
     case answer
     
-    public var is_translatable : Bool {
-        switch self {
-        case .question, .answer:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.joke_of_the_day
     }

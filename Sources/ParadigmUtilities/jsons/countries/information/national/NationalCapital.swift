@@ -44,13 +44,4 @@ public enum NationalCapitalValueKeys : String, JsonableKeys {
     case place
     case notes
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .notes, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

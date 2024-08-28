@@ -38,13 +38,4 @@ public struct Hyperlink : Jsonable {
 public enum HyperlinkValueKeys : String, JsonableKeys {
     case text
     case url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .text:
-            return true
-        default:
-            return false
-        }
-    }
 }

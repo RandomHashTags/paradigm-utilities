@@ -57,13 +57,4 @@ public enum PreHolidayValueKeys : String, JsonableKeys {
     case name
     case emoji
     case countries
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name:
-            return true
-        default:
-            return false
-        }
-    }
 }

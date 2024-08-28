@@ -52,13 +52,4 @@ public enum WikipediaPictureValueKeys : String, JsonableKeys {
     case name
     case title
     case image_url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .title:
-            return true
-        default:
-            return false
-        }
-    }
 }

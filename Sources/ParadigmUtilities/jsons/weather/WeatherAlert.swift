@@ -82,13 +82,4 @@ public enum WeatherAlertValueKeys : String, JsonableKeys {
     case defcon
     case time
     case source
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .event, .certainty, .headline, .instruction, .description, .source:
-            return true
-        default:
-            return false
-        }
-    }
 }

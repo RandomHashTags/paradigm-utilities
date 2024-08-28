@@ -97,10 +97,6 @@ public enum ProfessionalWrestlingEventValueKeys : String, UpcomingEventValueKeys
     case main_event
     case notes
     
-    public var is_translatable : Bool {
-        return true
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.wrestling_details
     }

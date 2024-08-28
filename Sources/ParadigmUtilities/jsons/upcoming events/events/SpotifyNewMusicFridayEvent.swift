@@ -90,10 +90,6 @@ public struct SpotifyNewMusicFridayEvent : GenericUpcomingEvent {
 public enum SpotifyNewMusicFridayEventValueKeys : String, UpcomingEventValueKeys {
     case tracks
     
-    public var is_translatable : Bool {
-        return true
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.spotify_new_music_friday_tracks
     }

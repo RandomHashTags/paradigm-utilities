@@ -61,13 +61,4 @@ public enum SovereignStateSingleValueValueKeys : String, JsonableKeys {
     case value_description
     case year_of_data
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .notes, .value, .value_description, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -42,13 +42,4 @@ public enum UpdateRelatedContentValueKeys : String, JsonableKeys {
     case countries
     case subdivisions
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

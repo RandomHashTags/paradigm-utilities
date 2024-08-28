@@ -90,11 +90,4 @@ public struct EventSources : Jsonable {
 
 public enum EventSourcesValueKeys : String, JsonableKeys {
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .sources:
-            return true
-        }
-    }
 }

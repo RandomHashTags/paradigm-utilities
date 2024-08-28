@@ -89,10 +89,6 @@ public enum APODEventValueKeys : String, UpcomingEventValueKeys {
     case copyright
     case video_url
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.astronomy_picture_of_the_day
     }

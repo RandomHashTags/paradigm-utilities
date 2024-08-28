@@ -38,13 +38,4 @@ public struct SovereignStateAvailabilities : Jsonable {
 public enum SovereignStateAvailabilitiesValueKeys : String, JsonableKeys {
     case image_url_prefix
     case availabilities
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .availabilities:
-            return true
-        default:
-            return false
-        }
-    }
 }

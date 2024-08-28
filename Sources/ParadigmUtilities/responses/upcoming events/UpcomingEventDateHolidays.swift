@@ -38,13 +38,4 @@ public struct UpcomingEventDateHolidays : Jsonable {
 public enum UpcomingEventDateHolidaysValueKeys : String, JsonableKeys {
     case date
     case holidays
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .holidays:
-            return true
-        default:
-            return false
-        }
-    }
 }

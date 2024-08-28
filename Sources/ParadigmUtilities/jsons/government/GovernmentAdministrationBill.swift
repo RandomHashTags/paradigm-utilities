@@ -74,8 +74,4 @@ public enum GovernmentAdministrationBillValueKeys : String, JsonableKeys {
     case cosponsors
     case actions
     case sources
-    
-    public var is_translatable : Bool {
-        return true
-    }
 }

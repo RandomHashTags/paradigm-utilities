@@ -39,13 +39,4 @@ public struct CountryGovernmentRecentActivityBillStatus : Jsonable {
 public enum CountryGovernmentRecentActivityBillStatusValueKeys : String, JsonableKeys {
     case status
     case dates
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .dates:
-            return true
-        default:
-            return false
-        }
-    }
 }

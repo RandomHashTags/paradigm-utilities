@@ -57,13 +57,4 @@ public enum NaturalWeatherEventValueKeys : String, JsonableKeys {
     case location
     case description
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .description, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

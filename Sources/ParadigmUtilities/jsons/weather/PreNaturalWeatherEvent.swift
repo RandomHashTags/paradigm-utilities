@@ -53,13 +53,4 @@ public enum PreNaturalWeatherEventValueKeys : String, JsonableKeys {
     case tag
     case country
     case subdivision
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .place, .tag:
-            return true
-        default:
-            return false
-        }
-    }
 }

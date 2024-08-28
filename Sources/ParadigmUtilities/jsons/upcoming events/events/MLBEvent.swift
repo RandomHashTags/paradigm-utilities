@@ -97,10 +97,6 @@ public enum MLBEventValueKeys : String, UpcomingEventValueKeys {
     case team_away
     case team_home
     
-    public var is_translatable : Bool {
-        return true
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.mlb
     }

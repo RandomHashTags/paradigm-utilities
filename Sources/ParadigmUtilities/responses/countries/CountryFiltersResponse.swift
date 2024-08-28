@@ -38,13 +38,4 @@ public struct CountryFiltersResponse : Jsonable {
 public enum CountryFiltersResponseValueKeys : String, JsonableKeys {
     case response_version
     case filters
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .filters:
-            return true
-        default:
-            return false
-        }
-    }
 }

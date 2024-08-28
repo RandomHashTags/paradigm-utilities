@@ -46,13 +46,4 @@ public enum PreElectionValueKeys : String, JsonableKeys {
     case name
     case date
     case country
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name:
-            return true
-        default:
-            return false
-        }
-    }
 }

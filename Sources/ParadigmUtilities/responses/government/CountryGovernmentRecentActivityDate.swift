@@ -38,13 +38,4 @@ public struct CountryGovernmentRecentActivityDate : Jsonable {
 public enum CountryGovernmentRecentActivityDatesValueKeys : String, JsonableKeys {
     case date
     case activity
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .activity:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -78,13 +78,4 @@ public enum SovereignStateRankingInfoValueValueKeys : String, JsonableKeys {
     case is_estimate
     case values
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .suffix, .values, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

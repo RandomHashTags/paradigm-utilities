@@ -38,13 +38,4 @@ public struct PreEarthquakeMagnitude : Jsonable {
 public enum PreEarthquakeMagnitudeValueKeys : String, JsonableKeys {
     case mag
     case quakes
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .quakes:
-            return true
-        default:
-            return false
-        }
-    }
 }

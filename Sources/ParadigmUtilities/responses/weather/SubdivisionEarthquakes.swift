@@ -40,13 +40,4 @@ public struct SubdivisionEarthquakes : Jsonable {
 public enum SubdivisionEarthquakesResponseValueKeys : String, JsonableKeys {
     case subdivision
     case magnitudes
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .magnitudes:
-            return true
-        default:
-            return false
-        }
-    }
 }

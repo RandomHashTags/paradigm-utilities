@@ -11,29 +11,29 @@ public struct UpcomingEventTypeEvents : Jsonable {
     public typealias JSONKeys = UpcomingEventTypeEventsValueKeys
     
     public let type:UpcomingEventType
-    @CodableOmittable public var date_events:[UpcomingEventTypeDateEvents]?
-    @CodableOmittable public var exact_time_events:[UpcomingEventTypeExactTimeEvents]?
+    public var date_events:[UpcomingEventTypeDateEvents]?
+    public var exact_time_events:[UpcomingEventTypeExactTimeEvents]?
     
     public init(type: UpcomingEventType, date_events: [UpcomingEventTypeDateEvents]? = nil, exact_time_events: [UpcomingEventTypeExactTimeEvents]? = nil) {
         self.type = type
-        self._date_events = CodableOmittable(date_events)
-        self._exact_time_events = CodableOmittable(exact_time_events)
+        self.date_events = date_events
+        self.exact_time_events = exact_time_events
     }
     
     public func getKeyValue(key: UpcomingEventTypeEventsValueKeys) -> Any? {
         switch key {
         case .type: return type
-        case .date_events: return _date_events
-        case .exact_time_events: return _exact_time_events
+        case .date_events: return date_events
+        case .exact_time_events: return exact_time_events
         }
     }
     public mutating func setKeyValue<T>(key: UpcomingEventTypeEventsValueKeys, value: T) {
         switch key {
         case .date_events:
-            _date_events = value as! CodableOmittable<[UpcomingEventTypeDateEvents]>
+            date_events = value as? [UpcomingEventTypeDateEvents]
             break
         case .exact_time_events:
-            _exact_time_events = value as! CodableOmittable<[UpcomingEventTypeExactTimeEvents]>
+            exact_time_events = value as? [UpcomingEventTypeExactTimeEvents]
             break
         default:
             break
@@ -45,23 +45,6 @@ public enum UpcomingEventTypeEventsValueKeys : String, JsonableKeys {
     case type
     case date_events
     case exact_time_events
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .date_events, .exact_time_events:
-            return true
-        default:
-            return false
-        }
-    }
-    public var is_omittable : Bool {
-        switch self {
-        case .date_events, .exact_time_events:
-            return true
-        default:
-            return false
-        }
-    }
 }
 
 public struct UpcomingEventTypeDateEvents : Jsonable {
@@ -94,15 +77,6 @@ public struct UpcomingEventTypeDateEvents : Jsonable {
 public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableKeys {
     case date
     case events
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .events:
-            return true
-        default:
-            return false
-        }
-    }
 }
 
 public struct UpcomingEventTypeExactTimeEvents : Jsonable {
@@ -135,13 +109,4 @@ public struct UpcomingEventTypeExactTimeEvents : Jsonable {
 public enum UpcomingEventTypeExactTimeEventsValueKeys : String, JsonableKeys {
     case time
     case events
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .events:
-            return true
-        default:
-            return false
-        }
-    }
 }

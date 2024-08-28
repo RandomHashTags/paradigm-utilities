@@ -47,13 +47,4 @@ public enum ClientSovereignStateAvailabilityValueKeys : String, JsonableKeys {
     case image_url
     case value
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -44,11 +44,4 @@ public enum WikipediaStatisticsAreaValueKeys : String, JsonableKeys {
     case total
     case water
     case land
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .total, .water, .land:
-            return true
-        }
-    }
 }

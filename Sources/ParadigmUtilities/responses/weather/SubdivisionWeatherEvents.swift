@@ -40,13 +40,4 @@ public struct SubdivisionWeatherEvents : Jsonable {
 public enum SubdivisionWeatherEventsValueKeys : String, JsonableKeys {
     case subdivision
     case events
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .events:
-            return true
-        default:
-            return false
-        }
-    }
 }

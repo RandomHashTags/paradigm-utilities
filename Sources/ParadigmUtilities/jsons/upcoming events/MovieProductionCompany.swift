@@ -68,13 +68,4 @@ public enum MovieProductionCompanyValueKeys : String, JsonableKeys {
     case description
     case image_url
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .aliases, .description, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

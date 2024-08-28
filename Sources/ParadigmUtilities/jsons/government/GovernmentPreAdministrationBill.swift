@@ -61,13 +61,4 @@ public enum GovernmentPreAdministrationBillValueKeys : String, JsonableKeys {
     case committees
     case notes
     case date
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title, .committees, .notes:
-            return true
-        default:
-            return false
-        }
-    }
 }

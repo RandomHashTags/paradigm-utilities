@@ -58,13 +58,4 @@ public enum PreHistoricalEventValueKeys : String, JsonableKeys {
     case name
     case summary
     case image_url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name, .summary:
-            return true
-        default:
-            return false
-        }
-    }
 }

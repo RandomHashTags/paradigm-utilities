@@ -38,13 +38,4 @@ public struct EventSource : Jsonable {
 public enum EventSourceValueKeys : String, JsonableKeys {
     case name
     case url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name:
-            return true
-        default:
-            return false
-        }
-    }
 }

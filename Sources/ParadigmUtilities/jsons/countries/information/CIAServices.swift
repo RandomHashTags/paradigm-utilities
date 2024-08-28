@@ -51,13 +51,4 @@ public enum CIAServicesValueKeys : String, JsonableKeys {
     case travel_facts_url
     case values
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .values, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -59,13 +59,4 @@ public enum WikipediaStatisticsValueKeys : String, JsonableKeys {
     case dimensions
     case population
     case government_url
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .area, .elevation, .dimensions, .population:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -38,11 +38,4 @@ public struct SovereignStateNonStaticInformation : SovereignStateInformationValu
 public enum SovereignStateNonStaticInformationValueKeys : String, JsonableKeys {
     case travel_advisories
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .travel_advisories, .sources:
-            return true
-        }
-    }
 }

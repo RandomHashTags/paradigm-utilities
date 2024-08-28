@@ -38,11 +38,4 @@ public struct SovereignStateHistory : SovereignStateInformationValue {
 public enum SovereignStateHistoryValueKeys : String, JsonableKeys {
     case events
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .events, .sources:
-            return true
-        }
-    }
 }

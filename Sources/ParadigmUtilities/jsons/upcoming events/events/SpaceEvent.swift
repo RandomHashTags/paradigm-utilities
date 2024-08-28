@@ -89,10 +89,6 @@ public enum SpaceEventValueKeys : String, UpcomingEventValueKeys {
     case news_url
     case video_url
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.space_event
     }

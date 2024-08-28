@@ -48,13 +48,4 @@ public enum ServerUpdateValueKeys : String, JsonableKeys {
     case summary
     case related
     case requires_premium
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .summary, .related:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -52,13 +52,4 @@ public enum SovereignStateWikipediaValueKeys : String, JsonableKeys {
     case url
     case statistics
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .paragraph, .statistics, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

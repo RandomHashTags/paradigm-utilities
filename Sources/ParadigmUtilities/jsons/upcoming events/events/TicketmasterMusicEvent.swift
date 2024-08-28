@@ -155,21 +155,6 @@ public enum TicketmasterMusicEventValueKeys : String, UpcomingEventValueKeys {
     case price_range_string
     case venues
     
-    public var is_translatable: Bool {
-        switch self {
-        case .accessibility,
-                .age_restriction,
-                .health_check_summary,
-                .health_check_description,
-                .please_note,
-                .ticket_limit,
-                .venues:
-            return true
-        default:
-            return false
-        }
-    }
-    
     public var category : UpcomingEventValueCategory {
         switch self {
         case .accessibility:

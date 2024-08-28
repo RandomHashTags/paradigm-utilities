@@ -101,10 +101,6 @@ public enum SpaceNearEarthObjectEventValueKeys : String, UpcomingEventValueKeys 
     case estimated_diameter_min
     case relative_velocity
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.near_earth_object
     }

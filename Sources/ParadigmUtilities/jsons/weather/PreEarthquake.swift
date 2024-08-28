@@ -43,13 +43,4 @@ public enum PreEarthquakeValueKeys : String, JsonableKeys {
     case id
     case place
     case city
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .place:
-            return true
-        default:
-            return false
-        }
-    }
 }

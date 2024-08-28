@@ -47,11 +47,4 @@ public enum HomeResponseWeatherValueKeys : String, JsonableKeys {
     case alerts
     case earthquakes
     case natural_events
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .alerts, .earthquakes, .natural_events:
-            return true
-        }
-    }
 }

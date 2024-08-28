@@ -45,13 +45,4 @@ public enum PreEnactedBillValueKeys : String, JsonableKeys {
     case title
     case chamber
     case status
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .title:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -52,13 +52,4 @@ public enum ElectionValueKeys : String, JsonableKeys {
     case country
     case subdivision
     case city
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .name:
-            return true
-        default:
-            return true
-        }
-    }
 }

@@ -65,13 +65,4 @@ public enum ClientWikipediaEventValueKeys : String, JsonableKeys {
     case subdivisions
     case tags
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .description, .hyperlinks, .tags, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

@@ -31,8 +31,4 @@ public struct WeatherEvent : Jsonable {
 public enum WeatherEventValueKeys : String, JsonableKeys {
     case type
     case defcon
-    
-    public var is_translatable : Bool {
-        return false
-    }
 }

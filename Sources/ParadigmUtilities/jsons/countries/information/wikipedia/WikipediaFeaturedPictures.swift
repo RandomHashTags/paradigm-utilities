@@ -44,13 +44,4 @@ public enum WikipediaFeaturedPicturesValueKeys : String, JsonableKeys {
     case image_url_prefix
     case pictures
     case sources
-    
-    public var is_translatable : Bool {
-        switch self {
-        case .pictures, .sources:
-            return true
-        default:
-            return false
-        }
-    }
 }

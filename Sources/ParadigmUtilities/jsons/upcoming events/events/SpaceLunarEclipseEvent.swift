@@ -113,10 +113,6 @@ public enum SpaceLunarEclipseEventValueKeys : String, UpcomingEventValueKeys {
     case duration_partial
     case duration_total
     
-    public var is_translatable : Bool {
-        return false
-    }
-    
     public var category : UpcomingEventValueCategory {
         return UpcomingEventValueCategory.space_lunar_eclipse
     }
