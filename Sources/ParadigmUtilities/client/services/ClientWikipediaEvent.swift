@@ -5,7 +5,6 @@
 //  Created by RandomHashTags on 6/28/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct ClientWikipediaEvent : Jsonable {    

@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/15/22.
 //
 
-import Foundation
-
 public enum UpcomingEventValueCategory : String, Jsonable {
     case astronomy_picture_of_the_day
     case joke_of_the_day

@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
-
 public struct Stock : Jsonable {
     public let symbol:String, name_short:String, name_long:String?, market_regular:StockQuote, market_post:StockQuote?
     

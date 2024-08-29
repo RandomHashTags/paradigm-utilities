@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
-
 public struct SpaceRocketLaunchMission : Jsonable {    
     public var name:String, description:String, type:String
     public let window_start:Int64, window_end:Int64?, exact_day:Bool?, exact_time:Bool?

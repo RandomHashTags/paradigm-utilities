@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/13/22.
 //
 
-import Foundation
-
 public enum UpcomingEventValueType : String, CaseIterable, Jsonable {
     case array_string
     case boolean

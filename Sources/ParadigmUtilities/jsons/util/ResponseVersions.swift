@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
-
 public struct ResponseVersions : Jsonable {
     public let api_version:Int, server_version:SemanticVersion, app_version:SemanticVersion
     

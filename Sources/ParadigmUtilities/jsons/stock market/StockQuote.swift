@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
-
 public struct StockQuote : Jsonable {
     public let open:Float?, high:Float?, low:Float?, change:Float, change_percent:String, price:Float
     

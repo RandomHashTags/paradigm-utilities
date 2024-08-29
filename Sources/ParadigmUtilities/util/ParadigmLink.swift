@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/24/22.
 //
 
-import Foundation
-
 public enum ParadigmLink : String {
     case website = "https://paradigm-app.com"
     

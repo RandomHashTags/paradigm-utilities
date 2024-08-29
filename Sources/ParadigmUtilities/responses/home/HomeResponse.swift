@@ -5,19 +5,17 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
-
 public struct HomeResponse : Jsonable {    
     public static var LATEST:HomeResponse! = nil
     
     public var countries:HomeResponse.Countries?
     public var government:HomeResponse.Government?
-    public var news:HomeResponseNews?
-    public var stock_market:HomeResponseStockMarket?
-    public var upcoming_events:HomeResponseUpcomingEvents?
-    public var weather:HomeResponseWeather?
+    public var news:HomeResponse.News?
+    public var stock_market:HomeResponse.StockMarket?
+    public var upcoming_events:HomeResponse.UpcomingEvents?
+    public var weather:HomeResponse.Weather?
     
-    public init(countries: HomeResponse.Countries?, government: HomeResponse.Government?, news: HomeResponseNews?, stock_market: HomeResponseStockMarket?, upcoming_events: HomeResponseUpcomingEvents?, weather: HomeResponseWeather?) {
+    public init(countries: HomeResponse.Countries?, government: HomeResponse.Government?, news: HomeResponse.News?, stock_market: HomeResponse.StockMarket?, upcoming_events: HomeResponse.UpcomingEvents?, weather: HomeResponse.Weather?) {
         self.countries = countries
         self.government = government
         self.news = news

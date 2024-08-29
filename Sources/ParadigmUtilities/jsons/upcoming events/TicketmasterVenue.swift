@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct TicketmasterVenue : Jsonable {    

@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 6/18/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public enum RemoteNotificationSubcategories {

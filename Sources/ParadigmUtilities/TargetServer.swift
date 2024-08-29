@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/12/22.
 //
 
-import Foundation
-
 public enum TargetServer : String, CaseIterable, LosslessStringConvertible {
     case countries
     case environment
@@ -52,7 +50,7 @@ public enum TargetServer : String, CaseIterable, LosslessStringConvertible {
         case .stock_market:         return "Stock Market"
         case .upcoming_events:      return "Upcoming Events"
         case .weather:              return "Weather"
-        #if os(macOS) || os(Linux) || os(Windows)
+        #if os(macOS) || os(Linux)
         case .paradigm:             return "Paradigm"
         #endif
         }

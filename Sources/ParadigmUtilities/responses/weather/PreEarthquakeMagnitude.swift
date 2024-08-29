@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 1/25/23.
 //
 
-import Foundation
-
 public struct PreEarthquakeMagnitude : Jsonable {    
     public let mag:String
     public var quakes:[PreEarthquake]

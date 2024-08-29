@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/18/22.
 //
 
-import Foundation
-
 public enum RemoteNotificationSubcategoryApple : String, CaseIterable, RemoteNotificationSubcategory {
     case ios_update
     case ipados_update

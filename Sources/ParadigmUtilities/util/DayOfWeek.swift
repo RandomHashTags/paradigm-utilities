@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/22/22.
 //
 
-import Foundation
-
 public enum DayOfWeek : Int, CaseIterable {
     case sunday = 1
     case monday = 2

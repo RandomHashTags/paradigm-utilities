@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 5/20/23.
 //
 
-import Foundation
-
 public actor AsyncTask : ParadigmSharedInstance {
     public static var shared_identifier : ParadigmSharedInstanceIdentifier { ParadigmSharedInstanceIdentifier.async_task }
     

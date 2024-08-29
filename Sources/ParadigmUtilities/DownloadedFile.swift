@@ -16,31 +16,29 @@ public struct DownloadedFile : Hashable, Sendable {
     public let name:String
     public var parentPath:String
     
-    public var url : URL {
-        return URL(fileURLWithPath: get_full_path())
-    }
+    public var url : URL { URL(fileURLWithPath: full_path) }
     
     public init(name: String, parentPath: String) {
         self.name = name
         self.parentPath = parentPath
     }
     
-    public func get_full_path() -> String {
+    public var full_path : String {
         return parentPath + "/" + name
     }
     public func is_directory() -> Bool {
         var isDir:ObjCBool = false
-        let exists:Bool = FileManagerAPI.file_exists(at_path: get_full_path(), is_directory: &isDir)
+        let exists:Bool = FileManagerAPI.file_exists(at_path: full_path, is_directory: &isDir)
         return exists && isDir.boolValue
     }
     public func get_files_at_full_path() -> [DownloadedFile]? {
-        return FileManagerAPI.get_all_downloaded_files(folder_name: get_full_path())
+        return FileManagerAPI.get_all_downloaded_files(folder_name: full_path)
     }
     public func get_files_at_name() -> [DownloadedFile]? {
-        return FileManagerAPI.get_all_downloaded_files(at_path: get_full_path())
+        return FileManagerAPI.get_all_downloaded_files(at_path: full_path)
     }
     
     public func decoded<T: Decodable>() -> T? {
-        return try? FileManagerAPI.parse_decodable_throwable(at: get_full_path())
+        return try? FileManagerAPI.parse_decodable_throwable(at: full_path)
     }
 }

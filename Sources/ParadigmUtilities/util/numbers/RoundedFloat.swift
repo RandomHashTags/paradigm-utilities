@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 4/5/23.
 //
 
-import Foundation
-
 public struct RoundedFloat : Hashable, Codable, Comparable {
     public var value:Float
     

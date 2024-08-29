@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
-
 // MARK: Track
 public struct SpotifyTrack : Jsonable {    
     public let name:String, duration:Int64, artists:[SpotifyArtist]?, image_url:String?, explicit:Bool, preview_url:String?

@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/18/22.
 //
 
-import Foundation
-
 public struct ClientGovernmentAdministration : Jsonable {
     public let current_version:Int, all_versions:[Int]
     

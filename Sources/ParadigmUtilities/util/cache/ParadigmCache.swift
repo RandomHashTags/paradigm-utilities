@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 5/20/23.
 //
 
-import Foundation
-
 public struct ParadigmCache {
     public static var cache:ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>> = ParadigmNSCache<APIVersion, ParadigmNSCache<AnyHashable, Any>>()
     

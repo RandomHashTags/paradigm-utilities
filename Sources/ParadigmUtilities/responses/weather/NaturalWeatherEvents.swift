@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 10/16/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct NaturalWeatherEvents : Jsonable {    

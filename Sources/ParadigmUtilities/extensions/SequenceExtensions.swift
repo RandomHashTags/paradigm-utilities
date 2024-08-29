@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/15/22.
 //
 
-import Foundation
-
 public extension Sequence {
     func map_set<T: Hashable>(maximum_set_count: Int, _ transform: (Element) -> T) -> Set<T> {
         var set:Set<T> = Set<T>()

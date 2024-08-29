@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 1/21/23.
 //
 
-import Foundation
-
 public struct UpcomingEventDateHolidays : Jsonable { // TODO: REMOVE??    
     public let date:EventDate
     public var holidays:[PreHoliday]

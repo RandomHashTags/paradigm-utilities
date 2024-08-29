@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 1/23/23.
 //
 
-import Foundation
-
 public struct PreHistoricalEvent : Jsonable {    
     public let id:String, date:EventDate
     public let exact_time_start:Int64?, exact_time_end:Int64?

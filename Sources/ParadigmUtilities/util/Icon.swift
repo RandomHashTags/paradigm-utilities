@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 11/20/20.
 //
 
-import Foundation
-
 public enum Icon : String, CaseIterable, Jsonable {
     case emoji_drink_coffee = "☕"
     

@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 1/21/23.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct SubdivisionEarthquakes : Jsonable {    

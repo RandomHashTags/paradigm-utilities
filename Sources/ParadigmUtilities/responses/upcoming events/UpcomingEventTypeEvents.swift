@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 1/21/23.
 //
 
-import Foundation
-
 public struct UpcomingEventTypeEvents : Jsonable {    
     public let type:UpcomingEventType
     public var date_events:[UpcomingEventTypeDateEvents]?

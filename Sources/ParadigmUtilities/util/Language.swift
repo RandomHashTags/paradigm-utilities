@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/12/22.
 //
 
-import Foundation
-
 public enum Language : String, CaseIterable, Jsonable {
     case arabic = "ar"
     case azerbaijani = "az"

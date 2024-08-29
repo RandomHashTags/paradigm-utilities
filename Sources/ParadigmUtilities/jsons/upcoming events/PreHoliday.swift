@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 6/17/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct PreHoliday : Jsonable {    

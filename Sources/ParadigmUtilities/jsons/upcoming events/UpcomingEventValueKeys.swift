@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 5/21/23.
 //
 
-import Foundation
-
 public protocol UpcomingEventValueKeys : JsonableKeys {
     var category : UpcomingEventValueCategory { get }
     var value_type : UpcomingEventValueType { get }

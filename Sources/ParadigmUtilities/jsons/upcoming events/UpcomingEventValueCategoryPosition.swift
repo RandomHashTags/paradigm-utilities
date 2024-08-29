@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/15/22.
 //
 
-import Foundation
-
 public enum UpcomingEventValueCategoryPosition : String, CaseIterable, Jsonable {
     case pre_content
     case above_description

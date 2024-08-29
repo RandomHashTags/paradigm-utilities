@@ -113,15 +113,15 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let countries:HomeResponse.Countries = HomeResponse.Countries(filters: nil)
         
         let government:HomeResponse.Government = HomeResponse.Government(recent_activity: [])
-        let news:HomeResponseNews = HomeResponseNews(regional: [])
-        let stock_market:HomeResponseStockMarket? = nil
+        let news:HomeResponse.News = HomeResponse.News(regional: [])
+        let stock_market:HomeResponse.StockMarket? = nil
         
         let upcoming_events_holidays_near:[UpcomingEventDateHolidays] = [
             UpcomingEventDateHolidays(date: EventDate(year: 2023, month: Month.january, day: 1), holidays: [
                 PreHoliday(type: "test", id: "test_holiday", name: "Test Holiday", emoji: nil)
             ])
         ]
-        let upcoming_events:HomeResponseUpcomingEvents = HomeResponseUpcomingEvents(holidays_near: upcoming_events_holidays_near, events: nil, movie_production_companies: nil)
+        let upcoming_events:HomeResponse.UpcomingEvents = HomeResponse.UpcomingEvents(holidays_near: upcoming_events_holidays_near, events: nil, movie_production_companies: nil)
         
         let weather_alerts:[CountryWeatherEvents] = [
             CountryWeatherEvents(country: Country.united_states, subdivisions: [
@@ -151,7 +151,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
             wildfires: [
                 
             ])
-        let weather:HomeResponseWeather = HomeResponseWeather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: weather_natural_events)
+        let weather:HomeResponse.Weather = HomeResponse.Weather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: weather_natural_events)
         
         let response:HomeResponse = HomeResponse(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
         let response_data:Data = try encoder.encode(response)

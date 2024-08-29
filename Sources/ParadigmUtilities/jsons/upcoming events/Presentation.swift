@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/15/22.
 //
 
-import Foundation
-
 public enum Presentation : String, CaseIterable, Jsonable {
     case apple_event
     case apple_event_wwdc

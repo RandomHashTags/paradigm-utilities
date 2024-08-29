@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
-
 public struct SpotifyDetails : Jsonable {
     public let total_tracks:Int, image_url:String, available_markets:[String], url:String
     

@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 1/7/22.
 //
 
-import Foundation
-
 public struct ITunesDetails : Jsonable {
     public let artist_view_url:String, collection_view_url:String, amg_artist_id:Int?, image_url:String
     

@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/15/22.
 //
 
-import Foundation
-
 public enum UpcomingEventValueCellType : String, CaseIterable, Jsonable {
     case audio
     case label

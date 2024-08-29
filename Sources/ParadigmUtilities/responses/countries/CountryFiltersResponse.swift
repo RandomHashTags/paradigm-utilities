@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/18/22.
 //
 
-import Foundation
-
 public struct CountryFiltersResponse : Jsonable {    
     public let response_version:Int
     public var filters:[CountryFilter]!

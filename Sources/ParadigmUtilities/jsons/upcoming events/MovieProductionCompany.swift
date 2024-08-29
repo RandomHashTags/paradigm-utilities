@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
-
 public struct MovieProductionCompany : MovieProductionCompanyProtocol {    
     public let response_version:Int, id:String
     public var name:String, aliases:[String]?, description:String

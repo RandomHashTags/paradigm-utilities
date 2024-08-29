@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/15/22.
 //
 
-import Foundation
-
 public enum PresentationType : String, CaseIterable, Jsonable {
     case award_ceremony
     case conference

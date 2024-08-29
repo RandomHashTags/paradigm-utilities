@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/21/22.
 //
 
-import Foundation
-
 public struct GovernmentAdministrationBill : Jsonable {    
     public var title:String, sponsor:GovernmentPrePolitician?, summary:String?, policy_area:String?, subjects:[String]?, cosponsors:[GovernmentPrePolitician]?, actions:[GovernmentBillAction]?, sources:EventSources
     

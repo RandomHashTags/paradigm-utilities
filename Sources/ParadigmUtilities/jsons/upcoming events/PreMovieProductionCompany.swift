@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
-
 public struct PreMovieProductionCompany : MovieProductionCompanyProtocol {    
     public let id:String
     public var name:String, aliases:[String]?

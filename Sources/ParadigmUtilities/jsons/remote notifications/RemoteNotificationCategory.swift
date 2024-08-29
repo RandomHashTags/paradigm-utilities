@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/18/22.
 //
 
-import Foundation
-
 public enum RemoteNotificationCategory : String, CaseIterable, Jsonable {
     case apple
     //case playstation

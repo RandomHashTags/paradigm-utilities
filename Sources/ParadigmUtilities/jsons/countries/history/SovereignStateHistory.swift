@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 10/13/22.
 //
 
-import Foundation
-
 public struct SovereignStateHistory : SovereignStateInformationValue {    
     public var events:[PreHistoricalEvent], sources:EventSources?
     

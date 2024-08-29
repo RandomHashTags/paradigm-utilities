@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 2/16/23.
 //
 
-import Foundation
-
 public enum WeatherEventType : String, CaseIterable, Jsonable {
     // USA events (https://api.weather.gov/alerts/types)
     case _911_telephone_outage_emergency

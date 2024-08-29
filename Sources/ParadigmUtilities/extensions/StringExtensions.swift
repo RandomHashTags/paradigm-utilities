@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 2/8/23.
 //
 
-import Foundation
-
 public extension String {
     func index(from: Int) -> Index {
         return index(startIndex, offsetBy: from)
