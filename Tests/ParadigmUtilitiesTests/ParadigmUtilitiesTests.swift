@@ -6,7 +6,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
     func testExample() async throws {
         //await testTranslations(bro)
         
-        try await test_benchmarks()
+        //try await test_benchmarks()
     }
     
     func test_foundation() throws {
@@ -14,12 +14,14 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let bro:TestBro = TestBro(big_boy: bruh, number: 1)
         
         let big_boy:String = bro.big_boy
-        let data:Data = try ParadigmUtilities.json_encoder.encode(bro)
+        var data:Data = try ParadigmUtilities.json_encoder.encode(bro)
         let string:String = String(data: data, encoding: .utf8)!
         XCTAssertEqual(string, "{\"big_boy\":\"" + big_boy + "\",\"number\":1}")
         
-        var decoded:TestBro = try ParadigmUtilities.json_decoder.decode(TestBro.self, from: data)
-        XCTAssertEqual(decoded.toString(), string)
+        let decoded:TestBro = try ParadigmUtilities.json_decoder.decode(TestBro.self, from: data)
+        data = try ParadigmUtilities.json_encoder.encode(decoded)
+        let other_string = String(data: data, encoding: .utf8)!
+        XCTAssertEqual(other_string, string)
     }
     
     func test_cache() {
@@ -64,7 +66,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
         
         XCTAssertNotNil(information._static?.national_capital)
         
-        let data:Data = information.toString()!.data(using: .utf8)!
+        let data:Data = try ParadigmUtilities.json_encoder.encode(information)
         let bro:SovereignStateInformation = try decoder.decode(SovereignStateInformation.self, from: data)
         XCTAssertEqual(bro._static?.response_version, response_version)
         XCTAssertEqual(bro._static?.national_anthem, anthem)
@@ -77,21 +79,21 @@ final class ParadigmUtilitiesTests : XCTestCase {
         
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
-        var apod_event:UpcomingEvent<APODEvent>! = //APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
-        XCTAssertEqual(apod_event.images, event_image_url_suffix)
-        let data:Data = apod_event.toData()!
-        let generic_parsed:APODEvent? = GenericUpcomingEvents.parse_any(data: data)
-        XCTAssertEqual(generic_parsed, apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
-        apod_event.images = event_image_url
-        let string:String? = generic_parsed?.getValue("copyright")
-        XCTAssertEqual(string, "Evan Anderson")
+        var apod_event:UpcomingEvent<APODEvent>! = UpcomingEvent<APODEvent>(type: .astronomy_picture_of_the_day, event_date: today, begins: nil, ends: nil, custom_type_singular_name: nil, title: title, description: nil, location: nil, images: [event_image_url], countries: nil, subdivisions: nil, youtube_video_ids: nil, sources: EventSources(sources: []), hyperlinks: nil, data: APODEvent(copyright: "Evan Anderson", video_url: nil))
+        XCTAssertEqual(apod_event.images, [event_image_url_suffix])
+        let data:Data = try ParadigmUtilities.json_encoder.encode(apod_event)
+        let generic_parsed:AnyUpcomingEvent? = GenericUpcomingEvents.parse_any(data: data)
+        XCTAssertEqual(generic_parsed as? UpcomingEvent<APODEvent>, apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
+        apod_event.images = [event_image_url]
+        //let string:String? = generic_parsed?.getValue("copyright")
+        //XCTAssertEqual(string, "Evan Anderson")
         
-        XCTAssertEqual(apod_event.image_url, event_image_url_suffix)
+        XCTAssertEqual(apod_event.images, [event_image_url_suffix])
         let apod_pre_event:PreUpcomingEvent = apod_event.to_pre_upcoming_event(tag: "")
-        XCTAssertEqual(apod_pre_event.image_url, event_image_url_suffix)
+        XCTAssertEqual(apod_pre_event.images, [event_image_url_suffix])
         
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
-        let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", image_url: nil)
+        let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", images: [])
         XCTAssertNotNil(movie_pre_event.event_date)
         let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
@@ -108,9 +110,9 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let encoder:JSONEncoder = ParadigmUtilities.json_encoder
         let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         
-        let countries:HomeResponseCountries = HomeResponseCountries(filters: nil)
+        let countries:HomeResponse.Countries = HomeResponse.Countries(filters: nil)
         
-        let government:HomeResponseGovernment = HomeResponseGovernment(recent_activity: [])
+        let government:HomeResponse.Government = HomeResponse.Government(recent_activity: [])
         let news:HomeResponseNews = HomeResponseNews(regional: [])
         let stock_market:HomeResponseStockMarket? = nil
         

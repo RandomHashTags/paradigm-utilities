@@ -43,7 +43,7 @@ public enum AnyUpcomingEventValueKeys : String, JsonableKeys {
 
 
 // MARK: UpcomingEvent
-public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent {
+public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent, Equatable {
     public let type:UpcomingEventType
     public var event_date:EventDate?
     public var begins:Date?
@@ -55,7 +55,9 @@ public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent {
     public var description:String?
     public var location:String?
 
-    public var images:[String]
+    public var images:[String] {
+        didSet { images = Self.optimize_images(type: type, images) }
+    }
     public var countries:[Country]?
     public var subdivisions:[SovereignStateSubdivisionWrapper]?
 
@@ -83,7 +85,7 @@ public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent {
 
         youtube_video_ids: [String]?,
         sources: EventSources,
-        hyperlinks: Hyperlinks,
+        hyperlinks: Hyperlinks?,
 
         data: T
     ) {
@@ -200,7 +202,7 @@ private struct UpcomingEventTypeCodable : UpcomingEventData {
 }
 
 // MARK: UpcomingEventData
-public protocol UpcomingEventData : Codable {
+public protocol UpcomingEventData : Codable, Equatable {
     associatedtype JSONKeys:JsonableKeys = NoJsonableKeys
 
     func getKeyValue(key: JSONKeys) -> Any?
@@ -236,7 +238,7 @@ public enum GenericUpcomingEvents {
     public static func parse_any(data: Data) -> AnyUpcomingEvent? {
         do {
             let decoder:JSONDecoder = ParadigmUtilities.json_decoder
-            let generic:UpcomingEvent<UpcomingEventTypeCodable> = try decoder.decode(UpcomingEvent<UpcomingEventTypeCodable>.self, from: data)
+            let generic:UpcomingEventTypeCodable = try decoder.decode(UpcomingEventTypeCodable.self, from: data)
             switch generic.type {
             case .astronomy_picture_of_the_day:
                 return try decoder.decode(UpcomingEvent<APODEvent>.self, from: data)
