@@ -77,12 +77,12 @@ final class ParadigmUtilitiesTests : XCTestCase {
         
         let event_image_url_suffix:String = "2302/Rcw58_Selby_960.jpg", event_image_url:String = "https://apod.nasa.gov/apod/image/" + event_image_url_suffix
         let today:EventDate = EventDate.today, title:String = "test"
-        var apod_event:APODEvent = APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
-        XCTAssertEqual(apod_event.image_url, event_image_url_suffix)
+        var apod_event:UpcomingEvent<APODEvent>! = //APODEvent(event_date: today, title: title, description: nil, location: nil, image_url: event_image_url, sources: EventSources(sources: []), hyperlinks: nil, countries: nil, subdivisions: nil, copyright: "Evan Anderson", video_url: nil)
+        XCTAssertEqual(apod_event.images, event_image_url_suffix)
         let data:Data = apod_event.toData()!
         let generic_parsed:APODEvent? = GenericUpcomingEvents.parse_any(data: data)
         XCTAssertEqual(generic_parsed, apod_event, "generic_parsed=\(String(describing: generic_parsed));apod_event=\(apod_event)")
-        apod_event.image_url = event_image_url
+        apod_event.images = event_image_url
         let string:String? = generic_parsed?.getValue("copyright")
         XCTAssertEqual(string, "Evan Anderson")
         

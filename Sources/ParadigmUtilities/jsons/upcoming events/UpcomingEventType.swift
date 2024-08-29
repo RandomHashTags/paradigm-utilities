@@ -256,44 +256,26 @@ public enum UpcomingEventType : String, CaseIterable, Jsonable, LosslessStringCo
     
     public var value_keys_type : any UpcomingEventValueKeys.Type {
         switch self {
-        case .astronomy_picture_of_the_day:      return APODEventValueKeys.self
-        case .joke_of_the_day:                   return JOTDEventValueKeys.self
-        case .movie:                             return MovieEventValueKeys.self
-        case .music_album:                       return MusicAlbumEventValueKeys.self
-        case .science_year_review:               return ScienceYearReviewEventValueKeys.self
-        case .space_event:                       return SpaceEventValueKeys.self
-        case .space_lunar_eclipse:               return SpaceLunarEclipseEventValueKeys.self
-        case .space_near_earth_object:           return SpaceNearEarthObjectEventValueKeys.self
-        case .space_rocket_launch:               return SpaceRocketLaunchEventValueKeys.self
-        case .sport_mlb:                         return MLBEventValueKeys.self
-        case .sport_professional_wrestling:      return ProfessionalWrestlingEventValueKeys.self
-        case .spotify_new_music_friday:          return SpotifyNewMusicFridayEventValueKeys.self
-        case .ticketmaster_music_event:          return TicketmasterMusicEventValueKeys.self
-        case .video_game:                        return VideoGameEventValueKeys.self
-        case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEventValueKeys.self
-        case .word_of_the_day:                   return WOTDEventValueKeys.self
+        case .astronomy_picture_of_the_day:      return APODEvent.ValueKeys.self
+        case .joke_of_the_day:                   return JOTDEvent.ValueKeys.self
+        case .movie:                             return MovieEvent.ValueKeys.self
+        case .music_album:                       return MusicAlbumEvent.ValueKeys.self
+        case .science_year_review:               return ScienceYearReviewEvent.ValueKeys.self
+        case .space_event:                       return SpaceEvent.ValueKeys.self
+        case .space_lunar_eclipse:               return SpaceLunarEclipseEvent.ValueKeys.self
+        case .space_near_earth_object:           return SpaceNearEarthObjectEvent.ValueKeys.self
+        case .space_rocket_launch:               return SpaceRocketLaunchEvent.ValueKeys.self
+        case .sport_mlb:                         return MLBEvent.ValueKeys.self
+        case .sport_professional_wrestling:      return ProfessionalWrestlingEvent.ValueKeys.self
+        case .spotify_new_music_friday:          return SpotifyNewMusicFridayEvent.ValueKeys.self
+        case .ticketmaster_music_event:          return TicketmasterMusicEvent.ValueKeys.self
+        case .video_game:                        return VideoGameEvent.ValueKeys.self
+        case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEvent.ValueKeys.self
+        case .word_of_the_day:                   return WOTDEvent.ValueKeys.self
         default:                                 return NoUpcomingEventValueKeys.self
         }
     }
     public var value_keys : [any UpcomingEventValueKeys]? {
-        switch self {
-        case .astronomy_picture_of_the_day:      return APODEventValueKeys.allCases
-        case .joke_of_the_day:                   return JOTDEventValueKeys.allCases
-        case .movie:                             return MovieEventValueKeys.allCases
-        case .music_album:                       return MusicAlbumEventValueKeys.allCases
-        case .science_year_review:               return ScienceYearReviewEventValueKeys.allCases
-        case .space_event:                       return SpaceEventValueKeys.allCases
-        case .space_lunar_eclipse:               return SpaceLunarEclipseEventValueKeys.allCases
-        case .space_near_earth_object:           return SpaceNearEarthObjectEventValueKeys.allCases
-        case .space_rocket_launch:               return SpaceRocketLaunchEventValueKeys.allCases
-        case .sport_mlb:                         return MLBEventValueKeys.allCases
-        case .sport_professional_wrestling:      return ProfessionalWrestlingEventValueKeys.allCases
-        case .spotify_new_music_friday:          return SpotifyNewMusicFridayEventValueKeys.allCases
-        case .ticketmaster_music_event:          return TicketmasterMusicEventValueKeys.allCases
-        case .video_game:                        return VideoGameEventValueKeys.allCases
-        case .wikipedia_todays_featured_picture: return WikipediaTodaysFeaturedPictureEventValueKeys.allCases
-        case .word_of_the_day:                   return WOTDEventValueKeys.allCases
-        default: return nil
-        }
+        return value_keys_type.allCases as? [any UpcomingEventValueKeys]
     }
 }

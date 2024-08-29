@@ -14,15 +14,15 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     
     public var type:UpcomingEventType?
     public var event_date:EventDate?
-    public var exact_start:Int64?
-    public var exact_end:Int64?
+    public var begins:Date?
+    public var ends:Date?
     
     /// A custom assigned identifier by the server which is only interacted with if the client needs to use the functionality in some way. Default is `nil`.
     ///
     /// An example would be the identifier of a TV Show event, so the client can view it using their service API (TVMaze), as the server doesn't handle those requests.
     public let id:String?
     public var title:String, tag:String
-    public var image_url:String?
+    public var images:[String]
     public let countries:[Country]?, subdivisions:[SovereignStateSubdivisionWrapper]?
     public var custom_type_singular_name:String?
     public let client_emoji:Icon?
@@ -30,15 +30,15 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
     public let url:String?, production_companies:[String]?, popularity:Int?
     public var team_away:ClientMLBTeam?, team_home:ClientMLBTeam?
     
-    public init(type: UpcomingEventType?, id: String? = nil, event_date: EventDate?, exact_start: Int64? = nil, exact_end: Int64? = nil, title: String, tag: String, image_url: String?, countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
+    public init(type: UpcomingEventType?, id: String? = nil, event_date: EventDate?, begins: Date? = nil, ends: Date? = nil, title: String, tag: String, images: [String], countries: [Country]? = nil, subdivisions: [SovereignStateSubdivisionWrapper]? = nil, url: String? = nil, custom_type_singular_name: String? = nil, client_emoji: Icon? = nil, production_companies: [String]? = nil, popularity: Int? = nil, team_away: ClientMLBTeam? = nil, team_home: ClientMLBTeam? = nil) {
         self.type = type
         self.id = id
         self.event_date = event_date
-        self.exact_start = exact_start
-        self.exact_end = exact_end
+        self.begins = begins
+        self.ends = ends
         self.title = title
         self.tag = tag
-        self.image_url = image_url
+        self.images = images
         self.countries = countries
         self.subdivisions = subdivisions
         self.custom_type_singular_name = custom_type_singular_name
@@ -55,11 +55,11 @@ public struct PreUpcomingEvent : UpcomingEventProtocol {
         case .type: return type
         case .id: return id
         case .event_date: return event_date
-        case .exact_start: return exact_start
-        case .exact_end: return exact_end
+        case .exact_start: return begins
+        case .exact_end: return ends
         case .title: return title
         case .tag: return tag
-        case .image_url: return image_url
+        case .image_url: return images
         case .countries: return countries
         case .subdivisions: return subdivisions
         case .custom_type_singular_name: return custom_type_singular_name

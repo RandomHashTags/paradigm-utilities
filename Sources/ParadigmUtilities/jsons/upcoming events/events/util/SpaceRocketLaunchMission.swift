@@ -8,7 +8,7 @@
 import Foundation
 
 public struct SpaceRocketLaunchMission : Jsonable {
-    public typealias JSONKeys = SpaceRocketLaunchMissionValueKeys
+    public typealias JSONKeys = ValueKeys
     
     public var name:String, description:String, type:String
     public let window_start:Int64, window_end:Int64?, exact_day:Bool?, exact_time:Bool?
@@ -65,15 +65,17 @@ public struct SpaceRocketLaunchMission : Jsonable {
     }
 }
 
-public enum SpaceRocketLaunchMissionValueKeys : String, JsonableKeys {
-    case name
-    case description
-    case type
-    case window_start
-    case window_end
-    case exact_day
-    case exact_time
-    case status
-    case probability
-    case video_url
+public extension SpaceRocketLaunchMission {
+    enum ValueKeys : String, JsonableKeys {
+        case name
+        case description
+        case type
+        case window_start
+        case window_end
+        case exact_day
+        case exact_time
+        case status
+        case probability
+        case video_url
+    }
 }
