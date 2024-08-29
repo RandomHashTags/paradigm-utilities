@@ -8,35 +8,52 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct CountryGovernmentRecentActivity : Jsonable {
-    public typealias JSONKeys = CountryGovernmentRecentActivityValueKeys
-    
+// MARK: Activity
+public struct CountryGovernmentRecentActivity : Jsonable {    
     public let country:Country
-    public var activity:[CountryGovernmentRecentActivityChamber]
+    public var activity:[Chamber]
     
-    public init(country: Country, activity: [CountryGovernmentRecentActivityChamber]) {
+    public init(country: Country, activity: [Chamber]) {
         self.country = country
         self.activity = activity
     }
-    
-    public func getKeyValue(key: CountryGovernmentRecentActivityValueKeys) -> Any? {
-        switch key {
-        case .country: return country
-        case .activity: return activity
-        }
-    }
-    public mutating func setKeyValue<T>(key: CountryGovernmentRecentActivityValueKeys, value: T) {
-        switch key {
-        case .activity:
-            activity = value as! [CountryGovernmentRecentActivityChamber]
-            break
-        default:
-            break
+}
+
+// MARK: Bill Status
+public extension CountryGovernmentRecentActivity {
+    struct BillStatus : Jsonable {        
+        public let status:GovernmentBillStatusWrapper
+        public var dates:[Date]
+        
+        public init(status: any GovernmentBillStatus, dates: [Date]) {
+            self.status = status.wrapped()
+            self.dates = dates
         }
     }
 }
 
-public enum CountryGovernmentRecentActivityValueKeys : String, JsonableKeys {
-    case country
-    case activity
+// MARK: Chamber
+public extension CountryGovernmentRecentActivity {
+    struct Chamber : Jsonable {        
+        public let chamber:GovernmentChamberWrapper
+        public var dates:[Date]
+        
+        public init(chamber: GovernmentChamberWrapper, dates: [Date]) {
+            self.chamber = chamber
+            self.dates = dates
+        }
+    }
+}
+
+// MARK: Date
+public extension CountryGovernmentRecentActivity {
+    struct Date : Jsonable {        
+        public let date:EventDate
+        public var activity:[GovernmentPreAdministrationBill]
+        
+        public init(date: EventDate, activity: [GovernmentPreAdministrationBill]) {
+            self.date = date
+            self.activity = activity
+        }
+    }
 }

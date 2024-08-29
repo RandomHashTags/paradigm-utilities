@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct UpcomingEventTypeEvents : Jsonable {
-    public typealias JSONKeys = UpcomingEventTypeEventsValueKeys
-    
+public struct UpcomingEventTypeEvents : Jsonable {    
     public let type:UpcomingEventType
     public var date_events:[UpcomingEventTypeDateEvents]?
     public var exact_time_events:[UpcomingEventTypeExactTimeEvents]?
@@ -19,37 +17,9 @@ public struct UpcomingEventTypeEvents : Jsonable {
         self.date_events = date_events
         self.exact_time_events = exact_time_events
     }
-    
-    public func getKeyValue(key: UpcomingEventTypeEventsValueKeys) -> Any? {
-        switch key {
-        case .type: return type
-        case .date_events: return date_events
-        case .exact_time_events: return exact_time_events
-        }
-    }
-    public mutating func setKeyValue<T>(key: UpcomingEventTypeEventsValueKeys, value: T) {
-        switch key {
-        case .date_events:
-            date_events = value as? [UpcomingEventTypeDateEvents]
-            break
-        case .exact_time_events:
-            exact_time_events = value as? [UpcomingEventTypeExactTimeEvents]
-            break
-        default:
-            break
-        }
-    }
 }
 
-public enum UpcomingEventTypeEventsValueKeys : String, JsonableKeys {
-    case type
-    case date_events
-    case exact_time_events
-}
-
-public struct UpcomingEventTypeDateEvents : Jsonable {
-    public typealias JSONKeys = UpcomingEventTypeDateEventsValueKeys
-    
+public struct UpcomingEventTypeDateEvents : Jsonable {    
     public let date:EventDate
     public var events:[PreUpcomingEvent]
     
@@ -57,31 +27,9 @@ public struct UpcomingEventTypeDateEvents : Jsonable {
         self.date = date
         self.events = events
     }
-    
-    public func getKeyValue(key: UpcomingEventTypeDateEventsValueKeys) -> Any? {
-        switch key {
-        case .date: return date
-        case .events: return events
-        }
-    }
-    public mutating func setKeyValue<T>(key: UpcomingEventTypeDateEventsValueKeys, value: T) {
-        switch key {
-        case .events:
-            events = value as! [PreUpcomingEvent]
-            break
-        default:
-            break
-        }
-    }
-}
-public enum UpcomingEventTypeDateEventsValueKeys : String, JsonableKeys {
-    case date
-    case events
 }
 
-public struct UpcomingEventTypeExactTimeEvents : Jsonable {
-    public typealias JSONKeys = UpcomingEventTypeExactTimeEventsValueKeys
-    
+public struct UpcomingEventTypeExactTimeEvents : Jsonable {    
     public let time:Int64
     public var events:[PreUpcomingEvent]
     
@@ -89,24 +37,4 @@ public struct UpcomingEventTypeExactTimeEvents : Jsonable {
         self.time = time
         self.events = events
     }
-    
-    public func getKeyValue(key: UpcomingEventTypeExactTimeEventsValueKeys) -> Any? {
-        switch key {
-        case .time: return time
-        case .events: return events
-        }
-    }
-    public mutating func setKeyValue<T>(key: UpcomingEventTypeExactTimeEventsValueKeys, value: T) {
-        switch key {
-        case .events:
-            events = value as! [PreUpcomingEvent]
-            break
-        default:
-            break
-        }
-    }
-}
-public enum UpcomingEventTypeExactTimeEventsValueKeys : String, JsonableKeys {
-    case time
-    case events
 }

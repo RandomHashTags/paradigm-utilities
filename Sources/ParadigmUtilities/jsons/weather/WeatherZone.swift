@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 6/12/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 import GEOSwift
 #if canImport(MapKit)

@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/17/22.
 //
 
-public struct ScienceYearReviewEvent : Jsonable {
+public struct ScienceYearReviewEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
         
     public var years:[Int:[ClientWikipediaEvent]]

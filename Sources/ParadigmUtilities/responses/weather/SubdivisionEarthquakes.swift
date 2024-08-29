@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct SubdivisionEarthquakes : Jsonable {
-    public typealias JSONKeys = SubdivisionEarthquakesResponseValueKeys
-    
+public struct SubdivisionEarthquakes : Jsonable {    
     public let subdivision:SovereignStateSubdivisionWrapper?
     public var magnitudes:[PreEarthquakeMagnitude]
     
@@ -18,26 +16,4 @@ public struct SubdivisionEarthquakes : Jsonable {
         self.subdivision = subdivision?.wrapped()
         self.magnitudes = magnitudes
     }
-    
-    public func getKeyValue(key: SubdivisionEarthquakesResponseValueKeys) -> Any? {
-        switch key {
-        case .subdivision: return subdivision
-        case .magnitudes: return magnitudes
-        }
-    }
-    
-    public mutating func setKeyValue<T>(key: SubdivisionEarthquakesResponseValueKeys, value: T) {
-        switch key {
-        case .magnitudes:
-            magnitudes = value as! [PreEarthquakeMagnitude]
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum SubdivisionEarthquakesResponseValueKeys : String, JsonableKeys {
-    case subdivision
-    case magnitudes
 }

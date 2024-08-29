@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 10/13/22.
 //
 
-import Foundation
-
-public struct WikipediaStatistics : Jsonable {
-    public typealias JSONKeys = WikipediaStatisticsValueKeys
-    
+public struct WikipediaStatistics : Jsonable {    
     public var area:WikipediaStatisticsArea?
     public var elevation:WikipediaStatisticsElevation?
     public var dimensions:WikipediaStatisticsDimensions?
@@ -23,40 +19,4 @@ public struct WikipediaStatistics : Jsonable {
         self.population = population
         self.government_url = government_url
     }
-    
-    public func getKeyValue(key: WikipediaStatisticsValueKeys) -> Any? {
-        switch key {
-        case .area: return area
-        case .elevation: return elevation
-        case .dimensions: return dimensions
-        case .population: return population
-        case .government_url: return government_url
-        }
-    }
-    public mutating func setKeyValue<T>(key: WikipediaStatisticsValueKeys, value: T) {
-        switch key {
-        case .area:
-            area = value as? WikipediaStatisticsArea
-            break
-        case .elevation:
-            elevation = value as? WikipediaStatisticsElevation
-            break
-        case .dimensions:
-            dimensions = value as? WikipediaStatisticsDimensions
-            break
-        case .population:
-            population = value as? WikipediaStatisticsPopulation
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum WikipediaStatisticsValueKeys : String, JsonableKeys {
-    case area
-    case elevation
-    case dimensions
-    case population
-    case government_url
 }

@@ -5,12 +5,9 @@
 //  Created by Evan Anderson on 6/18/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
-public struct PreEarthquake : Jsonable {
-    public typealias JSONKeys = PreEarthquakeValueKeys
-    
+public struct PreEarthquake : Jsonable {    
     public let id:String
     public var place:String
     public let city:SovereignStateCityWrapper?
@@ -20,27 +17,4 @@ public struct PreEarthquake : Jsonable {
         self.place = place
         self.city = city?.wrapped()
     }
-    
-    public func getKeyValue(key: PreEarthquakeValueKeys) -> Any? {
-        switch key {
-        case .id: return id
-        case .place: return place
-        case .city: return city
-        }
-    }
-    public mutating func setKeyValue<T>(key: PreEarthquakeValueKeys, value: T) {
-        switch key {
-        case .place:
-            place = value as! String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum PreEarthquakeValueKeys : String, JsonableKeys {
-    case id
-    case place
-    case city
 }

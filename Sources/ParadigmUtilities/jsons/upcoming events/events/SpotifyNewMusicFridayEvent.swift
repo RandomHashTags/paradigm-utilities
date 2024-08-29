@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct SpotifyNewMusicFridayEvent : Jsonable {
+public struct SpotifyNewMusicFridayEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public var tracks:[SpotifyTrack]

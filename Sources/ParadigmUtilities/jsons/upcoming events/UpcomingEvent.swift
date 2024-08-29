@@ -43,7 +43,7 @@ public enum AnyUpcomingEventValueKeys : String, JsonableKeys {
 
 
 // MARK: UpcomingEvent
-public struct UpcomingEvent<T: Jsonable> : AnyUpcomingEvent, Jsonable {
+public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent {
     public let type:UpcomingEventType
     public var event_date:EventDate?
     public var begins:Date?
@@ -150,13 +150,25 @@ public struct UpcomingEvent<T: Jsonable> : AnyUpcomingEvent, Jsonable {
     }
 }
 public extension UpcomingEvent {
+    func getValueKeys() -> T.JSONKeys.AllCases {
+        return T.JSONKeys.allCases
+    }
+    func getKeyValue(_ key: String) -> Any? {
+        guard let key:T.JSONKeys = T.JSONKeys(rawValue: key) else { return nil }
+        return data.getKeyValue(key: key)
+    }
+    mutating func setKeyValue<V>(_ key: String, value: V) {
+        guard let key:T.JSONKeys = T.JSONKeys(rawValue: key) else { return }
+        data.setKeyValue(key: key, value: value)
+    }
+
     private static func optimize_images(type: UpcomingEventType, _ images: [String]) -> [String] {
         guard let prefix:String = type.image_url_prefix else { return images }
         return images.map({ $0.starts(with: prefix) ? $0.substring(from: prefix.count) : $0 })
     }
     func getValue<V>(_ key: String) -> V? {
-        if let codingKey:JSONKeys = JSONKeys.init(rawValue: key) {
-            return getKeyValue(key: codingKey) as? V
+        if let codingKey:T.JSONKeys = T.JSONKeys.init(rawValue: key) {
+            return data.getKeyValue(key: codingKey) as? V
         } else if let key:AnyUpcomingEventValueKeys = AnyUpcomingEventValueKeys.init(rawValue: key) {
             return getKeyValue(key: key) as? V
         } else {
@@ -183,10 +195,40 @@ public extension UpcomingEvent {
     }
 }
 
-private struct UpcomingEventTypeCodable : Jsonable {
+private struct UpcomingEventTypeCodable : UpcomingEventData {
     let type:UpcomingEventType
 }
 
+// MARK: UpcomingEventData
+public protocol UpcomingEventData : Codable {
+    associatedtype JSONKeys:JsonableKeys = NoJsonableKeys
+
+    func getKeyValue(key: JSONKeys) -> Any?
+    mutating func setKeyValue<T>(key: JSONKeys, value: T)
+}
+public extension UpcomingEventData {
+    func getValueKeys() -> JSONKeys.AllCases {
+        return JSONKeys.allCases
+    }
+    
+    func getKeyValue(_ key: String) -> Any? {
+        guard let key:JSONKeys = JSONKeys(rawValue: key) else { return nil }
+        return getKeyValue(key: key)
+    }
+    mutating func setKeyValue<T>(_ key: String, value: T) {
+        guard let key:JSONKeys = JSONKeys(rawValue: key) else { return }
+        setKeyValue(key: key, value: value)
+    }
+}
+public extension UpcomingEventData where JSONKeys == NoJsonableKeys {
+    func getKeyValue(key: JSONKeys) -> Any? {
+        return nil
+    }
+    func setKeyValue<T>(key: JSONKeys, value: T) {
+    }
+}
+
+// MARK: GenericUpcomingEvents
 public enum GenericUpcomingEvents {
     public static func parse<T>(data: Data) -> UpcomingEvent<T>? {
         return try? ParadigmUtilities.json_decoder.decode(UpcomingEvent<T>.self, from: data)

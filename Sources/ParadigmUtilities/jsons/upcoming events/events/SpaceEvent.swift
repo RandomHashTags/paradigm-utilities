@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct SpaceEvent : Jsonable {
+public struct SpaceEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let news_url:String?, video_url:String?

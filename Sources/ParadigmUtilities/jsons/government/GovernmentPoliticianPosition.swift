@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 9/17/22.
 //
 
-import Foundation
-
 public enum GovernmentPoliticianPosition : String, CaseIterable, Jsonable {
     case president
     case vice_president

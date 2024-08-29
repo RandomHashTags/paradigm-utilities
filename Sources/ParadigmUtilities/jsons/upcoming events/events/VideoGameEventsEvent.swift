@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 5/22/23.
 //
 
-public struct VideoGameEventsEvent : Jsonable {
+public struct VideoGameEventsEvent : UpcomingEventData {
     public typealias JSONKeys = NoUpcomingEventValueKeys
         
     public init() {

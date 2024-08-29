@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct MovieProductionCompany : MovieProductionCompanyProtocol {
-    public typealias JSONKeys = MovieProductionCompanyValueKeys
-    
+public struct MovieProductionCompany : MovieProductionCompanyProtocol {    
     public let response_version:Int, id:String
     public var name:String, aliases:[String]?, description:String
     public let image_url:String?
@@ -28,44 +26,4 @@ public struct MovieProductionCompany : MovieProductionCompanyProtocol {
     public func toPreMovieProductionCompany() -> PreMovieProductionCompany {
         return PreMovieProductionCompany(id: id, name: name, aliases: aliases, image_url: image_url)
     }
-    
-    public func getKeyValue(key: MovieProductionCompanyValueKeys) -> Any? {
-        switch key {
-        case .response_version: return response_version
-        case .id: return id
-        case .name: return name
-        case .aliases: return aliases
-        case .description: return description
-        case .image_url: return image_url
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: MovieProductionCompanyValueKeys, value: T) {
-        switch key {
-        case .name:
-            name = value as! String
-            break
-        case .aliases:
-            aliases = value as? [String]
-            break
-        case .description:
-            description = value as! String
-            break
-        case .sources:
-            sources = value as! EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum MovieProductionCompanyValueKeys : String, JsonableKeys {
-    case response_version
-    case id
-    case name
-    case aliases
-    case description
-    case image_url
-    case sources
 }

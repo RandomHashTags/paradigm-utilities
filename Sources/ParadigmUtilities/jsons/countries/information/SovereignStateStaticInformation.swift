@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 10/18/22.
 //
 
-import Foundation
-
-public struct SovereignStateStaticInformation : SovereignStateInformationValue {
-    public typealias JSONKeys = SovereignStateStaticInformationValueKeys
-    
+public struct SovereignStateStaticInformation : SovereignStateInformationValue {    
     public let response_version:Int
     public var availabilities:SovereignStateAvailabilities?
     
@@ -49,95 +45,4 @@ public struct SovereignStateStaticInformation : SovereignStateInformationValue {
         self.wikipedia_featured_pictures = wikipedia_featured_pictures
         self.sources = sources
     }
-    
-    public func getKeyValue(key: SovereignStateStaticInformationValueKeys) -> Any? {
-        switch key {
-        case .response_version: return response_version
-        case .availabilities: return availabilities
-        case .agriculture: return agriculture
-        case .info: return info
-        case .legalities: return legalities
-        case .rankings: return rankings
-        case .single_values: return single_values
-        case .national_animals: return national_animals
-        case .national_anthem: return national_anthem
-        case .national_capital: return national_capital
-        case .national_trees: return national_trees
-        case .cia_services: return cia_services
-        case .history: return history
-        case .wikipedia: return wikipedia
-        case .wikipedia_featured_pictures: return wikipedia_featured_pictures
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: SovereignStateStaticInformationValueKeys, value: T) {
-        switch key {
-        case .availabilities:
-            availabilities = value as? SovereignStateAvailabilities
-            break
-        case .agriculture:
-            agriculture = value as? [SovereignStateAgricultureValue]
-            break
-        case .info:
-            info = value as? [SovereignStateInfoKey]
-            break
-        case .legalities:
-            legalities = value as? [SovereignStateInfoKey]
-            break
-        case .rankings:
-            rankings = value as? [SovereignStateRankingInfoValue]
-            break
-        case .single_values:
-            single_values = value as? [SovereignStateSingleValue]
-            break
-        case .national_animals:
-            national_animals = value as? NationalAnimals
-            break
-        case .national_anthem:
-            national_anthem = value as? NationalAnthem
-            break
-        case .national_capital:
-            national_capital = value as? NationalCapital
-            break
-        case .national_trees:
-            national_trees = value as? NationalTrees
-            break
-        case .cia_services:
-            cia_services = value as? CIAServices
-            break
-        case .history:
-            history = value as? SovereignStateHistory
-            break
-        case .wikipedia:
-            wikipedia = value as? SovereignStateWikipedia
-            break
-        case .wikipedia_featured_pictures:
-            wikipedia_featured_pictures = value as? WikipediaFeaturedPictures
-            break
-        case .sources:
-            sources = value as? EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum SovereignStateStaticInformationValueKeys : String, JsonableKeys {
-    case response_version
-    case availabilities
-    case agriculture
-    case info
-    case legalities
-    case rankings
-    case single_values
-    case national_animals
-    case national_anthem
-    case national_capital
-    case national_trees
-    case cia_services
-    case history
-    case wikipedia
-    case wikipedia_featured_pictures
-    case sources
 }

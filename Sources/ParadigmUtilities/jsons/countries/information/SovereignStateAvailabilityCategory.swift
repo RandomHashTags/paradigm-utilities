@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/25/22.
 //
 
-import Foundation
-
 public enum SovereignStateAvailabilityCategory : String, CaseIterable, Jsonable {    
     case communication_service
     case digital_payment_method

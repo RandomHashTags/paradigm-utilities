@@ -152,13 +152,9 @@ public struct EventDate : Comparable, Jsonable {
         }
     }
     
-    public var previous_date : EventDate {
-        return next_date(direction: .backward)
-    }
-    public var next_date : EventDate {
-        return next_date(direction: .forward)
-    }
-    private func next_date(direction: Calendar.SearchDirection) -> EventDate {
+    public var previous_date : EventDate { next_date(.backward) }
+    public var next_date : EventDate { next_date(.forward) }
+    private func next_date(_ direction: Calendar.SearchDirection) -> EventDate {
         var date:Date! = nil, selfDate:Date = date
         let calendar:Calendar = Calendar.current
         var components:DateComponents = DateComponents()

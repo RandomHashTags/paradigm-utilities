@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 7/17/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public protocol GovernmentBillStatus : Jsonable, CaseIterable, RawRepresentable where RawValue == String {

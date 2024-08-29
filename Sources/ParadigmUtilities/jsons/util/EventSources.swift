@@ -5,24 +5,18 @@
 //  Created by Evan Anderson on 6/14/22.
 //
 
-import Foundation
-
 public struct EventSources : Jsonable {
     public static func == (lhs: EventSources, rhs: EventSources) -> Bool {
         return lhs.sources.elementsEqual(rhs.sources)
     }
-    
-    public typealias JSONKeys = EventSourcesValueKeys
-    
+        
     private var sources:[EventSource]
     
-    public init(sources: [EventSource] = [EventSource]()) {
+    public init(sources: [EventSource] = []) {
         self.sources = sources
     }
     
-    public subscript(index: Int) -> EventSource? {
-        return sources.count > index ? sources[index] : nil
-    }
+    public subscript(index: Int) -> EventSource? { sources.get(index) }
     
     public init(from decoder: Decoder) throws {
         let container:SingleValueDecodingContainer = try decoder.singleValueContainer()
@@ -36,15 +30,9 @@ public struct EventSources : Jsonable {
         hasher.combine(sources)
     }
     
-    public var count : Int {
-        return sources.count
-    }
-    public var isEmpty : Bool {
-        return sources.isEmpty
-    }
-    public var first : EventSource? {
-        return sources.first
-    }
+    public var count : Int { sources.count }
+    public var isEmpty : Bool { sources.isEmpty }
+    public var first : EventSource? { sources.first }
     
     public mutating func append(_ source: EventSource) {
         sources.append(source)
@@ -73,21 +61,4 @@ public struct EventSources : Jsonable {
     public var wikipedia_source : EventSource? {
         return sources.first(where: { $0.name.lowercased().starts(with: "wikipedia: ") })
     }
-    
-    public func getKeyValue(key: EventSourcesValueKeys) -> Any? {
-        switch key {
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: EventSourcesValueKeys, value: T) {
-        switch key {
-        case .sources:
-            sources = value as! [EventSource]
-            break
-        }
-    }
-}
-
-public enum EventSourcesValueKeys : String, JsonableKeys {
-    case sources
 }

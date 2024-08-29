@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct SpaceRocketLaunchEvent : Jsonable {
+public struct SpaceRocketLaunchEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let mission_name:String

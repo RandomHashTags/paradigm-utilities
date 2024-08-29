@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/21/22.
 //
 
-import Foundation
-
 public protocol GovernmentPolicyArea : Jsonable, CaseIterable, RawRepresentable where RawValue == String {
     func getTag() -> String
 }

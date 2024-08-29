@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/17/22.
 //
 
-import Foundation
-
 public enum PoliticalParty : String, CaseIterable, Jsonable {
     case democrat
     case independent

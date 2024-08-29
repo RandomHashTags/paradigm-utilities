@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 9/17/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public struct GovernmentPoliticianTerm : Jsonable {

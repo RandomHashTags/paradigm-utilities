@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 10/13/22.
 //
 
-import Foundation
-
-public struct SubdivisionStatuteItem : Jsonable {
-    public typealias JSONKeys = SubdivisionStatuteItemValueKeys
-    
+public struct SubdivisionStatuteItem : Jsonable {    
     public let type:SubdivisionLegislationType, id:String
     public var title:String
     public let is_repealed:Bool
@@ -22,34 +18,4 @@ public struct SubdivisionStatuteItem : Jsonable {
         self.is_repealed = is_repealed
         self.sources = sources
     }
-    
-    public func getKeyValue(key: SubdivisionStatuteItemValueKeys) -> Any? {
-        switch key {
-        case .type: return type
-        case .id: return id
-        case .title: return title
-        case .is_repeated: return is_repealed
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: SubdivisionStatuteItemValueKeys, value: T) {
-        switch key {
-        case .title:
-            title = value as! String
-            break
-        case .sources:
-            sources = value as! EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum SubdivisionStatuteItemValueKeys : String, JsonableKeys {
-    case type
-    case id
-    case title
-    case is_repeated
-    case sources
 }

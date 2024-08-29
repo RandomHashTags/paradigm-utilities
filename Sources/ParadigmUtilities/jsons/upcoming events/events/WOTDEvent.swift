@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct WOTDEvent : Jsonable {
+public struct WOTDEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public var examples:[String]?

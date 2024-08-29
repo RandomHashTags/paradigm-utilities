@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 5/22/23.
 //
 
-public struct PresentationEvent : Jsonable {
+public struct PresentationEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public var tag:String

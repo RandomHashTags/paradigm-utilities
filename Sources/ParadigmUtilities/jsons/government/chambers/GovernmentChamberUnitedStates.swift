@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 7/17/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public enum GovernmentChamberUnitedStates : String, GovernmentChamber {

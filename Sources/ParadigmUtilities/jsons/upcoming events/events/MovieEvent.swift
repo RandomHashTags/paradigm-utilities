@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct MovieEvent : Jsonable {
+public struct MovieEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let release_info:String?, ratings:MovieRatings?

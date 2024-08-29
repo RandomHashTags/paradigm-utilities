@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 10/12/22.
 //
 
-import Foundation
-
-public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
-    public typealias JSONKeys = SovereignStateRankingInfoValueValueKeys
-    
+public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {    
     public let info:SovereignStateInfo, defcon:Int
     public var world_rank:Int, world_rank_max:Int
     public let year_of_data:Int, value:RoundedFloat
@@ -35,47 +31,4 @@ public struct SovereignStateRankingInfoValue : SovereignStateRankedValue {
         self.values = values
         self.sources = sources
     }
-    
-    public func getKeyValue(key: SovereignStateRankingInfoValueValueKeys) -> Any? {
-        switch key {
-        case .info: return info
-        case .defcon: return defcon
-        case .world_rank: return world_rank
-        case .max_world_rank: return world_rank_max
-        case .year_of_data: return year_of_data
-        case .value: return value
-        case .suffix: return suffix
-        case .is_estimate: return is_estimate
-        case .values: return values
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: SovereignStateRankingInfoValueValueKeys, value: T) {
-        switch key {
-        case .suffix:
-            suffix = value as? String
-            break
-        case .values:
-            values = value as? [SovereignStateRankingInfoValueOther]
-            break
-        case .sources:
-            sources = value as? EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum SovereignStateRankingInfoValueValueKeys : String, JsonableKeys {
-    case info
-    case defcon
-    case world_rank
-    case max_world_rank
-    case year_of_data
-    case value
-    case suffix
-    case is_estimate
-    case values
-    case sources
 }

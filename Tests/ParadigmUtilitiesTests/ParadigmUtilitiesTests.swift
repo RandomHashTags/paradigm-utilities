@@ -189,25 +189,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
     }
 }
 
-private struct TestBro : Jsonable {
-    typealias JSONKeys = TestBroValueKeys
-    
+private struct TestBro : Jsonable {    
     var big_boy:String
     let number:Int
-    
-    func getKeyValue(key: TestBroValueKeys) -> Any? {
-        switch key {
-        case .big_boy: return big_boy
-        }
-    }
-    mutating func setKeyValue<T>(key: TestBroValueKeys, value: T) {
-        switch key {
-        case .big_boy:
-            big_boy = value as! String
-            break
-        }
-    }
-}
-private enum TestBroValueKeys : String, JsonableKeys {
-    case big_boy
 }

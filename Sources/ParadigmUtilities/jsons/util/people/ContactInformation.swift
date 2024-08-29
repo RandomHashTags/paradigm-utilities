@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 9/17/22.
 //
 
-import Foundation
-
 public struct ContactInformation : Jsonable {
     public let address:String?, office:String?, phone_number:String?, fax_number:String?, contact_form_url:String?
     

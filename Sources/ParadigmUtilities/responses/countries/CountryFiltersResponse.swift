@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct CountryFiltersResponse : Jsonable {
-    public typealias JSONKeys = CountryFiltersResponseValueKeys
-    
+public struct CountryFiltersResponse : Jsonable {    
     public let response_version:Int
     public var filters:[CountryFilter]!
     
@@ -17,25 +15,4 @@ public struct CountryFiltersResponse : Jsonable {
         self.response_version = response_version
         self.filters = filters
     }
-    
-    public func getKeyValue(key: CountryFiltersResponseValueKeys) -> Any? {
-        switch key {
-        case .response_version: return response_version
-        case .filters: return filters
-        }
-    }
-    public mutating func setKeyValue<T>(key: CountryFiltersResponseValueKeys, value: T) {
-        switch key {
-        case .filters:
-            filters = value as? [CountryFilter]
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum CountryFiltersResponseValueKeys : String, JsonableKeys {
-    case response_version
-    case filters
 }

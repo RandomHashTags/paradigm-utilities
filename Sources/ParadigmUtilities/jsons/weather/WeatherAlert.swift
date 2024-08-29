@@ -5,12 +5,9 @@
 //  Created by Evan Anderson on 7/1/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
-public struct WeatherAlert : Jsonable {
-    public typealias JSONKeys = WeatherAlertValueKeys
-    
+public struct WeatherAlert : Jsonable {    
     public var event:String, certainty:String?, headline:String?, instruction:String?, description:String
     public let zones:[WeatherZone]
     public let subdivisions:[SovereignStateSubdivisionWrapper]?
@@ -30,56 +27,4 @@ public struct WeatherAlert : Jsonable {
         self.time = time
         self.source = source
     }
-    
-    public func getKeyValue(key: WeatherAlertValueKeys) -> Any? {
-        switch key {
-        case .event: return event
-        case .certainty: return certainty
-        case .headline: return headline
-        case .instruction: return instruction
-        case .description: return description
-        case .zones: return zones
-        case .subdivisions: return subdivisions
-        case .defcon: return defcon
-        case .time: return time
-        case .source: return source
-        }
-    }
-    public mutating func setKeyValue<T>(key: WeatherAlertValueKeys, value: T) {
-        switch key {
-        case .event:
-            event = value as! String
-            break
-        case .certainty:
-            certainty = value as? String
-            break
-        case .headline:
-            certainty = value as? String
-            break
-        case .instruction:
-            instruction = value as? String
-            break
-        case .description:
-            description = value as! String
-            break
-        case .source:
-            source = value as! EventSource
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum WeatherAlertValueKeys : String, JsonableKeys {
-    case event
-    case certainty
-    case headline
-    case instruction
-    case description
-    case zones
-    case subdivisions
-    case defcon
-    case time
-    case source
 }

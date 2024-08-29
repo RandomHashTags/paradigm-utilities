@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct SpaceLunarEclipseEvent : Jsonable {
+public struct SpaceLunarEclipseEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let time_greatest:Int64, orbital_node:String, saros:String, gamma:String, magnitude_penumbra:String, magnitude_umbra:String, duration_partial:Int, duration_total:Int

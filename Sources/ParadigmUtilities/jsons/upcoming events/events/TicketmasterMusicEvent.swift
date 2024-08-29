@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct TicketmasterMusicEvent : Jsonable {
+public struct TicketmasterMusicEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public var accessibility:String?, age_restriction:String?, health_check_summary:String?, health_check_description:String?, please_note:String?

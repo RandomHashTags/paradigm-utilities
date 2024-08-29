@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct CountryNewsEvents : Jsonable {
-    public typealias JSONKeys = CountryNewsEventsValueKeys
-    
+public struct CountryNewsEvents : Jsonable {    
     public let country:Country
     public var events:[NewsEvent]
     
@@ -18,25 +16,4 @@ public struct CountryNewsEvents : Jsonable {
         self.country = country
         self.events = events
     }
-    
-    public func getKeyValue(key: CountryNewsEventsValueKeys) -> Any? {
-        switch key {
-        case .country: return country
-        case .events: return events
-        }
-    }
-    public mutating func setKeyValue<T>(key: CountryNewsEventsValueKeys, value: T) {
-        switch key {
-        case .events:
-            events = value as! [NewsEvent]
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum CountryNewsEventsValueKeys : String, JsonableKeys {
-    case country
-    case events
 }

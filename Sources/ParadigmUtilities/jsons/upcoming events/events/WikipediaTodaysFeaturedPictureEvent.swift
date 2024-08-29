@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/21/22.
 //
 
-public struct WikipediaTodaysFeaturedPictureEvent : Jsonable {
+public struct WikipediaTodaysFeaturedPictureEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let video_url:String?

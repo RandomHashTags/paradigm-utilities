@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct HomeResponseWeather : HomeResponseProtocol {
-    public typealias JSONKeys = HomeResponseWeatherValueKeys
-    
+public struct HomeResponseWeather : HomeResponseProtocol {    
     public var alerts:[CountryWeatherEvents]?
     public var earthquakes:[CountryEarthquakes]?
     public var natural_events:NaturalWeatherEvents?
@@ -20,31 +18,4 @@ public struct HomeResponseWeather : HomeResponseProtocol {
         self.earthquakes = earthquakes
         self.natural_events = natural_events
     }
-    
-    public func getKeyValue(key: HomeResponseWeatherValueKeys) -> Any? {
-        switch key {
-        case .alerts: return alerts
-        case .earthquakes: return earthquakes
-        case .natural_events: return natural_events
-        }
-    }
-    public mutating func setKeyValue<T>(key: HomeResponseWeatherValueKeys, value: T) {
-        switch key {
-        case .alerts:
-            alerts = value as? [CountryWeatherEvents]
-            break
-        case .earthquakes:
-            earthquakes = value as? [CountryEarthquakes]
-            break
-        case .natural_events:
-            natural_events = value as? NaturalWeatherEvents
-            break
-        }
-    }
-}
-
-public enum HomeResponseWeatherValueKeys : String, JsonableKeys {
-    case alerts
-    case earthquakes
-    case natural_events
 }

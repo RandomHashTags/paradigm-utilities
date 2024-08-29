@@ -5,12 +5,9 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
-public struct PreNaturalWeatherEvent : Jsonable {
-    public typealias JSONKeys = PreNaturalWeatherEventValueKeys
-    
+public struct PreNaturalWeatherEvent : Jsonable {    
     public let id:String
     public var place:String, tag:String?
     public let country:Country?
@@ -23,34 +20,4 @@ public struct PreNaturalWeatherEvent : Jsonable {
         self.country = country
         self.subdivision = subdivision?.wrapped()
     }
-    
-    public func getKeyValue(key: PreNaturalWeatherEventValueKeys) -> Any? {
-        switch key {
-        case .id: return id
-        case .place: return place
-        case .tag: return tag
-        case .country: return country
-        case .subdivision: return subdivision
-        }
-    }
-    public mutating func setKeyValue<T>(key: PreNaturalWeatherEventValueKeys, value: T) {
-        switch key {
-        case .place:
-            place = value as! String
-            break
-        case .tag:
-            tag = value as? String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum PreNaturalWeatherEventValueKeys : String, JsonableKeys {
-    case id
-    case place
-    case tag
-    case country
-    case subdivision
 }

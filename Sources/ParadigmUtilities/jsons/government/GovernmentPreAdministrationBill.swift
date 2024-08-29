@@ -5,12 +5,9 @@
 //  Created by Evan Anderson on 7/21/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
-public struct GovernmentPreAdministrationBill : Jsonable {
-    public typealias JSONKeys = GovernmentPreAdministrationBillValueKeys
-    
+public struct GovernmentPreAdministrationBill : Jsonable {    
     public let chamber:GovernmentChamberWrapper, statuses:[GovernmentBillStatusHistoryStatusWrapper], id:String
     public var title:String, committees:String?, notes:String?
     public let date:EventDate
@@ -24,41 +21,4 @@ public struct GovernmentPreAdministrationBill : Jsonable {
         self.notes = notes
         self.date = date
     }
-    
-    public func getKeyValue(key: GovernmentPreAdministrationBillValueKeys) -> Any? {
-        switch key {
-        case .chamber: return chamber
-        case .statuses: return statuses
-        case .id: return id
-        case .title: return title
-        case .committees: return committees
-        case .notes: return notes
-        case .date: return date
-        }
-    }
-    public mutating func setKeyValue<T>(key: GovernmentPreAdministrationBillValueKeys, value: T) {
-        switch key {
-        case .title:
-            title = value as! String
-            break
-        case .committees:
-            committees = value as? String
-            break
-        case .notes:
-            notes = value as? String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum GovernmentPreAdministrationBillValueKeys : String, JsonableKeys {
-    case chamber
-    case statuses
-    case id
-    case title
-    case committees
-    case notes
-    case date
 }

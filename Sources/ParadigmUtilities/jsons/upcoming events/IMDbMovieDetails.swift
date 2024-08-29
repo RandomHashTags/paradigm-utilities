@@ -27,43 +27,4 @@ public struct IMDbMovieDetails : Jsonable {
         self.countries = countries
         self.source = source
     }
-    
-    public func getKeyValue(key: IMDbMovieDetailsValueKeys) -> Any? {
-        switch key {
-        case .rating: return rating
-        case .rating_reason: return rating_reason
-        case .runtime_seconds: return runtime_seconds
-        case .genres: return genres
-        case .imdb_rating: return imdb_rating
-        case .image_url: return image_url
-        case .countries: return countries
-        case .source: return source
-        }
-    }
-    public mutating func setKeyValue<T>(key: IMDbMovieDetailsValueKeys, value: T) {
-        switch key {
-        case .rating_reason:
-            rating_reason = value as? String
-            break
-        case .genres:
-            genres = value as? [String]
-            break
-        case .image_url:
-            image_url = value as? String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum IMDbMovieDetailsValueKeys : String, JsonableKeys {
-    case rating
-    case rating_reason
-    case runtime_seconds
-    case genres
-    case imdb_rating
-    case image_url
-    case countries
-    case source
 }

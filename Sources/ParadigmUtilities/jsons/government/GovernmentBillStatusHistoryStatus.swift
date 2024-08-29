@@ -5,7 +5,6 @@
 //  Created by Evan Anderson on 7/22/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
 public enum GovernmentBillStatusHistoryStatuses {

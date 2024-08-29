@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct APODEvent : Jsonable {
+public struct APODEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let copyright:String?, video_url:String?

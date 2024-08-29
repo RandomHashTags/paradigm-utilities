@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct Earthquake : Jsonable {
-    public typealias JSONKeys = EarthquakeValueKeys
-    
+public struct Earthquake : Jsonable {    
     public let country:Country?, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?
     public var cause:String
     public let magnitude:Float, place:String, exact_time:Date, last_updated:Date, depth_km:Float?, location:Location
@@ -29,46 +27,4 @@ public struct Earthquake : Jsonable {
         self.location = location
         self.sources = sources
     }
-    
-    public func getKeyValue(key: EarthquakeValueKeys) -> Any? {
-        switch key {
-        case .country: return country
-        case .subdivision: return subdivision
-        case .city: return city
-        case .cause: return cause
-        case .magnitude: return magnitude
-        case .place: return place
-        case .exact_time: return exact_time
-        case .last_updated: return last_updated
-        case .depth_km: return depth_km
-        case .location: return location
-        case .sources: return sources
-        }
-    }
-    public mutating func setKeyValue<T>(key: EarthquakeValueKeys, value: T) {
-        switch key {
-        case .cause:
-            cause = value as! String
-            break
-        case .sources:
-            sources = value as! EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum EarthquakeValueKeys : String, JsonableKeys {
-    case country
-    case subdivision
-    case city
-    case cause
-    case magnitude
-    case place
-    case exact_time
-    case last_updated
-    case depth_km
-    case location
-    case sources
 }

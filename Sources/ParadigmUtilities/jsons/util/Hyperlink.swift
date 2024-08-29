@@ -7,9 +7,7 @@
 
 import Foundation
 
-public struct Hyperlink : Jsonable {
-    public typealias JSONKeys = HyperlinkValueKeys
-    
+public struct Hyperlink : Jsonable {    
     public var text:String
     public var url:String
     
@@ -17,25 +15,4 @@ public struct Hyperlink : Jsonable {
         self.text = text
         self.url = url
     }
-    
-    public func getKeyValue(key: HyperlinkValueKeys) -> Any? {
-        switch key {
-        case .text: return text
-        case .url: return url
-        }
-    }
-    public mutating func setKeyValue<T>(key: HyperlinkValueKeys, value: T) {
-        switch key {
-        case .text:
-            text = value as! String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum HyperlinkValueKeys : String, JsonableKeys {
-    case text
-    case url
 }

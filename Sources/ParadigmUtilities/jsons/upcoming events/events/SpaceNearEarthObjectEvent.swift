@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct SpaceNearEarthObjectEvent : Jsonable {
+public struct SpaceNearEarthObjectEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let close_approach_epoch:Int64, potentially_hazardous:Bool?, estimated_diameter_max:Float, estimated_diameter_min:Float, relative_velocity:String

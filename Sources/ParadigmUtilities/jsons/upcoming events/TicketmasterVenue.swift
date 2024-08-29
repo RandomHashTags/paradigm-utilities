@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct TicketmasterVenue : Jsonable {
-    public typealias JSONKeys = TicketmasterVenueValueKeys
-    
+public struct TicketmasterVenue : Jsonable {    
     public let name:String, image_url:String?, country:Country, subdivision:SovereignStateSubdivisionWrapper?, city:SovereignStateCityWrapper?, location:Location?
     public var general_rule:String?, child_rule:String?, parking_detail:String?, accessible_seating_info:String?, url:String
     
@@ -27,50 +25,4 @@ public struct TicketmasterVenue : Jsonable {
         self.accessible_seating_info = accessible_seating_info
         self.url = url
     }
-    
-    public func getKeyValue(key: TicketmasterVenueValueKeys) -> Any? {
-        switch key {
-        case .name: return name
-        case .image_url: return image_url
-        case .country: return country
-        case .subdivision: return subdivision
-        case .city: return city
-        case .location: return location
-        case .general_rule: return general_rule
-        case .child_rule: return child_rule
-        case .parking_detail: return parking_detail
-        case .accessible_seating_info: return accessible_seating_info
-        }
-    }
-    public mutating func setKeyValue<T>(key: TicketmasterVenueValueKeys, value: T) {
-        switch key {
-        case .general_rule:
-            general_rule = value as? String
-            break
-        case .child_rule:
-            child_rule = value as? String
-            break
-        case .parking_detail:
-            parking_detail = value as? String
-            break
-        case .accessible_seating_info:
-            accessible_seating_info = value as? String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum TicketmasterVenueValueKeys : String, JsonableKeys {
-    case name
-    case image_url
-    case country
-    case subdivision
-    case city
-    case location
-    case general_rule
-    case child_rule
-    case parking_detail
-    case accessible_seating_info
 }

@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 10/10/22.
 //
 
-import Foundation
-
-public struct ClientMLBTeam : Jsonable {
-    public typealias JSONKeys = ClientMLBTeamValueKeys
-    
+public struct ClientMLBTeam : Jsonable {    
     public var name:String
     public let schedule_url:String, logo_url:String, wikipedia_url:String
     
@@ -19,29 +15,4 @@ public struct ClientMLBTeam : Jsonable {
         self.logo_url = logo_url
         self.wikipedia_url = wikipedia_url
     }
-    
-    public func getKeyValue(key: ClientMLBTeamValueKeys) -> Any? {
-        switch key {
-        case .name: return name
-        case .schedule_url: return schedule_url
-        case .logo_url: return logo_url
-        case .wikipedia_url: return wikipedia_url
-        }
-    }
-    public mutating func setKeyValue<T>(key: ClientMLBTeamValueKeys, value: T) {
-        switch key {
-        case .name:
-            name = value as! String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum ClientMLBTeamValueKeys : String, JsonableKeys {
-    case name
-    case schedule_url
-    case logo_url
-    case wikipedia_url
 }

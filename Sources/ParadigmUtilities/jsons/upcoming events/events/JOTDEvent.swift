@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct JOTDEvent : Jsonable {
+public struct JOTDEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let copyright:String

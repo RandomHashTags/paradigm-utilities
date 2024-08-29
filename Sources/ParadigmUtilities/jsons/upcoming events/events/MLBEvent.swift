@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct MLBEvent : Jsonable {
+public struct MLBEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public var team_away:ClientMLBTeam, team_home:ClientMLBTeam

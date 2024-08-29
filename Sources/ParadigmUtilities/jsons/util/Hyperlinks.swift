@@ -5,30 +5,22 @@
 //  Created by Evan Anderson on 7/25/22.
 //
 
-import Foundation
-
 private enum CodingKeys: CodingKey {
     case image_url_prefix
     case hyperlinks
 }
-public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
-    public typealias JSONKeys = HyperlinksValueKeys
-    
+public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {    
     public let image_url_prefix:String
     
     private var hyperlinks:[Hyperlink], hyperlink_count:Int = -1
     
-    public init(image_url_prefix: String, hyperlinks: [Hyperlink] = [Hyperlink]()) {
+    public init(image_url_prefix: String, hyperlinks: [Hyperlink] = []) {
         self.image_url_prefix = image_url_prefix
         self.hyperlinks = hyperlinks
     }
     
-    public var count : Int {
-        return hyperlinks.count
-    }
-    public var isEmpty : Bool {
-        return hyperlinks.isEmpty
-    }
+    public var count : Int { hyperlinks.count }
+    public var isEmpty : Bool { hyperlinks.isEmpty }
     
     public func encode(to encoder: Encoder) throws {
         var container:KeyedEncodingContainer = encoder.container(keyedBy: CodingKeys.self)
@@ -43,9 +35,9 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
     }
     
     public mutating func next() -> Hyperlink? {
-        let nextNumber:Int = hyperlink_count + 1
-        guard nextNumber < hyperlinks.count else { return nil }
-        hyperlink_count = nextNumber
+        let next:Int = hyperlink_count + 1
+        guard next < hyperlinks.count else { return nil }
+        hyperlink_count = next
         return hyperlinks[hyperlink_count]
     }
     public mutating func append(_ hyperlink: Hyperlink) {
@@ -59,21 +51,4 @@ public struct Hyperlinks : Sequence, IteratorProtocol, Jsonable {
         hyperlinks.remove(at: index)
         hyperlink_count -= 1
     }
-    
-    public func getKeyValue(key: HyperlinksValueKeys) -> Any? {
-        switch key {
-        case .hyperlinks: return hyperlinks
-        }
-    }
-    public mutating func setKeyValue<T>(key: HyperlinksValueKeys, value: T) {
-        switch key {
-        case .hyperlinks:
-            hyperlinks = value as! [Hyperlink]
-            break
-        }
-    }
-}
-
-public enum HyperlinksValueKeys : String, JsonableKeys {
-    case hyperlinks
 }

@@ -8,9 +8,7 @@
 import Foundation
 import SwiftSovereignStates
 
-public struct NewsEvent : Jsonable {
-    public typealias JSONKeys = NewsEventValueKeys
-    
+public struct NewsEvent : Jsonable {    
     public let id:String
     public var name:String?, description:String?
     public let image_url:String?, video_url:String?
@@ -31,47 +29,4 @@ public struct NewsEvent : Jsonable {
         self.related_subdivisions = related_subdivisions
         self.related_cities = related_cities
     }
-    
-    public func getKeyValue(key: NewsEventValueKeys) -> Any? {
-        switch key {
-        case .id: return id
-        case .name: return name
-        case .description: return description
-        case .image_url: return image_url
-        case .video_url: return video_url
-        case .sources: return sources
-            
-        case .related_countries: return related_countries
-        case .related_subdivisions: return related_subdivisions
-        case .related_cities: return related_cities
-        }
-    }
-    public mutating func setKeyValue<T>(key: NewsEventValueKeys, value: T) {
-        switch key {
-        case .name:
-            name = value as? String
-            break
-        case .description:
-            description = value as? String
-            break
-        case .sources:
-            sources = value as! EventSources
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum NewsEventValueKeys : String, JsonableKeys {
-    case id
-    case name
-    case description
-    case image_url
-    case video_url
-    case sources
-    
-    case related_countries
-    case related_subdivisions
-    case related_cities
 }

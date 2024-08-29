@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public struct MusicAlbumEvent : Jsonable {
+public struct MusicAlbumEvent : UpcomingEventData {
     public typealias JSONKeys = ValueKeys
     
     public let artist:String, spotify_details:SpotifyDetails?, itunes_details:ITunesDetails?

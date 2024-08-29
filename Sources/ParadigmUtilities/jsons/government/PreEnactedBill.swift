@@ -5,11 +5,7 @@
 //  Created by Evan Anderson on 7/20/22.
 //
 
-import Foundation
-
-public struct PreEnactedBill : Jsonable {
-    public typealias JSONKeys = PreEnactedBillValueKeys
-    
+public struct PreEnactedBill : Jsonable {    
     public let id:String
     public var title:String
     public let chamber:GovernmentChamberWrapper, status:GovernmentBillStatusWrapper
@@ -20,29 +16,4 @@ public struct PreEnactedBill : Jsonable {
         self.chamber = chamber.wrapped()
         self.status = status.wrapped()
     }
-    
-    public func getKeyValue(key: PreEnactedBillValueKeys) -> Any? {
-        switch key {
-        case .id: return id
-        case .title: return title
-        case .chamber: return chamber
-        case .status: return status
-        }
-    }
-    public mutating func setKeyValue<T>(key: PreEnactedBillValueKeys, value: T) {
-        switch key {
-        case .title:
-            title = value as! String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum PreEnactedBillValueKeys : String, JsonableKeys {
-    case id
-    case title
-    case chamber
-    case status
 }

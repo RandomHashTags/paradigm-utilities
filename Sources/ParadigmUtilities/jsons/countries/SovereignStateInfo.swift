@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 6/16/22.
 //
 
-import Foundation
-
 public enum SovereignStateInfo : String, CaseIterable, Jsonable {
     case agriculture_food_apple_production
     case agriculture_food_apricot_production

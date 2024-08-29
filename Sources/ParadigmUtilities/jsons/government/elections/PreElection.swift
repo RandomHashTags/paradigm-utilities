@@ -5,12 +5,9 @@
 //  Created by Evan Anderson on 10/31/22.
 //
 
-import Foundation
 import SwiftSovereignStates
 
-public struct PreElection : Jsonable {
-    public typealias JSONKeys = PreElectionValueKeys
-    
+public struct PreElection : Jsonable {    
     public let id:String
     public var name:String
     public let date:EventDate, country:Country
@@ -21,29 +18,4 @@ public struct PreElection : Jsonable {
         self.date = date
         self.country = country
     }
-    
-    public func getKeyValue(key: PreElectionValueKeys) -> Any? {
-        switch key {
-        case .id: return id
-        case .name: return name
-        case .date: return date
-        case .country: return country
-        }
-    }
-    public mutating func setKeyValue<T>(key: PreElectionValueKeys, value: T) {
-        switch key {
-        case .name:
-            name = value as! String
-            break
-        default:
-            break
-        }
-    }
-}
-
-public enum PreElectionValueKeys : String, JsonableKeys {
-    case id
-    case name
-    case date
-    case country
 }

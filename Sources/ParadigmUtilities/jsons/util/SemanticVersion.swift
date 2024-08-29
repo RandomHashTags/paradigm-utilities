@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/19/22.
 //
 
-import Foundation
-
 public struct SemanticVersion : Jsonable, Comparable {
     public static func < (lhs: SemanticVersion, rhs: SemanticVersion) -> Bool {
         let leftMajor:Int = lhs.major, rightMajor:Int = rhs.major
@@ -39,7 +37,5 @@ public struct SemanticVersion : Jsonable, Comparable {
         self = SemanticVersion(string: string)
     }
     
-    public var description : String {
-        return "\(major).\(minor).\(patch)"
-    }
+    public var description : String { "\(major).\(minor).\(patch)" }
 }

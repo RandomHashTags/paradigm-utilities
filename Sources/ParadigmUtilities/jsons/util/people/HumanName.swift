@@ -5,8 +5,6 @@
 //  Created by Evan Anderson on 7/17/22.
 //
 
-import Foundation
-
 public struct HumanName : Jsonable {
     public let first:String, middle:String?, last:String
     
