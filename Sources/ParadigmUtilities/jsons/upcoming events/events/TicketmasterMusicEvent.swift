@@ -6,6 +6,7 @@
 //
 
 public struct TicketmasterMusicEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.ticketmaster_music_event
     public typealias JSONKeys = ValueKeys
     
     public var accessibility:String?, age_restriction:String?, health_check_summary:String?, health_check_description:String?, please_note:String?

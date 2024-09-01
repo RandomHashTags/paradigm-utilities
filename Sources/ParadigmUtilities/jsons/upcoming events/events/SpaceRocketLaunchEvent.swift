@@ -6,6 +6,7 @@
 //
 
 public struct SpaceRocketLaunchEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.space_rocket_launch
     public typealias JSONKeys = ValueKeys
     
     public let mission_name:String

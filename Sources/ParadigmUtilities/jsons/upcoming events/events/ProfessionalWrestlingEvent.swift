@@ -6,6 +6,7 @@
 //
 
 public struct ProfessionalWrestlingEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.sport_professional_wrestling
     public typealias JSONKeys = ValueKeys
     
     public var main_event:String, notes:String?

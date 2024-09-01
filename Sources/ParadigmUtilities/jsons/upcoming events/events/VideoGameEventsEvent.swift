@@ -6,6 +6,7 @@
 //
 
 public struct VideoGameEventsEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.video_game_events
     public typealias JSONKeys = NoUpcomingEventValueKeys
         
     public init() {

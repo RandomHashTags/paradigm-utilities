@@ -6,6 +6,7 @@
 //
 
 public struct MovieEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.movie
     public typealias JSONKeys = ValueKeys
     
     public let release_info:String?, ratings:MovieRatings?

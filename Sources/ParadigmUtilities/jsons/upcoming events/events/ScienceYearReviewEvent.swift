@@ -6,6 +6,7 @@
 //
 
 public struct ScienceYearReviewEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.science_year_review
     public typealias JSONKeys = ValueKeys
         
     public var years:[Int:[ClientWikipediaEvent]]

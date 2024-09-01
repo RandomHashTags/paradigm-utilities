@@ -6,6 +6,7 @@
 //
 
 public struct SpotifyNewMusicFridayEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.spotify_new_music_friday
     public typealias JSONKeys = ValueKeys
     
     public var tracks:[SpotifyTrack]

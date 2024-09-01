@@ -6,6 +6,7 @@
 //
 
 public struct SpaceNearEarthObjectEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.space_near_earth_object
     public typealias JSONKeys = ValueKeys
     
     public let close_approach_epoch:Int64, potentially_hazardous:Bool?, estimated_diameter_max:Float, estimated_diameter_min:Float, relative_velocity:String

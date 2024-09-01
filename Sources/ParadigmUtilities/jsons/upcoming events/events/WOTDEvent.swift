@@ -6,6 +6,7 @@
 //
 
 public struct WOTDEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.word_of_the_day
     public typealias JSONKeys = ValueKeys
     
     public var examples:[String]?

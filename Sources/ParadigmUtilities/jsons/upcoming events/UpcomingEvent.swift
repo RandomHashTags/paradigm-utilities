@@ -11,6 +11,9 @@ import SwiftSovereignStates
 // MARK: AnyUpcomingEvent
 public protocol AnyUpcomingEvent : Codable {
     var type : UpcomingEventType { get }
+    var event_date : EventDate? { get }
+    var begins : Date? { get }
+    var ends : Date? { get }
 
     var title : String { get }
     var description : String? { get set }
@@ -68,12 +71,11 @@ public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent, Equatable 
     public var data:T
 
     public init(
-        type: UpcomingEventType,
         event_date: EventDate?,
         begins: Date?,
         ends: Date?,
 
-        custom_type_singular_name: String?,
+        custom_type_singular_name: String? = nil,
 
         title: String,
         description: String?,
@@ -83,13 +85,13 @@ public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent, Equatable 
         countries: [Country]?,
         subdivisions: [SovereignStateSubdivisionWrapper]?,
 
-        youtube_video_ids: [String]?,
+        youtube_video_ids: [String]? = nil,
         sources: EventSources,
         hyperlinks: Hyperlinks?,
 
         data: T
     ) {
-        self.type = type
+        self.type = T.event_type
         self.event_date = event_date
         self.begins = begins
         self.ends = ends
@@ -174,6 +176,7 @@ public extension UpcomingEvent {
 
 // MARK: UpcomingEventData
 public protocol UpcomingEventData : Codable, Equatable {
+    static var event_type : UpcomingEventType { get }
     associatedtype JSONKeys:JsonableKeys = NoJsonableKeys
 
     func getKeyValue(key: JSONKeys) -> Any?
@@ -195,6 +198,7 @@ public extension UpcomingEventData where JSONKeys == NoJsonableKeys {
 }
 
 private struct UpcomingEventTypeCodable : UpcomingEventData {
+    static var event_type : UpcomingEventType { UpcomingEventType.astronomy_picture_of_the_day }
     let type:UpcomingEventType
 }
 

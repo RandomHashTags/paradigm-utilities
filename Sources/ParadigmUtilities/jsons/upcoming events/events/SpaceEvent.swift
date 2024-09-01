@@ -6,6 +6,7 @@
 //
 
 public struct SpaceEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.space_event
     public typealias JSONKeys = ValueKeys
     
     public let news_url:String?, video_url:String?

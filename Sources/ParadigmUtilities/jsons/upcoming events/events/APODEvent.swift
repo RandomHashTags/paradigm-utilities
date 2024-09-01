@@ -6,6 +6,7 @@
 //
 
 public struct APODEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.astronomy_picture_of_the_day
     public typealias JSONKeys = ValueKeys
     
     public let copyright:String?, video_url:String?

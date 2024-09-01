@@ -6,6 +6,7 @@
 //
 
 public struct PresentationEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.presentations
     public typealias JSONKeys = ValueKeys
     
     public var tag:String

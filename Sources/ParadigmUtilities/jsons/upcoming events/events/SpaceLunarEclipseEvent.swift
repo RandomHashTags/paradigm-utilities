@@ -6,6 +6,7 @@
 //
 
 public struct SpaceLunarEclipseEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.space_lunar_eclipse
     public typealias JSONKeys = ValueKeys
     
     public let time_greatest:Int64, orbital_node:String, saros:String, gamma:String, magnitude_penumbra:String, magnitude_umbra:String, duration_partial:Int, duration_total:Int

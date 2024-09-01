@@ -6,6 +6,7 @@
 //
 
 public struct WikipediaTodaysFeaturedPictureEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.wikipedia_todays_featured_picture
     public typealias JSONKeys = ValueKeys
     
     public let video_url:String?

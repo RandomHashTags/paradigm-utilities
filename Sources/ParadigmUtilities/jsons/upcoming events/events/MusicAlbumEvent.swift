@@ -6,6 +6,7 @@
 //
 
 public struct MusicAlbumEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.music_album
     public typealias JSONKeys = ValueKeys
     
     public let artist:String, spotify_details:SpotifyDetails?, itunes_details:ITunesDetails?

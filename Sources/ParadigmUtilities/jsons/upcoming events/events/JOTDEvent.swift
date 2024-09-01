@@ -6,6 +6,7 @@
 //
 
 public struct JOTDEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.joke_of_the_day
     public typealias JSONKeys = ValueKeys
     
     public let copyright:String

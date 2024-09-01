@@ -6,6 +6,7 @@
 //
 
 public struct MLBEvent : UpcomingEventData {
+    public static let event_type:UpcomingEventType = UpcomingEventType.sport_mlb
     public typealias JSONKeys = ValueKeys
     
     public var team_away:ClientMLBTeam, team_home:ClientMLBTeam
