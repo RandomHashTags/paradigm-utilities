@@ -24,18 +24,6 @@ public struct JOTDEvent : UpcomingEventData {
         case .answer: return answer
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .question:
-            question = value as! String
-            break
-        case .answer:
-            answer = value as! String
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension JOTDEvent {

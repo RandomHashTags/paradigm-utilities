@@ -19,13 +19,6 @@ public struct PresentationEvent : UpcomingEventData {
         case .tag: return tag
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .tag:
-            tag = value as! String
-            break
-        }
-    }
 }
 
 public extension PresentationEvent {

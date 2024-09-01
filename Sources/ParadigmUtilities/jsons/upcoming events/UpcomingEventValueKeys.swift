@@ -5,7 +5,7 @@
 //  Created by Evan Anderson on 5/21/23.
 //
 
-public protocol UpcomingEventValueKeys : JsonableKeys {
+public protocol UpcomingEventValueKeys : JsonableKeys { // TODO: move to app
     var category : UpcomingEventValueCategory { get }
     var value_type : UpcomingEventValueType { get }
     var value_cell_type : UpcomingEventValueCellType { get }

@@ -22,15 +22,6 @@ public struct VideoGameEvent : UpcomingEventData {
         case .genres: return genres
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .genres:
-            genres = value as! [String]
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension VideoGameEvent {

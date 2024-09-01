@@ -45,30 +45,6 @@ public struct TicketmasterMusicEvent : UpcomingEventData {
         case .venues: return venues
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .accessibility:
-            accessibility = value as? String
-            break
-        case .age_restriction:
-            age_restriction = value as? String
-            break
-        case .health_check_summary:
-            health_check_summary = value as? String
-            break
-        case .health_check_description:
-            health_check_description = value as? String
-            break
-        case .ticket_limit:
-            ticket_limit = value as? String
-            break
-        case .venues:
-            venues = value as? [TicketmasterVenue]
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension TicketmasterMusicEvent {

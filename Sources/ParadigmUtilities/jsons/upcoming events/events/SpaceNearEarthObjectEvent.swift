@@ -27,8 +27,6 @@ public struct SpaceNearEarthObjectEvent : UpcomingEventData {
         case .relative_velocity: return relative_velocity
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }
 
 public extension SpaceNearEarthObjectEvent {

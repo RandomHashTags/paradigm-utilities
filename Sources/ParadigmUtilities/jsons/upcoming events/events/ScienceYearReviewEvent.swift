@@ -19,13 +19,6 @@ public struct ScienceYearReviewEvent : UpcomingEventData {
         case .years: return years
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .years:
-            years = value as! [Int:[ClientWikipediaEvent]]
-            break
-        }
-    }
 }
 
 public extension ScienceYearReviewEvent {

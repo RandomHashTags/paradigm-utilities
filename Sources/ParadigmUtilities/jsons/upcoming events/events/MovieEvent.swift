@@ -27,15 +27,6 @@ public struct MovieEvent : UpcomingEventData {
         case .production_companies: return production_companies
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .imdb_info:
-            imdb_info = value as? IMDbMovieDetails
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension MovieEvent {

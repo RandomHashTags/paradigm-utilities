@@ -19,13 +19,6 @@ public struct SpotifyNewMusicFridayEvent : UpcomingEventData {
         case .tracks: return tracks
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .tracks:
-            tracks = value as! [SpotifyTrack]
-            break
-        }
-    }
 }
 
 public extension SpotifyNewMusicFridayEvent {

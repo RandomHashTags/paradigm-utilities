@@ -21,16 +21,6 @@ public struct MLBEvent : UpcomingEventData {
         case .team_home: return team_home
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .team_away:
-            team_away = value as! ClientMLBTeam
-            break
-        case .team_home:
-            team_home = value as! ClientMLBTeam
-            break
-        }
-    }
 }
 
 public extension MLBEvent {

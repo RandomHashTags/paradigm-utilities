@@ -21,8 +21,6 @@ public struct SpaceEvent : UpcomingEventData {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }
 
 public extension SpaceEvent {

@@ -19,8 +19,6 @@ public struct WikipediaTodaysFeaturedPictureEvent : UpcomingEventData {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }
 
 public extension WikipediaTodaysFeaturedPictureEvent {

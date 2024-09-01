@@ -41,18 +41,6 @@ public struct SpaceRocketLaunchEvent : UpcomingEventData {
         case .video_url: return video_url
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .mission_description:
-            mission_description = value as! String
-            break
-        case .mission_type:
-            mission_type = value as! String
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension SpaceRocketLaunchEvent {

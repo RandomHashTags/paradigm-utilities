@@ -26,15 +26,6 @@ public struct WOTDEvent : UpcomingEventData {
         case .grammar_type: return grammar_type
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .examples:
-            examples = value as? [String]
-            break
-        default:
-            break
-        }
-    }
 }
 
 public extension WOTDEvent {

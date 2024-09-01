@@ -21,16 +21,6 @@ public struct ProfessionalWrestlingEvent : UpcomingEventData {
         case .notes: return notes
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-        switch key {
-        case .main_event:
-            main_event = value as! String
-            break
-        case .notes:
-            notes = value as? String
-            break
-        }
-    }
 }
 
 public extension ProfessionalWrestlingEvent {

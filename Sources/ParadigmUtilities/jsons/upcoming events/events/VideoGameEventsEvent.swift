@@ -14,6 +14,4 @@ public struct VideoGameEventsEvent : UpcomingEventData {
     public func getKeyValue(key: JSONKeys) -> Any? {
         return nil
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }

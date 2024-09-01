@@ -129,27 +129,6 @@ public struct UpcomingEvent<T: UpcomingEventData> : AnyUpcomingEvent, Equatable 
         case .subdivisions: return subdivisions
         }
     }
-    public mutating func setKeyValue<V>(key: AnyUpcomingEventValueKeys, value: V) {
-        switch key {
-        case .custom_type_singular_name:
-            custom_type_singular_name = value as? String
-            break
-        case .title:
-            title = value as! String
-            break
-        case .description:
-            description = value as? String
-            break
-        case .sources:
-            sources = value as! EventSources
-            break
-        case .hyperlinks:
-            hyperlinks = value as? Hyperlinks
-            break
-        default:
-            break
-        }
-    }
 }
 public extension UpcomingEvent {
     func getValueKeys() -> T.JSONKeys.AllCases {
@@ -158,10 +137,6 @@ public extension UpcomingEvent {
     func getKeyValue(_ key: String) -> Any? {
         guard let key:T.JSONKeys = T.JSONKeys(rawValue: key) else { return nil }
         return data.getKeyValue(key: key)
-    }
-    mutating func setKeyValue<V>(_ key: String, value: V) {
-        guard let key:T.JSONKeys = T.JSONKeys(rawValue: key) else { return }
-        data.setKeyValue(key: key, value: value)
     }
 
     private static func optimize_images(type: UpcomingEventType, _ images: [String]) -> [String] {
@@ -206,7 +181,6 @@ public protocol UpcomingEventData : Codable, Equatable {
     associatedtype JSONKeys:JsonableKeys = NoJsonableKeys
 
     func getKeyValue(key: JSONKeys) -> Any?
-    mutating func setKeyValue<T>(key: JSONKeys, value: T)
 }
 public extension UpcomingEventData {
     func getValueKeys() -> JSONKeys.AllCases {
@@ -217,16 +191,10 @@ public extension UpcomingEventData {
         guard let key:JSONKeys = JSONKeys(rawValue: key) else { return nil }
         return getKeyValue(key: key)
     }
-    mutating func setKeyValue<T>(_ key: String, value: T) {
-        guard let key:JSONKeys = JSONKeys(rawValue: key) else { return }
-        setKeyValue(key: key, value: value)
-    }
 }
 public extension UpcomingEventData where JSONKeys == NoJsonableKeys {
     func getKeyValue(key: JSONKeys) -> Any? {
         return nil
-    }
-    func setKeyValue<T>(key: JSONKeys, value: T) {
     }
 }
 

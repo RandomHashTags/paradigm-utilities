@@ -33,8 +33,6 @@ public struct SpaceLunarEclipseEvent : UpcomingEventData {
         case .duration_total: return duration_total
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }
 
 public extension SpaceLunarEclipseEvent {

@@ -7,10 +7,7 @@
 
 import SwiftSovereignStates
 
-public protocol JsonableProtocol : Hashable, Codable {
-}
-
-public protocol Jsonable : JsonableProtocol {
+public protocol Jsonable : Hashable, Codable {
 }
 public protocol JsonableKeys : CodingKey, CaseIterable, RawRepresentable where RawValue == String {
 }

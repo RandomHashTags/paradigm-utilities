@@ -23,8 +23,6 @@ public struct MusicAlbumEvent : UpcomingEventData {
         case .itunes_details: return itunes_details
         }
     }
-    public mutating func setKeyValue<T>(key: JSONKeys, value: T) {
-    }
 }
 
 public extension MusicAlbumEvent {
