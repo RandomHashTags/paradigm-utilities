@@ -7,12 +7,14 @@
 
 import SwiftSovereignStates
 
-public struct CountryNewsEvents : Jsonable {    
-    public let country:Country
-    public var events:[NewsEvent]
-    
-    public init(country: Country, events: [NewsEvent]) {
-        self.country = country
-        self.events = events
+public extension Responses.News {
+    public struct CountryNewsEvents : Jsonable {    
+        public let country:Country
+        public var events:[NewsEvent]
+        
+        public init(country: Country, events: [NewsEvent]) {
+            self.country = country
+            self.events = events
+        }
     }
 }

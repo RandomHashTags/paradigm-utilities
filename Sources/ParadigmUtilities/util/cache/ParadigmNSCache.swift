@@ -21,9 +21,7 @@ public final class ParadigmNSCache<Key: Hashable, Value> : NSObject, NSCacheDele
     }
     
     public subscript(key: Key) -> Value? {
-        get {
-            return value(forKey: key)
-        }
+        get { value(forKey: key) }
         set {
             guard let value:Value = newValue else {
                 remove_value(for_key: key)

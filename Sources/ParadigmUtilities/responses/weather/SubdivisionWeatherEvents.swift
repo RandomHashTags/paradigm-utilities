@@ -7,12 +7,14 @@
 
 import SwiftSovereignStates
 
-public struct SubdivisionWeatherEvents : Jsonable {    
-    public let subdivision:SovereignStateSubdivisionWrapper?
-    public var events:[WeatherEvent]
-    
-    public init(subdivision: SovereignStateSubdivisionWrapper?, events: [WeatherEvent]) {
-        self.subdivision = subdivision
-        self.events = events
+public extension Responses.Weather {
+    struct SubdivisionWeatherEvents : Jsonable {    
+        public let subdivision:SovereignStateSubdivisionWrapper?
+        public var events:[WeatherEvent]
+        
+        public init(subdivision: SovereignStateSubdivisionWrapper?, events: [WeatherEvent]) {
+            self.subdivision = subdivision
+            self.events = events
+        }
     }
 }

@@ -19,12 +19,8 @@ public struct EventDate : Comparable, Jsonable {
         return leftYear < rightYear || leftYear == rightYear && (leftMonth < rightMonth || leftMonth == rightMonth && leftDay < rightDay)
     }
     
-    public static var today : EventDate {
-        return EventDate(ParadigmUtilities.now)
-    }
-    public static var today_date_string : String {
-        return EventDate.get_date_string(ParadigmUtilities.now)
-    }
+    public static var today : EventDate { EventDate(ParadigmUtilities.now) }
+    public static var today_date_string : String { EventDate.get_date_string(ParadigmUtilities.now) }
     
     /// _month-year-day_ format. (example: __2-2023-25__)
     public static func get_date_string(_ date: Date) -> String {

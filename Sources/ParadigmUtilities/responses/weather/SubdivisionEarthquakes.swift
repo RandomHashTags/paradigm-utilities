@@ -7,12 +7,14 @@
 
 import SwiftSovereignStates
 
-public struct SubdivisionEarthquakes : Jsonable {    
-    public let subdivision:SovereignStateSubdivisionWrapper?
-    public var magnitudes:[PreEarthquakeMagnitude]
-    
-    public init(subdivision: (any SovereignStateSubdivision)?, magnitudes: [PreEarthquakeMagnitude]) {
-        self.subdivision = subdivision?.wrapped()
-        self.magnitudes = magnitudes
+public extension Responses.Weather {
+    struct SubdivisionEarthquakes : Jsonable {    
+        public let subdivision:SovereignStateSubdivisionWrapper?
+        public var magnitudes:[PreEarthquakeMagnitude]
+        
+        public init(subdivision: (any SovereignStateSubdivision)?, magnitudes: [PreEarthquakeMagnitude]) {
+            self.subdivision = subdivision?.wrapped()
+            self.magnitudes = magnitudes
+        }
     }
 }

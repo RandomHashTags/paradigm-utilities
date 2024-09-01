@@ -8,9 +8,7 @@
 public enum APIVersion : String, CaseIterable {
     case v1
     
-    public static var latest : APIVersion {
-        return APIVersion.allCases.max(by: { $0.value > $1.value })!
-    }
+    public static var latest : APIVersion { APIVersion.allCases.max(by: { $0.value > $1.value })! }
     
     public var value : Int {
         switch self {

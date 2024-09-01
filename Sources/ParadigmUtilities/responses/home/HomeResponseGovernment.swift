@@ -5,8 +5,8 @@
 //  Created by Evan Anderson on 10/15/22.
 //
 
-public extension HomeResponse {
-    struct Government : HomeResponseProtocol {        
+public extension Responses.Government {
+    struct Home : HomeResponseProtocol {        
         public var recent_activity:[CountryGovernmentRecentActivity]
         
         public init(recent_activity: [CountryGovernmentRecentActivity]) {

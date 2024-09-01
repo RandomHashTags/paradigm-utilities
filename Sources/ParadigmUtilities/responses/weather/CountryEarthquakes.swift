@@ -7,12 +7,14 @@
 
 import SwiftSovereignStates
 
-public struct CountryEarthquakes : Jsonable {    
-    public let country:Country?
-    public var subdivisions:[SubdivisionEarthquakes]
-    
-    public init(country: Country?, subdivisions: [SubdivisionEarthquakes]) {
-        self.country = country
-        self.subdivisions = subdivisions
+public extension Responses.Weather {
+    struct CountryEarthquakes : Jsonable {    
+        public let country:Country?
+        public var subdivisions:[SubdivisionEarthquakes]
+        
+        public init(country: Country?, subdivisions: [SubdivisionEarthquakes]) {
+            self.country = country
+            self.subdivisions = subdivisions
+        }
     }
 }

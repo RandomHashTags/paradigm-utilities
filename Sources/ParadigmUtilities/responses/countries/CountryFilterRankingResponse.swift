@@ -7,11 +7,13 @@
 
 import SwiftSovereignStates
 
-public struct CountryFilterRankingResponse : Jsonable {
-    public let id:String, rankings:[Country:Int]
-    
-    public init(id: String, rankings: [Country:Int]) {
-        self.id = id
-        self.rankings = rankings
+public extension Responses.Countries {
+    struct CountryFilterRankingResponse : Jsonable {
+        public let id:String, rankings:[Country:Int]
+        
+        public init(id: String, rankings: [Country:Int]) {
+            self.id = id
+            self.rankings = rankings
+        }
     }
 }

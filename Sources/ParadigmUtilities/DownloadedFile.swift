@@ -16,16 +16,14 @@ public struct DownloadedFile : Hashable, Sendable {
     public let name:String
     public var parentPath:String
     
+    public var full_path : String { parentPath + "/" + name }
     public var url : URL { URL(fileURLWithPath: full_path) }
     
     public init(name: String, parentPath: String) {
         self.name = name
         self.parentPath = parentPath
     }
-    
-    public var full_path : String {
-        return parentPath + "/" + name
-    }
+
     public func is_directory() -> Bool {
         var isDir:ObjCBool = false
         let exists:Bool = FileManagerAPI.file_exists(at_path: full_path, is_directory: &isDir)

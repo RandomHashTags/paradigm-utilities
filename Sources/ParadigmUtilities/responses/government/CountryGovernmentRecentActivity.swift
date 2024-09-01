@@ -8,18 +8,20 @@
 import SwiftSovereignStates
 
 // MARK: Activity
-public struct CountryGovernmentRecentActivity : Jsonable {    
-    public let country:Country
-    public var activity:[Chamber]
-    
-    public init(country: Country, activity: [Chamber]) {
-        self.country = country
-        self.activity = activity
+public extension Responses.Government {
+    public struct CountryGovernmentRecentActivity : Jsonable {    
+        public let country:Country
+        public var activity:[Chamber]
+        
+        public init(country: Country, activity: [Chamber]) {
+            self.country = country
+            self.activity = activity
+        }
     }
 }
 
 // MARK: Bill Status
-public extension CountryGovernmentRecentActivity {
+public extension Responses.Government.CountryGovernmentRecentActivity {
     struct BillStatus : Jsonable {        
         public let status:GovernmentBillStatusWrapper
         public var dates:[Date]
@@ -32,7 +34,7 @@ public extension CountryGovernmentRecentActivity {
 }
 
 // MARK: Chamber
-public extension CountryGovernmentRecentActivity {
+public extension Responses.Government.CountryGovernmentRecentActivity {
     struct Chamber : Jsonable {        
         public let chamber:GovernmentChamberWrapper
         public var dates:[Date]
@@ -45,7 +47,7 @@ public extension CountryGovernmentRecentActivity {
 }
 
 // MARK: Date
-public extension CountryGovernmentRecentActivity {
+public extension Responses.Government.CountryGovernmentRecentActivity {
     struct Date : Jsonable {        
         public let date:EventDate
         public var activity:[GovernmentPreAdministrationBill]

@@ -5,14 +5,12 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public extension HomeResponse {
-    struct UpcomingEvents : HomeResponseProtocol {    
-        public var holidays_near:[UpcomingEventDateHolidays]?
-        public var events:[UpcomingEventTypeEvents]?
-        public var movie_production_companies:MovieProductionCompaniesResponse?
+public extension Responses.UpcomingEvents {
+    struct Home : HomeResponseProtocol {    
+        public var events:[Responses.UpcomingEvents.TypeEvents]?
+        public var movie_production_companies:Responses.UpcomingEvents.MovieProductionCompanies?
             
-        public init(holidays_near: [UpcomingEventDateHolidays]?, events: [UpcomingEventTypeEvents]?, movie_production_companies: MovieProductionCompaniesResponse?) {
-            self.holidays_near = holidays_near
+        public init(events: [Responses.UpcomingEvents.TypeEvents]?, movie_production_companies: Responses.UpcomingEvents.MovieProductionCompanies?) {
             self.events = events
             self.movie_production_companies = movie_production_companies
         }

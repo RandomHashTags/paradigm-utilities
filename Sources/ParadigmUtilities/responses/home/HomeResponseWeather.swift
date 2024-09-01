@@ -5,8 +5,8 @@
 //  Created by Evan Anderson on 10/14/22.
 //
 
-public extension HomeResponse {
-    struct Weather : HomeResponseProtocol {    
+public extension Responses.Weather {
+    struct Home : HomeResponseProtocol {    
         public var alerts:[CountryWeatherEvents]?
         public var earthquakes:[CountryEarthquakes]?
         public var natural_events:NaturalWeatherEvents?
