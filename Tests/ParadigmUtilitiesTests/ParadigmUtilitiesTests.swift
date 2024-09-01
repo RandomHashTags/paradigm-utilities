@@ -95,65 +95,54 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let event_date:EventDate = EventDate(year: 2023, month: Month.january, day: 1)
         let movie_pre_event:PreUpcomingEvent = PreUpcomingEvent(type: .movie, event_date: event_date, title: "Test Movie Title", tag: "Test Movie Tag", images: [])
         XCTAssertNotNil(movie_pre_event.event_date)
-        let dates:UpcomingEventTypeDateEvents = UpcomingEventTypeDateEvents(date: event_date, events: [movie_pre_event])
-        let test:UpcomingEventTypeEvents = UpcomingEventTypeEvents(type: .movie, date_events: [dates])
+        let dates:Responses.UpcomingEvents.TypeDateEvents = Responses.UpcomingEvents.TypeDateEvents(date: event_date, events: [movie_pre_event])
+        let test:Responses.UpcomingEvents.TypeEvents = Responses.UpcomingEvents.TypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try encoder.encode(test), encoding: .utf8)!
         XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
-        
-        let pre_holiday:PreHoliday = PreHoliday(type: "fun", id: "test_holiday", name: "Test Holiday", emoji: nil)
-        let holidays_near:[UpcomingEventDateHolidays] = [UpcomingEventDateHolidays(date: event_date, holidays: [pre_holiday])]
-        let holidays_near_json:String = String(data: try encoder.encode(holidays_near), encoding: .utf8)!
-        XCTAssert(holidays_near_json.elementsEqual("[{\"date\":\"1-2023-01\",\"holidays\":[{\"type\":\"fun\",\"id\":\"test_holiday\",\"name\":\"Test Holiday\"}]}]"), "holidays_near_json=" + holidays_near_json)
     }
     
     func test_home_responses() throws {
         let encoder:JSONEncoder = ParadigmUtilities.json_encoder
         let decoder:JSONDecoder = ParadigmUtilities.json_decoder
         
-        let countries:HomeResponse.Countries = HomeResponse.Countries(filters: nil)
+        let countries:Responses.Countries.Home = Responses.Countries.Home(filters: nil)
         
-        let government:HomeResponse.Government = HomeResponse.Government(recent_activity: [])
-        let news:HomeResponse.News = HomeResponse.News(regional: [])
-        let stock_market:HomeResponse.StockMarket? = nil
+        let government:Responses.Government.Home = Responses.Government.Home(recent_activity: [])
+        let news:Responses.News.Home = Responses.News.Home(regional: [])
+        let stock_market:Responses.StockMarket.Home? = nil
+
+        let upcoming_events:Responses.UpcomingEvents.Home = Responses.UpcomingEvents.Home(events: nil, movie_production_companies: nil)
         
-        let upcoming_events_holidays_near:[UpcomingEventDateHolidays] = [
-            UpcomingEventDateHolidays(date: EventDate(year: 2023, month: Month.january, day: 1), holidays: [
-                PreHoliday(type: "test", id: "test_holiday", name: "Test Holiday", emoji: nil)
-            ])
-        ]
-        let upcoming_events:HomeResponse.UpcomingEvents = HomeResponse.UpcomingEvents(holidays_near: upcoming_events_holidays_near, events: nil, movie_production_companies: nil)
-        
-        let weather_alerts:[CountryWeatherEvents] = [
-            CountryWeatherEvents(country: Country.united_states, subdivisions: [
-                SubdivisionWeatherEvents(subdivision: SubdivisionsUnitedStates.minnesota.wrapped(), events: [
+        let weather_alerts:[Responses.Weather.CountryWeatherEvents] = [
+            Responses.Weather.CountryWeatherEvents(country: Country.united_states, subdivisions: [
+                Responses.Weather.SubdivisionWeatherEvents(subdivision: SubdivisionsUnitedStates.minnesota.wrapped(), events: [
                     WeatherEvent(type: .blizzard_warning, defcon: 3)
                 ])
             ])
         ]
-        let weather_earthquakes:[CountryEarthquakes] = [
-            CountryEarthquakes(country: Country.united_states, subdivisions: [
-                SubdivisionEarthquakes(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
-                    PreEarthquakeMagnitude(mag: "5.0", quakes: [
+        let weather_earthquakes:[Responses.Weather.CountryEarthquakes] = [
+            Responses.Weather.CountryEarthquakes(country: Country.united_states, subdivisions: [
+                Responses.Weather.SubdivisionEarthquakes(subdivision: SubdivisionsUnitedStates.minnesota, magnitudes: [
+                    Responses.Weather.PreEarthquakeMagnitude(mag: "5.0", quakes: [
                         PreEarthquake(id: "mn3948u50294", place: "26km W of Rochester", city: CitiesUnitedStatesMinnesota.rochester)
                     ])
                 ])
             ])
         ]
-        let weather_natural_events:NaturalWeatherEvents = NaturalWeatherEvents(
+        let weather_natural_events:Responses.Weather.NaturalWeatherEvents = Responses.Weather.NaturalWeatherEvents(
             severe_storms: [
-                CountryNaturalWeatherEvents(country: Country.united_states, events: [
+                Responses.Weather.CountryNaturalWeatherEvents(country: Country.united_states, events: [
                     PreNaturalWeatherEvent(id: "az98345", place: "Alaska", tag: nil, country: Country.united_states, subdivision: SubdivisionsUnitedStates.alaska)
                 ])
             ],
             volcanoes: [
-                
             ],
             wildfires: [
-                
-            ])
-        let weather:HomeResponse.Weather = HomeResponse.Weather(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: weather_natural_events)
+            ]
+        )
+        let weather:Responses.Weather.Home = Responses.Weather.Home(alerts: weather_alerts, earthquakes: weather_earthquakes, natural_events: weather_natural_events)
         
-        let response:HomeResponse = HomeResponse(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
+        let response:Responses.Home = Responses.Home(countries: countries, government: government, news: news, stock_market: stock_market, upcoming_events: upcoming_events, weather: weather)
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
         let target_response_string:String = """
