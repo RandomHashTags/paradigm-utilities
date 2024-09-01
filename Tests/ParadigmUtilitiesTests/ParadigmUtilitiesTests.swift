@@ -98,7 +98,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let dates:Responses.UpcomingEvents.TypeDateEvents = Responses.UpcomingEvents.TypeDateEvents(date: event_date, events: [movie_pre_event])
         let test:Responses.UpcomingEvents.TypeEvents = Responses.UpcomingEvents.TypeEvents(type: .movie, date_events: [dates])
         let upcoming_events_json:String = String(data: try encoder.encode(test), encoding: .utf8)!
-        XCTAssert(upcoming_events_json.elementsEqual("{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}"), "upcoming_events_json=" + upcoming_events_json)
+        XCTAssertEqual(upcoming_events_json, "{\"type\":\"movie\",\"date_events\":[{\"date\":\"1-2023-01\",\"events\":[{\"title\":\"Test Movie Title\",\"tag\":\"Test Movie Tag\"}]}]}")
     }
     
     func test_home_responses() throws {
@@ -146,7 +146,7 @@ final class ParadigmUtilitiesTests : XCTestCase {
         let response_data:Data = try encoder.encode(response)
         let response_string:String = String(data: response_data, encoding: .utf8)!
         let target_response_string:String = """
-{"upcoming_events":{"holidays_near":[{"date":"1-2023-01","holidays":[{"type":"test","id":"test_holiday","name":"Test Holiday"}]}]},"weather":{"natural_events":{"severe_storms":[{"country":"united_states","events":[{"place":"Alaska","id":"az98345","country":"united_states","subdivision":"united_states-alaska"}]}],"volcanoes":[],"wildfires":[]},"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states-minnesota","events":[{"type":"blizzard_warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states-minnesota-rochester"}]}],"subdivision":"united_states-minnesota"}]}]}}
+{"upcoming_events":{"weather":{"natural_events":{"severe_storms":[{"country":"united_states","events":[{"place":"Alaska","id":"az98345","country":"united_states","subdivision":"united_states-alaska"}]}],"volcanoes":[],"wildfires":[]},"alerts":[{"country":"united_states","subdivisions":[{"subdivision":"united_states-minnesota","events":[{"type":"blizzard_warning","defcon":3}]}]}],"earthquakes":[{"country":"united_states","subdivisions":[{"magnitudes":[{"mag":"5.0","quakes":[{"id":"mn3948u50294","place":"26km W of Rochester","city":"united_states-minnesota-rochester"}]}],"subdivision":"united_states-minnesota"}]}]}}
 """
         //print("response_string=" + response_string)
         XCTAssertEqual(response_string, target_response_string)

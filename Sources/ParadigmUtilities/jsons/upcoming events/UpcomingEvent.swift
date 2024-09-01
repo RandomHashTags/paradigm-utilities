@@ -172,10 +172,6 @@ public extension UpcomingEvent {
     }
 }
 
-private struct UpcomingEventTypeCodable : UpcomingEventData {
-    let type:UpcomingEventType
-}
-
 // MARK: UpcomingEventData
 public protocol UpcomingEventData : Codable, Equatable {
     associatedtype JSONKeys:JsonableKeys = NoJsonableKeys
@@ -196,6 +192,10 @@ public extension UpcomingEventData where JSONKeys == NoJsonableKeys {
     func getKeyValue(key: JSONKeys) -> Any? {
         return nil
     }
+}
+
+private struct UpcomingEventTypeCodable : UpcomingEventData {
+    let type:UpcomingEventType
 }
 
 // MARK: GenericUpcomingEvents
