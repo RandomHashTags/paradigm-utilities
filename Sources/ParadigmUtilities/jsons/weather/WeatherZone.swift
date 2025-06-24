@@ -30,6 +30,7 @@ public final class WeatherZone : Jsonable {
         hasher.combine(geometry)
     }
     
+    #if canImport(MapKit)
     private func getPoints(_ geometry: Geometry) -> [CLLocationCoordinate2D] {
         switch geometry {
         case .point(let point):
@@ -48,7 +49,6 @@ public final class WeatherZone : Jsonable {
             return points.points.map({ CLLocationCoordinate2D(latitude: $0.y, longitude: $0.x) })
         }
     }
-    #if canImport(MapKit)
     public lazy var geometry_overlay : MKPolygon? = {
         let points:[CLLocationCoordinate2D] = getPoints(geometry)
         guard !points.isEmpty else { return nil }
